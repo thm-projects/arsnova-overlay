@@ -1,0 +1,8 @@
+*~
+*.o
+*.cmake
+*.kdev4
+build/*
+CMakeFiles/*
+CMakeCache/*
+
