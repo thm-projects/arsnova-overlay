@@ -1,10 +1,25 @@
 include_directories(${QT_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR})
 
 set(arsnovawidget_SRCS
-  main.cpp
   ui/overlaywidget.cpp
   updatetimer.cpp
+  main.cpp
 )
+
+set(arsnovawidget_MAC_SRCS
+  main.m
+)
+
+set_source_files_properties(
+  ${arsnovawidget_MAC_SRCS} PROPERTIES LANGUAGE C
+)
+
+if(APPLE)
+  set(arsnovawidget_SRCS
+    ${arsnovawidget_SRCS}
+    ${arsnovawidget_MAC_SRCS}
+  )
+endif(APPLE)
 
 set(arsnovawidget_MOC_SRCS
   ui/overlaywidget.h

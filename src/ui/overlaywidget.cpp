@@ -14,7 +14,8 @@ OverlayWidget::OverlayWidget ( QWidget* parent, Qt::WindowFlags f )
     connect ( this->httpClient, SIGNAL ( requestFinished ( int,bool ) ), this, SLOT ( updateGraphicsScene() ) );
     connect ( ui->sessionIdEdit, SIGNAL ( editingFinished() ), this, SLOT ( sessionLogin() ) );
     connect ( ui->loginButton, SIGNAL ( pressed() ), this, SLOT ( sessionLogin() ) );
-    //this->setWindowFlags(Qt::FramelessWindowHint);
+    
+    this->setWindowFlags(Qt::Window | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint);
 
     ui->progressBar->setMaximum ( OverlayWidget::httpUpdateInterval );
 
@@ -28,6 +29,7 @@ OverlayWidget::OverlayWidget ( QWidget* parent, Qt::WindowFlags f )
 
     this->createGraphicsScene();
     this->setMouseTracking ( true );
+        
     ui->graphicsView->setMouseTracking ( true );
 
     ui->graphicsView->setScene ( this->graphicsScene );
