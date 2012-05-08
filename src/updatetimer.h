@@ -8,16 +8,17 @@ class UpdateTimer : public QObject {
 
 public:
     explicit UpdateTimer () ;
+    void reset();
 
 private:
     QTimer * qtimer;
-    static const int updateInterval; 
+    int ticks;
 
 private slots:
     void update() ;
 
 signals:
-    void tick();
+    void tick(int ticks);
 };
 
 #endif // UPDATETIMER_H

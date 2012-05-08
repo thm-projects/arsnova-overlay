@@ -22,14 +22,22 @@ private:
 
     QHttp * httpClient;
     QString sessionId;
+    int loggedInUsers;
+    int latestUnderstandingResponses;
+
+    static const int httpUpdateInterval;
 
     static const int ySize;
 
     void createGraphicsScene();
     void updateGraphicsBar ( int index, int value );
 
+    void mouseMoveEvent ( QMouseEvent * event );
+    void resizeEvent ( QResizeEvent * event );
+
 private slots:
-    void updateHttpResponse();
+    void sessionLogin();
+    void updateHttpResponse ( int ticks );
     void updateGraphicsScene();
     void drawPercentageLines();
 };

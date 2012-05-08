@@ -1,12 +1,15 @@
 #include "updatetimer.h"
 
-const int UpdateTimer::updateInterval = 20;
-
 UpdateTimer::UpdateTimer() : qtimer ( new QTimer() ) {
-    qtimer->start ( updateInterval * 1000 );
+    qtimer->start ( 1000 );
+    this->ticks = 0;
     connect ( qtimer, SIGNAL ( timeout() ), this, SLOT ( update() ) );
 }
 
 void UpdateTimer::update() {
-    emit tick();
+    emit tick ( this->ticks++ );
+}
+
+void UpdateTimer::reset() {
+    this->ticks = 0;
 }
