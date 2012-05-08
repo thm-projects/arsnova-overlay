@@ -22,16 +22,14 @@ private:
 
     QHttp * httpClient;
     QString sessionId;
+    QString styleSheetBackup;
     int loggedInUsers;
     int latestUnderstandingResponses;
 
     static const int httpUpdateInterval;
-
     static const int ySize;
-
     void createGraphicsScene();
     void updateGraphicsBar ( int index, int value );
-
     void mouseMoveEvent ( QMouseEvent * event );
     void resizeEvent ( QResizeEvent * event );
 
@@ -40,6 +38,9 @@ private slots:
     void updateHttpResponse ( int ticks );
     void updateGraphicsScene();
     void drawPercentageLines();
+    void showSessionIdForm();
+    void makeTransparent(bool enabled);
+    void makeFullscreen(bool enabled);
 };
 
 #endif // OVERLAYWIDGET_H

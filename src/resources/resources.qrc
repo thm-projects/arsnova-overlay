@@ -1,5 +1,10 @@
 <RCC>
   <qresource prefix="images">
+    <file>images/layer-visible-off.png</file>
+    <file>images/layer-visible-on.png</file>
+    <file>images/system-switch-user.png</file>
+    <file>images/view-fullscreen.png</file>
+    <file>images/view-restore.png</file>
     <file>images/background.png</file>
   </qresource>
 </RCC>

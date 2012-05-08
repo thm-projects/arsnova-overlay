@@ -10,12 +10,16 @@ OverlayWidget::OverlayWidget ( QWidget* parent, Qt::WindowFlags f )
     this->updateTimer = new UpdateTimer();
     this->httpClient = new QHttp ( "ars.thm.de", QHttp::ConnectionModeHttps, 443 );
 
+    this->styleSheetBackup = this->styleSheet();
+
     connect ( this->updateTimer, SIGNAL ( tick ( int ) ), this, SLOT ( updateHttpResponse ( int ) ) );
     connect ( this->httpClient, SIGNAL ( requestFinished ( int,bool ) ), this, SLOT ( updateGraphicsScene() ) );
     connect ( ui->sessionIdEdit, SIGNAL ( editingFinished() ), this, SLOT ( sessionLogin() ) );
     connect ( ui->loginButton, SIGNAL ( pressed() ), this, SLOT ( sessionLogin() ) );
-    
-    this->setWindowFlags(Qt::Window | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint);
+    connect ( ui->actionChangeSession, SIGNAL ( triggered ( bool ) ), this, SLOT ( showSessionIdForm() ) );
+    connect ( ui->actionMakeTransparent, SIGNAL ( triggered ( bool ) ), this, SLOT ( makeTransparent ( bool ) ) );
+
+    this->setWindowFlags ( Qt::Window | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint );
 
     ui->progressBar->setMaximum ( OverlayWidget::httpUpdateInterval );
 
@@ -29,7 +33,7 @@ OverlayWidget::OverlayWidget ( QWidget* parent, Qt::WindowFlags f )
 
     this->createGraphicsScene();
     this->setMouseTracking ( true );
-        
+
     ui->graphicsView->setMouseTracking ( true );
 
     ui->graphicsView->setScene ( this->graphicsScene );
@@ -140,6 +144,8 @@ void OverlayWidget::updateGraphicsScene() {
             ui->progressBar->show();
             ui->graphicsView->show();
             ui->sessionNameLabel->show();
+            this->setWindowFlags ( Qt::Window | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint );
+            this->show();
             this->updateHttpResponse ( OverlayWidget::httpUpdateInterval );
             ui->sessionNameLabel->setText (
                 scriptValue.property ( "rows" ).property ( 0 ).property ( "value" ).property ( "shortName" ).toString()
@@ -228,4 +234,32 @@ void OverlayWidget::resizeEvent ( QResizeEvent* event ) {
 
 void OverlayWidget::sessionLogin() {
     this->httpClient->get ( "/couchdb/arsnova/_design/session/_view/by_keyword?key=\"" + ui->sessionIdEdit->text() + "\"" );
+}
+
+void OverlayWidget::makeTransparent ( bool enabled ) {
+    if ( enabled ) {
+        this->setWindowOpacity ( .5 );
+        return;
+    }
+    this->setWindowOpacity ( 1 );
+}
+
+void OverlayWidget::makeFullscreen ( bool enabled ) {
+    if ( enabled ) {
+        return;
+    }
+}
+
+void OverlayWidget::showSessionIdForm() {
+    ui->loginButton->setFocus();
+
+    ui->sessionIdEdit->show();
+    ui->loginButton->show();
+    ui->onlineUsersLabel->hide();
+    ui->progressBar->hide();
+    ui->graphicsView->hide();
+    ui->sessionNameLabel->hide();
+
+    this->setWindowFlags ( Qt::Window | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint );
+    this->show();
 }
