@@ -6,15 +6,33 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>320</width>
+    <width>200</width>
     <height>245</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>200</width>
+    <height>0</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>200</width>
+    <height>16777215</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background: url(:images/images/background.png)</string>
+   <string notr="true">background: url(:images/images/background.png);</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <property name="margin">
@@ -29,6 +47,9 @@
    </item>
    <item row="2" column="0">
     <widget class="QLineEdit" name="sessionIdEdit">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
      <property name="styleSheet">
       <string notr="true">font-size: 24px;
 border: 1px solid #555;
@@ -47,6 +68,9 @@ background: white;</string>
    </item>
    <item row="2" column="1">
     <widget class="QPushButton" name="loginButton">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
      <property name="styleSheet">
       <string notr="true">QPushButton#loginButton {
     font-size: 24px;
@@ -83,7 +107,13 @@ QPushButton#loginButton:hover {
      <property name="minimumSize">
       <size>
        <width>0</width>
-       <height>32</height>
+       <height>22</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>22</height>
       </size>
      </property>
      <property name="autoFillBackground">
@@ -95,21 +125,28 @@ QPushButton#loginButton:hover {
      <addaction name="actionChangeSession"/>
      <addaction name="actionMakeTransparent"/>
      <addaction name="actionFullscreen"/>
+     <addaction name="actionExit"/>
     </widget>
    </item>
    <item row="0" column="0" colspan="2">
     <layout class="QHBoxLayout" name="horizontalLayout">
+     <property name="leftMargin">
+      <number>4</number>
+     </property>
+     <property name="rightMargin">
+      <number>4</number>
+     </property>
      <item>
       <widget class="QLabel" name="sessionNameLabel">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
        <property name="minimumSize">
         <size>
-         <width>100</width>
+         <width>80</width>
          <height>0</height>
         </size>
        </property>
@@ -128,6 +165,12 @@ font-weight: bold;</string>
      </item>
      <item>
       <widget class="QProgressBar" name="progressBar">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="styleSheet">
         <string notr="true">QProgressBar {
 	border: 1px solid #fff;
@@ -153,6 +196,12 @@ QProgressBar::chunk {
      </item>
      <item>
       <widget class="QLabel" name="onlineUsersLabel">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="styleSheet">
         <string notr="true">font-size: 14px;
 color: white;
@@ -182,6 +231,9 @@ font-weight: bold;</string>
    <property name="checkable">
     <bool>true</bool>
    </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
    <property name="icon">
     <iconset resource="../resources/resources.qrc">
      <normaloff>:/images/images/layer-visible-off.png</normaloff>
@@ -208,6 +260,19 @@ font-weight: bold;</string>
    </property>
    <property name="toolTip">
     <string>Fullscreen</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="icon">
+    <iconset resource="../resources/resources.qrc">
+     <normaloff>:/images/images/application-exit.png</normaloff>
+     <normalon>:/images/images/view-restore.png</normalon>:/images/images/application-exit.png</iconset>
+   </property>
+   <property name="text">
+    <string>Exit</string>
+   </property>
+   <property name="toolTip">
+    <string>Exit</string>
    </property>
   </action>
  </widget>

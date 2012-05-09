@@ -28,10 +28,10 @@ private:
 
     static const int httpUpdateInterval;
     static const int ySize;
+    static const int xSize;
     void createGraphicsScene();
     void updateGraphicsBar ( int index, int value );
-    void mouseMoveEvent ( QMouseEvent * event );
-    void resizeEvent ( QResizeEvent * event );
+    void moveToBottomRightEdge();
 
 private slots:
     void sessionLogin();

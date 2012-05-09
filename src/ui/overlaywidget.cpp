@@ -1,6 +1,7 @@
 #include "overlaywidget.h"
 
-const int OverlayWidget::ySize = 160;
+const int OverlayWidget::ySize = 80;
+const int OverlayWidget::xSize = 180;
 const int OverlayWidget::httpUpdateInterval = 10;
 
 OverlayWidget::OverlayWidget ( QWidget* parent, Qt::WindowFlags f )
@@ -18,6 +19,8 @@ OverlayWidget::OverlayWidget ( QWidget* parent, Qt::WindowFlags f )
     connect ( ui->loginButton, SIGNAL ( pressed() ), this, SLOT ( sessionLogin() ) );
     connect ( ui->actionChangeSession, SIGNAL ( triggered ( bool ) ), this, SLOT ( showSessionIdForm() ) );
     connect ( ui->actionMakeTransparent, SIGNAL ( triggered ( bool ) ), this, SLOT ( makeTransparent ( bool ) ) );
+    connect ( ui->actionFullscreen, SIGNAL ( triggered ( bool ) ), this, SLOT ( makeFullscreen ( bool ) ) );
+    connect ( ui->actionExit, SIGNAL ( triggered ( bool ) ), this, SLOT ( close() ) );
 
     this->setWindowFlags ( Qt::Window | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint );
 
@@ -30,6 +33,7 @@ OverlayWidget::OverlayWidget ( QWidget* parent, Qt::WindowFlags f )
     ui->onlineUsersLabel->hide();
     ui->progressBar->hide();
     ui->sessionNameLabel->hide();
+    ui->menuWidget->hide();
 
     this->createGraphicsScene();
     this->setMouseTracking ( true );
@@ -37,8 +41,14 @@ OverlayWidget::OverlayWidget ( QWidget* parent, Qt::WindowFlags f )
     ui->graphicsView->setMouseTracking ( true );
 
     ui->graphicsView->setScene ( this->graphicsScene );
+    this->moveToBottomRightEdge();
+}
 
-    ui->menuWidget->hide();
+void OverlayWidget::moveToBottomRightEdge() {
+    this->resize ( QSize ( xSize+20, ( ySize*2 ) + 32 ) );
+    int xPos = QApplication::desktop()->screenGeometry().width() - this->size().width() - 8;
+    int yPos = QApplication::desktop()->screenGeometry().height() - this->size().height() - 8;
+    this->move ( xPos, yPos );
 }
 
 void OverlayWidget::createGraphicsScene() {
@@ -47,19 +57,20 @@ void OverlayWidget::createGraphicsScene() {
     QPen whitePen ( qRgb ( 200,200,200 ) );
     QBrush greyBrush ( qRgb ( 100,100,100 ) );
 
-    //ui->graphicsView->setRenderHint(QPainter::Antialiasing);
-
     this->drawPercentageLines();
 
-    this->bars->append ( this->graphicsScene->addRect ( QRectF ( 20,ySize,40,0 ) ) );
-    this->bars->append ( this->graphicsScene->addRect ( QRectF ( 80,ySize,40,0 ) ) );
-    this->bars->append ( this->graphicsScene->addRect ( QRectF ( 140,ySize,40,0 ) ) );
-    this->bars->append ( this->graphicsScene->addRect ( QRectF ( 200,ySize,40,0 ) ) );
+    // Bars
+    for ( int i = 1; i <= 4; i++ ) {
+        int xSpace = OverlayWidget::xSize / 13;
+        this->bars->append ( this->graphicsScene->addRect ( QRectF ( ( xSpace * i ) + ( xSpace * ( i-1 ) * 2 ), ySize,xSpace*2,0 ) ) );
+    }
 
-    this->bars->append ( this->graphicsScene->addRect ( QRectF ( 20,ySize,40,0 ) ) );
-    this->bars->append ( this->graphicsScene->addRect ( QRectF ( 80,ySize,40,0 ) ) );
-    this->bars->append ( this->graphicsScene->addRect ( QRectF ( 140,ySize,40,0 ) ) );
-    this->bars->append ( this->graphicsScene->addRect ( QRectF ( 200,ySize,40,0 ) ) );
+    // Shadows
+    for ( int i = 1; i <= 4; i++ ) {
+        int xSpace = OverlayWidget::xSize / 13;
+        qDebug() << xSpace;
+        this->bars->append ( this->graphicsScene->addRect ( QRectF ( ( xSpace * i ) + ( xSpace * ( i-1 ) * 2 ), ySize,xSpace*2,0 ) ) );
+    }
 
     QLinearGradient linearGradient;
     linearGradient.setStart ( 0,0 );
@@ -107,8 +118,7 @@ void OverlayWidget::createGraphicsScene() {
     this->bars->at ( 7 )->setBrush ( QBrush ( Qt::black ) );
     this->bars->at ( 7 )->setGraphicsEffect ( effectD );
 
-    QGraphicsLineItem * xAxis = this->graphicsScene->addLine ( QLineF ( 0,ySize,260,ySize ), whitePen );
-    QGraphicsLineItem * yAxis = this->graphicsScene->addLine ( QLineF ( 0,0,0,ySize ), whitePen );
+    QGraphicsLineItem * xAxis = this->graphicsScene->addLine ( QLineF ( 0,ySize,OverlayWidget::xSize,ySize ), whitePen );
 
     this->graphicsScene->update();
 
@@ -123,7 +133,7 @@ void OverlayWidget::drawPercentageLines() {
 
     for ( int i = 0; i < 4; i++ ) {
         int y = ( ySize * i ) / 4;
-        this->graphicsScene->addLine ( QLineF ( 0,y,260,y ), whiteDottedPen );
+        this->graphicsScene->addLine ( QLineF ( 0,y,OverlayWidget::xSize,y ), whiteDottedPen );
     }
 }
 
@@ -144,6 +154,7 @@ void OverlayWidget::updateGraphicsScene() {
             ui->progressBar->show();
             ui->graphicsView->show();
             ui->sessionNameLabel->show();
+            ui->menuWidget->show();
             this->setWindowFlags ( Qt::Window | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint );
             this->show();
             this->updateHttpResponse ( OverlayWidget::httpUpdateInterval );
@@ -206,37 +217,14 @@ void OverlayWidget::updateGraphicsBar ( int index, int value ) {
     this->graphicsScene->update();
 }
 
-void OverlayWidget::mouseMoveEvent ( QMouseEvent* event ) {
-    if (
-        ( event->pos().y() >= this->size().height() - 20 )
-        && ui->progressBar->isVisible()
-    ) {
-        ui->menuWidget->show();
-    } else {
-        ui->menuWidget->hide();
-    }
-    QWidget::mouseMoveEvent ( event );
-}
-
-void OverlayWidget::resizeEvent ( QResizeEvent* event ) {
-    int yScale = event->size().height() / 210;
-    int xScale = event->size().width() / 320;
-
-    qDebug() << event->size() << xScale << yScale;
-
-    ui->graphicsView->resetMatrix();
-    ui->graphicsView->scale ( xScale, yScale );
-    ui->graphicsView->update();
-
-    QWidget::resizeEvent ( event );
-}
-
-
 void OverlayWidget::sessionLogin() {
     this->httpClient->get ( "/couchdb/arsnova/_design/session/_view/by_keyword?key=\"" + ui->sessionIdEdit->text() + "\"" );
+    this->makeTransparent ( true );
+    this->moveToBottomRightEdge();
 }
 
 void OverlayWidget::makeTransparent ( bool enabled ) {
+    ui->actionMakeTransparent->setChecked ( enabled );
     if ( enabled ) {
         this->setWindowOpacity ( .5 );
         return;
@@ -246,11 +234,34 @@ void OverlayWidget::makeTransparent ( bool enabled ) {
 
 void OverlayWidget::makeFullscreen ( bool enabled ) {
     if ( enabled ) {
+
+        this->move ( 0,0 );
+        this->setMaximumSize ( QApplication::desktop()->screenGeometry().width(),QApplication::desktop()->screenGeometry().height() );
+        this->resize ( QApplication::desktop()->screenGeometry().width(),QApplication::desktop()->screenGeometry().height() );
+        this->setWindowState ( this->windowState() ^ Qt::WindowFullScreen );
+        this->show();
+
+        int yScale = ( this->size().height() / ySize ) - 2;
+        int xScale = ( this->size().width() / xSize ) - 2;
+
+        qDebug() << this->size() << xScale << yScale;
+
+        ui->graphicsView->resetMatrix();
+        ui->graphicsView->scale ( xScale, yScale );
+        ui->graphicsView->update();
         return;
     }
+
+    this->setWindowState ( this->windowState() & ~Qt::WindowFullScreen );
+    this->show();
+
+    this->moveToBottomRightEdge();
+    ui->graphicsView->resetMatrix();
 }
 
 void OverlayWidget::showSessionIdForm() {
+    this->makeTransparent ( false );
+
     ui->loginButton->setFocus();
 
     ui->sessionIdEdit->show();
@@ -259,7 +270,10 @@ void OverlayWidget::showSessionIdForm() {
     ui->progressBar->hide();
     ui->graphicsView->hide();
     ui->sessionNameLabel->hide();
+    ui->menuWidget->hide();
 
     this->setWindowFlags ( Qt::Window | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint );
     this->show();
+
+    this->moveToBottomRightEdge();
 }

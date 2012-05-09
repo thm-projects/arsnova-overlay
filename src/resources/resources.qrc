@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="images">
+    <file>images/application-exit.png</file>
     <file>images/layer-visible-off.png</file>
     <file>images/layer-visible-on.png</file>
     <file>images/system-switch-user.png</file>
