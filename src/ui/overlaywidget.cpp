@@ -68,7 +68,6 @@ void OverlayWidget::createGraphicsScene() {
     // Shadows
     for ( int i = 1; i <= 4; i++ ) {
         int xSpace = OverlayWidget::xSize / 13;
-        qDebug() << xSpace;
         this->bars->append ( this->graphicsScene->addRect ( QRectF ( ( xSpace * i ) + ( xSpace * ( i-1 ) * 2 ), ySize,xSpace*2,0 ) ) );
     }
 
@@ -243,8 +242,6 @@ void OverlayWidget::makeFullscreen ( bool enabled ) {
 
         int yScale = ( this->size().height() / ySize ) - 2;
         int xScale = ( this->size().width() / xSize ) - 2;
-
-        qDebug() << this->size() << xScale << yScale;
 
         ui->graphicsView->resetMatrix();
         ui->graphicsView->scale ( xScale, yScale );

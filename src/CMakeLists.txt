@@ -41,7 +41,21 @@ qt4_add_resources(resources_RCC_SRCS ${resources_RCCS})
 qt4_wrap_cpp(arsnovawidget_SRCS ${arsnovawidget_MOC_SRCS})
 qt4_wrap_ui(arsnovawidget_UIS_H ${arsnovawidget_UIS})
 
-add_executable(arsnovawidget MACOSX_BUNDLE
+IF( WIN32 AND MINGW )
+  # To cross compile on Linux use: 'i686-w64-mingw32-windres' or similar command shipped with mingw cross compiler.
+  # Change resources/arsnovawidgeticon.rc to use the correct path seperator depending on used plattform.
+  ADD_CUSTOM_COMMAND( OUTPUT arsnovawidgeticon.rc.obj
+    COMMAND i686-w64-mingw32-windres -I${CMAKE_CURRENT_SOURCE_DIR} -i${CMAKE_CURRENT_SOURCE_DIR}/resources/arsnovawidgeticon.rc 
+	-o arsnovawidgeticon.rc.obj
+  )
+  SET(arsnovawidget_SRCS ${arsnovawidget_SRCS} ${CMAKE_CURRENT_BINARY_DIR}/arsnovawidgeticon.rc.obj)
+ENDIF( WIN32 AND MINGW )
+
+IF( WIN32 AND NOT MINGW )
+  SET(arsnovawidget_SRCS ${arsnovawidget_SRCS} arsnovawidgeticon.rc)
+ENDIF( WIN32 AND NOT MINGW )
+
+add_executable(arsnovawidget MACOSX_BUNDLE WIN32
   ${arsnovawidget_SRCS}
   ${arsnovawidget_UIS_H}
   ${resources_RCC_SRCS}
@@ -55,21 +69,18 @@ target_link_libraries(arsnovawidget
 )
 
 IF(APPLE)
-
   SET (CMAKE_CXX_FLAGS "-mmacosx-version-min=10.5") 
-
   INSTALL(CODE
-
     "SET(BUNDLE
-
       \"\${CMAKE_INSTALL_PREFIX}/../..\"
-
     )"
-
   )
-
   INSTALL(CODE "EXECUTE_PROCESS(COMMAND macdeployqt ./bin/arsnovawidget.app)")
-
   INSTALL(TARGETS arsnovawidget BUNDLE DESTINATION ../../../)
-
 ENDIF(APPLE)
+
+IF (WIN32)
+  INSTALL(TARGETS arsnovawidget
+    RUNTIME DESTINATION .
+  )
+ENDIF (WIN32)

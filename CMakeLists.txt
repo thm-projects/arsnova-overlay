@@ -22,6 +22,28 @@ IF (APPLE)
   )
 ENDIF (APPLE)
 
+IF (WIN32)
+  INSTALL(FILES ${FILES}
+    DESTINATION .
+  )
+  SET(WINQTFILES
+    # This part should contain DLL files to be included in package e.g.:
+    ${CMAKE_CURRENT_BINARY_DIR}/lib/libgcc_s_sjlj-1.dll
+    ${CMAKE_CURRENT_BINARY_DIR}/lib/libstdc++-6.dll
+    ${CMAKE_CURRENT_BINARY_DIR}/lib/QtCore4.dll
+    ${CMAKE_CURRENT_BINARY_DIR}/lib/QtGui4.dll
+    ${CMAKE_CURRENT_BINARY_DIR}/lib/QtSvg4.dll
+    ${CMAKE_CURRENT_BINARY_DIR}/lib/QtXml4.dll
+    ${CMAKE_CURRENT_BINARY_DIR}/lib/libjpeg-8.dll 
+    ${CMAKE_CURRENT_BINARY_DIR}/lib/libpng15-15.dll
+    ${CMAKE_CURRENT_BINARY_DIR}/lib/libtiff-5.dll
+    ${CMAKE_CURRENT_BINARY_DIR}/lib/zlib1.dll
+  )
+  INSTALL(FILES ${WINQTFILES}
+    DESTINATION .
+  )
+ENDIF (WIN32)
+
 # CPACK
 INCLUDE(InstallRequiredSystemLibraries)
 SET(CPACK_RESOURCE_FILE_LICENSE "COPYING")
