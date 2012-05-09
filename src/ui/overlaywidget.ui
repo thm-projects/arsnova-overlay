@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>200</width>
-    <height>245</height>
+    <height>269</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -32,7 +32,7 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background: url(:images/images/background.png);</string>
+   <string notr="true">background: #333 url(:images/images/background.png);</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <property name="margin">
@@ -130,6 +130,9 @@ QPushButton#loginButton:hover {
    </item>
    <item row="0" column="0" colspan="2">
     <layout class="QHBoxLayout" name="horizontalLayout">
+     <property name="spacing">
+      <number>2</number>
+     </property>
      <property name="leftMargin">
       <number>4</number>
      </property>
@@ -151,7 +154,7 @@ QPushButton#loginButton:hover {
         </size>
        </property>
        <property name="styleSheet">
-        <string notr="true">font-size: 14px;
+        <string notr="true">font-size: 12px;
 color: white;
 font-weight: bold;</string>
        </property>
@@ -180,6 +183,8 @@ font-weight: bold;</string>
 }
 
 QProgressBar::chunk {
+	width: 8px;
+	margin: 1px;
 	background-color: #dde;
 }</string>
        </property>
@@ -203,7 +208,7 @@ QProgressBar::chunk {
         </sizepolicy>
        </property>
        <property name="styleSheet">
-        <string notr="true">font-size: 14px;
+        <string notr="true">font-size: 12px;
 color: white;
 font-weight: bold;</string>
        </property>

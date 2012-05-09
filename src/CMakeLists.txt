@@ -41,7 +41,7 @@ qt4_add_resources(resources_RCC_SRCS ${resources_RCCS})
 qt4_wrap_cpp(arsnovawidget_SRCS ${arsnovawidget_MOC_SRCS})
 qt4_wrap_ui(arsnovawidget_UIS_H ${arsnovawidget_UIS})
 
-add_executable(arsnovawidget
+add_executable(arsnovawidget MACOSX_BUNDLE
   ${arsnovawidget_SRCS}
   ${arsnovawidget_UIS_H}
   ${resources_RCC_SRCS}
@@ -53,3 +53,23 @@ target_link_libraries(arsnovawidget
   ${QT_QTNETWORK_LIBRARY}
   ${QT_QTSCRIPT_LIBRARY}
 )
+
+IF(APPLE)
+
+  SET (CMAKE_CXX_FLAGS "-mmacosx-version-min=10.5") 
+
+  INSTALL(CODE
+
+    "SET(BUNDLE
+
+      \"\${CMAKE_INSTALL_PREFIX}/../..\"
+
+    )"
+
+  )
+
+  INSTALL(CODE "EXECUTE_PROCESS(COMMAND macdeployqt ./bin/arsnovawidget.app)")
+
+  INSTALL(TARGETS arsnovawidget BUNDLE DESTINATION ../../../)
+
+ENDIF(APPLE)

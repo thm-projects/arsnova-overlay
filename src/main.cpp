@@ -13,7 +13,8 @@ int main ( int argc, char** argv ) {
     startApplication ( argc, argv );
 #endif
     QApplication app ( argc, argv );
-
+    app.setStyle("plastique");
+    
     OverlayWidget widget;
     widget.show();
 
