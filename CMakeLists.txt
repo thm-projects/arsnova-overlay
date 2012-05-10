@@ -32,8 +32,9 @@ IF (WIN32)
     ${CMAKE_CURRENT_BINARY_DIR}/lib/libstdc++-6.dll
     ${CMAKE_CURRENT_BINARY_DIR}/lib/QtCore4.dll
     ${CMAKE_CURRENT_BINARY_DIR}/lib/QtGui4.dll
+    ${CMAKE_CURRENT_BINARY_DIR}/lib/QtNetwork4.dll
+    ${CMAKE_CURRENT_BINARY_DIR}/lib/QtScript4.dll
     ${CMAKE_CURRENT_BINARY_DIR}/lib/QtSvg4.dll
-    ${CMAKE_CURRENT_BINARY_DIR}/lib/QtXml4.dll
     ${CMAKE_CURRENT_BINARY_DIR}/lib/libjpeg-8.dll 
     ${CMAKE_CURRENT_BINARY_DIR}/lib/libpng15-15.dll
     ${CMAKE_CURRENT_BINARY_DIR}/lib/libtiff-5.dll
