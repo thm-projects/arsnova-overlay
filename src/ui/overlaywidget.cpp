@@ -179,9 +179,14 @@ void OverlayWidget::updateGraphicsScene() {
         this->latestUnderstandingResponses = values[0] + values[1] + values[2] + values[3];
 
         for ( int i = 0; i <= 3; i++ ) {
-            if ( this->latestUnderstandingResponses > 0 ) this->updateGraphicsBar ( i, ( values[i] * ySize ) / this->latestUnderstandingResponses );
+            if ( this->latestUnderstandingResponses > 0 ) {
+                this->updateGraphicsBar ( i, ( values[i] * ySize ) / this->latestUnderstandingResponses );
+            } else {
+                this->updateGraphicsBar ( i, 0 );
+            }
         }
     } else if ( this->httpClient->currentRequest().path().contains ( "logged_in" ) ) {
+        qDebug() << this->httpClient->currentRequest().path() << "\n" << scriptValue.toVariant();
         this->loggedInUsers = scriptValue.property ( "rows" ).property ( 0 ).property ( "value" ).toInteger();
         ui->onlineUsersLabel->setText (
             QString ( "(" ) + QString::number ( this->latestUnderstandingResponses, 10 ) + "/"
@@ -193,8 +198,12 @@ void OverlayWidget::updateGraphicsScene() {
 void OverlayWidget::updateHttpResponse ( int ticks ) {
     ui->progressBar->setValue ( ticks );
     if ( ticks == OverlayWidget::httpUpdateInterval ) {
-        this->httpClient->get ( "/couchdb/arsnova/_design/understanding/_view/by_session?group=true&startkey=[\"" + this->sessionId + "\"]&endkey=[\"" + this->sessionId + "\",{}]" );
-        this->httpClient->get ( "/couchdb/arsnova/_design/logged_in/_view/count?group=true&startkey=[\"" + this->sessionId + "\"]&endkey=[\"" + this->sessionId + "\",{}]" );
+        // Like ArsNova: ARSnova.models.Feedback.getSessionFeedback()
+        int timeLimit = 3;
+        QString dcTimestamp = QString::number ( QDateTime::currentMSecsSinceEpoch() );
+
+        this->httpClient->get ( "/couchdb/arsnova/_design/understanding/_view/by_session?group=true&_dc=" + dcTimestamp + "&startkey=[\"" + this->sessionId + "\"]&endkey=[\"" + this->sessionId + "\",{}]" );
+        this->httpClient->get ( "/couchdb/arsnova/_design/logged_in/_view/count?_dc=" + dcTimestamp + "&startkey=[\"" + this->sessionId + "\"," + QString::number ( QDateTime::currentMSecsSinceEpoch() - ( timeLimit * 1000 * 60 ),10 ) + "]&endkey=[\"" + this->sessionId + "\",{}]" );
         this->updateTimer->reset();
     }
 }
