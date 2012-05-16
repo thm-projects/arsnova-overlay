@@ -10,11 +10,12 @@ OverlayWidget::OverlayWidget ( QWidget* parent, Qt::WindowFlags f )
 
     this->updateTimer = new UpdateTimer();
     this->httpClient = new QHttp ( "ars.thm.de", QHttp::ConnectionModeHttps, 443 );
+    this->httpConnection = new HttpConnection ( this->httpClient );
 
     this->styleSheetBackup = this->styleSheet();
 
     connect ( this->updateTimer, SIGNAL ( tick ( int ) ), this, SLOT ( updateHttpResponse ( int ) ) );
-    connect ( this->httpClient, SIGNAL ( requestFinished ( int,bool ) ), this, SLOT ( updateGraphicsScene() ) );
+    connect ( this->httpConnection, SIGNAL ( requestFinished ( HttpConnection::RequestType, QScriptValue * ) ), this, SLOT ( updateGraphicsScene ( HttpConnection::RequestType, QScriptValue * ) ) );
     connect ( ui->sessionIdEdit, SIGNAL ( editingFinished() ), this, SLOT ( sessionLogin() ) );
     connect ( ui->loginButton, SIGNAL ( pressed() ), this, SLOT ( sessionLogin() ) );
     connect ( ui->actionChangeSession, SIGNAL ( triggered ( bool ) ), this, SLOT ( showSessionIdForm() ) );
@@ -136,15 +137,11 @@ void OverlayWidget::drawPercentageLines() {
     }
 }
 
+void OverlayWidget::updateGraphicsScene ( HttpConnection::RequestType type, QScriptValue * response ) {
 
-void OverlayWidget::updateGraphicsScene() {
+    if ( type == HttpConnection::SESSION_REQUEST ) {
 
-    QByteArray response = this->httpClient->readAll();
-    QScriptEngine scriptEngine;
-    QScriptValue scriptValue = scriptEngine.evaluate ( QString ( "(" ) + response.data() + ")" );
-    if ( this->httpClient->currentRequest().path().contains ( "by_keyword" ) ) {
-
-        this->sessionId = scriptValue.property ( "rows" ).property ( 0 ).property ( "id" ).toString();
+        this->sessionId = response->property ( "rows" ).property ( 0 ).property ( "id" ).toString();
 
         if ( ! this->sessionId.isNull() ) {
             ui->sessionIdEdit->hide();
@@ -158,22 +155,22 @@ void OverlayWidget::updateGraphicsScene() {
             this->show();
             this->updateHttpResponse ( OverlayWidget::httpUpdateInterval );
             ui->sessionNameLabel->setText (
-                scriptValue.property ( "rows" ).property ( 0 ).property ( "value" ).property ( "shortName" ).toString()
+                response->property ( "rows" ).property ( 0 ).property ( "value" ).property ( "shortName" ).toString()
                 + "\n("
-                + scriptValue.property ( "rows" ).property ( 0 ).property ( "key" ).toString()
+                + response->property ( "rows" ).property ( 0 ).property ( "key" ).toString()
                 + ")"
             );
         }
 
-    } else if ( this->httpClient->currentRequest().path().contains ( "by_session" ) ) {
+    } else if ( type == HttpConnection::UNDERSTANDING_REQUEST ) {
         int values[4] = {0,0,0,0};
 
         for ( int i = 0; i <= 3; i++ ) {
-            QString key = scriptValue.property ( "rows" ).property ( i ).property ( "key" ).property ( 1 ).toString();
-            if ( key == "Bitte schneller" ) values[0] = scriptValue.property ( "rows" ).property ( i ).property ( "value" ).toInteger();
-            if ( key == "Kann folgen" ) values[1] = scriptValue.property ( "rows" ).property ( i ).property ( "value" ).toInteger();
-            if ( key == "Zu schnell" ) values[2] = scriptValue.property ( "rows" ).property ( i ).property ( "value" ).toInteger();
-            if ( key == "Nicht mehr dabei" ) values[3] = scriptValue.property ( "rows" ).property ( i ).property ( "value" ).toInteger();
+            QString key = response->property ( "rows" ).property ( i ).property ( "key" ).property ( 1 ).toString();
+            if ( key == "Bitte schneller" ) values[0] = response->property ( "rows" ).property ( i ).property ( "value" ).toInteger();
+            if ( key == "Kann folgen" ) values[1] = response->property ( "rows" ).property ( i ).property ( "value" ).toInteger();
+            if ( key == "Zu schnell" ) values[2] = response->property ( "rows" ).property ( i ).property ( "value" ).toInteger();
+            if ( key == "Nicht mehr dabei" ) values[3] = response->property ( "rows" ).property ( i ).property ( "value" ).toInteger();
         }
 
         this->latestUnderstandingResponses = values[0] + values[1] + values[2] + values[3];
@@ -185,9 +182,8 @@ void OverlayWidget::updateGraphicsScene() {
                 this->updateGraphicsBar ( i, 0 );
             }
         }
-    } else if ( this->httpClient->currentRequest().path().contains ( "logged_in" ) ) {
-        qDebug() << this->httpClient->currentRequest().path() << "\n" << scriptValue.toVariant();
-        this->loggedInUsers = scriptValue.property ( "rows" ).property ( 0 ).property ( "value" ).toInteger();
+    } else if ( type == HttpConnection::LOGGEDIN_REQUEST ) {
+        this->loggedInUsers = response->property ( "rows" ).property ( 0 ).property ( "value" ).toInteger();
         ui->onlineUsersLabel->setText (
             QString ( "(" ) + QString::number ( this->latestUnderstandingResponses, 10 ) + "/"
             + QString::number ( this->loggedInUsers, 10 ) + ")"
@@ -198,12 +194,8 @@ void OverlayWidget::updateGraphicsScene() {
 void OverlayWidget::updateHttpResponse ( int ticks ) {
     ui->progressBar->setValue ( ticks );
     if ( ticks == OverlayWidget::httpUpdateInterval ) {
-        // Like ArsNova: ARSnova.models.Feedback.getSessionFeedback()
-        int timeLimit = 3;
-        QString dcTimestamp = QString::number ( QDateTime::currentMSecsSinceEpoch() );
-
-        this->httpClient->get ( "/couchdb/arsnova/_design/understanding/_view/by_session?group=true&_dc=" + dcTimestamp + "&startkey=[\"" + this->sessionId + "\"]&endkey=[\"" + this->sessionId + "\",{}]" );
-        this->httpClient->get ( "/couchdb/arsnova/_design/logged_in/_view/count?_dc=" + dcTimestamp + "&startkey=[\"" + this->sessionId + "\"," + QString::number ( QDateTime::currentMSecsSinceEpoch() - ( timeLimit * 1000 * 60 ),10 ) + "]&endkey=[\"" + this->sessionId + "\",{}]" );
+        this->httpConnection->requestUnderstanding();
+        this->httpConnection->requestLoggedIn();
         this->updateTimer->reset();
     }
 }
@@ -226,7 +218,7 @@ void OverlayWidget::updateGraphicsBar ( int index, int value ) {
 }
 
 void OverlayWidget::sessionLogin() {
-    this->httpClient->get ( "/couchdb/arsnova/_design/session/_view/by_keyword?key=\"" + ui->sessionIdEdit->text() + "\"" );
+    this->httpConnection->requestSession ( ui->sessionIdEdit->text() );
     this->makeTransparent ( true );
     this->moveToBottomRightEdge();
 }
@@ -283,3 +275,4 @@ void OverlayWidget::showSessionIdForm() {
 
     this->moveToBottomRightEdge();
 }
+

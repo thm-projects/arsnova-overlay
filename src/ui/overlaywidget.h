@@ -7,6 +7,7 @@
 #include "ui_overlaywidget.h"
 
 #include "../updatetimer.h"
+#include "httpconnection.h"
 
 class OverlayWidget : public QWidget, Ui::OverlayWidget {
     Q_OBJECT
@@ -21,6 +22,7 @@ private:
     QList<QGraphicsRectItem *> * bars;
 
     QHttp * httpClient;
+    HttpConnection * httpConnection;
     QString sessionId;
     QString styleSheetBackup;
     int loggedInUsers;
@@ -36,7 +38,7 @@ private:
 private slots:
     void sessionLogin();
     void updateHttpResponse ( int ticks );
-    void updateGraphicsScene();
+    void updateGraphicsScene(HttpConnection::RequestType type, QScriptValue * response);
     void drawPercentageLines();
     void showSessionIdForm();
     void makeTransparent(bool enabled);

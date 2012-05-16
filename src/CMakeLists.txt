@@ -3,6 +3,7 @@ include_directories(${QT_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR})
 set(arsnovawidget_SRCS
   ui/overlaywidget.cpp
   updatetimer.cpp
+  httpconnection.cpp
   main.cpp
 )
 
@@ -24,6 +25,7 @@ endif(APPLE)
 set(arsnovawidget_MOC_SRCS
   ui/overlaywidget.h
   updatetimer.h
+  httpconnection.h
 )
 
 set(arsnovawidget_UIS
