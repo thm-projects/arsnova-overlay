@@ -40,13 +40,26 @@ void HttpConnection::handleResponse() {
         //emit this->requestError();
         //return;
     }
-    
+
     if ( this->httpClient->currentRequest().path().contains ( "by_keyword" ) ) {
         this->sessionId = responseValue->property ( "rows" ).property ( 0 ).property ( "id" ).toString();
-        emit this->requestFinished ( RequestType::SESSION_REQUEST, responseValue );
+        QString sessionKey = responseValue->property ( "rows" ).property ( 0 ).property ( "key" ).toString();
+        QString shortName = responseValue->property ( "rows" ).property ( 0 ).property ( "value" ).property ( "shortName" ).toString();
+        emit this->requestFinished ( SessionResponse ( sessionKey, shortName ) );
     } else if ( this->httpClient->currentRequest().path().contains ( "by_session" ) ) {
-        emit this->requestFinished ( RequestType::UNDERSTANDING_REQUEST, responseValue );
+        int values[4] = {0,0,0,0};
+
+        for ( int i = 0; i <= 3; i++ ) {
+            QString key = responseValue->property ( "rows" ).property ( i ).property ( "key" ).property ( 1 ).toString();
+            if ( key == "Bitte schneller" ) values[0] = responseValue->property ( "rows" ).property ( i ).property ( "value" ).toInteger();
+            if ( key == "Kann folgen" ) values[1] = responseValue->property ( "rows" ).property ( i ).property ( "value" ).toInteger();
+            if ( key == "Zu schnell" ) values[2] = responseValue->property ( "rows" ).property ( i ).property ( "value" ).toInteger();
+            if ( key == "Nicht mehr dabei" ) values[3] = responseValue->property ( "rows" ).property ( i ).property ( "value" ).toInteger();
+        }
+
+        emit this->requestFinished ( UnderstandingResponse ( values[0], values[1], values[2], values[3] ) );
     } else if ( this->httpClient->currentRequest().path().contains ( "logged_in" ) ) {
-        emit this->requestFinished ( RequestType::LOGGEDIN_REQUEST, responseValue );
+        int value = responseValue->property ( "rows" ).property ( 0 ).property ( "value" ).toInteger();
+        emit this->requestFinished ( LoggedInResponse ( value ) );
     }
 }

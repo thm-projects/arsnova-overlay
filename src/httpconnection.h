@@ -4,6 +4,10 @@
 #include <QtNetwork>
 #include <QtScript>
 
+#include "sessionresponse.h"
+#include "understandingresponse.h"
+#include "loggedinresponse.h"
+
 class HttpConnection : public QObject {
     Q_OBJECT
 
@@ -29,6 +33,9 @@ private slots:
 signals:
     void requestError();
     void requestFinished ( HttpConnection::RequestType type, QScriptValue * response );
+    void requestFinished ( SessionResponse response );
+    void requestFinished ( UnderstandingResponse response );
+    void requestFinished ( LoggedInResponse response );
 };
 
 #endif // HTTPCONNECTION_H

@@ -15,7 +15,9 @@ OverlayWidget::OverlayWidget ( QWidget* parent, Qt::WindowFlags f )
     this->styleSheetBackup = this->styleSheet();
 
     connect ( this->updateTimer, SIGNAL ( tick ( int ) ), this, SLOT ( updateHttpResponse ( int ) ) );
-    connect ( this->httpConnection, SIGNAL ( requestFinished ( HttpConnection::RequestType, QScriptValue * ) ), this, SLOT ( updateGraphicsScene ( HttpConnection::RequestType, QScriptValue * ) ) );
+    connect ( this->httpConnection, SIGNAL ( requestFinished ( SessionResponse ) ), this, SLOT ( onSessionResponse ( SessionResponse ) ) );
+    connect ( this->httpConnection, SIGNAL ( requestFinished ( UnderstandingResponse ) ), this, SLOT ( onUnderstandingResponse ( UnderstandingResponse ) ) );
+    connect ( this->httpConnection, SIGNAL ( requestFinished ( LoggedInResponse ) ), this, SLOT ( onLoggedInResponse ( LoggedInResponse ) ) );
     connect ( ui->sessionIdEdit, SIGNAL ( editingFinished() ), this, SLOT ( sessionLogin() ) );
     connect ( ui->loginButton, SIGNAL ( pressed() ), this, SLOT ( sessionLogin() ) );
     connect ( ui->actionChangeSession, SIGNAL ( triggered ( bool ) ), this, SLOT ( showSessionIdForm() ) );
@@ -137,58 +139,52 @@ void OverlayWidget::drawPercentageLines() {
     }
 }
 
-void OverlayWidget::updateGraphicsScene ( HttpConnection::RequestType type, QScriptValue * response ) {
+void OverlayWidget::onSessionResponse ( SessionResponse response ) {
+    this->sessionId = response.sessionId();
 
-    if ( type == HttpConnection::SESSION_REQUEST ) {
-
-        this->sessionId = response->property ( "rows" ).property ( 0 ).property ( "id" ).toString();
-
-        if ( ! this->sessionId.isNull() ) {
-            ui->sessionIdEdit->hide();
-            ui->loginButton->hide();
-            ui->onlineUsersLabel->show();
-            ui->progressBar->show();
-            ui->graphicsView->show();
-            ui->sessionNameLabel->show();
-            ui->menuWidget->show();
-            this->setWindowFlags ( Qt::Window | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint );
-            this->show();
-            this->updateHttpResponse ( OverlayWidget::httpUpdateInterval );
-            ui->sessionNameLabel->setText (
-                response->property ( "rows" ).property ( 0 ).property ( "value" ).property ( "shortName" ).toString()
-                + "\n("
-                + response->property ( "rows" ).property ( 0 ).property ( "key" ).toString()
-                + ")"
-            );
-        }
-
-    } else if ( type == HttpConnection::UNDERSTANDING_REQUEST ) {
-        int values[4] = {0,0,0,0};
-
-        for ( int i = 0; i <= 3; i++ ) {
-            QString key = response->property ( "rows" ).property ( i ).property ( "key" ).property ( 1 ).toString();
-            if ( key == "Bitte schneller" ) values[0] = response->property ( "rows" ).property ( i ).property ( "value" ).toInteger();
-            if ( key == "Kann folgen" ) values[1] = response->property ( "rows" ).property ( i ).property ( "value" ).toInteger();
-            if ( key == "Zu schnell" ) values[2] = response->property ( "rows" ).property ( i ).property ( "value" ).toInteger();
-            if ( key == "Nicht mehr dabei" ) values[3] = response->property ( "rows" ).property ( i ).property ( "value" ).toInteger();
-        }
-
-        this->latestUnderstandingResponses = values[0] + values[1] + values[2] + values[3];
-
-        for ( int i = 0; i <= 3; i++ ) {
-            if ( this->latestUnderstandingResponses > 0 ) {
-                this->updateGraphicsBar ( i, ( values[i] * ySize ) / this->latestUnderstandingResponses );
-            } else {
-                this->updateGraphicsBar ( i, 0 );
-            }
-        }
-    } else if ( type == HttpConnection::LOGGEDIN_REQUEST ) {
-        this->loggedInUsers = response->property ( "rows" ).property ( 0 ).property ( "value" ).toInteger();
-        ui->onlineUsersLabel->setText (
-            QString ( "(" ) + QString::number ( this->latestUnderstandingResponses, 10 ) + "/"
-            + QString::number ( this->loggedInUsers, 10 ) + ")"
+    if ( ! this->sessionId.isNull() ) {
+        ui->sessionIdEdit->hide();
+        ui->loginButton->hide();
+        ui->onlineUsersLabel->show();
+        ui->progressBar->show();
+        ui->graphicsView->show();
+        ui->sessionNameLabel->show();
+        ui->menuWidget->show();
+        this->setWindowFlags ( Qt::Window | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint );
+        this->show();
+        this->updateHttpResponse ( OverlayWidget::httpUpdateInterval );
+        ui->sessionNameLabel->setText (
+            response.shortName()
+            + "\n("
+            + response.sessionId()
+            + ")"
         );
     }
+}
+
+void OverlayWidget::onUnderstandingResponse ( UnderstandingResponse response ) {
+    int values[4];
+    for ( int i = 0; i <= 3; i++ ) {
+        values[i] = response.values().at ( i );
+    }
+
+    this->latestUnderstandingResponses = values[0] + values[1] + values[2] + values[3];
+
+    for ( int i = 0; i <= 3; i++ ) {
+        if ( this->latestUnderstandingResponses > 0 ) {
+            this->updateGraphicsBar ( i, ( values[i] * ySize ) / this->latestUnderstandingResponses );
+        } else {
+            this->updateGraphicsBar ( i, 0 );
+        }
+    }
+}
+
+void OverlayWidget::onLoggedInResponse ( LoggedInResponse response ) {
+    this->loggedInUsers = response.value();
+    ui->onlineUsersLabel->setText (
+        QString ( "(" ) + QString::number ( this->latestUnderstandingResponses, 10 ) + "/"
+        + QString::number ( this->loggedInUsers, 10 ) + ")"
+    );
 }
 
 void OverlayWidget::updateHttpResponse ( int ticks ) {

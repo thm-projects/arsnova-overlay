@@ -4,6 +4,9 @@ set(arsnovawidget_SRCS
   ui/overlaywidget.cpp
   updatetimer.cpp
   httpconnection.cpp
+  sessionresponse.cpp
+  understandingresponse.cpp
+  loggedinresponse.cpp
   main.cpp
 )
 
@@ -26,6 +29,9 @@ set(arsnovawidget_MOC_SRCS
   ui/overlaywidget.h
   updatetimer.h
   httpconnection.h
+  sessionresponse.h
+  understandingresponse.h
+  loggedinresponse.h
 )
 
 set(arsnovawidget_UIS

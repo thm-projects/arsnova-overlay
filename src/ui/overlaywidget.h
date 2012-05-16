@@ -9,6 +9,9 @@
 #include "../updatetimer.h"
 #include "httpconnection.h"
 
+#include "sessionresponse.h"
+#include "understandingresponse.h"
+
 class OverlayWidget : public QWidget, Ui::OverlayWidget {
     Q_OBJECT
 
@@ -38,11 +41,14 @@ private:
 private slots:
     void sessionLogin();
     void updateHttpResponse ( int ticks );
-    void updateGraphicsScene(HttpConnection::RequestType type, QScriptValue * response);
     void drawPercentageLines();
     void showSessionIdForm();
-    void makeTransparent(bool enabled);
-    void makeFullscreen(bool enabled);
+    void makeTransparent ( bool enabled );
+    void makeFullscreen ( bool enabled );
+
+    void onSessionResponse ( SessionResponse response );
+    void onUnderstandingResponse ( UnderstandingResponse response );
+    void onLoggedInResponse ( LoggedInResponse response );
 };
 
 #endif // OVERLAYWIDGET_H
