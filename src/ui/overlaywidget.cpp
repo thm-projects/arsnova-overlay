@@ -12,7 +12,8 @@ OverlayWidget::OverlayWidget ( QWidget* parent, Qt::WindowFlags f )
     this->httpClient = new QHttp ( "ars.thm.de", QHttp::ConnectionModeHttps, 443 );
     this->httpConnection = new HttpConnection ( this->httpClient );
 
-    this->styleSheetBackup = this->styleSheet();
+    this->svgLogo = new SvgLogo();
+    ui->logoWidget = this->svgLogo->widget();
 
     connect ( this->updateTimer, SIGNAL ( tick ( int ) ), this, SLOT ( updateHttpResponse ( int ) ) );
     connect ( this->httpConnection, SIGNAL ( requestFinished ( SessionResponse ) ), this, SLOT ( onSessionResponse ( SessionResponse ) ) );
@@ -37,6 +38,7 @@ OverlayWidget::OverlayWidget ( QWidget* parent, Qt::WindowFlags f )
     ui->progressBar->hide();
     ui->sessionNameLabel->hide();
     ui->menuWidget->hide();
+    ui->logoWidget->hide();
 
     this->createGraphicsScene();
     this->setMouseTracking ( true );

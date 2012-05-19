@@ -11,6 +11,7 @@
 
 #include "sessionresponse.h"
 #include "understandingresponse.h"
+#include "svglogo.h"
 
 class OverlayWidget : public QWidget, Ui::OverlayWidget {
     Q_OBJECT
@@ -27,9 +28,10 @@ private:
     QHttp * httpClient;
     HttpConnection * httpConnection;
     QString sessionId;
-    QString styleSheetBackup;
     int loggedInUsers;
     int latestUnderstandingResponses;
+    
+    SvgLogo * svgLogo;
 
     static const int httpUpdateInterval;
     static const int ySize;

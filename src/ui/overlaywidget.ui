@@ -45,7 +45,7 @@
      </property>
     </widget>
    </item>
-   <item row="2" column="0">
+   <item row="3" column="0">
     <widget class="QLineEdit" name="sessionIdEdit">
      <property name="enabled">
       <bool>true</bool>
@@ -66,7 +66,7 @@ background: white;</string>
      </property>
     </widget>
    </item>
-   <item row="2" column="1">
+   <item row="3" column="1">
     <widget class="QPushButton" name="loginButton">
      <property name="enabled">
       <bool>true</bool>
@@ -96,7 +96,7 @@ QPushButton#loginButton:hover {
      </property>
     </widget>
    </item>
-   <item row="3" column="0" colspan="2">
+   <item row="4" column="0" colspan="2">
     <widget class="QToolBar" name="menuWidget">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -221,6 +221,9 @@ font-weight: bold;</string>
       </widget>
      </item>
     </layout>
+   </item>
+   <item row="2" column="0">
+    <widget class="QSvgWidget" name="logoWidget" native="true"/>
    </item>
   </layout>
   <action name="actionChangeSession">

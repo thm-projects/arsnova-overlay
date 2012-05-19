@@ -7,6 +7,7 @@ set(arsnovawidget_SRCS
   sessionresponse.cpp
   understandingresponse.cpp
   loggedinresponse.cpp
+  svglogo.cpp
   main.cpp
 )
 
@@ -32,6 +33,7 @@ set(arsnovawidget_MOC_SRCS
   sessionresponse.h
   understandingresponse.h
   loggedinresponse.h
+  svglogo.h
 )
 
 set(arsnovawidget_UIS
@@ -74,6 +76,7 @@ target_link_libraries(arsnovawidget
   ${QT_QTGUI_LIBRARY}
   ${QT_QTNETWORK_LIBRARY}
   ${QT_QTSCRIPT_LIBRARY}
+  ${QT_QTSVG_LIBRARY}
 )
 
 IF(APPLE)
