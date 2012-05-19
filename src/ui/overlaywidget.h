@@ -40,6 +40,14 @@ private:
     void updateGraphicsBar ( int index, int value );
     void moveToBottomRightEdge();
 
+    enum VisibileViewType {
+        LOGIN_VIEW,
+        BAR_VIEW,
+	COLORED_LOGO_VIEW
+    };
+
+    void setVisibleViewType ( VisibileViewType type );
+
 private slots:
     void sessionLogin();
     void updateHttpResponse ( int ticks );

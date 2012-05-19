@@ -45,57 +45,6 @@
      </property>
     </widget>
    </item>
-   <item row="3" column="0">
-    <widget class="QLineEdit" name="sessionIdEdit">
-     <property name="enabled">
-      <bool>true</bool>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font-size: 24px;
-border: 1px solid #555;
-border-radius: 2px;
-padding: 4px;
-margin: auto 4px;
-background: white;</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-     <property name="placeholderText">
-      <string>Session ID</string>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="1">
-    <widget class="QPushButton" name="loginButton">
-     <property name="enabled">
-      <bool>true</bool>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QPushButton#loginButton {
-    font-size: 24px;
-    border: 1px solid #555;
-    border-radius: 2px;
-    padding: 4px;
-    margin: 4px;
-	background: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(240, 240, 240, 255), stop:1 rgba(160, 160, 160, 255));
-}
-
-QPushButton#loginButton:hover {
-	background: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(160, 160, 160, 255), stop:1 rgba(200, 200, 200, 255));
-}</string>
-     </property>
-     <property name="text">
-      <string>OK</string>
-     </property>
-     <property name="autoDefault">
-      <bool>true</bool>
-     </property>
-     <property name="default">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
    <item row="4" column="0" colspan="2">
     <widget class="QToolBar" name="menuWidget">
      <property name="sizePolicy">
@@ -225,6 +174,63 @@ font-weight: bold;</string>
    <item row="2" column="0">
     <widget class="QSvgWidget" name="logoWidget" native="true"/>
    </item>
+   <item row="3" column="0">
+    <widget class="QWidget" name="loginWidget" native="true">
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="0" column="0">
+       <widget class="QLineEdit" name="sessionIdEdit">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">font-size: 24px;
+border: 1px solid #555;
+border-radius: 2px;
+padding: 4px;
+margin: auto 4px;
+background: white;</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <property name="placeholderText">
+         <string>Session ID</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QPushButton" name="loginButton">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton#loginButton {
+    font-size: 24px;
+    border: 1px solid #555;
+    border-radius: 2px;
+    padding: 4px;
+    margin: 4px;
+	background: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(240, 240, 240, 255), stop:1 rgba(160, 160, 160, 255));
+}
+
+QPushButton#loginButton:hover {
+	background: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(160, 160, 160, 255), stop:1 rgba(200, 200, 200, 255));
+}</string>
+        </property>
+        <property name="text">
+         <string>OK</string>
+        </property>
+        <property name="autoDefault">
+         <bool>true</bool>
+        </property>
+        <property name="default">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
   </layout>
   <action name="actionChangeSession">
    <property name="icon">
@@ -284,6 +290,13 @@ font-weight: bold;</string>
    </property>
   </action>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QSvgWidget</class>
+   <extends>QWidget</extends>
+   <header>qsvgwidget.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="../resources/resources.qrc"/>
  </resources>
