@@ -52,7 +52,7 @@ void OverlayWidget::moveToBottomRightEdge() {
 
 void OverlayWidget::setVisibleViewType ( OverlayWidget::VisibileViewType type ) {
     switch ( type ) {
-    case VisibileViewType::LOGIN_VIEW:
+    case LOGIN_VIEW:
         ui->loginWidget->show();
         ui->loginButton->setFocus();
         ui->graphicsView->hide();
@@ -62,7 +62,7 @@ void OverlayWidget::setVisibleViewType ( OverlayWidget::VisibileViewType type ) 
         ui->menuWidget->hide();
         ui->logoWidget->hide();
         break;
-    case VisibileViewType::BAR_VIEW:
+    case BAR_VIEW:
         ui->loginWidget->hide();
         ui->onlineUsersLabel->show();
         ui->progressBar->show();
@@ -71,7 +71,7 @@ void OverlayWidget::setVisibleViewType ( OverlayWidget::VisibileViewType type ) 
         ui->menuWidget->show();
         ui->logoWidget->hide();
         break;
-    case VisibileViewType::COLORED_LOGO_VIEW:
+    case COLORED_LOGO_VIEW:
         ui->loginWidget->hide();
         ui->onlineUsersLabel->show();
         ui->progressBar->show();
