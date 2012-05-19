@@ -31,13 +31,6 @@ OverlayWidget::OverlayWidget ( QWidget* parent, Qt::WindowFlags f )
 
     this->graphicsScene = new QGraphicsScene();
 
-    ui->loginButton->setFocus();
-    ui->graphicsView->hide();
-    ui->onlineUsersLabel->hide();
-    ui->progressBar->hide();
-    ui->sessionNameLabel->hide();
-    ui->menuWidget->hide();
-
     this->createGraphicsScene();
     this->setMouseTracking ( true );
 
@@ -45,6 +38,7 @@ OverlayWidget::OverlayWidget ( QWidget* parent, Qt::WindowFlags f )
 
     ui->graphicsView->setScene ( this->graphicsScene );
     this->moveToBottomRightEdge();
+    this->setVisibleViewType ( LOGIN_VIEW );
 }
 
 void OverlayWidget::moveToBottomRightEdge() {
@@ -52,6 +46,30 @@ void OverlayWidget::moveToBottomRightEdge() {
     int xPos = QApplication::desktop()->screenGeometry().width() - this->size().width() - 8;
     int yPos = QApplication::desktop()->screenGeometry().height() - this->size().height() - 8;
     this->move ( xPos, yPos );
+}
+
+void OverlayWidget::setVisibleViewType ( OverlayWidget::VisibileViewType type ) {
+    switch ( type ) {
+    case VisibileViewType::LOGIN_VIEW:
+        ui->sessionIdEdit->show();
+        ui->loginButton->show();
+        ui->loginButton->setFocus();
+        ui->graphicsView->hide();
+        ui->onlineUsersLabel->hide();
+        ui->progressBar->hide();
+        ui->sessionNameLabel->hide();
+        ui->menuWidget->hide();
+        break;
+    case VisibileViewType::BAR_VIEW:
+        ui->sessionIdEdit->hide();
+        ui->loginButton->hide();
+        ui->onlineUsersLabel->show();
+        ui->progressBar->show();
+        ui->graphicsView->show();
+        ui->sessionNameLabel->show();
+        ui->menuWidget->show();
+        break;
+    }
 }
 
 void OverlayWidget::createGraphicsScene() {
@@ -143,13 +161,7 @@ void OverlayWidget::onSessionResponse ( SessionResponse response ) {
     this->sessionId = response.sessionId();
 
     if ( ! this->sessionId.isNull() ) {
-        ui->sessionIdEdit->hide();
-        ui->loginButton->hide();
-        ui->onlineUsersLabel->show();
-        ui->progressBar->show();
-        ui->graphicsView->show();
-        ui->sessionNameLabel->show();
-        ui->menuWidget->show();
+        this->setVisibleViewType ( BAR_VIEW );
         this->setWindowFlags ( Qt::Window | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint );
         this->show();
         this->updateHttpResponse ( OverlayWidget::httpUpdateInterval );
@@ -159,7 +171,9 @@ void OverlayWidget::onSessionResponse ( SessionResponse response ) {
             + response.sessionId()
             + ")"
         );
+        return;
     }
+    this->makeTransparent ( false );
 }
 
 void OverlayWidget::onUnderstandingResponse ( UnderstandingResponse response ) {
@@ -189,9 +203,9 @@ void OverlayWidget::onLoggedInResponse ( LoggedInResponse response ) {
 
 void OverlayWidget::updateHttpResponse ( int ticks ) {
     ui->progressBar->setValue ( ticks );
-    if ( 
-      ticks == OverlayWidget::httpUpdateInterval
-      and ! this->sessionId.isEmpty()
+    if (
+        ticks == OverlayWidget::httpUpdateInterval
+        and ! this->sessionId.isEmpty()
     ) {
         this->httpConnection->requestUnderstanding();
         this->httpConnection->requestLoggedIn();
@@ -261,13 +275,7 @@ void OverlayWidget::showSessionIdForm() {
 
     ui->loginButton->setFocus();
 
-    ui->sessionIdEdit->show();
-    ui->loginButton->show();
-    ui->onlineUsersLabel->hide();
-    ui->progressBar->hide();
-    ui->graphicsView->hide();
-    ui->sessionNameLabel->hide();
-    ui->menuWidget->hide();
+    this->setVisibleViewType ( LOGIN_VIEW );
 
     this->setWindowFlags ( Qt::Window | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint );
     this->show();
