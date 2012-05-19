@@ -11,6 +11,7 @@
 
 #include "sessionresponse.h"
 #include "understandingresponse.h"
+#include "svglogo.h"
 
 class OverlayWidget : public QWidget, Ui::OverlayWidget {
     Q_OBJECT
@@ -30,6 +31,8 @@ private:
     int loggedInUsers;
     int latestUnderstandingResponses;
 
+    SvgLogo * svgLogo;
+
     static const int httpUpdateInterval;
     static const int ySize;
     static const int xSize;
@@ -39,7 +42,8 @@ private:
 
     enum VisibileViewType {
         LOGIN_VIEW,
-        BAR_VIEW
+        BAR_VIEW,
+        COLORED_LOGO_VIEW
     };
 
     void setVisibleViewType ( VisibileViewType type );
@@ -51,6 +55,7 @@ private slots:
     void showSessionIdForm();
     void makeTransparent ( bool enabled );
     void makeFullscreen ( bool enabled );
+    void switchView ( bool coloredLogoView );
 
     void onSessionResponse ( SessionResponse response );
     void onUnderstandingResponse ( UnderstandingResponse response );

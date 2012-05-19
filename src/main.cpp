@@ -2,6 +2,8 @@
 #include <QtGui>
 
 #include "ui/overlaywidget.h"
+#include "svglogo.h"
+#include "understandingresponse.h"
 
 #ifdef __APPLE__
 extern "C" int startApplication ( int argc, char ** argv );
@@ -12,9 +14,10 @@ int main ( int argc, char** argv ) {
 #ifdef __APPLE__
     startApplication ( argc, argv );
 #endif
+
     QApplication app ( argc, argv );
-    app.setStyle("plastique");
-    
+    app.setStyle ( "plastique" );
+
     OverlayWidget widget;
     widget.show();
 

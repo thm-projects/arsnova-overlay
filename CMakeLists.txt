@@ -16,6 +16,8 @@ endif(APPLE)
 add_subdirectory(src)
 add_subdirectory(test)
 
+enable_testing()
+
 IF (APPLE)
   INSTALL(FILES ${FILES}
     DESTINATION ../../../
