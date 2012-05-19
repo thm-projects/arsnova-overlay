@@ -74,6 +74,7 @@
      <addaction name="actionChangeSession"/>
      <addaction name="actionMakeTransparent"/>
      <addaction name="actionFullscreen"/>
+     <addaction name="actionSwitchView"/>
      <addaction name="actionExit"/>
     </widget>
    </item>
@@ -172,7 +173,20 @@ font-weight: bold;</string>
     </layout>
    </item>
    <item row="2" column="0">
-    <widget class="QSvgWidget" name="logoWidget" native="true"/>
+    <widget class="QSvgWidget" name="logoWidget" native="true">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+    </widget>
    </item>
    <item row="3" column="0">
     <widget class="QWidget" name="loginWidget" native="true">
@@ -287,6 +301,22 @@ QPushButton#loginButton:hover {
    </property>
    <property name="toolTip">
     <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionSwitchView">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../resources/resources.qrc">
+     <normaloff>:/images/images/view-colored-logo.png</normaloff>
+     <normalon>:/images/images/view-statistics.png</normalon>:/images/images/view-colored-logo.png</iconset>
+   </property>
+   <property name="text">
+    <string>Switch View</string>
+   </property>
+   <property name="toolTip">
+    <string>Switch View</string>
    </property>
   </action>
  </widget>

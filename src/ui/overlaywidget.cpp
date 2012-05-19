@@ -13,8 +13,7 @@ OverlayWidget::OverlayWidget ( QWidget* parent, Qt::WindowFlags f )
     this->httpConnection = new HttpConnection ( this->httpClient );
 
     this->svgLogo = new SvgLogo();
-    ui->logoWidget = this->svgLogo->widget();
-
+    
     connect ( this->updateTimer, SIGNAL ( tick ( int ) ), this, SLOT ( updateHttpResponse ( int ) ) );
     connect ( this->httpConnection, SIGNAL ( requestFinished ( SessionResponse ) ), this, SLOT ( onSessionResponse ( SessionResponse ) ) );
     connect ( this->httpConnection, SIGNAL ( requestFinished ( UnderstandingResponse ) ), this, SLOT ( onUnderstandingResponse ( UnderstandingResponse ) ) );
@@ -24,6 +23,7 @@ OverlayWidget::OverlayWidget ( QWidget* parent, Qt::WindowFlags f )
     connect ( ui->actionChangeSession, SIGNAL ( triggered ( bool ) ), this, SLOT ( showSessionIdForm() ) );
     connect ( ui->actionMakeTransparent, SIGNAL ( triggered ( bool ) ), this, SLOT ( makeTransparent ( bool ) ) );
     connect ( ui->actionFullscreen, SIGNAL ( triggered ( bool ) ), this, SLOT ( makeFullscreen ( bool ) ) );
+    connect ( ui->actionSwitchView, SIGNAL ( triggered ( bool ) ), this, SLOT ( switchView ( bool ) ) );
     connect ( ui->actionExit, SIGNAL ( triggered ( bool ) ), this, SLOT ( close() ) );
 
     this->setWindowFlags ( Qt::Window | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint );
@@ -202,6 +202,9 @@ void OverlayWidget::onUnderstandingResponse ( UnderstandingResponse response ) {
             this->updateGraphicsBar ( i, 0 );
         }
     }
+    
+    this->svgLogo->updateFromResponse(response);
+    ui->logoWidget->load(this->svgLogo->toXml());
 }
 
 void OverlayWidget::onLoggedInResponse ( LoggedInResponse response ) {
@@ -294,3 +297,10 @@ void OverlayWidget::showSessionIdForm() {
     this->moveToBottomRightEdge();
 }
 
+void OverlayWidget::switchView ( bool coloredLogoView ) {
+    if ( coloredLogoView ) {
+        this->setVisibleViewType ( COLORED_LOGO_VIEW );
+        return;
+    }
+    this->setVisibleViewType ( BAR_VIEW );
+}

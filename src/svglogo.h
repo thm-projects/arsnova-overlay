@@ -13,14 +13,14 @@ public:
     explicit SvgLogo();
     
     void updateFromResponse(UnderstandingResponse response);
-    QSvgWidget * widget();
     QColor color();
+    QByteArray toXml();
 
 
 private:
     QFile * file;
     QByteArray contents;
-    QSvgWidget * _widget;
+    QByteArray plainContents;
     QColor baseColor;
 
     void setColorValue ( float value );

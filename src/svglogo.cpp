@@ -2,7 +2,8 @@
 
 SvgLogo::SvgLogo() : file ( new QFile ( ":images/logo.svg" ) ) {
     this->file->open ( QIODevice::ReadOnly );
-    this->_widget = new QSvgWidget();
+    this->plainContents = this->file->readAll();
+    this->file->close();
 }
 
 void SvgLogo::updateFromResponse ( UnderstandingResponse response ) {
@@ -15,12 +16,12 @@ void SvgLogo::updateFromResponse ( UnderstandingResponse response ) {
         sum += response.values().at ( i );
     }
 
-    if ( sum == 0 ) this->_widget->load ( QByteArray() );
+    if ( sum == 0 ) this->setColors ( qRgb ( 48, 48, 48 ), qRgb ( 48, 48, 48 ), 0 );
     this->setColorValue ( all/sum );
 }
 
 void SvgLogo::setColorValue ( float value ) {
-    this->contents = this->file->readAll();
+    this->contents = this->plainContents;
     if ( value >= 0 and value < 1 ) {
         this->setColors ( qRgb ( 122, 184, 68 ), qRgb ( 254, 201, 41 ), value );
     } else if ( value >= 1 and value < 2 ) {
@@ -28,8 +29,6 @@ void SvgLogo::setColorValue ( float value ) {
     } else if ( value >= 2 and value <= 3 ) {
         this->setColors ( qRgb ( 237, 96, 28 ), qRgb ( 235, 235, 235 ), value - 2 );
     }
-
-    this->_widget->load ( this->contents );
 }
 
 void SvgLogo::setColors ( QColor start, QColor end, float value ) {
@@ -62,16 +61,16 @@ void SvgLogo::setColors ( QColor start, QColor end, float value ) {
 
 int SvgLogo::calculateColor ( int start, int end, float value ) {
     if ( start >= end ) {
-        return ( ( start - end ) * (1-value) ) + end;
+        return ( ( start - end ) * ( 1-value ) ) + end;
     } else {
         return ( ( end - start ) * value ) + start;
     }
 }
 
-QSvgWidget * SvgLogo::widget() {
-    return this->_widget;
-}
-
 QColor SvgLogo::color() {
     return this->baseColor;
+}
+
+QByteArray SvgLogo::toXml() {
+    return this->contents;
 }

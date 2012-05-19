@@ -30,7 +30,7 @@ private:
     QString sessionId;
     int loggedInUsers;
     int latestUnderstandingResponses;
-    
+
     SvgLogo * svgLogo;
 
     static const int httpUpdateInterval;
@@ -43,7 +43,7 @@ private:
     enum VisibileViewType {
         LOGIN_VIEW,
         BAR_VIEW,
-	COLORED_LOGO_VIEW
+        COLORED_LOGO_VIEW
     };
 
     void setVisibleViewType ( VisibileViewType type );
@@ -55,6 +55,7 @@ private slots:
     void showSessionIdForm();
     void makeTransparent ( bool enabled );
     void makeFullscreen ( bool enabled );
+    void switchView ( bool coloredLogoView );
 
     void onSessionResponse ( SessionResponse response );
     void onUnderstandingResponse ( UnderstandingResponse response );
