@@ -189,7 +189,10 @@ void OverlayWidget::onLoggedInResponse ( LoggedInResponse response ) {
 
 void OverlayWidget::updateHttpResponse ( int ticks ) {
     ui->progressBar->setValue ( ticks );
-    if ( ticks == OverlayWidget::httpUpdateInterval ) {
+    if ( 
+      ticks == OverlayWidget::httpUpdateInterval
+      and ! this->sessionId.isEmpty()
+    ) {
         this->httpConnection->requestUnderstanding();
         this->httpConnection->requestLoggedIn();
         this->updateTimer->reset();
