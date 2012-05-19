@@ -4,6 +4,7 @@ SvgLogo::SvgLogo() : file ( new QFile ( ":images/logo.svg" ) ) {
     this->file->open ( QIODevice::ReadOnly );
     this->plainContents = this->file->readAll();
     this->file->close();
+    this->setColorValue ( -1 );
 }
 
 void SvgLogo::updateFromResponse ( UnderstandingResponse response ) {
@@ -16,7 +17,7 @@ void SvgLogo::updateFromResponse ( UnderstandingResponse response ) {
         sum += response.values().at ( i );
     }
 
-    if ( sum == 0 ) this->setColors ( qRgb ( 48, 48, 48 ), qRgb ( 48, 48, 48 ), 0 );
+    if ( sum == 0 ) this->setColorValue ( -1 );
     this->setColorValue ( all/sum );
 }
 
@@ -28,6 +29,8 @@ void SvgLogo::setColorValue ( float value ) {
         this->setColors ( qRgb ( 254, 201, 41 ), qRgb ( 237, 96, 28 ), value - 1 );
     } else if ( value >= 2 and value <= 3 ) {
         this->setColors ( qRgb ( 237, 96, 28 ), qRgb ( 235, 235, 235 ), value - 2 );
+    } else {
+        this->setColors ( qRgb ( 48, 48, 48 ), qRgb ( 48, 48, 48 ), 1 );
     }
 }
 
