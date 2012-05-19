@@ -27,7 +27,6 @@ private:
     QHttp * httpClient;
     HttpConnection * httpConnection;
     QString sessionId;
-    QString styleSheetBackup;
     int loggedInUsers;
     int latestUnderstandingResponses;
 

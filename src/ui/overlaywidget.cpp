@@ -12,8 +12,6 @@ OverlayWidget::OverlayWidget ( QWidget* parent, Qt::WindowFlags f )
     this->httpClient = new QHttp ( "ars.thm.de", QHttp::ConnectionModeHttps, 443 );
     this->httpConnection = new HttpConnection ( this->httpClient );
 
-    this->styleSheetBackup = this->styleSheet();
-
     connect ( this->updateTimer, SIGNAL ( tick ( int ) ), this, SLOT ( updateHttpResponse ( int ) ) );
     connect ( this->httpConnection, SIGNAL ( requestFinished ( SessionResponse ) ), this, SLOT ( onSessionResponse ( SessionResponse ) ) );
     connect ( this->httpConnection, SIGNAL ( requestFinished ( UnderstandingResponse ) ), this, SLOT ( onUnderstandingResponse ( UnderstandingResponse ) ) );
