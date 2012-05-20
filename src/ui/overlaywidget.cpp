@@ -13,13 +13,14 @@ OverlayWidget::OverlayWidget ( QWidget* parent, Qt::WindowFlags f )
     this->httpConnection = new HttpConnection ( this->httpClient );
 
     this->svgLogo = new SvgLogo();
-    
+
     connect ( this->updateTimer, SIGNAL ( tick ( int ) ), this, SLOT ( updateHttpResponse ( int ) ) );
     connect ( this->httpConnection, SIGNAL ( requestFinished ( SessionResponse ) ), this, SLOT ( onSessionResponse ( SessionResponse ) ) );
     connect ( this->httpConnection, SIGNAL ( requestFinished ( UnderstandingResponse ) ), this, SLOT ( onUnderstandingResponse ( UnderstandingResponse ) ) );
     connect ( this->httpConnection, SIGNAL ( requestFinished ( LoggedInResponse ) ), this, SLOT ( onLoggedInResponse ( LoggedInResponse ) ) );
-    connect ( ui->sessionIdEdit, SIGNAL ( editingFinished() ), this, SLOT ( sessionLogin() ) );
-    connect ( ui->loginButton, SIGNAL ( pressed() ), this, SLOT ( sessionLogin() ) );
+    connect ( ui->loginwidget, SIGNAL ( editingFinished() ), this, SLOT ( sessionLogin() ) );
+    connect ( ui->loginwidget, SIGNAL ( exitButtonClicked() ), this, SLOT ( close() ) );
+    connect ( ui->loginwidget, SIGNAL ( loginButtonClicked() ), this, SLOT ( sessionLogin() ) );
     connect ( ui->actionChangeSession, SIGNAL ( triggered ( bool ) ), this, SLOT ( showSessionIdForm() ) );
     connect ( ui->actionMakeTransparent, SIGNAL ( triggered ( bool ) ), this, SLOT ( makeTransparent ( bool ) ) );
     connect ( ui->actionFullscreen, SIGNAL ( triggered ( bool ) ), this, SLOT ( makeFullscreen ( bool ) ) );
@@ -53,8 +54,7 @@ void OverlayWidget::moveToBottomRightEdge() {
 void OverlayWidget::setVisibleViewType ( OverlayWidget::VisibileViewType type ) {
     switch ( type ) {
     case LOGIN_VIEW:
-        ui->loginWidget->show();
-        ui->loginButton->setFocus();
+        ui->loginwidget->show();
         ui->graphicsView->hide();
         ui->onlineUsersLabel->hide();
         ui->progressBar->hide();
@@ -63,7 +63,7 @@ void OverlayWidget::setVisibleViewType ( OverlayWidget::VisibileViewType type ) 
         ui->logoWidget->hide();
         break;
     case BAR_VIEW:
-        ui->loginWidget->hide();
+        ui->loginwidget->hide();
         ui->onlineUsersLabel->show();
         ui->progressBar->show();
         ui->graphicsView->show();
@@ -72,7 +72,7 @@ void OverlayWidget::setVisibleViewType ( OverlayWidget::VisibileViewType type ) 
         ui->logoWidget->hide();
         break;
     case COLORED_LOGO_VIEW:
-        ui->loginWidget->hide();
+        ui->loginwidget->hide();
         ui->onlineUsersLabel->show();
         ui->progressBar->show();
         ui->graphicsView->hide();
@@ -202,9 +202,9 @@ void OverlayWidget::onUnderstandingResponse ( UnderstandingResponse response ) {
             this->updateGraphicsBar ( i, 0 );
         }
     }
-    
-    this->svgLogo->updateFromResponse(response);
-    ui->logoWidget->load(this->svgLogo->toXml());
+
+    this->svgLogo->updateFromResponse ( response );
+    ui->logoWidget->load ( this->svgLogo->toXml() );
 }
 
 void OverlayWidget::onLoggedInResponse ( LoggedInResponse response ) {
@@ -245,7 +245,7 @@ void OverlayWidget::updateGraphicsBar ( int index, int value ) {
 }
 
 void OverlayWidget::sessionLogin() {
-    this->httpConnection->requestSession ( ui->sessionIdEdit->text() );
+    this->httpConnection->requestSession ( ui->loginwidget->text() );
     this->makeTransparent ( true );
     this->moveToBottomRightEdge();
 }
@@ -286,8 +286,6 @@ void OverlayWidget::makeFullscreen ( bool enabled ) {
 
 void OverlayWidget::showSessionIdForm() {
     this->makeTransparent ( false );
-
-    ui->loginButton->setFocus();
 
     this->setVisibleViewType ( LOGIN_VIEW );
 

@@ -11,6 +11,14 @@ set(arsnovawidget_SRCS
   main.cpp
 )
 
+set(arsnovawidgetplugin_SRCS
+  qplugin/arsnovawidgetcollection.cpp
+  qplugin/loginwidget.cpp
+  qplugin/loginwidgetplugin.cpp
+  qplugin/bardiagramwidget.cpp
+  qplugin/bardiagramwidgetplugin.cpp
+)
+
 set(arsnovawidget_MAC_SRCS
   main.m
 )
@@ -36,8 +44,21 @@ set(arsnovawidget_MOC_SRCS
   svglogo.h
 )
 
+set(arsnovawidgetplugin_MOC_SRCS
+  qplugin/arsnovawidgetcollection.h
+  qplugin/loginwidget.h
+  qplugin/loginwidgetplugin.h
+  qplugin/bardiagramwidget.h
+  qplugin/bardiagramwidgetplugin.h
+)
+
 set(arsnovawidget_UIS
   ui/overlaywidget.ui
+)
+
+set(arsnovawidgetplugin_UIS
+  qplugin/loginwidget.ui
+  qplugin/bardiagramwidget.ui
 )
 
 ## Resources ##
@@ -50,6 +71,9 @@ qt4_add_resources(resources_RCC_SRCS ${resources_RCCS})
 
 qt4_wrap_cpp(arsnovawidget_SRCS ${arsnovawidget_MOC_SRCS})
 qt4_wrap_ui(arsnovawidget_UIS_H ${arsnovawidget_UIS})
+
+qt4_wrap_cpp(arsnovawidgetplugin_SRCS ${arsnovawidgetplugin_MOC_SRCS})
+qt4_wrap_ui(arsnovawidgetplugin_UIS_H ${arsnovawidgetplugin_UIS})
 
 IF( WIN32 AND MINGW )
   # To cross compile on Linux use: 'i686-w64-mingw32-windres' or similar command shipped with mingw cross compiler.
@@ -71,11 +95,24 @@ add_executable(arsnovawidget MACOSX_BUNDLE WIN32
   ${resources_RCC_SRCS}
 )
 
+add_library(qarsnova SHARED
+  ${arsnovawidgetplugin_SRCS}
+  ${arsnovawidgetplugin_UIS_H}
+  ${resources_RCC_SRCS}
+)
+
 target_link_libraries(arsnovawidget
   ${QT_QTCORE_LIBRARY}
   ${QT_QTGUI_LIBRARY}
   ${QT_QTNETWORK_LIBRARY}
   ${QT_QTSCRIPT_LIBRARY}
+  ${QT_QTSVG_LIBRARY}
+  qarsnova
+)
+
+target_link_libraries(qarsnova
+  ${QT_QTCORE_LIBRARY}
+  ${QT_QTGUI_LIBRARY}
   ${QT_QTSVG_LIBRARY}
 )
 

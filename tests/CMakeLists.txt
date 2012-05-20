@@ -8,6 +8,8 @@ set(arsnovawidget_SRCS
   ../src/svglogo.cpp
   svglogotest.cpp
   ../src/understandingresponse.cpp
+  ../src/qplugin/loginwidget.cpp
+  qplugin/loginwidgettest.cpp
   main.cpp
 )
 
@@ -29,13 +31,17 @@ set(arsnovawidget_MOC_SRCS
   ../src/svglogo.h
   svglogotest.h
   ../src/understandingresponse.h
+  ../src/qplugin/loginwidget.h
+  qplugin/loginwidgettest.h
 )
 
 set(arsnovawidget_UIS
+  ../src/qplugin/loginwidget.ui
 )
 
 ## Resources ##
 set(resources_RCCS
+  ../src/resources/resources.qrc
 )
 
 qt4_add_resources(resources_RCC_SRCS ${resources_RCCS})
@@ -57,6 +63,8 @@ target_link_libraries(tests
   ${QT_QTSCRIPT_LIBRARY}
   ${QT_QTSVG_LIBRARY}
   ${QT_QTTEST_LIBRARY}
+  ${QT_QTTESTGUI_LIBRARY}
 )
 
 add_test(SvgLogoTest ${EXECUTABLE_OUTPUT_PATH}/tests SvgLogoTest)
+add_test(LoginWidgetTest ${EXECUTABLE_OUTPUT_PATH}/tests LoginWidgetTest)
