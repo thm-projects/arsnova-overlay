@@ -118,14 +118,22 @@ void BarDiagramWidget::updateGraphicsBar ( int index, int value ) {
     this->graphicsScene->update();
 }
 
+void BarDiagramWidget::updateFromResponse ( UnderstandingResponse response ) {
+    for ( int i = 0; i < response.values().size(); i++ ) {
+        if ( response.count() > 0 ) {
+            this->updateGraphicsBar ( i, ( response.values().at ( i ) * ySize ) / response.count() );
+        } else {
+            this->updateGraphicsBar ( i, 0 );
+        }
+    }
+}
+
 void BarDiagramWidget::resizeEvent ( QResizeEvent * event ) {
     ui->graphicsView->resetMatrix();
 
     int yScale = ( this->size().height() / ySize );
     int xScale = ( this->size().width() / xSize );
 
-    qDebug() << xScale << yScale;
-    
     ui->graphicsView->resetMatrix();
     ui->graphicsView->scale ( xScale, yScale );
     ui->graphicsView->update();

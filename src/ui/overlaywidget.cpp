@@ -95,21 +95,9 @@ void OverlayWidget::onSessionResponse ( SessionResponse response ) {
 }
 
 void OverlayWidget::onUnderstandingResponse ( UnderstandingResponse response ) {
-    int values[4];
-    for ( int i = 0; i <= 3; i++ ) {
-        values[i] = response.values().at ( i );
-    }
+    this->latestUnderstandingResponses = response.count();
 
-    this->latestUnderstandingResponses = values[0] + values[1] + values[2] + values[3];
-
-    for ( int i = 0; i <= 3; i++ ) {
-        if ( this->latestUnderstandingResponses > 0 ) {
-            ui->bardiagramwidget->updateGraphicsBar ( i, ( values[i] * ySize ) / this->latestUnderstandingResponses );
-        } else {
-            ui->bardiagramwidget->updateGraphicsBar ( i, 0 );
-        }
-    }
-
+    ui->bardiagramwidget->updateFromResponse ( response );
     ui->logodiagramwidget->updateFromResponse ( response );
 }
 
