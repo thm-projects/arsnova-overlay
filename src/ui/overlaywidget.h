@@ -21,9 +21,7 @@ public:
 
 private:
     Ui::OverlayWidget * ui;
-    QGraphicsScene * graphicsScene;
     UpdateTimer * updateTimer;
-    QList<QGraphicsRectItem *> * bars;
 
     QHttp * httpClient;
     HttpConnection * httpConnection;
@@ -31,13 +29,9 @@ private:
     int loggedInUsers;
     int latestUnderstandingResponses;
 
-    SvgLogo * svgLogo;
-
     static const int httpUpdateInterval;
     static const int ySize;
     static const int xSize;
-    void createGraphicsScene();
-    void updateGraphicsBar ( int index, int value );
     void moveToBottomRightEdge();
 
     enum VisibileViewType {
@@ -51,7 +45,6 @@ private:
 private slots:
     void sessionLogin();
     void updateHttpResponse ( int ticks );
-    void drawPercentageLines();
     void showSessionIdForm();
     void makeTransparent ( bool enabled );
     void makeFullscreen ( bool enabled );

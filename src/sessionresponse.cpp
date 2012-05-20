@@ -3,7 +3,7 @@
 SessionResponse::SessionResponse ( QString sessionId, QString shortName ) : _sessionId ( sessionId ), _shortName ( shortName ) {}
 
 SessionResponse::~SessionResponse() {
-    qDebug() << "SessionResponse destroy";
+
 }
 
 QString SessionResponse::sessionId() {

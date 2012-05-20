@@ -12,14 +12,13 @@ OverlayWidget::OverlayWidget ( QWidget* parent, Qt::WindowFlags f )
     this->httpClient = new QHttp ( "ars.thm.de", QHttp::ConnectionModeHttps, 443 );
     this->httpConnection = new HttpConnection ( this->httpClient );
 
-    this->svgLogo = new SvgLogo();
-    
     connect ( this->updateTimer, SIGNAL ( tick ( int ) ), this, SLOT ( updateHttpResponse ( int ) ) );
     connect ( this->httpConnection, SIGNAL ( requestFinished ( SessionResponse ) ), this, SLOT ( onSessionResponse ( SessionResponse ) ) );
     connect ( this->httpConnection, SIGNAL ( requestFinished ( UnderstandingResponse ) ), this, SLOT ( onUnderstandingResponse ( UnderstandingResponse ) ) );
     connect ( this->httpConnection, SIGNAL ( requestFinished ( LoggedInResponse ) ), this, SLOT ( onLoggedInResponse ( LoggedInResponse ) ) );
-    connect ( ui->sessionIdEdit, SIGNAL ( editingFinished() ), this, SLOT ( sessionLogin() ) );
-    connect ( ui->loginButton, SIGNAL ( pressed() ), this, SLOT ( sessionLogin() ) );
+    connect ( ui->loginwidget, SIGNAL ( editingFinished() ), this, SLOT ( sessionLogin() ) );
+    connect ( ui->loginwidget, SIGNAL ( exitButtonClicked() ), this, SLOT ( close() ) );
+    connect ( ui->loginwidget, SIGNAL ( loginButtonClicked() ), this, SLOT ( sessionLogin() ) );
     connect ( ui->actionChangeSession, SIGNAL ( triggered ( bool ) ), this, SLOT ( showSessionIdForm() ) );
     connect ( ui->actionMakeTransparent, SIGNAL ( triggered ( bool ) ), this, SLOT ( makeTransparent ( bool ) ) );
     connect ( ui->actionFullscreen, SIGNAL ( triggered ( bool ) ), this, SLOT ( makeFullscreen ( bool ) ) );
@@ -30,15 +29,9 @@ OverlayWidget::OverlayWidget ( QWidget* parent, Qt::WindowFlags f )
 
     ui->progressBar->setMaximum ( OverlayWidget::httpUpdateInterval );
 
-    this->graphicsScene = new QGraphicsScene();
-
-    ui->logoWidget->hide();
-    this->createGraphicsScene();
+    ui->logodiagramwidget->hide();
     this->setMouseTracking ( true );
 
-    ui->graphicsView->setMouseTracking ( true );
-
-    ui->graphicsView->setScene ( this->graphicsScene );
     this->moveToBottomRightEdge();
     this->setVisibleViewType ( LOGIN_VIEW );
 }
@@ -53,118 +46,32 @@ void OverlayWidget::moveToBottomRightEdge() {
 void OverlayWidget::setVisibleViewType ( OverlayWidget::VisibileViewType type ) {
     switch ( type ) {
     case LOGIN_VIEW:
-        ui->loginWidget->show();
-        ui->loginButton->setFocus();
-        ui->graphicsView->hide();
+        ui->loginwidget->show();
+        ui->bardiagramwidget->hide();
         ui->onlineUsersLabel->hide();
         ui->progressBar->hide();
         ui->sessionNameLabel->hide();
         ui->menuWidget->hide();
-        ui->logoWidget->hide();
+        ui->logodiagramwidget->hide();
         break;
     case BAR_VIEW:
-        ui->loginWidget->hide();
+        ui->loginwidget->hide();
         ui->onlineUsersLabel->show();
         ui->progressBar->show();
-        ui->graphicsView->show();
+        ui->bardiagramwidget->show();
         ui->sessionNameLabel->show();
         ui->menuWidget->show();
-        ui->logoWidget->hide();
+        ui->logodiagramwidget->hide();
         break;
     case COLORED_LOGO_VIEW:
-        ui->loginWidget->hide();
+        ui->loginwidget->hide();
         ui->onlineUsersLabel->show();
         ui->progressBar->show();
-        ui->graphicsView->hide();
+        ui->bardiagramwidget->hide();
         ui->sessionNameLabel->show();
         ui->menuWidget->show();
-        ui->logoWidget->show();
+        ui->logodiagramwidget->show();
         break;
-    }
-}
-
-void OverlayWidget::createGraphicsScene() {
-    this->bars = new QList<QGraphicsRectItem*>();
-
-    QPen whitePen ( qRgb ( 200,200,200 ) );
-    QBrush greyBrush ( qRgb ( 100,100,100 ) );
-
-    this->drawPercentageLines();
-
-    // Bars
-    for ( int i = 1; i <= 4; i++ ) {
-        int xSpace = OverlayWidget::xSize / 13;
-        this->bars->append ( this->graphicsScene->addRect ( QRectF ( ( xSpace * i ) + ( xSpace * ( i-1 ) * 2 ), ySize,xSpace*2,0 ) ) );
-    }
-
-    // Shadows
-    for ( int i = 1; i <= 4; i++ ) {
-        int xSpace = OverlayWidget::xSize / 13;
-        this->bars->append ( this->graphicsScene->addRect ( QRectF ( ( xSpace * i ) + ( xSpace * ( i-1 ) * 2 ), ySize,xSpace*2,0 ) ) );
-    }
-
-    QLinearGradient linearGradient;
-    linearGradient.setStart ( 0,0 );
-    linearGradient.setFinalStop ( 0, ySize );
-
-    linearGradient.setColorAt ( 0, qRgb ( 122, 184, 68 ) );
-    linearGradient.setColorAt ( 1, qRgb ( 82, 144, 28 ) );
-    this->bars->at ( 0 )->setBrush ( QBrush ( linearGradient ) );
-
-    linearGradient.setColorAt ( 0, qRgb ( 254, 201, 41 ) );
-    linearGradient.setColorAt ( 1, qRgb ( 214, 161, 0 ) );
-    this->bars->at ( 1 )->setBrush ( QBrush ( linearGradient ) );
-
-    linearGradient.setColorAt ( 0, qRgb ( 237, 96, 28 ) );
-    linearGradient.setColorAt ( 1, qRgb ( 197, 56, 0 ) );
-    this->bars->at ( 2 )->setBrush ( QBrush ( linearGradient ) );
-
-    linearGradient.setColorAt ( 0, qRgb ( 235, 235, 235 ) );
-    linearGradient.setColorAt ( 1, qRgb ( 195,195,195 ) );
-    this->bars->at ( 3 )->setBrush ( QBrush ( linearGradient ) );
-
-
-    QGraphicsBlurEffect * effectA = new QGraphicsBlurEffect();
-    effectA->setBlurRadius ( 3 );
-    QGraphicsBlurEffect * effectB = new QGraphicsBlurEffect();
-    effectB->setBlurRadius ( 3 );
-    QGraphicsBlurEffect * effectC = new QGraphicsBlurEffect();
-    effectC->setBlurRadius ( 3 );
-    QGraphicsBlurEffect * effectD = new QGraphicsBlurEffect();
-    effectD->setBlurRadius ( 3 );
-
-    this->bars->at ( 4 )->setZValue ( -2 );
-    this->bars->at ( 4 )->setBrush ( QBrush ( Qt::black ) );
-    this->bars->at ( 4 )->setGraphicsEffect ( effectA );
-
-    this->bars->at ( 5 )->setZValue ( -2 );
-    this->bars->at ( 5 )->setBrush ( QBrush ( Qt::black ) );
-    this->bars->at ( 5 )->setGraphicsEffect ( effectB );
-
-    this->bars->at ( 6 )->setZValue ( -2 );
-    this->bars->at ( 6 )->setBrush ( QBrush ( Qt::black ) );
-    this->bars->at ( 6 )->setGraphicsEffect ( effectC );
-
-    this->bars->at ( 7 )->setZValue ( -2 );
-    this->bars->at ( 7 )->setBrush ( QBrush ( Qt::black ) );
-    this->bars->at ( 7 )->setGraphicsEffect ( effectD );
-
-    QGraphicsLineItem * xAxis = this->graphicsScene->addLine ( QLineF ( 0,ySize,OverlayWidget::xSize,ySize ), whitePen );
-
-    this->graphicsScene->update();
-
-    ui->graphicsView->setScene ( this->graphicsScene );
-}
-
-void OverlayWidget::drawPercentageLines() {
-    QPen whiteDottedPen ( qRgb ( 140,140,140 ) );
-    QVector<qreal> dashes;
-    dashes << 1 << 4;
-    whiteDottedPen.setDashPattern ( dashes );
-
-    for ( int i = 0; i < 4; i++ ) {
-        int y = ( ySize * i ) / 4;
-        this->graphicsScene->addLine ( QLineF ( 0,y,OverlayWidget::xSize,y ), whiteDottedPen );
     }
 }
 
@@ -188,23 +95,10 @@ void OverlayWidget::onSessionResponse ( SessionResponse response ) {
 }
 
 void OverlayWidget::onUnderstandingResponse ( UnderstandingResponse response ) {
-    int values[4];
-    for ( int i = 0; i <= 3; i++ ) {
-        values[i] = response.values().at ( i );
-    }
+    this->latestUnderstandingResponses = response.count();
 
-    this->latestUnderstandingResponses = values[0] + values[1] + values[2] + values[3];
-
-    for ( int i = 0; i <= 3; i++ ) {
-        if ( this->latestUnderstandingResponses > 0 ) {
-            this->updateGraphicsBar ( i, ( values[i] * ySize ) / this->latestUnderstandingResponses );
-        } else {
-            this->updateGraphicsBar ( i, 0 );
-        }
-    }
-    
-    this->svgLogo->updateFromResponse(response);
-    ui->logoWidget->load(this->svgLogo->toXml());
+    ui->bardiagramwidget->updateFromResponse ( response );
+    ui->logodiagramwidget->updateFromResponse ( response );
 }
 
 void OverlayWidget::onLoggedInResponse ( LoggedInResponse response ) {
@@ -227,25 +121,8 @@ void OverlayWidget::updateHttpResponse ( int ticks ) {
     }
 }
 
-void OverlayWidget::updateGraphicsBar ( int index, int value ) {
-    QGraphicsRectItem * item = this->bars->at ( index );
-
-    int x = item->rect().x();
-    int y = ySize - value;
-    int width = item->rect().width();
-    int height = value;
-    item->setRect ( QRectF ( x,y,width,height ) );
-    item->update();
-
-    item = this->bars->at ( index + 4 );
-    item->setRect ( QRectF ( x,y,width,height ) );
-    item->update();
-
-    this->graphicsScene->update();
-}
-
 void OverlayWidget::sessionLogin() {
-    this->httpConnection->requestSession ( ui->sessionIdEdit->text() );
+    this->httpConnection->requestSession ( ui->loginwidget->text() );
     this->makeTransparent ( true );
     this->moveToBottomRightEdge();
 }
@@ -267,13 +144,6 @@ void OverlayWidget::makeFullscreen ( bool enabled ) {
         this->resize ( QApplication::desktop()->screenGeometry().width(),QApplication::desktop()->screenGeometry().height() );
         this->setWindowState ( this->windowState() ^ Qt::WindowFullScreen );
         this->show();
-
-        int yScale = ( this->size().height() / ySize ) - 2;
-        int xScale = ( this->size().width() / xSize ) - 2;
-
-        ui->graphicsView->resetMatrix();
-        ui->graphicsView->scale ( xScale, yScale );
-        ui->graphicsView->update();
         return;
     }
 
@@ -281,13 +151,10 @@ void OverlayWidget::makeFullscreen ( bool enabled ) {
     this->show();
 
     this->moveToBottomRightEdge();
-    ui->graphicsView->resetMatrix();
 }
 
 void OverlayWidget::showSessionIdForm() {
     this->makeTransparent ( false );
-
-    ui->loginButton->setFocus();
 
     this->setVisibleViewType ( LOGIN_VIEW );
 

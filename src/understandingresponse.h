@@ -11,9 +11,11 @@ public:
     ~UnderstandingResponse();
 
     QList< int > values();
+    int count();
 
 private:
     QList<int> _values;
+    int _count;
 };
 
 #endif // UNDERSTANDINGRESPONSE_H
