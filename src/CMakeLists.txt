@@ -108,11 +108,13 @@ add_executable(arsnovawidget MACOSX_BUNDLE WIN32
   ${resources_RCC_SRCS}
 )
 
-add_library(qarsnova SHARED
-  ${arsnovawidgetplugin_SRCS}
-  ${arsnovawidgetplugin_UIS_H}
-  ${resources_RCC_SRCS}
-)
+if(QTPLUGIN)
+  add_library(qarsnova SHARED
+    ${arsnovawidgetplugin_SRCS}
+    ${arsnovawidgetplugin_UIS_H}
+    ${resources_RCC_SRCS}
+  )
+endif(QTPLUGIN)
 
 target_link_libraries(arsnovawidget
   ${QT_QTCORE_LIBRARY}
@@ -120,14 +122,15 @@ target_link_libraries(arsnovawidget
   ${QT_QTNETWORK_LIBRARY}
   ${QT_QTSCRIPT_LIBRARY}
   ${QT_QTSVG_LIBRARY}
-  qarsnova
 )
 
-target_link_libraries(qarsnova
-  ${QT_QTCORE_LIBRARY}
-  ${QT_QTGUI_LIBRARY}
-  ${QT_QTSVG_LIBRARY}
-)
+if(QTPLUGIN)
+  target_link_libraries(qarsnova
+    ${QT_QTCORE_LIBRARY}
+    ${QT_QTGUI_LIBRARY}
+    ${QT_QTSVG_LIBRARY}
+  )
+endif(QTPLUGIN)
 
 IF(APPLE)
   SET (CMAKE_CXX_FLAGS "-mmacosx-version-min=10.5") 

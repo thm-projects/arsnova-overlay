@@ -14,10 +14,21 @@ if(APPLE)
   set(CMAKE_EXE_LINKER_FLAGS "-framework Foundation -w")
 endif(APPLE)
 
-enable_testing()
-
 add_subdirectory(src)
-add_subdirectory(tests)
+
+if(TESTS)
+  message ("Build of tests is enabled")
+  enable_testing()
+  add_subdirectory(tests)
+else(TESTS)
+  message ("To enable build of tests use param '-DTESTS=ON'")
+endif(TESTS)
+
+if(QTPLUGIN)
+  message ("Build of Qt plugin is enabled")
+else(QTPLUGIN)
+  message ("To enable build of the Qt plugin providing integration of used widgets use param '-DQTPLUGIN=ON'")
+endif(QTPLUGIN)
 
 IF (APPLE)
   INSTALL(FILES ${FILES}
