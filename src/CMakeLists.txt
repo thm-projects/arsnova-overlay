@@ -8,10 +8,15 @@ set(arsnovawidget_SRCS
   understandingresponse.cpp
   loggedinresponse.cpp
   svglogo.cpp
+  qplugin/loginwidget.cpp
+  qplugin/bardiagramwidget.cpp
+  qplugin/logodiagramwidget.cpp
   main.cpp
 )
 
 set(arsnovawidgetplugin_SRCS
+  svglogo.cpp
+  understandingresponse.cpp
   qplugin/arsnovawidgetcollection.cpp
   qplugin/loginwidget.cpp
   qplugin/loginwidgetplugin.cpp
@@ -44,6 +49,9 @@ set(arsnovawidget_MOC_SRCS
   understandingresponse.h
   loggedinresponse.h
   svglogo.h
+  qplugin/loginwidget.h
+  qplugin/bardiagramwidget.h
+  qplugin/logodiagramwidget.h
 )
 
 set(arsnovawidgetplugin_MOC_SRCS
