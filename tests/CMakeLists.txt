@@ -12,6 +12,8 @@ set(arsnovawidget_SRCS
   qplugin/loginwidgettest.cpp
   ../src/qplugin/bardiagramwidget.cpp
   qplugin/bardiagramwidgettest.cpp
+  ../src/qplugin/logodiagramwidget.cpp
+  qplugin/logodiagramwidgettest.cpp
   main.cpp
 )
 
@@ -37,11 +39,14 @@ set(arsnovawidget_MOC_SRCS
   qplugin/loginwidgettest.h
   ../src/qplugin/bardiagramwidget.h
   qplugin/bardiagramwidgettest.h
+  ../src/qplugin/logodiagramwidget.h
+  qplugin/logodiagramwidgettest.h
 )
 
 set(arsnovawidget_UIS
   ../src/qplugin/loginwidget.ui
   ../src/qplugin/bardiagramwidget.ui
+  ../src/qplugin/logodiagramwidget.ui
 )
 
 ## Resources ##
@@ -74,3 +79,4 @@ target_link_libraries(tests
 add_test(SvgLogoTest ${EXECUTABLE_OUTPUT_PATH}/tests SvgLogoTest)
 add_test(LoginWidgetTest ${EXECUTABLE_OUTPUT_PATH}/tests LoginWidgetTest)
 add_test(BarDiagramWidgetTest ${EXECUTABLE_OUTPUT_PATH}/tests BarDiagramWidgetTest)
+add_test(LogoDiagramWidgetTest ${EXECUTABLE_OUTPUT_PATH}/tests LogoDiagramWidgetTest)

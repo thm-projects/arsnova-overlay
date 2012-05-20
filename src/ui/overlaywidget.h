@@ -29,8 +29,6 @@ private:
     int loggedInUsers;
     int latestUnderstandingResponses;
 
-    SvgLogo * svgLogo;
-
     static const int httpUpdateInterval;
     static const int ySize;
     static const int xSize;

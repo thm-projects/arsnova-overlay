@@ -17,6 +17,8 @@ set(arsnovawidgetplugin_SRCS
   qplugin/loginwidgetplugin.cpp
   qplugin/bardiagramwidget.cpp
   qplugin/bardiagramwidgetplugin.cpp
+  qplugin/logodiagramwidget.cpp
+  qplugin/logodiagramwidgetplugin.cpp
 )
 
 set(arsnovawidget_MAC_SRCS
@@ -50,6 +52,8 @@ set(arsnovawidgetplugin_MOC_SRCS
   qplugin/loginwidgetplugin.h
   qplugin/bardiagramwidget.h
   qplugin/bardiagramwidgetplugin.h
+  qplugin/logodiagramwidget.h
+  qplugin/logodiagramwidgetplugin.h
 )
 
 set(arsnovawidget_UIS
@@ -59,6 +63,7 @@ set(arsnovawidget_UIS
 set(arsnovawidgetplugin_UIS
   qplugin/loginwidget.ui
   qplugin/bardiagramwidget.ui
+  qplugin/logodiagramwidget.ui
 )
 
 ## Resources ##

@@ -168,24 +168,11 @@ font-weight: bold;</string>
      </item>
     </layout>
    </item>
-   <item row="1" column="0">
-    <widget class="QSvgWidget" name="logoWidget" native="true">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="autoFillBackground">
-      <bool>false</bool>
-     </property>
-     <property name="styleSheet">
-      <string notr="true"/>
-     </property>
-    </widget>
-   </item>
    <item row="3" column="0">
     <widget class="LoginWidget" name="loginwidget"/>
+   </item>
+   <item row="1" column="0">
+    <widget class="LogoDiagramWidget" name="logodiagramwidget"/>
    </item>
   </layout>
   <action name="actionChangeSession">
@@ -274,9 +261,9 @@ font-weight: bold;</string>
    <header>qplugin/bardiagramwidget.h</header>
   </customwidget>
   <customwidget>
-   <class>QSvgWidget</class>
+   <class>LogoDiagramWidget</class>
    <extends>QWidget</extends>
-   <header>qsvgwidget.h</header>
+   <header>qplugin/logodiagramwidget.h</header>
   </customwidget>
  </customwidgets>
  <resources>

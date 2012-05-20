@@ -6,6 +6,7 @@
 
 #include "loginwidgetplugin.h"
 #include "bardiagramwidgetplugin.h"
+#include "logodiagramwidgetplugin.h"
 
 class ArsNovaWidgetCollection : public QObject, QDesignerCustomWidgetCollectionInterface {
     Q_OBJECT

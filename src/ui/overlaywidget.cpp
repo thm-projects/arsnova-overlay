@@ -12,8 +12,6 @@ OverlayWidget::OverlayWidget ( QWidget* parent, Qt::WindowFlags f )
     this->httpClient = new QHttp ( "ars.thm.de", QHttp::ConnectionModeHttps, 443 );
     this->httpConnection = new HttpConnection ( this->httpClient );
 
-    this->svgLogo = new SvgLogo();
-
     connect ( this->updateTimer, SIGNAL ( tick ( int ) ), this, SLOT ( updateHttpResponse ( int ) ) );
     connect ( this->httpConnection, SIGNAL ( requestFinished ( SessionResponse ) ), this, SLOT ( onSessionResponse ( SessionResponse ) ) );
     connect ( this->httpConnection, SIGNAL ( requestFinished ( UnderstandingResponse ) ), this, SLOT ( onUnderstandingResponse ( UnderstandingResponse ) ) );
@@ -31,7 +29,7 @@ OverlayWidget::OverlayWidget ( QWidget* parent, Qt::WindowFlags f )
 
     ui->progressBar->setMaximum ( OverlayWidget::httpUpdateInterval );
 
-    ui->logoWidget->hide();
+    ui->logodiagramwidget->hide();
     this->setMouseTracking ( true );
 
     this->moveToBottomRightEdge();
@@ -54,7 +52,7 @@ void OverlayWidget::setVisibleViewType ( OverlayWidget::VisibileViewType type ) 
         ui->progressBar->hide();
         ui->sessionNameLabel->hide();
         ui->menuWidget->hide();
-        ui->logoWidget->hide();
+        ui->logodiagramwidget->hide();
         break;
     case BAR_VIEW:
         ui->loginwidget->hide();
@@ -63,7 +61,7 @@ void OverlayWidget::setVisibleViewType ( OverlayWidget::VisibileViewType type ) 
         ui->bardiagramwidget->show();
         ui->sessionNameLabel->show();
         ui->menuWidget->show();
-        ui->logoWidget->hide();
+        ui->logodiagramwidget->hide();
         break;
     case COLORED_LOGO_VIEW:
         ui->loginwidget->hide();
@@ -72,7 +70,7 @@ void OverlayWidget::setVisibleViewType ( OverlayWidget::VisibileViewType type ) 
         ui->bardiagramwidget->hide();
         ui->sessionNameLabel->show();
         ui->menuWidget->show();
-        ui->logoWidget->show();
+        ui->logodiagramwidget->show();
         break;
     }
 }
@@ -112,8 +110,7 @@ void OverlayWidget::onUnderstandingResponse ( UnderstandingResponse response ) {
         }
     }
 
-    this->svgLogo->updateFromResponse ( response );
-    ui->logoWidget->load ( this->svgLogo->toXml() );
+    ui->logodiagramwidget->updateFromResponse ( response );
 }
 
 void OverlayWidget::onLoggedInResponse ( LoggedInResponse response ) {
