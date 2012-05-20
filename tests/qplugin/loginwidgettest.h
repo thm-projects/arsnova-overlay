@@ -11,7 +11,7 @@ class LoginWidgetTest : public QObject {
     Q_OBJECT
 
 public:
-    explicit LoginWidgetTest ( QObject* parent = 0 );
+    explicit LoginWidgetTest ( QObject * parent = 0 );
 
 private:
     LoginWidget * loginWidget;
