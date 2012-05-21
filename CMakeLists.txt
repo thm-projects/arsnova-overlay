@@ -55,6 +55,8 @@ IF (WIN32)
     ${CMAKE_CURRENT_BINARY_DIR}/lib/libtiff-5.dll
     ${CMAKE_CURRENT_BINARY_DIR}/lib/liblzma-5.dll
     ${CMAKE_CURRENT_BINARY_DIR}/lib/zlib1.dll
+    ${CMAKE_CURRENT_BINARY_DIR}/lib/libssl-8.dll
+    ${CMAKE_CURRENT_BINARY_DIR}/lib/libcrypto-8.dll
   )
   INSTALL(FILES ${WINQTFILES}
     DESTINATION .
