@@ -12,27 +12,20 @@ class HttpConnection : public QObject {
     Q_OBJECT
 
 public:
-    explicit HttpConnection ( QHttp * httpClient );
+    explicit HttpConnection ();
     void requestUnderstanding();
     void requestSession ( QString sessionKey );
     void requestLoggedIn();
 
-    enum RequestType {
-        SESSION_REQUEST,
-        UNDERSTANDING_REQUEST,
-        LOGGEDIN_REQUEST
-    };
-
 private:
-    QHttp * httpClient;
+    QNetworkAccessManager * networkAccessManager;
     QString sessionId;
 
 private slots:
-    void handleResponse();
+    void handleReply ( QNetworkReply * reply );
 
 signals:
     void requestError();
-    void requestFinished ( HttpConnection::RequestType type, QScriptValue * response );
     void requestFinished ( SessionResponse response );
     void requestFinished ( UnderstandingResponse response );
     void requestFinished ( LoggedInResponse response );

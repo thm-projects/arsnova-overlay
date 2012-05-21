@@ -9,8 +9,7 @@ OverlayWidget::OverlayWidget ( QWidget* parent, Qt::WindowFlags f )
     ui->setupUi ( this );
 
     this->updateTimer = new UpdateTimer();
-    this->httpClient = new QHttp ( "ars.thm.de", QHttp::ConnectionModeHttps, 443 );
-    this->httpConnection = new HttpConnection ( this->httpClient );
+    this->httpConnection = new HttpConnection ();
 
     connect ( this->updateTimer, SIGNAL ( tick ( int ) ), this, SLOT ( updateHttpResponse ( int ) ) );
     connect ( this->httpConnection, SIGNAL ( requestFinished ( SessionResponse ) ), this, SLOT ( onSessionResponse ( SessionResponse ) ) );

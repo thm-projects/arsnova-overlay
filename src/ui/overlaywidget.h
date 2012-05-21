@@ -23,7 +23,6 @@ private:
     Ui::OverlayWidget * ui;
     UpdateTimer * updateTimer;
 
-    QHttp * httpClient;
     HttpConnection * httpConnection;
     QString sessionId;
     int loggedInUsers;
