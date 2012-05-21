@@ -38,9 +38,6 @@
    <property name="margin">
     <number>0</number>
    </property>
-   <item row="2" column="0">
-    <widget class="BarDiagramWidget" name="bardiagramwidget"/>
-   </item>
    <item row="4" column="0" colspan="2">
     <widget class="QToolBar" name="menuWidget">
      <property name="sizePolicy">
@@ -168,11 +165,14 @@ font-weight: bold;</string>
      </item>
     </layout>
    </item>
-   <item row="3" column="0">
-    <widget class="LoginWidget" name="loginwidget"/>
+   <item row="1" column="0" colspan="2">
+    <widget class="LogoDiagramWidget" name="logodiagramwidget" native="true"/>
    </item>
-   <item row="1" column="0">
-    <widget class="LogoDiagramWidget" name="logodiagramwidget"/>
+   <item row="2" column="0" colspan="2">
+    <widget class="BarDiagramWidget" name="bardiagramwidget" native="true"/>
+   </item>
+   <item row="3" column="0" colspan="2">
+    <widget class="LoginWidget" name="loginwidget" native="true"/>
    </item>
   </layout>
   <action name="actionChangeSession">
@@ -182,6 +182,9 @@ font-weight: bold;</string>
    </property>
    <property name="text">
     <string>ChangeSession</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
    </property>
   </action>
   <action name="actionMakeTransparent">
@@ -202,6 +205,9 @@ font-weight: bold;</string>
    <property name="toolTip">
     <string>Make transparent</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+T</string>
+   </property>
   </action>
   <action name="actionFullscreen">
    <property name="checkable">
@@ -218,6 +224,9 @@ font-weight: bold;</string>
    <property name="toolTip">
     <string>Fullscreen</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+F</string>
+   </property>
   </action>
   <action name="actionExit">
    <property name="icon">
@@ -230,6 +239,9 @@ font-weight: bold;</string>
    </property>
    <property name="toolTip">
     <string>Exit</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
    </property>
   </action>
   <action name="actionSwitchView">
@@ -246,6 +258,9 @@ font-weight: bold;</string>
    </property>
    <property name="toolTip">
     <string>Switch View</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+V</string>
    </property>
   </action>
  </widget>
