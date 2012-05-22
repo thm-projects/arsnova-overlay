@@ -1,0 +1,9 @@
+[Desktop Entry]
+X-SuSE-translate=true
+Categories=
+Encoding=UTF-8
+Name=ArsNovaWidget
+GenericName=ArsNovaWidget
+Type=Application
+Exec=arsnovawidget
+Icon=arsnova
