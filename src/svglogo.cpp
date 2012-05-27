@@ -1,6 +1,6 @@
 #include "svglogo.h"
 
-SvgLogo::SvgLogo() : file ( new QFile ( ":images/logo.svg" ) ) {
+SvgLogo::SvgLogo() : file ( new QFile ( ":images/arsnova.svg" ) ) {
     this->file->open ( QIODevice::ReadOnly );
     this->plainContents = this->file->readAll();
     this->file->close();

@@ -4,11 +4,28 @@ find_package(Qt4 REQUIRED)
 
 set(VERSION_MAJOR 0)
 set(VERSION_MINOR 1)
-set(VERSION_RELEASE 20120521)
+set(VERSION_RELEASE 20120522)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR}/bin)
 set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR}/libs)
+
+set(DESKTOP
+  src/resources/arsnovawidget.desktop
+)
+
+set(ICONS
+  src/resources/arsnova.svg
+)
+
+IF (UNIX AND NOT APPLE)
+  INSTALL(FILES ${DESKTOP}
+    DESTINATION share/applications
+  )
+  INSTALL(FILES ${ICONS}
+    DESTINATION share/icons/hicolor/scalable/apps
+  )
+ENDIF (UNIX AND NOT APPLE)
 
 if(APPLE)
   set(CMAKE_EXE_LINKER_FLAGS "-framework Foundation -w")

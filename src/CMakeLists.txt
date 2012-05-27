@@ -83,7 +83,7 @@ qt4_add_resources(resources_RCC_SRCS ${resources_RCCS})
 #####
 
 qt4_wrap_cpp(arsnovawidget_SRCS ${arsnovawidget_MOC_SRCS})
-qt4_wrap_ui(arsnovawidget_UIS_H ${arsnovawidget_UIS})
+qt4_wrap_ui(arsnovawidget_UIS_H ${arsnovawidget_UIS} ${arsnovawidgetplugin_UIS})
 
 qt4_wrap_cpp(arsnovawidgetplugin_SRCS ${arsnovawidgetplugin_MOC_SRCS})
 qt4_wrap_ui(arsnovawidgetplugin_UIS_H ${arsnovawidgetplugin_UIS})
@@ -142,6 +142,12 @@ IF(APPLE)
   INSTALL(CODE "EXECUTE_PROCESS(COMMAND macdeployqt ./bin/arsnovawidget.app)")
   INSTALL(TARGETS arsnovawidget BUNDLE DESTINATION ../../../)
 ENDIF(APPLE)
+
+IF (UNIX AND NOT APPLE)
+  INSTALL(TARGETS arsnovawidget
+    RUNTIME DESTINATION bin
+  )
+ENDIF (UNIX AND NOT APPLE)
 
 IF (WIN32)
   INSTALL(TARGETS arsnovawidget
