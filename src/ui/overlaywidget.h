@@ -18,6 +18,7 @@ class OverlayWidget : public QWidget, Ui::OverlayWidget {
 
 public:
     explicit OverlayWidget ( QWidget* parent = 0, Qt::WindowFlags f = 0 );
+    const Ui::OverlayWidget * const getUi();
 
 private:
     Ui::OverlayWidget * ui;

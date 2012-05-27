@@ -35,6 +35,10 @@ OverlayWidget::OverlayWidget ( QWidget* parent, Qt::WindowFlags f )
     this->setVisibleViewType ( LOGIN_VIEW );
 }
 
+const Ui::OverlayWidget*const OverlayWidget::getUi() {
+    return this->ui;
+}
+
 void OverlayWidget::moveToBottomRightEdge() {
     this->resize ( QSize ( xSize+20, ( ySize*2 ) + 32 ) );
     int xPos = QApplication::desktop()->screenGeometry().width() - this->size().width() - 8;
