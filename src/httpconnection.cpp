@@ -1,7 +1,7 @@
 #include "httpconnection.h"
 
 HttpConnection::HttpConnection ()
-    : QObject(), networkAccessManager ( new QNetworkAccessManager() ) {
+    : networkAccessManager ( new QNetworkAccessManager() ) {
     connect ( networkAccessManager, SIGNAL ( finished ( QNetworkReply* ) ), this, SLOT ( handleReply ( QNetworkReply* ) ) );
 
 }

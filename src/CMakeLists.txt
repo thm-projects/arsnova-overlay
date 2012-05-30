@@ -44,6 +44,7 @@ endif(APPLE)
 set(arsnovawidget_MOC_SRCS
   ui/overlaywidget.h
   updatetimer.h
+  abstractconnection.h
   httpconnection.h
   sessionresponse.h
   understandingresponse.h

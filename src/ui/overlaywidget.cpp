@@ -4,17 +4,16 @@ const int OverlayWidget::ySize = 80;
 const int OverlayWidget::xSize = 180;
 const int OverlayWidget::httpUpdateInterval = 10;
 
-OverlayWidget::OverlayWidget ( QWidget* parent, Qt::WindowFlags f )
-    : QWidget ( parent, f ) , ui ( new Ui::OverlayWidget() ) {
+OverlayWidget::OverlayWidget ( AbstractConnection * connection, QWidget* parent, Qt::WindowFlags f )
+    : QWidget ( parent, f ) , ui ( new Ui::OverlayWidget() ), connection ( connection ) {
     ui->setupUi ( this );
 
     this->updateTimer = new UpdateTimer();
-    this->httpConnection = new HttpConnection ();
 
     connect ( this->updateTimer, SIGNAL ( tick ( int ) ), this, SLOT ( updateHttpResponse ( int ) ) );
-    connect ( this->httpConnection, SIGNAL ( requestFinished ( SessionResponse ) ), this, SLOT ( onSessionResponse ( SessionResponse ) ) );
-    connect ( this->httpConnection, SIGNAL ( requestFinished ( UnderstandingResponse ) ), this, SLOT ( onUnderstandingResponse ( UnderstandingResponse ) ) );
-    connect ( this->httpConnection, SIGNAL ( requestFinished ( LoggedInResponse ) ), this, SLOT ( onLoggedInResponse ( LoggedInResponse ) ) );
+    connect ( this->connection, SIGNAL ( requestFinished ( SessionResponse ) ), this, SLOT ( onSessionResponse ( SessionResponse ) ) );
+    connect ( this->connection, SIGNAL ( requestFinished ( UnderstandingResponse ) ), this, SLOT ( onUnderstandingResponse ( UnderstandingResponse ) ) );
+    connect ( this->connection, SIGNAL ( requestFinished ( LoggedInResponse ) ), this, SLOT ( onLoggedInResponse ( LoggedInResponse ) ) );
     connect ( ui->loginwidget, SIGNAL ( editingFinished() ), this, SLOT ( sessionLogin() ) );
     connect ( ui->loginwidget, SIGNAL ( exitButtonClicked() ), this, SLOT ( close() ) );
     connect ( ui->loginwidget, SIGNAL ( loginButtonClicked() ), this, SLOT ( sessionLogin() ) );
@@ -33,6 +32,11 @@ OverlayWidget::OverlayWidget ( QWidget* parent, Qt::WindowFlags f )
 
     this->moveToBottomRightEdge();
     this->setVisibleViewType ( LOGIN_VIEW );
+}
+
+OverlayWidget::~OverlayWidget() {
+    delete this->connection;
+    delete this->updateTimer;
 }
 
 const Ui::OverlayWidget*const OverlayWidget::getUi() {
@@ -118,14 +122,14 @@ void OverlayWidget::updateHttpResponse ( int ticks ) {
         ticks == OverlayWidget::httpUpdateInterval
         and ! this->sessionId.isEmpty()
     ) {
-        this->httpConnection->requestUnderstanding();
-        this->httpConnection->requestLoggedIn();
+        this->connection->requestUnderstanding();
+        this->connection->requestLoggedIn();
         this->updateTimer->reset();
     }
 }
 
 void OverlayWidget::sessionLogin() {
-    this->httpConnection->requestSession ( ui->loginwidget->text() );
+    this->connection->requestSession ( ui->loginwidget->text() );
     this->makeTransparent ( true );
     this->moveToBottomRightEdge();
 }

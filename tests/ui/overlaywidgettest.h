@@ -5,6 +5,7 @@
 #include <QtTestGui>
 
 #include "ui/overlaywidget.h"
+#include "stubconnection.h"
 
 class OverlayWidgetTest : public QObject {
 
@@ -19,8 +20,12 @@ private:
 private slots:
     void initTestCase();
     void cleanupTestCase();
-    
+
     void testShouldShowOverlayWidget();
+    void testShouldDisplayBarDiagramAfterSessionLogin();
+    void testShouldDisplayCorrectCountString();
+    void testShouldSwitchToLogoDiagram();
+    void testShouldSwitchToLogin();
 };
 
 #endif // OVERLAYWIDGETTEST_H

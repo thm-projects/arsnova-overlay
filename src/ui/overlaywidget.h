@@ -7,7 +7,7 @@
 #include "ui_overlaywidget.h"
 
 #include "../updatetimer.h"
-#include "httpconnection.h"
+#include "abstractconnection.h"
 
 #include "sessionresponse.h"
 #include "understandingresponse.h"
@@ -17,14 +17,15 @@ class OverlayWidget : public QWidget, Ui::OverlayWidget {
     Q_OBJECT
 
 public:
-    explicit OverlayWidget ( QWidget* parent = 0, Qt::WindowFlags f = 0 );
+    explicit OverlayWidget ( AbstractConnection * connection, QWidget* parent = 0, Qt::WindowFlags f = 0 );
+    virtual ~OverlayWidget();
     const Ui::OverlayWidget * const getUi();
 
 private:
     Ui::OverlayWidget * ui;
     UpdateTimer * updateTimer;
 
-    HttpConnection * httpConnection;
+    AbstractConnection * connection;
     QString sessionId;
     int loggedInUsers;
     int latestUnderstandingResponses;

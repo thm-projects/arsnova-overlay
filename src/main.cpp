@@ -4,6 +4,7 @@
 #include "ui/overlaywidget.h"
 #include "svglogo.h"
 #include "understandingresponse.h"
+#include "httpconnection.h"
 
 #ifdef __APPLE__
 extern "C" int startApplication ( int argc, char ** argv );
@@ -18,7 +19,7 @@ int main ( int argc, char** argv ) {
     QApplication app ( argc, argv );
     app.setStyle ( "plastique" );
 
-    OverlayWidget widget;
+    OverlayWidget widget ( new HttpConnection() );
     widget.show();
 
 #ifdef __APPLE__

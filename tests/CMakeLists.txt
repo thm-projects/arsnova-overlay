@@ -18,6 +18,7 @@ set(arsnovawidget_SRCS
   ui/overlaywidgettest.cpp
   ../src/updatetimer.cpp
   ../src/httpconnection.cpp
+  stubconnection.cpp
   ../src/sessionresponse.cpp
   ../src/loggedinresponse.cpp
   main.cpp
@@ -50,7 +51,9 @@ set(arsnovawidget_MOC_SRCS
   ../src/ui/overlaywidget.h
   ui/overlaywidgettest.h
   ../src/updatetimer.h
+  ../src/abstractconnection.h
   ../src/httpconnection.h
+  stubconnection.h
   ../src/sessionresponse.h
   ../src/loggedinresponse.h
 )
