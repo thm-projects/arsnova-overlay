@@ -2,6 +2,19 @@
 
 OverlayWidgetTest::OverlayWidgetTest ( QObject* parent ) : QObject ( parent ) {}
 
+void OverlayWidgetTest::enterSessionId ( QLineEdit * lineEdit ) {
+    QTest::keyClick ( lineEdit,  Qt::Key_0 );
+    QTest::keyClick ( lineEdit,  Qt::Key_1 );
+    QTest::keyClick ( lineEdit,  Qt::Key_2 );
+    QTest::keyClick ( lineEdit,  Qt::Key_3 );
+    QTest::keyClick ( lineEdit,  Qt::Key_4 );
+    QTest::keyClick ( lineEdit,  Qt::Key_5 );
+    QTest::keyClick ( lineEdit,  Qt::Key_6 );
+    QTest::keyClick ( lineEdit,  Qt::Key_7 );
+    QTest::keyClick ( lineEdit,  Qt::Key_Enter );
+}
+
+
 void OverlayWidgetTest::initTestCase() {
     this->overlayWidget = new OverlayWidget ( new StubConnection() );
 }
@@ -18,15 +31,7 @@ void OverlayWidgetTest::testShouldShowOverlayWidget() {
 void OverlayWidgetTest::testShouldDisplayBarDiagramAfterSessionLogin() {
     QVERIFY ( this->overlayWidget->getUi()->loginwidget->isVisible() );
 
-    QTest::keyClick ( this->overlayWidget->getUi()->loginwidget->getUi()->sessionIdEdit,  Qt::Key_0 );
-    QTest::keyClick ( this->overlayWidget->getUi()->loginwidget->getUi()->sessionIdEdit,  Qt::Key_1 );
-    QTest::keyClick ( this->overlayWidget->getUi()->loginwidget->getUi()->sessionIdEdit,  Qt::Key_2 );
-    QTest::keyClick ( this->overlayWidget->getUi()->loginwidget->getUi()->sessionIdEdit,  Qt::Key_3 );
-    QTest::keyClick ( this->overlayWidget->getUi()->loginwidget->getUi()->sessionIdEdit,  Qt::Key_4 );
-    QTest::keyClick ( this->overlayWidget->getUi()->loginwidget->getUi()->sessionIdEdit,  Qt::Key_5 );
-    QTest::keyClick ( this->overlayWidget->getUi()->loginwidget->getUi()->sessionIdEdit,  Qt::Key_6 );
-    QTest::keyClick ( this->overlayWidget->getUi()->loginwidget->getUi()->sessionIdEdit,  Qt::Key_7 );
-    QTest::keyClick ( this->overlayWidget->getUi()->loginwidget->getUi()->sessionIdEdit,  Qt::Key_Enter );
+    this->enterSessionId ( this->overlayWidget->getUi()->loginwidget->getUi()->sessionIdEdit );
 
     QVERIFY ( this->overlayWidget->getUi()->bardiagramwidget->isVisible() );
 }
@@ -50,3 +55,4 @@ void OverlayWidgetTest::testShouldSwitchToLogin() {
     this->overlayWidget->getUi()->actionChangeSession->trigger();
     QVERIFY ( this->overlayWidget->getUi()->loginwidget->isVisible() );
 }
+

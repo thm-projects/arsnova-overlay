@@ -97,3 +97,8 @@ add_test(LoginWidgetTest ${EXECUTABLE_OUTPUT_PATH}/tests LoginWidgetTest)
 add_test(BarDiagramWidgetTest ${EXECUTABLE_OUTPUT_PATH}/tests BarDiagramWidgetTest)
 add_test(LogoDiagramWidgetTest ${EXECUTABLE_OUTPUT_PATH}/tests LogoDiagramWidgetTest)
 add_test(OverlayWidgetTest ${EXECUTABLE_OUTPUT_PATH}/tests OverlayWidgetTest)
+
+if (TESTS AND COVERAGE)
+  add_test("create_report" lcov --directory ${CMAKE_CURRENT_BINARY_DIR} --capture --output-file coverage.info)
+  add_test("create_html" genhtml coverage.info -o ${CMAKE_CURRENT_BINARY_DIR}/coverage)
+endif (TESTS AND COVERAGE)

@@ -16,6 +16,7 @@ public:
 
 private:
     OverlayWidget * overlayWidget;
+    void enterSessionId ( QLineEdit * lineEdit );
 
 private slots:
     void initTestCase();
