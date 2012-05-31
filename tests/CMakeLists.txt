@@ -101,7 +101,7 @@ add_custom_command(TARGET coverage POST_BUILD
   COMMAND ${LCOV_TOOL} --remove coverage.info .cxx -o coverage.info
   COMMAND ${LCOV_TOOL} --remove coverage.info *include* -o coverage.info
 
-  COMMAND ${LCOV_HTML} coverage.info --no-branch-coverage -o ${CMAKE_CURRENT_BINARY_DIR}/../coverage
+  COMMAND ${LCOV_HTML} coverage.info -o ${CMAKE_CURRENT_BINARY_DIR}/../coverage
 
   COMMAND ${LCOV_TOOL} --directory ${CMAKE_CURRENT_BINARY_DIR}/../ --zerocounters
 )  
