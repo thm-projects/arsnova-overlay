@@ -1,8 +1,7 @@
 #ifndef STUBCONNECTION_H
 #define STUBCONNECTION_H
 
-#include <../../home/pcvolkmer/Projekte/arsnovawidget/src/abstractconnection.h>
-
+#include "abstractconnection.h"
 
 class StubConnection : public AbstractConnection {
 
