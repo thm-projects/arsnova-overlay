@@ -92,13 +92,23 @@ target_link_libraries(tests
   ${QT_QTTESTGUI_LIBRARY}
 )
 
+if (TESTS AND COVERAGE)
+add_custom_target(coverage)
+add_dependencies(coverage check)
+
+add_custom_command(TARGET coverage POST_BUILD
+  COMMAND ${LCOV_TOOL} --directory ${CMAKE_CURRENT_BINARY_DIR}/ --capture --output-file coverage.info
+  COMMAND ${LCOV_TOOL} --remove coverage.info .cxx -o coverage.info
+  COMMAND ${LCOV_TOOL} --remove coverage.info *include* -o coverage.info
+
+  COMMAND ${LCOV_HTML} coverage.info --no-branch-coverage -o ${CMAKE_CURRENT_BINARY_DIR}/../coverage
+
+  COMMAND ${LCOV_TOOL} --directory ${CMAKE_CURRENT_BINARY_DIR}/../ --zerocounters
+)  
+endif (TESTS AND COVERAGE)
+
 add_test(SvgLogoTest ${EXECUTABLE_OUTPUT_PATH}/tests SvgLogoTest)
 add_test(LoginWidgetTest ${EXECUTABLE_OUTPUT_PATH}/tests LoginWidgetTest)
 add_test(BarDiagramWidgetTest ${EXECUTABLE_OUTPUT_PATH}/tests BarDiagramWidgetTest)
 add_test(LogoDiagramWidgetTest ${EXECUTABLE_OUTPUT_PATH}/tests LogoDiagramWidgetTest)
 add_test(OverlayWidgetTest ${EXECUTABLE_OUTPUT_PATH}/tests OverlayWidgetTest)
-
-if (TESTS AND COVERAGE)
-  add_test("create_report" lcov --directory ${CMAKE_CURRENT_BINARY_DIR} --capture --output-file coverage.info)
-  add_test("create_html" genhtml coverage.info -o ${CMAKE_CURRENT_BINARY_DIR}/coverage)
-endif (TESTS AND COVERAGE)
