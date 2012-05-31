@@ -7,9 +7,17 @@ const int OverlayWidget::httpUpdateInterval = 10;
 OverlayWidget::OverlayWidget ( AbstractConnection * connection, QWidget* parent, Qt::WindowFlags f )
     : QWidget ( parent, f ) , ui ( new Ui::OverlayWidget() ), connection ( connection ) {
     ui->setupUi ( this );
-
     this->updateTimer = new UpdateTimer();
+    this->connectSignals();
+    this->setWindowFlags ( Qt::Window | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint );
+    ui->progressBar->setMaximum ( OverlayWidget::httpUpdateInterval );
+    ui->logodiagramwidget->hide();
+    this->setMouseTracking ( true );
+    this->moveToBottomRightEdge();
+    this->setVisibleViewType ( LOGIN_VIEW );
+}
 
+void OverlayWidget::connectSignals() {
     connect ( this->updateTimer, SIGNAL ( tick ( int ) ), this, SLOT ( updateHttpResponse ( int ) ) );
     connect ( this->connection, SIGNAL ( requestFinished ( SessionResponse ) ), this, SLOT ( onSessionResponse ( SessionResponse ) ) );
     connect ( this->connection, SIGNAL ( requestFinished ( UnderstandingResponse ) ), this, SLOT ( onUnderstandingResponse ( UnderstandingResponse ) ) );
@@ -22,16 +30,6 @@ OverlayWidget::OverlayWidget ( AbstractConnection * connection, QWidget* parent,
     connect ( ui->actionFullscreen, SIGNAL ( triggered ( bool ) ), this, SLOT ( makeFullscreen ( bool ) ) );
     connect ( ui->actionSwitchView, SIGNAL ( triggered ( bool ) ), this, SLOT ( switchView ( bool ) ) );
     connect ( ui->actionExit, SIGNAL ( triggered ( bool ) ), this, SLOT ( close() ) );
-
-    this->setWindowFlags ( Qt::Window | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint );
-
-    ui->progressBar->setMaximum ( OverlayWidget::httpUpdateInterval );
-
-    ui->logodiagramwidget->hide();
-    this->setMouseTracking ( true );
-
-    this->moveToBottomRightEdge();
-    this->setVisibleViewType ( LOGIN_VIEW );
 }
 
 OverlayWidget::~OverlayWidget() {

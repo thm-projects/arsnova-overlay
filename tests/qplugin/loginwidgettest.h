@@ -19,11 +19,14 @@ private:
 private slots:
     void initTestCase();
     void cleanupTestCase();
-    
+
     void testShouldShowLoginWidget();
     void testShouldEmitSignalEditingFinished();
     void testShouldEmitSignalExitButtonClicked();
     void testShouldEmitSignalLoginButtonClicked();
+    void testShouldSetLineEditText();
+    void testShouldGetLineEditText();
+    void testShouldClearLineEditText();
 };
 
 #endif // LOGINWIDGETTEST_H

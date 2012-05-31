@@ -23,9 +23,11 @@ private slots:
     void cleanupTestCase();
 
     void testShouldShowOverlayWidget();
+    void testShouldNotDisplayBarDiagramWithoutSessionLogin();
     void testShouldDisplayBarDiagramAfterSessionLogin();
     void testShouldDisplayCorrectCountString();
     void testShouldSwitchToLogoDiagram();
+    void testShouldSwitchToBarDiagram();
     void testShouldSwitchToLogin();
 };
 

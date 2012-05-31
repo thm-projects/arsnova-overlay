@@ -28,6 +28,14 @@ void OverlayWidgetTest::testShouldShowOverlayWidget() {
     QVERIFY ( this->overlayWidget->isVisible() );
 }
 
+void OverlayWidgetTest::testShouldNotDisplayBarDiagramWithoutSessionLogin() {
+    QVERIFY ( this->overlayWidget->getUi()->loginwidget->isVisible() );
+    
+    QTest::keyClick ( this->overlayWidget->getUi()->loginwidget->getUi()->sessionIdEdit,  Qt::Key_Enter );
+    
+    QVERIFY ( this->overlayWidget->getUi()->loginwidget->isVisible() );
+}
+
 void OverlayWidgetTest::testShouldDisplayBarDiagramAfterSessionLogin() {
     QVERIFY ( this->overlayWidget->getUi()->loginwidget->isVisible() );
 
@@ -49,6 +57,14 @@ void OverlayWidgetTest::testShouldSwitchToLogoDiagram() {
     QVERIFY ( this->overlayWidget->getUi()->actionSwitchView->isChecked() );
     QVERIFY ( ! this->overlayWidget->getUi()->bardiagramwidget->isVisible() );
     QVERIFY ( this->overlayWidget->getUi()->logodiagramwidget->isVisible() );
+}
+
+void OverlayWidgetTest::testShouldSwitchToBarDiagram() {
+    QVERIFY ( this->overlayWidget->getUi()->actionSwitchView->isChecked() );
+    this->overlayWidget->getUi()->actionSwitchView->trigger();
+    QVERIFY ( ! this->overlayWidget->getUi()->actionSwitchView->isChecked() );
+    QVERIFY ( this->overlayWidget->getUi()->bardiagramwidget->isVisible() );
+    QVERIFY ( ! this->overlayWidget->getUi()->logodiagramwidget->isVisible() );
 }
 
 void OverlayWidgetTest::testShouldSwitchToLogin() {

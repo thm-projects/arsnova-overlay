@@ -43,3 +43,21 @@ void LoginWidgetTest::testShouldEmitSignalLoginButtonClicked() {
 
     QCOMPARE ( spy.count(), 1 );
 }
+
+void LoginWidgetTest::testShouldSetLineEditText() {
+    this->loginWidget->setText ( "test321" );
+
+    QCOMPARE ( this->loginWidget->getUi()->sessionIdEdit->text(), QString ( "test321" ) );
+}
+
+void LoginWidgetTest::testShouldGetLineEditText() {
+    this->loginWidget->getUi()->sessionIdEdit->setText ( "test123" );
+
+    QCOMPARE ( this->loginWidget->text(), QString ( "test123" ) );
+}
+
+void LoginWidgetTest::testShouldClearLineEditText() {
+    this->loginWidget->clear();
+
+    QVERIFY ( this->loginWidget->getUi()->sessionIdEdit->text().isEmpty() );
+}

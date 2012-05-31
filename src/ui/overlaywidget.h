@@ -42,6 +42,7 @@ private:
     };
 
     void setVisibleViewType ( VisibileViewType type );
+    void connectSignals();
 
 private slots:
     void sessionLogin();
