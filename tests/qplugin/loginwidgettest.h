@@ -22,7 +22,8 @@ private slots:
 
     void testShouldEmitSignalExitButtonClicked();
     void testShouldShowLoginWidget();
-    void testShouldEmitSignalEditingFinished();
+    void testShouldEmitSignalReturnPressed();
+    void testShouldNotEmitSignalOnTabPressed();
     void testShouldEmitSignalLoginButtonClicked();
     void testShouldSetLineEditText();
     void testShouldGetLineEditText();
