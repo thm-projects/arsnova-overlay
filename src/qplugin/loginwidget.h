@@ -22,12 +22,12 @@ private:
     Ui::LoginWidget * _ui;
 
 private slots:
-    void on_sessionIdEdit_editingFinished();
+    void on_sessionIdEdit_returnPressed();
     void on_exitButton_clicked();
     void on_loginButton_clicked();
 
 signals:
-    void editingFinished();
+    void returnPressed();
     void exitButtonClicked();
     void loginButtonClicked();
 };

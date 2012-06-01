@@ -20,9 +20,9 @@ private slots:
     void initTestCase();
     void cleanupTestCase();
 
+    void testShouldEmitSignalExitButtonClicked();
     void testShouldShowLoginWidget();
     void testShouldEmitSignalEditingFinished();
-    void testShouldEmitSignalExitButtonClicked();
     void testShouldEmitSignalLoginButtonClicked();
     void testShouldSetLineEditText();
     void testShouldGetLineEditText();

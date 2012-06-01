@@ -22,6 +22,7 @@ private slots:
     void initTestCase();
     void cleanupTestCase();
 
+    void testShouldExitOnExitButtonClicked();
     void testShouldShowOverlayWidget();
     void testShouldNotDisplayBarDiagramWithoutSessionLogin();
     void testShouldDisplayBarDiagramAfterSessionLogin();

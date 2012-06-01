@@ -23,6 +23,18 @@ void OverlayWidgetTest::cleanupTestCase() {
     delete this->overlayWidget;
 }
 
+void OverlayWidgetTest::testShouldExitOnExitButtonClicked() {
+    delete this->overlayWidget;
+    this->overlayWidget = new OverlayWidget ( new StubConnection() );
+    this->overlayWidget->show();
+
+    QVERIFY ( this->overlayWidget->getUi()->loginwidget->isVisible() );
+    QTest::mouseClick ( this->overlayWidget->getUi()->loginwidget->getUi()->exitButton, Qt::LeftButton );
+
+    QVERIFY ( this->overlayWidget->isEnabled() );
+    this->overlayWidget = new OverlayWidget ( new StubConnection() );
+}
+
 void OverlayWidgetTest::testShouldShowOverlayWidget() {
     this->overlayWidget->show();
     QVERIFY ( this->overlayWidget->isVisible() );
@@ -30,9 +42,9 @@ void OverlayWidgetTest::testShouldShowOverlayWidget() {
 
 void OverlayWidgetTest::testShouldNotDisplayBarDiagramWithoutSessionLogin() {
     QVERIFY ( this->overlayWidget->getUi()->loginwidget->isVisible() );
-    
+
     QTest::keyClick ( this->overlayWidget->getUi()->loginwidget->getUi()->sessionIdEdit,  Qt::Key_Enter );
-    
+
     QVERIFY ( this->overlayWidget->getUi()->loginwidget->isVisible() );
 }
 
@@ -71,4 +83,3 @@ void OverlayWidgetTest::testShouldSwitchToLogin() {
     this->overlayWidget->getUi()->actionChangeSession->trigger();
     QVERIFY ( this->overlayWidget->getUi()->loginwidget->isVisible() );
 }
-

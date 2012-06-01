@@ -21,8 +21,8 @@ void LoginWidget::clear() {
     _ui->sessionIdEdit->clear();
 }
 
-void LoginWidget::on_sessionIdEdit_editingFinished() {
-    emit this->editingFinished();
+void LoginWidget::on_sessionIdEdit_returnPressed() {
+    emit this->returnPressed();
 }
 
 void LoginWidget::on_exitButton_clicked() {

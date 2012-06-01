@@ -3,15 +3,29 @@
 LoginWidgetTest::LoginWidgetTest ( QObject* parent ) : QObject ( parent ) {}
 
 void LoginWidgetTest::initTestCase() {
-    this->loginWidget = new LoginWidget();
+    this->loginWidget = nullptr;
 }
 
 void LoginWidgetTest::cleanupTestCase() {
     delete this->loginWidget;
 }
 
-void LoginWidgetTest::testShouldShowLoginWidget() {
+void LoginWidgetTest::testShouldEmitSignalExitButtonClicked() {
+    delete this->loginWidget;
+    this->loginWidget = new LoginWidget();
     this->loginWidget->show();
+
+    QSignalSpy spy ( this->loginWidget, SIGNAL ( exitButtonClicked ( ) ) );
+    QTest::mouseClick ( this->loginWidget->getUi()->exitButton,  Qt::LeftButton );
+
+    QCOMPARE ( spy.count(), 1 );
+}
+
+void LoginWidgetTest::testShouldShowLoginWidget() {
+    delete this->loginWidget;
+    this->loginWidget = new LoginWidget();
+    this->loginWidget->show();
+    
     QVERIFY ( this->loginWidget->isVisible() );
 }
 
@@ -26,13 +40,6 @@ void LoginWidgetTest::testShouldEmitSignalEditingFinished() {
     QTest::keyClick ( this->loginWidget->getUi()->sessionIdEdit,  Qt::Key_6 );
     QTest::keyClick ( this->loginWidget->getUi()->sessionIdEdit,  Qt::Key_7 );
     QTest::keyClick ( this->loginWidget->getUi()->sessionIdEdit,  Qt::Key_Enter );
-
-    QCOMPARE ( spy.count(), 1 );
-}
-
-void LoginWidgetTest::testShouldEmitSignalExitButtonClicked() {
-    QSignalSpy spy ( this->loginWidget, SIGNAL ( exitButtonClicked ( ) ) );
-    QTest::mouseClick ( this->loginWidget->getUi()->exitButton,  Qt::LeftButton );
 
     QCOMPARE ( spy.count(), 1 );
 }

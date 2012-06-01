@@ -22,7 +22,7 @@ void OverlayWidget::connectSignals() {
     connect ( this->connection, SIGNAL ( requestFinished ( SessionResponse ) ), this, SLOT ( onSessionResponse ( SessionResponse ) ) );
     connect ( this->connection, SIGNAL ( requestFinished ( UnderstandingResponse ) ), this, SLOT ( onUnderstandingResponse ( UnderstandingResponse ) ) );
     connect ( this->connection, SIGNAL ( requestFinished ( LoggedInResponse ) ), this, SLOT ( onLoggedInResponse ( LoggedInResponse ) ) );
-    connect ( ui->loginwidget, SIGNAL ( editingFinished() ), this, SLOT ( sessionLogin() ) );
+    connect ( ui->loginwidget, SIGNAL ( returnPressed() ), this, SLOT ( sessionLogin() ) );
     connect ( ui->loginwidget, SIGNAL ( exitButtonClicked() ), this, SLOT ( close() ) );
     connect ( ui->loginwidget, SIGNAL ( loginButtonClicked() ), this, SLOT ( sessionLogin() ) );
     connect ( ui->actionChangeSession, SIGNAL ( triggered ( bool ) ), this, SLOT ( showSessionIdForm() ) );
@@ -176,3 +176,4 @@ void OverlayWidget::switchView ( bool coloredLogoView ) {
     }
     this->setVisibleViewType ( BAR_VIEW );
 }
+
