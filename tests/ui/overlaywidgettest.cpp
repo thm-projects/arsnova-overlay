@@ -17,6 +17,7 @@ void OverlayWidgetTest::enterSessionId ( QLineEdit * lineEdit ) {
 
 void OverlayWidgetTest::initTestCase() {
     this->overlayWidget = new OverlayWidget ( new StubConnection() );
+    this->widgetSize = this->overlayWidget->size();
 }
 
 void OverlayWidgetTest::cleanupTestCase() {
@@ -77,6 +78,21 @@ void OverlayWidgetTest::testShouldSwitchToBarDiagram() {
     QVERIFY ( ! this->overlayWidget->getUi()->actionSwitchView->isChecked() );
     QVERIFY ( this->overlayWidget->getUi()->bardiagramwidget->isVisible() );
     QVERIFY ( ! this->overlayWidget->getUi()->logodiagramwidget->isVisible() );
+}
+
+void OverlayWidgetTest::testShouldBeFullscreen() {
+    this->overlayWidget->getUi()->actionFullscreen->trigger();
+    int width = QApplication::desktop()->screenGeometry().width();
+    int height = QApplication::desktop()->screenGeometry().height();
+
+    QVERIFY ( this->overlayWidget->width() == width );
+    QVERIFY ( this->overlayWidget->height() == height );
+}
+
+void OverlayWidgetTest::testShouldNotBeFullscreen() {
+    this->overlayWidget->getUi()->actionFullscreen->trigger();
+    QVERIFY ( this->overlayWidget->width() == this->widgetSize.width() );
+    QVERIFY ( this->overlayWidget->height() == this->widgetSize.height() );
 }
 
 void OverlayWidgetTest::testShouldSwitchToLogin() {

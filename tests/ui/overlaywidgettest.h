@@ -16,6 +16,7 @@ public:
 
 private:
     OverlayWidget * overlayWidget;
+    QSize widgetSize;
     void enterSessionId ( QLineEdit * lineEdit );
 
 private slots:
@@ -29,6 +30,8 @@ private slots:
     void testShouldDisplayCorrectCountString();
     void testShouldSwitchToLogoDiagram();
     void testShouldSwitchToBarDiagram();
+    void testShouldBeFullscreen();
+    void testShouldNotBeFullscreen();
     void testShouldSwitchToLogin();
 };
 
