@@ -4,6 +4,7 @@ ArsNovaWidgetCollection::ArsNovaWidgetCollection ( QObject* parent ) : QObject (
     this->widgets.append ( new LoginWidgetPlugin ( this ) );
     this->widgets.append ( new BarDiagramWidgetPlugin ( this ) );
     this->widgets.append ( new LogoDiagramWidgetPlugin ( this ) );
+    this->widgets.append ( new SessionInformationWidgetPlugin ( this ) );
 }
 
 QList< QDesignerCustomWidgetInterface* > ArsNovaWidgetCollection::customWidgets() const {

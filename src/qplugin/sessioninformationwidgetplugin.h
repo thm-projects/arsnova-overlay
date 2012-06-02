@@ -1,20 +1,18 @@
-#ifndef LOGODIAGRAMWIDGETPLUGIN_H
-#define LOGODIAGRAMWIDGETPLUGIN_H
+#ifndef SESSIONINFORMATIONWIDGETPLUGIN_H
+#define SESSIONINFORMATIONWIDGETPLUGIN_H
 
 #include <QtGui>
 #include <QDesignerCustomWidgetInterface>
+#include "sessioninformationwidget.h"
 
-#include "logodiagramwidget.h"
-
-class LogoDiagramWidgetPlugin
+class SessionInformationWidgetPlugin
         : public QObject, public QDesignerCustomWidgetInterface {
 
     Q_OBJECT
     Q_INTERFACES ( QDesignerCustomWidgetInterface )
 
 public:
-    explicit LogoDiagramWidgetPlugin ( QObject * parent = 0 );
-
+    explicit SessionInformationWidgetPlugin ( QObject * parent = 0 );
     QString name() const;
     QString includeFile() const;
     QString group() const;
@@ -25,4 +23,4 @@ public:
     QWidget * createWidget ( QWidget * parent );
 };
 
-#endif // LOGODIAGRAMWIDGETPLUGIN_H
+#endif // SESSIONINFORMATIONWIDGETPLUGIN_H

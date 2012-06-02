@@ -15,7 +15,7 @@ QString LoginWidgetPlugin::group() const {
 }
 
 QIcon LoginWidgetPlugin::icon() const {
-    return QIcon ( ":/images/logo.svg" );
+    return QIcon ( ":/images/arsnova.svg" );
 }
 
 QString LoginWidgetPlugin::toolTip() const {

@@ -61,7 +61,13 @@ void OverlayWidgetTest::testShouldDisplayCorrectCountString() {
     QVERIFY ( this->overlayWidget->getUi()->bardiagramwidget->isVisible() );
 
     // As declared in StubConnection class
-    QCOMPARE ( this->overlayWidget->getUi()->onlineUsersLabel->text(), QString ( "(10/3)" ) );
+    QCOMPARE (
+        this->overlayWidget->getUi()
+        ->sessioninformationwidget->getUi()
+        ->onlineUsersLabel
+        ->text(),
+        QString ( "(10/3)" )
+    );
 }
 
 void OverlayWidgetTest::testShouldSwitchToLogoDiagram() {

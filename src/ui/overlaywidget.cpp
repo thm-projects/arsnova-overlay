@@ -9,7 +9,7 @@ OverlayWidget::OverlayWidget ( AbstractConnection * connection, QWidget * parent
     ui->setupUi ( this );
     this->updateTimer = new UpdateTimer();
     this->connectSignals();
-    ui->progressBar->setMaximum ( OverlayWidget::httpUpdateInterval );
+    //ui->progressBar->setMaximum ( OverlayWidget::httpUpdateInterval );
     this->setMouseTracking ( true );
     this->moveToBottomRightEdge();
     this->setVisibleViewType ( LOGIN_VIEW );
@@ -51,9 +51,7 @@ void OverlayWidget::setVisibleViewType ( OverlayWidget::VisibileViewType type ) 
     case LOGIN_VIEW:
         ui->loginwidget->show();
         ui->bardiagramwidget->hide();
-        ui->onlineUsersLabel->hide();
-        ui->progressBar->hide();
-        ui->sessionNameLabel->hide();
+        ui->sessioninformationwidget->hide();
         ui->menuWidget->hide();
         ui->logodiagramwidget->hide();
         this->setWindowFlags (
@@ -65,10 +63,8 @@ void OverlayWidget::setVisibleViewType ( OverlayWidget::VisibileViewType type ) 
         break;
     case BAR_VIEW:
         ui->loginwidget->hide();
-        ui->onlineUsersLabel->show();
-        ui->progressBar->show();
         ui->bardiagramwidget->show();
-        ui->sessionNameLabel->show();
+        ui->sessioninformationwidget->show();
         ui->menuWidget->show();
         ui->logodiagramwidget->hide();
         this->setWindowFlags (
@@ -81,10 +77,8 @@ void OverlayWidget::setVisibleViewType ( OverlayWidget::VisibileViewType type ) 
         break;
     case COLORED_LOGO_VIEW:
         ui->loginwidget->hide();
-        ui->onlineUsersLabel->show();
-        ui->progressBar->show();
+        ui->sessioninformationwidget->show();
         ui->bardiagramwidget->hide();
-        ui->sessionNameLabel->show();
         ui->menuWidget->show();
         ui->logodiagramwidget->show();
         this->setWindowFlags (
@@ -104,12 +98,7 @@ void OverlayWidget::onSessionResponse ( SessionResponse response ) {
     if ( ! this->sessionId.isNull() ) {
         this->setVisibleViewType ( BAR_VIEW );
         this->updateHttpResponse ( OverlayWidget::httpUpdateInterval );
-        ui->sessionNameLabel->setText (
-            response.shortName()
-            + "\n("
-            + response.sessionId()
-            + ")"
-        );
+        ui->sessioninformationwidget->updateSessionLabel ( response.shortName(), response.sessionId() );
         return;
     }
     this->makeTransparent ( false );
@@ -124,15 +113,11 @@ void OverlayWidget::onUnderstandingResponse ( UnderstandingResponse response ) {
 
 void OverlayWidget::onLoggedInResponse ( LoggedInResponse response ) {
     this->loggedInUsers = response.value();
-    ui->onlineUsersLabel->setText (
-        QString ( "(" ) + QString::number ( this->latestUnderstandingResponses, 10 )
-        + "/"
-        + QString::number ( this->loggedInUsers, 10 ) + ")"
-    );
+    ui->sessioninformationwidget->updateCounterLabel ( this->latestUnderstandingResponses, this->loggedInUsers );
 }
 
 void OverlayWidget::updateHttpResponse ( int ticks ) {
-    ui->progressBar->setValue ( ticks );
+    ui->sessioninformationwidget->updateProgressBar ( ticks, OverlayWidget::httpUpdateInterval );
     if (
         ticks == OverlayWidget::httpUpdateInterval
         and ! this->sessionId.isEmpty()

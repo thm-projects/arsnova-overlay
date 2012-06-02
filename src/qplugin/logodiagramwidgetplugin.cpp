@@ -15,7 +15,7 @@ QString LogoDiagramWidgetPlugin::group() const {
 }
 
 QIcon LogoDiagramWidgetPlugin::icon() const {
-    return QIcon ( ":/images/logo.svg" );
+    return QIcon ( ":/images/arsnova.svg" );
 }
 
 QString LogoDiagramWidgetPlugin::toolTip() const {

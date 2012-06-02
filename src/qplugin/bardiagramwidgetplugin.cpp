@@ -15,7 +15,7 @@ QString BarDiagramWidgetPlugin::group() const {
 }
 
 QIcon BarDiagramWidgetPlugin::icon() const {
-    return QIcon ( ":/images/logo.svg" );
+    return QIcon ( ":/images/arsnova.svg" );
 }
 
 QString BarDiagramWidgetPlugin::toolTip() const {

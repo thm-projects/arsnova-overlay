@@ -14,6 +14,8 @@ set(arsnovawidget_SRCS
   qplugin/bardiagramwidgettest.cpp
   ../src/qplugin/logodiagramwidget.cpp
   qplugin/logodiagramwidgettest.cpp
+  ../src/qplugin/sessioninformationwidget.cpp
+  qplugin/sessioninformationwidgettest.cpp
   ../src/ui/overlaywidget.cpp
   ui/overlaywidgettest.cpp
   ../src/updatetimer.cpp
@@ -48,6 +50,8 @@ set(arsnovawidget_MOC_SRCS
   qplugin/bardiagramwidgettest.h
   ../src/qplugin/logodiagramwidget.h
   qplugin/logodiagramwidgettest.h
+  ../src/qplugin/sessioninformationwidget.h
+  qplugin/sessioninformationwidgettest.h
   ../src/ui/overlaywidget.h
   ui/overlaywidgettest.h
   ../src/updatetimer.h
@@ -62,6 +66,7 @@ set(arsnovawidget_UIS
   ../src/qplugin/loginwidget.ui
   ../src/qplugin/bardiagramwidget.ui
   ../src/qplugin/logodiagramwidget.ui
+  ../src/qplugin/sessioninformationwidget.ui
   ../src/ui/overlaywidget.ui
 )
 
@@ -112,3 +117,4 @@ add_test(LoginWidgetTest ${EXECUTABLE_OUTPUT_PATH}/tests LoginWidgetTest)
 add_test(BarDiagramWidgetTest ${EXECUTABLE_OUTPUT_PATH}/tests BarDiagramWidgetTest)
 add_test(LogoDiagramWidgetTest ${EXECUTABLE_OUTPUT_PATH}/tests LogoDiagramWidgetTest)
 add_test(OverlayWidgetTest ${EXECUTABLE_OUTPUT_PATH}/tests OverlayWidgetTest)
+add_test(SessionInformationWidgetTest ${EXECUTABLE_OUTPUT_PATH}/tests SessionInformationWidgetTest)

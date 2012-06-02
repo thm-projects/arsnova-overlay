@@ -38,6 +38,9 @@
    <property name="margin">
     <number>0</number>
    </property>
+   <item row="0" column="0">
+    <widget class="SessionInformationWidget" name="sessioninformationwidget"/>
+   </item>
    <item row="4" column="0" colspan="2">
     <widget class="QToolBar" name="menuWidget">
      <property name="sizePolicy">
@@ -71,108 +74,14 @@
      <addaction name="actionExit"/>
     </widget>
    </item>
-   <item row="0" column="0" colspan="2">
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <property name="spacing">
-      <number>2</number>
-     </property>
-     <property name="leftMargin">
-      <number>4</number>
-     </property>
-     <property name="rightMargin">
-      <number>4</number>
-     </property>
-     <item>
-      <widget class="QLabel" name="sessionNameLabel">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>80</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">font-size: 12px;
-color: white;
-font-weight: bold;</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QProgressBar" name="progressBar">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QProgressBar {
-	border: 1px solid #fff;
-	border-radius: 2px;
-	margin: 4px;
-	height: 6px;
-}
-
-QProgressBar::chunk {
-	width: 8px;
-	margin: 1px;
-	background-color: #dde;
-}</string>
-       </property>
-       <property name="value">
-        <number>0</number>
-       </property>
-       <property name="textVisible">
-        <bool>false</bool>
-       </property>
-       <property name="invertedAppearance">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="onlineUsersLabel">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">font-size: 12px;
-color: white;
-font-weight: bold;</string>
-       </property>
-       <property name="text">
-        <string>0</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
    <item row="1" column="0" colspan="2">
-    <widget class="LogoDiagramWidget" name="logodiagramwidget" native="true"/>
+    <widget class="LogoDiagramWidget" name="logodiagramwidget"/>
    </item>
    <item row="2" column="0" colspan="2">
-    <widget class="BarDiagramWidget" name="bardiagramwidget" native="true"/>
+    <widget class="BarDiagramWidget" name="bardiagramwidget"/>
    </item>
    <item row="3" column="0" colspan="2">
-    <widget class="LoginWidget" name="loginwidget" native="true"/>
+    <widget class="LoginWidget" name="loginwidget"/>
    </item>
   </layout>
   <action name="actionChangeSession">
@@ -276,6 +185,11 @@ font-weight: bold;</string>
    <class>LogoDiagramWidget</class>
    <extends>QWidget</extends>
    <header>qplugin/logodiagramwidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>SessionInformationWidget</class>
+   <extends>QWidget</extends>
+   <header>qplugin/sessioninformationwidget.h</header>
   </customwidget>
  </customwidgets>
  <resources>
