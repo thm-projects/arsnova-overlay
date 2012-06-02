@@ -4,14 +4,12 @@ const int OverlayWidget::ySize = 80;
 const int OverlayWidget::xSize = 180;
 const int OverlayWidget::httpUpdateInterval = 10;
 
-OverlayWidget::OverlayWidget ( AbstractConnection * connection, QWidget* parent, Qt::WindowFlags f )
+OverlayWidget::OverlayWidget ( AbstractConnection * connection, QWidget * parent, Qt::WindowFlags f )
     : QWidget ( parent, f ) , ui ( new Ui::OverlayWidget() ), connection ( connection ) {
     ui->setupUi ( this );
     this->updateTimer = new UpdateTimer();
     this->connectSignals();
-    this->setWindowFlags ( Qt::Window | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint );
     ui->progressBar->setMaximum ( OverlayWidget::httpUpdateInterval );
-    ui->logodiagramwidget->hide();
     this->setMouseTracking ( true );
     this->moveToBottomRightEdge();
     this->setVisibleViewType ( LOGIN_VIEW );
@@ -58,6 +56,12 @@ void OverlayWidget::setVisibleViewType ( OverlayWidget::VisibileViewType type ) 
         ui->sessionNameLabel->hide();
         ui->menuWidget->hide();
         ui->logodiagramwidget->hide();
+        this->setWindowFlags (
+            Qt::Window
+            | Qt::FramelessWindowHint
+            | Qt::WindowStaysOnTopHint
+        );
+        this->show();
         break;
     case BAR_VIEW:
         ui->loginwidget->hide();
@@ -67,6 +71,13 @@ void OverlayWidget::setVisibleViewType ( OverlayWidget::VisibileViewType type ) 
         ui->sessionNameLabel->show();
         ui->menuWidget->show();
         ui->logodiagramwidget->hide();
+        this->setWindowFlags (
+            Qt::Window
+            | Qt::FramelessWindowHint
+            | Qt::WindowStaysOnTopHint
+            | Qt::X11BypassWindowManagerHint
+        );
+        this->show();
         break;
     case COLORED_LOGO_VIEW:
         ui->loginwidget->hide();
@@ -76,6 +87,13 @@ void OverlayWidget::setVisibleViewType ( OverlayWidget::VisibileViewType type ) 
         ui->sessionNameLabel->show();
         ui->menuWidget->show();
         ui->logodiagramwidget->show();
+        this->setWindowFlags (
+            Qt::Window
+            | Qt::FramelessWindowHint
+            | Qt::WindowStaysOnTopHint
+            | Qt::X11BypassWindowManagerHint
+        );
+        this->show();
         break;
     }
 }
@@ -85,8 +103,6 @@ void OverlayWidget::onSessionResponse ( SessionResponse response ) {
 
     if ( ! this->sessionId.isNull() ) {
         this->setVisibleViewType ( BAR_VIEW );
-        this->setWindowFlags ( Qt::Window | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint );
-        this->show();
         this->updateHttpResponse ( OverlayWidget::httpUpdateInterval );
         ui->sessionNameLabel->setText (
             response.shortName()
@@ -109,7 +125,8 @@ void OverlayWidget::onUnderstandingResponse ( UnderstandingResponse response ) {
 void OverlayWidget::onLoggedInResponse ( LoggedInResponse response ) {
     this->loggedInUsers = response.value();
     ui->onlineUsersLabel->setText (
-        QString ( "(" ) + QString::number ( this->latestUnderstandingResponses, 10 ) + "/"
+        QString ( "(" ) + QString::number ( this->latestUnderstandingResponses, 10 )
+        + "/"
         + QString::number ( this->loggedInUsers, 10 ) + ")"
     );
 }
@@ -145,8 +162,14 @@ void OverlayWidget::makeFullscreen ( bool enabled ) {
     if ( enabled ) {
 
         this->move ( 0,0 );
-        this->setMaximumSize ( QApplication::desktop()->screenGeometry().width(),QApplication::desktop()->screenGeometry().height() );
-        this->resize ( QApplication::desktop()->screenGeometry().width(),QApplication::desktop()->screenGeometry().height() );
+        this->setMaximumSize (
+            QApplication::desktop()->screenGeometry().width(),
+            QApplication::desktop()->screenGeometry().height()
+        );
+        this->resize (
+            QApplication::desktop()->screenGeometry().width(),
+            QApplication::desktop()->screenGeometry().height()
+        );
         this->setWindowState ( this->windowState() ^ Qt::WindowFullScreen );
         this->show();
         return;
@@ -160,12 +183,7 @@ void OverlayWidget::makeFullscreen ( bool enabled ) {
 
 void OverlayWidget::showSessionIdForm() {
     this->makeTransparent ( false );
-
     this->setVisibleViewType ( LOGIN_VIEW );
-
-    this->setWindowFlags ( Qt::Window | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint );
-    this->show();
-
     this->moveToBottomRightEdge();
 }
 
@@ -176,4 +194,3 @@ void OverlayWidget::switchView ( bool coloredLogoView ) {
     }
     this->setVisibleViewType ( BAR_VIEW );
 }
-
