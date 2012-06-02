@@ -191,9 +191,6 @@ font-weight: bold;</string>
    <property name="checkable">
     <bool>true</bool>
    </property>
-   <property name="checked">
-    <bool>true</bool>
-   </property>
    <property name="icon">
     <iconset resource="../resources/resources.qrc">
      <normaloff>:/images/images/layer-visible-off.png</normaloff>

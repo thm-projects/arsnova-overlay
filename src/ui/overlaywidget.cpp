@@ -145,7 +145,6 @@ void OverlayWidget::updateHttpResponse ( int ticks ) {
 
 void OverlayWidget::sessionLogin() {
     this->connection->requestSession ( ui->loginwidget->text() );
-    this->makeTransparent ( true );
     this->moveToBottomRightEdge();
 }
 

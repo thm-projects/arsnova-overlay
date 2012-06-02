@@ -32,6 +32,8 @@ private slots:
     void testShouldSwitchToBarDiagram();
     void testShouldBeFullscreen();
     void testShouldNotBeFullscreen();
+    void testShouldBeOpaque();
+    void testShouldNotBeOpaque();
     void testShouldSwitchToLogin();
 };
 

@@ -95,6 +95,16 @@ void OverlayWidgetTest::testShouldNotBeFullscreen() {
     QVERIFY ( this->overlayWidget->height() == this->widgetSize.height() );
 }
 
+void OverlayWidgetTest::testShouldBeOpaque() {
+    this->overlayWidget->getUi()->actionMakeTransparent->trigger();
+    QVERIFY ( this->overlayWidget->windowOpacity() < 1.0 );
+}
+
+void OverlayWidgetTest::testShouldNotBeOpaque() {
+    this->overlayWidget->getUi()->actionMakeTransparent->trigger();
+    QVERIFY ( this->overlayWidget->windowOpacity() == 1.0 );
+}
+
 void OverlayWidgetTest::testShouldSwitchToLogin() {
     this->overlayWidget->getUi()->actionChangeSession->trigger();
     QVERIFY ( this->overlayWidget->getUi()->loginwidget->isVisible() );
