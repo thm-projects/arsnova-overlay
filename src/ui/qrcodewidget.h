@@ -10,7 +10,7 @@ class QRCodeWidget : public QWidget, Ui::QRCodeWidget {
 
 public:
     explicit QRCodeWidget ( QWidget* parent = 0, Qt::WindowFlags f = 0 );
-    void showUrl ( QUrl url );
+    void setUrl ( QUrl url );
 
 private:
     Ui::QRCodeWidget * _ui;
