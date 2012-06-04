@@ -2,7 +2,7 @@
 #define QRCODEGENERATOR_H
 
 #include <QtGui>
-#include <qrencode.h>
+#include "../extern/libqrencode/qrencode.h"
 
 class QRCodeGenerator {
 

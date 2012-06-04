@@ -35,6 +35,10 @@ if(APPLE)
   set(CMAKE_EXE_LINKER_FLAGS "-framework Foundation -w")
 endif(APPLE)
 
+if (APPLE OR WIN32)
+  add_subdirectory(extern)
+endif(APPLE OR WIN32)
+
 add_subdirectory(src)
 
 if(TESTS)
@@ -92,6 +96,7 @@ IF (WIN32)
     ${CMAKE_CURRENT_BINARY_DIR}/lib/zlib1.dll
     ${CMAKE_CURRENT_BINARY_DIR}/lib/libssl-8.dll
     ${CMAKE_CURRENT_BINARY_DIR}/lib/libcrypto-8.dll
+    ${CMAKE_CURRENT_BINARY_DIR}/libs/libqrencode.dll
   )
   INSTALL(FILES ${WINQTFILES}
     DESTINATION .
