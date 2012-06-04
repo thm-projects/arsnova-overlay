@@ -17,12 +17,14 @@ set(arsnovawidget_SRCS
   ../src/qplugin/sessioninformationwidget.cpp
   qplugin/sessioninformationwidgettest.cpp
   ../src/ui/overlaywidget.cpp
+  ../src/ui/qrcodewidget.cpp
   ui/overlaywidgettest.cpp
   ../src/updatetimer.cpp
   ../src/httpconnection.cpp
   stubconnection.cpp
   ../src/sessionresponse.cpp
   ../src/loggedinresponse.cpp
+  ../src/qrcodegenerator.cpp
   main.cpp
 )
 
@@ -53,6 +55,7 @@ set(arsnovawidget_MOC_SRCS
   ../src/qplugin/sessioninformationwidget.h
   qplugin/sessioninformationwidgettest.h
   ../src/ui/overlaywidget.h
+  ../src/ui/qrcodewidget.h
   ui/overlaywidgettest.h
   ../src/updatetimer.h
   ../src/abstractconnection.h
@@ -60,6 +63,7 @@ set(arsnovawidget_MOC_SRCS
   stubconnection.h
   ../src/sessionresponse.h
   ../src/loggedinresponse.h
+  ../src/qrcodegenerator.h
 )
 
 set(arsnovawidget_UIS
@@ -95,6 +99,7 @@ target_link_libraries(tests
   ${QT_QTSVG_LIBRARY}
   ${QT_QTTEST_LIBRARY}
   ${QT_QTTESTGUI_LIBRARY}
+  qrencode
 )
 
 if (TESTS AND COVERAGE)

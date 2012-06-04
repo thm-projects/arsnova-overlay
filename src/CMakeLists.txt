@@ -2,6 +2,7 @@ include_directories(${QT_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR})
 
 set(arsnovawidget_SRCS
   ui/overlaywidget.cpp
+  ui/qrcodewidget.cpp
   updatetimer.cpp
   httpconnection.cpp
   sessionresponse.cpp
@@ -12,6 +13,7 @@ set(arsnovawidget_SRCS
   qplugin/bardiagramwidget.cpp
   qplugin/logodiagramwidget.cpp
   qplugin/sessioninformationwidget.cpp
+  qrcodegenerator.cpp
   main.cpp
 )
 
@@ -46,6 +48,7 @@ endif(APPLE)
 
 set(arsnovawidget_MOC_SRCS
   ui/overlaywidget.h
+  ui/qrcodewidget.h
   updatetimer.h
   abstractconnection.h
   httpconnection.h
@@ -57,6 +60,7 @@ set(arsnovawidget_MOC_SRCS
   qplugin/bardiagramwidget.h
   qplugin/logodiagramwidget.h
   qplugin/sessioninformationwidget.h
+  qrcodegenerator.h
 )
 
 set(arsnovawidgetplugin_MOC_SRCS
@@ -73,6 +77,7 @@ set(arsnovawidgetplugin_MOC_SRCS
 
 set(arsnovawidget_UIS
   ui/overlaywidget.ui
+  ui/qrcodewidget.ui
 )
 
 set(arsnovawidgetplugin_UIS
@@ -130,6 +135,7 @@ target_link_libraries(arsnovawidget
   ${QT_QTNETWORK_LIBRARY}
   ${QT_QTSCRIPT_LIBRARY}
   ${QT_QTSVG_LIBRARY}
+  qrencode
 )
 
 if(QTPLUGIN)

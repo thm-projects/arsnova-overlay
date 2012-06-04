@@ -4,14 +4,14 @@
 #include <QtGui>
 #include <QtNetwork>
 #include <QtScript>
-#include "ui_overlaywidget.h"
 
+#include "ui_overlaywidget.h"
 #include "../updatetimer.h"
 #include "abstractconnection.h"
-
 #include "sessionresponse.h"
 #include "understandingresponse.h"
 #include "svglogo.h"
+#include "qrcodewidget.h"
 
 class OverlayWidget : public QWidget, Ui::OverlayWidget {
     Q_OBJECT
@@ -43,6 +43,7 @@ private:
 
     void setVisibleViewType ( VisibileViewType type );
     void connectSignals();
+    void showQRCode ( QString url );
 
 private slots:
     void sessionLogin();
