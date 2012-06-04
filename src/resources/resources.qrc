@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="images">
+    <file>images/qrcode.png</file>
     <file>images/view-colored-logo.png</file>
     <file>images/view-statistics.png</file>
     <file>images/application-exit.png</file>

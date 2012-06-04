@@ -52,7 +52,7 @@
      <property name="minimumSize">
       <size>
        <width>0</width>
-       <height>22</height>
+       <height>0</height>
       </size>
      </property>
      <property name="maximumSize">
@@ -67,10 +67,17 @@
      <property name="styleSheet">
       <string notr="true">background: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(240, 240, 240, 255), stop:1 rgba(160, 160, 160, 255));</string>
      </property>
+     <property name="iconSize">
+      <size>
+       <width>20</width>
+       <height>20</height>
+      </size>
+     </property>
      <addaction name="actionChangeSession"/>
      <addaction name="actionMakeTransparent"/>
      <addaction name="actionFullscreen"/>
      <addaction name="actionSwitchView"/>
+     <addaction name="actionShowQRCode"/>
      <addaction name="actionExit"/>
     </widget>
    </item>
@@ -167,6 +174,24 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+V</string>
+   </property>
+  </action>
+  <action name="actionShowQRCode">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../resources/resources.qrc">
+     <normaloff>:/images/images/qrcode.png</normaloff>:/images/images/qrcode.png</iconset>
+   </property>
+   <property name="text">
+    <string>ShowQRCode</string>
+   </property>
+   <property name="toolTip">
+    <string>ShowQRCode</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Alt+Q</string>
    </property>
   </action>
  </widget>

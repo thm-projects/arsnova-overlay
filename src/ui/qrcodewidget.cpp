@@ -3,13 +3,7 @@
 QRCodeWidget::QRCodeWidget ( QWidget* parent, Qt::WindowFlags f )
     : QWidget ( parent, f ), _ui ( new Ui::QRCodeWidget() ) {
     _ui->setupUi ( this );
-}
 
-void QRCodeWidget::showUrl ( QUrl url ) {
-    QRCodeGenerator qrgen ( url.toString() );
-    QPixmap pixmap = QPixmap::fromImage ( qrgen.generate().scaled ( this->neededQRCodeSize() ) );
-    _ui->qrCodeLabel->setPixmap ( pixmap );
-    _ui->urlLabel->setText ( url.toString() );
     this->adjustSize();
     this->setWindowFlags (
         Qt::Window
@@ -17,13 +11,22 @@ void QRCodeWidget::showUrl ( QUrl url ) {
         | Qt::WindowStaysOnTopHint
         | Qt::X11BypassWindowManagerHint
     );
-    
-    
-    this->show();
+}
+
+void QRCodeWidget::showUrl ( QUrl url ) {
+    QRCodeGenerator qrgen ( url.toString() );
+    QPixmap pixmap = QPixmap::fromImage ( qrgen.generate().scaled ( this->neededQRCodeSize() ) );
+    _ui->qrCodeLabel->setPixmap ( pixmap );
+    _ui->urlLabel->setText ( url.toString() );
+
+    QRect frect = frameGeometry();
+    frect.moveCenter ( QApplication::desktop()->availableGeometry().center() );
+    move ( frect.topLeft() );
 }
 
 void QRCodeWidget::adjustSize() {
     QSize qrCodeSize = this->neededQRCodeSize();
+    _ui->qrCodeLabel->resize ( qrCodeSize );
     _ui->urlLabel->setStyleSheet ( "font-size: 32px;" );
     this->setStyleSheet ( "background-color: white; padding: 48px;" );
 }

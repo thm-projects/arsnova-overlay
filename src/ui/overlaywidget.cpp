@@ -9,9 +9,9 @@ const int OverlayWidget::httpUpdateInterval = 10;
 OverlayWidget::OverlayWidget ( AbstractConnection * connection, QWidget * parent, Qt::WindowFlags f )
     : QWidget ( parent, f ) , ui ( new Ui::OverlayWidget() ), connection ( connection ) {
     ui->setupUi ( this );
+    qrcodewidget = new QRCodeWidget ();
     this->updateTimer = new UpdateTimer();
     this->connectSignals();
-    //ui->progressBar->setMaximum ( OverlayWidget::httpUpdateInterval );
     this->setMouseTracking ( true );
     this->moveToBottomRightEdge();
     this->setVisibleViewType ( LOGIN_VIEW );
@@ -30,11 +30,17 @@ void OverlayWidget::connectSignals() {
     connect ( ui->actionFullscreen, SIGNAL ( triggered ( bool ) ), this, SLOT ( makeFullscreen ( bool ) ) );
     connect ( ui->actionSwitchView, SIGNAL ( triggered ( bool ) ), this, SLOT ( switchView ( bool ) ) );
     connect ( ui->actionExit, SIGNAL ( triggered ( bool ) ), this, SLOT ( close() ) );
+    connect ( ui->actionShowQRCode, SIGNAL ( triggered ( bool ) ), this, SLOT ( showQRCode ( bool ) ) );
 }
 
 OverlayWidget::~OverlayWidget() {
     delete this->connection;
     delete this->updateTimer;
+}
+
+bool OverlayWidget::close() {
+    this->qrcodewidget->hide();
+    QWidget::close();
 }
 
 const Ui::OverlayWidget*const OverlayWidget::getUi() {
@@ -132,7 +138,6 @@ void OverlayWidget::updateHttpResponse ( int ticks ) {
 
 void OverlayWidget::sessionLogin() {
     this->connection->requestSession ( ui->loginwidget->text() );
-    this->showQRCode ( QString ( "https://ars.thm.de/#id/" ) + ui->loginwidget->text() );
     this->moveToBottomRightEdge();
 }
 
@@ -182,7 +187,15 @@ void OverlayWidget::switchView ( bool coloredLogoView ) {
     this->setVisibleViewType ( BAR_VIEW );
 }
 
-void OverlayWidget::showQRCode ( QString url ) {
-    QRCodeWidget * qrcodewidget = new QRCodeWidget();
-    qrcodewidget->showUrl ( QUrl ( url ) );
+void OverlayWidget::showQRCode ( bool enabled ) {
+    QUrl url ( QString ( "https://ars.thm.de/#id/" ) + ui->loginwidget->text() );
+    qDebug() << this->qrcodewidget->size();
+    if ( enabled ) {
+        this->qrcodewidget->showUrl ( url );
+        this->qrcodewidget->show();
+        return;
+    }
+
+    this->qrcodewidget->hide();
 }
+
