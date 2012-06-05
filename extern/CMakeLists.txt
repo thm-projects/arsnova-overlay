@@ -23,11 +23,11 @@ set_source_files_properties(
 )
 
 if (APPLE)
-  add_library(qrencode SHARED
+  add_library(qrencode STATIC
     ${qrencode_SRCS}
   )
 else (APPLE)
-  add_library(qrencode STATIC
+  add_library(qrencode SHARED
     ${qrencode_SRCS}
   )
 endif (APPLE)
