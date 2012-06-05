@@ -8,6 +8,7 @@
 #include "qplugin/logodiagramwidgettest.h"
 #include "qplugin/sessioninformationwidgettest.h"
 #include "ui/overlaywidgettest.h"
+#include "ui/qrcodewidgettest.h"
 
 int main ( int argc, char ** argv ) {
     QApplication app ( argc, argv );
@@ -30,6 +31,9 @@ int main ( int argc, char ** argv ) {
     } else if ( QString ( argv[argc-1] ) == "SessionInformationWidgetTest" ) {
         SessionInformationWidgetTest sessionInformationWidgetTest;
         return QTest::qExec ( &sessionInformationWidgetTest, argc-1, argv );
+    } else if ( QString ( argv[argc-1] ) == "QRCodeWidgetTest" ) {
+        QRCodeWidgetTest qrCodeWidgetTest;
+        return QTest::qExec ( &qrCodeWidgetTest, argc-1, argv );
     } else {
         qDebug() << "Not a valid test case selected. Add test case name as last parameter. (e.g.: tests -xunitxml SvgLogoTest)";
     }

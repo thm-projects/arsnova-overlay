@@ -16,6 +16,8 @@ public:
 
 private:
     OverlayWidget * overlayWidget;
+    QRCodeWidget * qrCodeWidget;
+
     QSize widgetSize;
     void enterSessionId ( QLineEdit * lineEdit );
 
@@ -30,6 +32,8 @@ private slots:
     void testShouldDisplayCorrectCountString();
     void testShouldSwitchToLogoDiagram();
     void testShouldSwitchToBarDiagram();
+    void testShouldShowQRCodeWidget();
+    void testShouldNotShowQRCodeWidget();
     void testShouldBeFullscreen();
     void testShouldNotBeFullscreen();
     void testShouldBeOpaque();
@@ -38,3 +42,4 @@ private slots:
 };
 
 #endif // OVERLAYWIDGETTEST_H
+

@@ -17,8 +17,9 @@ set(arsnovawidget_SRCS
   ../src/qplugin/sessioninformationwidget.cpp
   qplugin/sessioninformationwidgettest.cpp
   ../src/ui/overlaywidget.cpp
-  ../src/ui/qrcodewidget.cpp
   ui/overlaywidgettest.cpp
+  ../src/ui/qrcodewidget.cpp
+  ui/qrcodewidgettest.cpp
   ../src/updatetimer.cpp
   ../src/httpconnection.cpp
   stubconnection.cpp
@@ -55,8 +56,9 @@ set(arsnovawidget_MOC_SRCS
   ../src/qplugin/sessioninformationwidget.h
   qplugin/sessioninformationwidgettest.h
   ../src/ui/overlaywidget.h
-  ../src/ui/qrcodewidget.h
   ui/overlaywidgettest.h
+  ../src/ui/qrcodewidget.h
+  ui/qrcodewidgettest.h
   ../src/updatetimer.h
   ../src/abstractconnection.h
   ../src/httpconnection.h
@@ -110,6 +112,7 @@ add_custom_command(TARGET coverage POST_BUILD
   COMMAND ${LCOV_TOOL} --directory ${CMAKE_CURRENT_BINARY_DIR}/ --capture --output-file coverage.info
   COMMAND ${LCOV_TOOL} --remove coverage.info .cxx -o coverage.info
   COMMAND ${LCOV_TOOL} --remove coverage.info *include* -o coverage.info
+  COMMAND ${LCOV_TOOL} --remove coverage.info *extern* -o coverage.info
 
   COMMAND ${LCOV_HTML} coverage.info --no-branch-coverage -o ${CMAKE_CURRENT_BINARY_DIR}/../coverage
 
@@ -123,3 +126,4 @@ add_test(BarDiagramWidgetTest ${EXECUTABLE_OUTPUT_PATH}/tests BarDiagramWidgetTe
 add_test(LogoDiagramWidgetTest ${EXECUTABLE_OUTPUT_PATH}/tests LogoDiagramWidgetTest)
 add_test(OverlayWidgetTest ${EXECUTABLE_OUTPUT_PATH}/tests OverlayWidgetTest)
 add_test(SessionInformationWidgetTest ${EXECUTABLE_OUTPUT_PATH}/tests SessionInformationWidgetTest)
+add_test(QRCodeWidgetTest ${EXECUTABLE_OUTPUT_PATH}/tests QRCodeWidgetTest)

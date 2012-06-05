@@ -43,9 +43,6 @@ QSize QRCodeWidget::neededQRCodeSize() {
     return QSize ( edgeSize * .75, edgeSize * .75 );
 }
 
-
-
-
-
-
-
+const Ui::QRCodeWidget*const QRCodeWidget::getUi() {
+    return this->_ui;
+}

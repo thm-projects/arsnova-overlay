@@ -86,6 +86,32 @@ void OverlayWidgetTest::testShouldSwitchToBarDiagram() {
     QVERIFY ( ! this->overlayWidget->getUi()->logodiagramwidget->isVisible() );
 }
 
+void OverlayWidgetTest::testShouldShowQRCodeWidget() {
+    this->overlayWidget->getUi()->actionShowQRCode->trigger();
+    this->qrCodeWidget = ( QRCodeWidget * ) QApplication::widgetAt (
+                             QApplication::desktop()->screenGeometry().width() / 2,
+                             QApplication::desktop()->screenGeometry().height() / 2
+                         )->parentWidget();
+
+    if ( this->qrCodeWidget == nullptr ) QFAIL ( "Test failed: No Widget found" );
+
+    const QMetaObject * metaObject = this->qrCodeWidget->metaObject();
+    QVERIFY (
+        metaObject->property ( metaObject->indexOfProperty ( "objectName" ) ).read ( this->qrCodeWidget ) == "QRCodeWidget"
+    );
+    QVERIFY (
+        qrCodeWidget->isVisible()
+    );
+}
+
+void OverlayWidgetTest::testShouldNotShowQRCodeWidget() {
+    if ( this->qrCodeWidget == nullptr ) QFAIL ( "Test failed: No Widget found" );
+    this->overlayWidget->getUi()->actionShowQRCode->trigger();
+    QVERIFY (
+        ! qrCodeWidget->isVisible()
+    );
+}
+
 void OverlayWidgetTest::testShouldBeFullscreen() {
     this->overlayWidget->getUi()->actionFullscreen->trigger();
     int width = QApplication::desktop()->screenGeometry().width();

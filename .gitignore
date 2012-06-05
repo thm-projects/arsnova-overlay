@@ -1,6 +1,8 @@
 *~
 *.o
 *.obj
+*.so
+*.dll
 *.exe
 *.dmg
 *.cmake
@@ -15,4 +17,5 @@ CMakeCache*
 *CPack*
 Makefile
 *bin/*
-*coverage/*
+*coverage*
+Testing*
