@@ -11,6 +11,8 @@ QRCodeGenerator::~QRCodeGenerator() {
 QImage QRCodeGenerator::generate ( ) {
     QSize imageSize = QSize ( this->qrcode->width, this->qrcode->width );
     QImage image ( imageSize, QImage::Format_Mono );
+    image.setColor ( 0, qRgb ( 0, 0, 0 ) );
+    image.setColor ( 1, qRgb ( 255, 255, 255 ) );
 
     int index = 0;
     for ( int y = 0; y <= this->qrcode->width - 1; y++ ) {

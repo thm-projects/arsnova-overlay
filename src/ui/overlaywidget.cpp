@@ -40,7 +40,7 @@ OverlayWidget::~OverlayWidget() {
 
 bool OverlayWidget::close() {
     this->qrcodewidget->hide();
-    QWidget::close();
+    return QWidget::close();
 }
 
 const Ui::OverlayWidget*const OverlayWidget::getUi() {
