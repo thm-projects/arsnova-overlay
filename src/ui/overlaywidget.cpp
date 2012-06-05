@@ -188,7 +188,7 @@ void OverlayWidget::switchView ( bool coloredLogoView ) {
 }
 
 void OverlayWidget::showQRCode ( bool enabled ) {
-    QUrl url ( QString ( "https://ars.thm.de/#id/" ) + ui->loginwidget->text() );
+    QUrl url ( QString ( "https://ars.thm.de/id/" ) + ui->loginwidget->text() );
     this->qrcodewidget->setUrl ( url );
     if ( enabled ) {
         this->qrcodewidget->show();
@@ -197,4 +197,3 @@ void OverlayWidget::showQRCode ( bool enabled ) {
 
     this->qrcodewidget->hide();
 }
-

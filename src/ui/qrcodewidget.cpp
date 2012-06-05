@@ -4,9 +4,10 @@ QRCodeWidget::QRCodeWidget ( QWidget* parent, Qt::WindowFlags f )
     : QWidget ( parent, f ), _ui ( new Ui::QRCodeWidget() ) {
     _ui->setupUi ( this );
 
+    // Rezize widget with 48px padding on each side
     this->resize (
-        QApplication::desktop()->screenGeometry().width() / 2,
-        QApplication::desktop()->screenGeometry().height() / 2
+        QApplication::desktop()->screenGeometry().width() - 96,
+        QApplication::desktop()->screenGeometry().height() - 96
     );
 
     this->adjustSize();
@@ -31,7 +32,7 @@ void QRCodeWidget::setUrl ( QUrl url ) {
 
 void QRCodeWidget::adjustSize() {
     _ui->qrCodeLabel->resize ( this->neededQRCodeSize() );
-    _ui->urlLabel->setStyleSheet ( "font-size: 32px;" );
+    _ui->urlLabel->setStyleSheet ( "font-size: " + this->neededFontSize() );
     this->setStyleSheet ( "background-color: white;" );
 }
 
@@ -41,6 +42,13 @@ QSize QRCodeWidget::neededQRCodeSize() {
                    : this->size().width();
 
     return QSize ( edgeSize * .75, edgeSize * .75 );
+}
+
+QString QRCodeWidget::neededFontSize() {
+    int edgeSize = this->neededQRCodeSize().height();
+    // Aspect ratio QRCode - FontSize
+    int fontSize = edgeSize / 14;
+    return QString::number ( fontSize, 10 ) + "px";
 }
 
 const Ui::QRCodeWidget*const QRCodeWidget::getUi() {

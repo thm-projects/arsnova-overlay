@@ -17,6 +17,7 @@ private:
     Ui::QRCodeWidget * _ui;
     void adjustSize();
     QSize neededQRCodeSize();
+    QString neededFontSize();
 };
 
 #endif // QRCODEWIDGET_H
