@@ -22,6 +22,12 @@ set_source_files_properties(
   ${qrencode_SRCS} PROPERTIES LANGUAGE C
 )
 
-add_library(qrencode SHARED
-  ${qrencode_SRCS}
-)
+if (APPLE)
+  add_library(qrencode SHARED
+    ${qrencode_SRCS}
+  )
+else (APPLE)
+  add_library(qrencode STATIC
+    ${qrencode_SRCS}
+  )
+endif (APPLE)
