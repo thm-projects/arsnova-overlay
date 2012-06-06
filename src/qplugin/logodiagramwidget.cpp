@@ -5,6 +5,7 @@ LogoDiagramWidget::LogoDiagramWidget ( QWidget * parent, Qt::WindowFlags f )
     ui->setupUi ( this );
 
     this->svgLogo = new SvgLogo();
+    this->updateFromResponse ( UnderstandingResponse ( 0,0,0,0 ) );
 }
 
 LogoDiagramWidget::~LogoDiagramWidget() {
