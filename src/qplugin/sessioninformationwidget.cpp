@@ -23,10 +23,5 @@ void SessionInformationWidget::updateProgressBar ( int value, int max ) {
 }
 
 void SessionInformationWidget::updateSessionLabel ( QString sessionName, QString sessionID ) {
-    _ui->sessionNameLabel->setText (
-        sessionName
-        + "\n("
-        + sessionID
-        + ")"
-    );
+    _ui->sessionNameLabel->setText ( sessionID );
 }

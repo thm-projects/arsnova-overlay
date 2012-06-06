@@ -22,9 +22,9 @@ void SessionInformationWidgetTest::testShouldDisplayCorrectProgressBar() {
 }
 
 void SessionInformationWidgetTest::testShouldDisplayCorrectSessionName() {
-    this->sessionInformationWidget->updateSessionLabel ( "Test","12345678" );
+    this->sessionInformationWidget->updateSessionLabel ( "Test", "12345678" );
     QVERIFY (
-        this->sessionInformationWidget->getUi()->sessionNameLabel->text() == "Test\n(12345678)"
+        this->sessionInformationWidget->getUi()->sessionNameLabel->text() == "12345678"
     );
 }
 
