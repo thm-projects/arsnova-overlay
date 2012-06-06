@@ -15,3 +15,9 @@ void LogoDiagramWidgetTest::testShouldShowLogoDiagramWidget() {
     QVERIFY ( this->logoDiagramWidget->isVisible() );
     QVERIFY ( this->logoDiagramWidget->getUi()->logoWidget->isVisible() );
 }
+
+void LogoDiagramWidgetTest::testShouldScaleSvgWidget() {
+    QSize size = this->logoDiagramWidget->getUi()->logoWidget->size();
+    QVERIFY ( size.height() == size.width() );
+    QVERIFY ( this->logoDiagramWidget->size().height() == size.width() );
+}

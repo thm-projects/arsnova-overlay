@@ -19,8 +19,9 @@ private:
 private slots:
     void initTestCase();
     void cleanupTestCase();
-    
+
     void testShouldShowLogoDiagramWidget();
+    void testShouldScaleSvgWidget();
 };
 
 #endif // LOGODIAGRAMWIDGETTEST_H

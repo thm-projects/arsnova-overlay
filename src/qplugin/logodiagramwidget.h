@@ -13,11 +13,13 @@ public:
     explicit LogoDiagramWidget ( QWidget* parent = 0, Qt::WindowFlags f = 0 );
     virtual ~LogoDiagramWidget();
     const Ui::LogoDiagramWidget * const getUi();
-    void updateFromResponse(UnderstandingResponse response);
-    
+    void updateFromResponse ( UnderstandingResponse response );
+
 private:
     Ui::LogoDiagramWidget * ui;
     SvgLogo * svgLogo;
+
+    void resizeEvent ( QResizeEvent * event );
 };
 
 #endif // LOGODIAGRAMWIDGET_H
