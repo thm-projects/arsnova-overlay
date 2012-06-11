@@ -3,12 +3,27 @@ cmake_minimum_required(VERSION 2.6)
 find_package(Qt4 REQUIRED)
 
 set(VERSION_MAJOR 0)
-set(VERSION_MINOR 1)
-set(VERSION_RELEASE 20120606)
+set(VERSION_MINOR 2)
+set(VERSION_PATCH dev)
 
 if (BUILD_NUMBER)
-  set(VERSION_RELEASE "${VERSION_RELEASE}-${BUILD_NUMBER}")
+  set(VERSION_PATCH "${VERSION_PATCH}_${BUILD_NUMBER}")
+else(BUILD_NUMBER)
+  find_program(GIT_EXECUTABLE "git")
+  if(GIT_EXECUTABLE)
+    execute_process(
+      COMMAND ${GIT_EXECUTABLE} rev-parse --verify -q --short=5 HEAD
+      OUTPUT_VARIABLE head
+      OUTPUT_STRIP_TRAILING_WHITESPACE
+      WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+    )
+    set(VERSION_PATCH "${VERSION_PATCH}_g${head}")
+  endif()
 endif()
+
+option (TESTS "Enable build of tests" OFF)
+option (COVERAGE "Enable coverage" OFF)
+option (QTPLUGIN "Enable build of Qt plugin" OFF)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR}/bin)
@@ -111,7 +126,7 @@ SET(CPACK_PACKAGE_VENDOR "Paul-Christian Volkmer <paul-christian.volkmer@mni.thm
 SET(CPACK_PACKAGE_CONTACT "Paul-Christian Volkmer <paul-christian.volkmer@mni.thm.de>")
 SET(CPACK_PACKAGE_VERSION_MAJOR ${VERSION_MAJOR})
 SET(CPACK_PACKAGE_VERSION_MINOR ${VERSION_MINOR})
-SET(CPACK_PACKAGE_VERSION_PATCH ${VERSION_RELEASE})
+SET(CPACK_PACKAGE_VERSION_PATCH ${VERSION_PATCH})
 
 IF (UNIX AND NOT APPLE)
   SET(CPACK_GENERATOR  "RPM")
