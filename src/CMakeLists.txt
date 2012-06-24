@@ -14,6 +14,7 @@ set(arsnovawidget_SRCS
   qplugin/logodiagramwidget.cpp
   qplugin/sessioninformationwidget.cpp
   qrcodegenerator.cpp
+  interposedquestion.cpp
   main.cpp
 )
 
@@ -61,6 +62,7 @@ set(arsnovawidget_MOC_SRCS
   qplugin/logodiagramwidget.h
   qplugin/sessioninformationwidget.h
   qrcodegenerator.h
+  interposedquestion.h
 )
 
 set(arsnovawidgetplugin_MOC_SRCS

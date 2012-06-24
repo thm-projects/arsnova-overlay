@@ -17,6 +17,8 @@ public:
     void requestUnderstanding();
     void requestSession ( QString sessionKey );
     void requestLoggedIn();
+    void requestInterposedQuestions();
+    void requestInterposedQuestion ( QString docID );
 
 private:
     QNetworkAccessManager * networkAccessManager;

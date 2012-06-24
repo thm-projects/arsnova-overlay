@@ -45,6 +45,27 @@ void HttpConnection::requestUnderstanding() {
     );
 }
 
+void HttpConnection::requestInterposedQuestions() {
+    this->networkAccessManager->get (
+        QNetworkRequest (
+            QUrl (
+                "https://ars.thm.de/couchdb/arsnova/_design/interposed_question/_view/by_session?key=\""
+                + this->sessionId + "\""
+            )
+        )
+    );
+}
+
+void HttpConnection::requestInterposedQuestion ( QString docID ) {
+    this->networkAccessManager->get (
+        QNetworkRequest (
+            QUrl (
+                "https://ars.thm.de/couchdb/arsnova/" + docID
+            )
+        )
+    );
+}
+
 void HttpConnection::handleReply ( QNetworkReply * reply ) {
     QByteArray response = reply->readAll();
 
@@ -61,7 +82,10 @@ void HttpConnection::handleReply ( QNetworkReply * reply ) {
         QString sessionKey = responseValue->property ( "rows" ).property ( 0 ).property ( "key" ).toString();
         QString shortName = responseValue->property ( "rows" ).property ( 0 ).property ( "value" ).property ( "shortName" ).toString();
         emit this->requestFinished ( SessionResponse ( sessionKey, shortName ) );
-    } else if ( reply->url().path().contains ( "by_session" ) ) {
+    } else if (
+        reply->url().path().contains ( "by_session" )
+        && reply->url().path().contains ( "understanding" )
+    ) {
         int values[4] = {0,0,0,0};
 
         for ( int i = 0; i <= 3; i++ ) {
@@ -76,7 +100,18 @@ void HttpConnection::handleReply ( QNetworkReply * reply ) {
     } else if ( reply->url().path().contains ( "logged_in" ) ) {
         int value = responseValue->property ( "rows" ).property ( 0 ).property ( "value" ).toInteger();
         emit this->requestFinished ( LoggedInResponse ( value ) );
+    } else if (
+        reply->url().path().contains ( "by_session" )
+        && reply->url().path().contains ( "interposed_question" )
+    ) {
+        QVariant interposedQuestions = responseValue->property ( "rows" ).toVariant();
+        // TODO Transform into array of objects
+    } else {
+        // Single Document - check 'type' property
+        QVariant responseDocument = responseValue->toVariant();
+        if ( responseValue->property ( "type" ).equals("interposed_question") ) {
+            // Interposed Question
+        }
     }
-
     reply->deleteLater();
 }

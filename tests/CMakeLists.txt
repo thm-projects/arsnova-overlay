@@ -26,6 +26,7 @@ set(arsnovawidget_SRCS
   ../src/sessionresponse.cpp
   ../src/loggedinresponse.cpp
   ../src/qrcodegenerator.cpp
+  ../src/interposedquestion.cpp
   main.cpp
 )
 
@@ -66,6 +67,7 @@ set(arsnovawidget_MOC_SRCS
   ../src/sessionresponse.h
   ../src/loggedinresponse.h
   ../src/qrcodegenerator.h
+  ../src/interposedquestion.h
 )
 
 set(arsnovawidget_UIS
