@@ -9,8 +9,8 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="210mm"
-   height="297mm"
+   width="640"
+   height="250"
    id="svg2"
    version="1.1"
    inkscape:version="0.48.2 r9819"
@@ -25,7 +25,8 @@
        clipPathUnits="userSpaceOnUse">
       <path
          id="path3022"
-         d="M 0,1459.77 0,0 l 4387.92,0 0,1459.77 -4387.92,0 z" />
+         d="M 0,1459.77 0,0 l 4387.92,0 0,1459.77 -4387.92,0 z"
+         inkscape:connector-curvature="0" />
     </clipPath>
   </defs>
   <sodipodi:namedview
@@ -36,8 +37,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.4"
-     inkscape:cx="221.42857"
-     inkscape:cy="777.14286"
+     inkscape:cx="136.42857"
+     inkscape:cy="234.28572"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -54,17 +55,18 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <g
      inkscape:label="Ebene 1"
      inkscape:groupmode="layer"
-     id="layer1">
+     id="layer1"
+     transform="translate(0,-802.36218)">
     <g
        id="g3016"
-       transform="matrix(0.125,0,0,-0.125,117.18357,300.74069)">
+       transform="matrix(0.125,0,0,-0.125,45.755,1018.5978)">
       <g
          clip-path="url(#clipPath3020)"
          id="g3018">
