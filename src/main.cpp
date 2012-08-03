@@ -2,9 +2,11 @@
 #include <QtGui>
 
 #include "ui/overlaywidget.h"
+#include "ui/mainwindow.h"
 #include "svglogo.h"
 #include "understandingresponse.h"
 #include "httpconnection.h"
+#include "ui/splashscreen.h"
 
 #ifdef __APPLE__
 extern "C" int startApplication ( int argc, char ** argv );
@@ -19,6 +21,12 @@ int main ( int argc, char** argv ) {
     QApplication app ( argc, argv );
     app.setStyle ( "plastique" );
 
+    SplashScreen::instance()->showMessage("Starting ARSnovawidget");
+    SplashScreen::instance()->show();
+    
+    MainWindow mainWindow;
+    mainWindow.show();
+    
     OverlayWidget widget ( new HttpConnection() );
     widget.show();
 

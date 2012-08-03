@@ -8,6 +8,7 @@
 *.cmake
 *.kdev4
 *.cxx*
+*.log
 *ui_*
 build/*
 CMakeFiles*

@@ -1,8 +1,10 @@
 include_directories(${QT_INCLUDES} ${CMAKE_CURRENT_BINARY_DIR})
 
 set(arsnovawidget_SRCS
+  ui/mainwindow.cpp
   ui/overlaywidget.cpp
   ui/qrcodewidget.cpp
+  ui/splashscreen.cpp
   updatetimer.cpp
   httpconnection.cpp
   sessionresponse.cpp
@@ -48,8 +50,10 @@ if(APPLE)
 endif(APPLE)
 
 set(arsnovawidget_MOC_SRCS
+  ui/mainwindow.h
   ui/overlaywidget.h
   ui/qrcodewidget.h
+  ui/splashscreen.h
   updatetimer.h
   abstractconnection.h
   httpconnection.h
@@ -78,6 +82,7 @@ set(arsnovawidgetplugin_MOC_SRCS
 )
 
 set(arsnovawidget_UIS
+  ui/mainwindow.ui
   ui/overlaywidget.ui
   ui/qrcodewidget.ui
 )

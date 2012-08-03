@@ -12,6 +12,7 @@
     <file>images/view-fullscreen.png</file>
     <file>images/view-restore.png</file>
     <file>images/background.png</file>
+    <file>images/splash.png</file>
     <file>arsnova.svg</file>
   </qresource>
 </RCC>

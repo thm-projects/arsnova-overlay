@@ -11,23 +11,27 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>ARSnovawidget</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../resources/resources.qrc">
+    <normaloff>:/images/images/view-colored-logo.png</normaloff>:/images/images/view-colored-logo.png</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">QPushButton {
 	border-top: 1px solid #555;
-	border-bottom: 1px solid #555;
-	border-left: 1px solid #555;
+	border-bottom: 1px solid #000;
 	padding: 8px;
-	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(200, 200, 200, 255), stop:1 rgba(0, 0, 0, 255));
-	font-weight: bold;
-	font-size: 14px;
+	background-color: #333;
 	text-align: left;
-	color: white;
+	color: #eee;
 }
 
 QPushButton:pressed {
-	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(255, 255, 255, 255), stop:1 rgba(0, 0, 0, 255));
+	background-color: #111;
+	border-right: 3px solid #80ba24;
+	color: #fff;
+	font-weight: bold;
 }</string>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -52,7 +56,7 @@ QPushButton:pressed {
       <item>
        <layout class="QVBoxLayout" name="verticalLayout">
         <property name="spacing">
-         <number>1</number>
+         <number>0</number>
         </property>
         <item>
          <widget class="QPushButton" name="pushButton">
