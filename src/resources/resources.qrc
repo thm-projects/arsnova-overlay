@@ -1,6 +1,8 @@
 <RCC>
   <qresource prefix="images">
+    <file>images/thm-logo.png</file>
     <file>images/qrcode.png</file>
+    <file>THM.svg</file>
     <file>images/view-colored-logo.png</file>
     <file>images/view-statistics.png</file>
     <file>images/application-exit.png</file>
