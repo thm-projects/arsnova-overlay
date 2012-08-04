@@ -5,6 +5,7 @@
 
 #include "ui_mainwindow.h"
 #include "ui/splashscreen.h"
+#include "qplugin/loginwidget.h"
 
 class MainWindow : public QMainWindow, Ui::MainWindow {
     Q_OBJECT
@@ -16,6 +17,13 @@ public:
 
 private:
     Ui::MainWindow * ui;
+
+    void uncheckLeftMenuButtons();
+
+private slots:
+    void on_loginButton_clicked ();
+    void on_sessionsButton_clicked ();
+    void on_settingsButton_clicked ();
 
 };
 
