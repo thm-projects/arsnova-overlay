@@ -14,17 +14,17 @@ public:
     explicit MainWindow ( QWidget * parent = 0, Qt::WindowFlags f = 0 );
     virtual ~MainWindow();
     const Ui::MainWindow * const getUi();
+    void addWidget ( QString title, QWidget * widget );
 
 private:
     Ui::MainWindow * ui;
+    QSignalMapper * menuSignalMapper;
+    QList< QPair<QString, QWidget *> > * widgetList;
 
-    void uncheckLeftMenuButtons();
+    void checkLeftMenuButton(QString title);
 
 private slots:
-    void on_loginButton_clicked ();
-    void on_sessionsButton_clicked ();
-    void on_settingsButton_clicked ();
-
+    void activateWidget ( QString widgetTitle );
 };
 
 #endif // MAINWINDOW_H

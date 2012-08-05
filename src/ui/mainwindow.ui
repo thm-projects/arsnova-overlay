@@ -70,37 +70,7 @@ QPushButton:checked {
           <number>0</number>
          </property>
          <item>
-          <widget class="QPushButton" name="loginButton">
-           <property name="text">
-            <string>Login</string>
-           </property>
-           <property name="checkable">
-            <bool>true</bool>
-           </property>
-           <property name="checked">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="sessionsButton">
-           <property name="text">
-            <string>Sessions</string>
-           </property>
-           <property name="checkable">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="settingsButton">
-           <property name="text">
-            <string>Settings</string>
-           </property>
-           <property name="checkable">
-            <bool>true</bool>
-           </property>
-          </widget>
+          <layout class="QVBoxLayout" name="buttonVerticalLayout"/>
          </item>
          <item>
           <spacer name="verticalSpacer">
@@ -145,7 +115,7 @@ QPushButton:checked {
        </widget>
       </item>
       <item>
-       <widget class="QWidget" name="widget" native="true">
+       <widget class="QStackedWidget" name="stackedWidget">
         <property name="sizePolicy">
          <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
           <horstretch>0</horstretch>
