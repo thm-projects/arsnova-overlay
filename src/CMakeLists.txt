@@ -5,6 +5,7 @@ set(arsnovawidget_SRCS
   ui/overlaywidget.cpp
   ui/qrcodewidget.cpp
   ui/splashscreen.cpp
+  ui/sessionwidget.cpp
   updatetimer.cpp
   httpconnection.cpp
   sessionresponse.cpp
@@ -54,6 +55,7 @@ set(arsnovawidget_MOC_SRCS
   ui/overlaywidget.h
   ui/qrcodewidget.h
   ui/splashscreen.h
+  ui/sessionwidget.h
   updatetimer.h
   abstractconnection.h
   httpconnection.h
@@ -85,6 +87,7 @@ set(arsnovawidget_UIS
   ui/mainwindow.ui
   ui/overlaywidget.ui
   ui/qrcodewidget.ui
+  ui/sessionwidget.ui
 )
 
 set(arsnovawidgetplugin_UIS

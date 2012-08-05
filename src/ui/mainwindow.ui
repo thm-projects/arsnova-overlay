@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>778</width>
+    <height>442</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -123,8 +123,10 @@ QPushButton:checked {
          </sizepolicy>
         </property>
         <property name="styleSheet">
-         <string notr="true">background: white;
-border: 1px solid black;</string>
+         <string notr="true">background: white;</string>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::Box</enum>
         </property>
        </widget>
       </item>
@@ -137,7 +139,7 @@ border: 1px solid black;</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>778</width>
      <height>18</height>
     </rect>
    </property>

@@ -6,6 +6,8 @@
 #include "ui_mainwindow.h"
 #include "ui/splashscreen.h"
 #include "qplugin/loginwidget.h"
+#include "ui/qrcodewidget.h"
+#include "ui/sessionwidget.h"
 
 class MainWindow : public QMainWindow, Ui::MainWindow {
     Q_OBJECT
@@ -19,7 +21,7 @@ public:
 private:
     Ui::MainWindow * ui;
     QSignalMapper * menuSignalMapper;
-    QList< QPair<QString, QWidget *> > * widgetList;
+    QMap<QString, QWidget *> * widgetList;
 
     void checkLeftMenuButton(QString title);
 
