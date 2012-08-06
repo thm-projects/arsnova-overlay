@@ -9,7 +9,8 @@ const int OverlayWidget::httpUpdateInterval = 10;
 OverlayWidget::OverlayWidget ( AbstractConnection * connection, QWidget * parent, Qt::WindowFlags f )
     : QWidget ( parent, f ) , ui ( new Ui::OverlayWidget() ), connection ( connection ) {
     ui->setupUi ( this );
-    qrcodewidget = new QRCodeWidget ();
+    this->qrcodewidget = new QRCodeWidget ();
+    this->qrcodewidget->setFullscreen ( true );
     this->updateTimer = new UpdateTimer();
     this->connectSignals();
     this->setMouseTracking ( true );

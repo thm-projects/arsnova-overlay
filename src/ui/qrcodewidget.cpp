@@ -3,21 +3,27 @@
 QRCodeWidget::QRCodeWidget ( QWidget* parent, Qt::WindowFlags f )
     : QWidget ( parent, f ), _ui ( new Ui::QRCodeWidget() ) {
     _ui->setupUi ( this );
+    this->setFullscreen ( false );
+}
 
-    // Rezize widget with 48px padding on each side
-    this->resize (
-        QApplication::desktop()->screenGeometry().width() - 96,
-        QApplication::desktop()->screenGeometry().height() - 96
-    );
+void QRCodeWidget::setFullscreen ( bool fullscreen ) {
+    if ( fullscreen ) {
+        // Rezize widget with 48px padding on each side
+        this->resize (
+            QApplication::desktop()->screenGeometry().width() - 96,
+            QApplication::desktop()->screenGeometry().height() - 96
+        );
+
+        this->setWindowFlags (
+            Qt::Window
+            | Qt::FramelessWindowHint
+            | Qt::WindowStaysOnTopHint
+            | Qt::X11BypassWindowManagerHint
+        );
+    }
 
     this->adjustSize();
-    this->setWindowFlags (
-        Qt::Window
-        | Qt::FramelessWindowHint
-        | Qt::WindowStaysOnTopHint
-        | Qt::X11BypassWindowManagerHint
-    );
-
+    
     QRect frect = frameGeometry();
     frect.moveCenter ( QApplication::desktop()->availableGeometry().center() );
     move ( frect.topLeft() );

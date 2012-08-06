@@ -10,10 +10,10 @@ MainWindow::MainWindow ( QWidget * parent, Qt::WindowFlags f ) : QMainWindow ( p
     this->addWidget ( "Sessions", new SessionWidget() );
     this->addWidget ( "Settings", new QWidget() );
 
-    QRCodeWidget * qrwidget = new QRCodeWidget();
-    qrwidget->setUrl(QUrl("https://ars.thm.de/"));
+    QRCodeWidget * qrwidget = new QRCodeWidget ();
+    qrwidget->setUrl ( QUrl ( "https://ars.thm.de/" ) );
     this->addWidget ( "QR-Code", qrwidget );
-    
+
     this->activateWidget ( "Login" );
 }
 
