@@ -5,7 +5,9 @@
 *.dll
 *.exe
 *.dmg
-*.cmake
+CPack*.cmake
+CTest*.cmake
+cmake*.cmake
 *.kdev4
 *.cxx*
 *.log
@@ -20,3 +22,4 @@ Makefile
 *bin/*
 *coverage*
 Testing*
+src/version.h

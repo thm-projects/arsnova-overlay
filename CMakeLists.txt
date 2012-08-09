@@ -29,6 +29,8 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR}/bin)
 set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR}/libs)
 
+CONFIGURE_FILE( version.h.cmake src/version.h )
+
 set(DESKTOP
   src/resources/arsnovawidget.desktop
 )

@@ -5,7 +5,12 @@ MainWindow::MainWindow ( QWidget * parent, Qt::WindowFlags f ) : QMainWindow ( p
     this->menuSignalMapper = new QSignalMapper ( this );
     this->widgetList = new QMap<QString, QWidget *>();
 
-    SplashScreen::instance()->showMessage ( "Running ARSnovawidget developer release" );
+    SplashScreen::instance()->showMessage (
+        QString ( "Running ARSnovawidget " )
+        + " " + VERSION_MAJOR
+        + "." + VERSION_MINOR
+        + "." + VERSION_PATCH
+    );
     this->addWidget ( "Login", new LoginWidget() );
     this->addWidget ( "Sessions", new SessionWidget() );
     this->addWidget ( "Settings", new QWidget() );

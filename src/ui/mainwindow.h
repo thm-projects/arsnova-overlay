@@ -3,6 +3,7 @@
 
 #include <QtGui>
 
+#include "version.h"
 #include "ui_mainwindow.h"
 #include "ui/splashscreen.h"
 #include "qplugin/loginwidget.h"
