@@ -19,6 +19,10 @@ set(arsnovawidget_SRCS
   ../src/ui/overlaywidget.cpp
   ui/overlaywidgettest.cpp
   ../src/ui/qrcodewidget.cpp
+  ui/mainwindowtest.cpp
+  ../src/ui/mainwindow.cpp
+  ../src/ui/splashscreen.cpp
+  ../src/ui/sessionwidget.cpp
   ui/qrcodewidgettest.cpp
   ../src/updatetimer.cpp
   ../src/httpconnection.cpp
@@ -59,6 +63,10 @@ set(arsnovawidget_MOC_SRCS
   ../src/ui/overlaywidget.h
   ui/overlaywidgettest.h
   ../src/ui/qrcodewidget.h
+  ui/mainwindowtest.h
+  ../src/ui/mainwindow.h
+  ../src/ui/splashscreen.h
+  ../src/ui/sessionwidget.h
   ui/qrcodewidgettest.h
   ../src/updatetimer.h
   ../src/abstractconnection.h
@@ -76,6 +84,7 @@ set(arsnovawidget_UIS
   ../src/qplugin/logodiagramwidget.ui
   ../src/qplugin/sessioninformationwidget.ui
   ../src/ui/overlaywidget.ui
+  ../src/ui/sessionwidget.ui
 )
 
 ## Resources ##
@@ -129,3 +138,4 @@ add_test(LogoDiagramWidgetTest ${EXECUTABLE_OUTPUT_PATH}/tests LogoDiagramWidget
 add_test(OverlayWidgetTest ${EXECUTABLE_OUTPUT_PATH}/tests OverlayWidgetTest)
 add_test(SessionInformationWidgetTest ${EXECUTABLE_OUTPUT_PATH}/tests SessionInformationWidgetTest)
 add_test(QRCodeWidgetTest ${EXECUTABLE_OUTPUT_PATH}/tests QRCodeWidgetTest)
+add_test(MainWindowTest ${EXECUTABLE_OUTPUT_PATH}/tests MainWindowTest)
