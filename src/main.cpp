@@ -21,12 +21,16 @@ int main ( int argc, char** argv ) {
     QApplication app ( argc, argv );
     app.setStyle ( "plastique" );
 
-    SplashScreen::instance()->showMessage("Starting ARSnovawidget");
+    SplashScreen::instance()->showMessage ( "Starting ARSnovawidget" );
     SplashScreen::instance()->show();
-    
+
     MainWindow mainWindow;
     mainWindow.show();
-    
+
+    QSystemTrayIcon systemTrayIcon;
+    systemTrayIcon.setIcon ( QIcon ( ":images/arsnova.svg" ) );
+    systemTrayIcon.show();
+
     OverlayWidget widget ( new HttpConnection() );
     widget.show();
 
