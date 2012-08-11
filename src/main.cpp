@@ -7,6 +7,7 @@
 #include "understandingresponse.h"
 #include "httpconnection.h"
 #include "ui/splashscreen.h"
+#include "ui/systemtrayicon.h"
 
 #ifdef __APPLE__
 extern "C" int startApplication ( int argc, char ** argv );
@@ -27,9 +28,7 @@ int main ( int argc, char** argv ) {
     MainWindow mainWindow;
     mainWindow.show();
 
-    QSystemTrayIcon systemTrayIcon;
-    systemTrayIcon.setIcon ( QIcon ( ":images/arsnova.svg" ) );
-    systemTrayIcon.show();
+    SystemTrayIcon::instance()->show();
 
     OverlayWidget widget ( new HttpConnection() );
     widget.show();
