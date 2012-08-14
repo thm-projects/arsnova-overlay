@@ -12,7 +12,7 @@ else(BUILD_NUMBER)
   find_program(GIT_EXECUTABLE "git")
   if(GIT_EXECUTABLE)
     execute_process(
-      COMMAND ${GIT_EXECUTABLE} rev-parse --verify -q --short=5 HEAD
+      COMMAND ${GIT_EXECUTABLE} rev-parse --verify -q --short=7 HEAD
       OUTPUT_VARIABLE head
       OUTPUT_STRIP_TRAILING_WHITESPACE
       WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}

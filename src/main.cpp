@@ -26,9 +26,6 @@ int main ( int argc, char** argv ) {
     
     MainWindow mainWindow;
     mainWindow.show();
-    
-    OverlayWidget widget ( new HttpConnection() );
-    widget.show();
 
 #ifdef __APPLE__
     stopApplication();

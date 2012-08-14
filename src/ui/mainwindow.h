@@ -9,6 +9,8 @@
 #include "qplugin/loginwidget.h"
 #include "ui/qrcodewidget.h"
 #include "ui/sessionwidget.h"
+#include "ui/overlaywidget.h"
+#include "httpconnection.h"
 
 class MainWindow : public QMainWindow, Ui::MainWindow {
     Q_OBJECT
@@ -23,8 +25,10 @@ private:
     Ui::MainWindow * ui;
     QSignalMapper * menuSignalMapper;
     QMap<QString, QWidget *> * widgetList;
+    OverlayWidget * overlayWidget;
+    HttpConnection * httpConnection;
 
-    void checkLeftMenuButton(QString title);
+    void checkLeftMenuButton ( QString title );
 
 private slots:
     void activateWidget ( QString widgetTitle );

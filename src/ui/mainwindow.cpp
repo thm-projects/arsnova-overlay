@@ -18,17 +18,21 @@ MainWindow::MainWindow ( QWidget * parent, Qt::WindowFlags f ) : QMainWindow ( p
     QRCodeWidget * qrwidget = new QRCodeWidget ();
     qrwidget->setUrl ( QUrl ( "https://ars.thm.de/" ) );
     this->addWidget ( "QR-Code", qrwidget );
-
     this->activateWidget ( "Login" );
+
+    this->httpConnection = new HttpConnection();
+
+    this->overlayWidget = new OverlayWidget ( this->httpConnection, this );
+    this->overlayWidget->setVisible ( false );
 }
 
 MainWindow::~MainWindow() {
-
+    this->overlayWidget->close();
+    delete this->overlayWidget;
 }
 
 const Ui::MainWindow * const MainWindow::getUi() {
     return this->ui;
-
 }
 
 void MainWindow::addWidget ( QString title, QWidget* widget ) {
