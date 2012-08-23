@@ -14,6 +14,8 @@ MainWindow::MainWindow ( QWidget * parent, Qt::WindowFlags f ) : QMainWindow ( p
     );
 
     this->addWidget ( "Login", new LoginWidget() );
+    this->connectLoginWidget();
+
     this->addWidget ( "Sessions", new SessionWidget ( this->httpConnection ) );
     this->addWidget ( "Settings", new QWidget() );
 
@@ -75,4 +77,19 @@ QWidget * MainWindow::findWidget ( QString widgetTitle ) {
     return nullptr;
 }
 
+void MainWindow::connectLoginWidget() {
+    LoginWidget * loginWidget = ( LoginWidget * ) this->findWidget ( "Login" );
+    if ( loginWidget != nullptr ) {
+        connect ( loginWidget, SIGNAL ( returnPressed() ), this, SLOT ( sessionLogin() ) );
+        connect ( loginWidget, SIGNAL ( exitButtonClicked() ), this, SLOT ( close() ) );
+        connect ( loginWidget, SIGNAL ( loginButtonClicked() ), this, SLOT ( sessionLogin() ) );
+    }
+}
 
+void MainWindow::sessionLogin() {
+    LoginWidget * loginWidget = ( LoginWidget * ) this->findWidget ( "Login" );
+    if ( loginWidget != nullptr ) {
+        this->httpConnection->requestSession ( loginWidget->text() );
+        this->activateWidget ( "Sessions" );
+    }
+}

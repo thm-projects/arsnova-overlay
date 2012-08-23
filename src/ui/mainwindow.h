@@ -30,9 +30,11 @@ private:
 
     void checkLeftMenuButton ( QString title );
     QWidget * findWidget ( QString widgetTitle );
+    void connectLoginWidget();
 
 private slots:
     void activateWidget ( QString widgetTitle );
+    void sessionLogin();
 };
 
 #endif // MAINWINDOW_H
