@@ -30,9 +30,6 @@ int main ( int argc, char** argv ) {
 
     SystemTrayIcon::instance()->show();
 
-    OverlayWidget widget ( new HttpConnection() );
-    widget.show();
-
 #ifdef __APPLE__
     stopApplication();
 #endif

@@ -12,7 +12,7 @@ else(BUILD_NUMBER)
   find_program(GIT_EXECUTABLE "git")
   if(GIT_EXECUTABLE)
     execute_process(
-      COMMAND ${GIT_EXECUTABLE} rev-parse --verify -q --short=5 HEAD
+      COMMAND ${GIT_EXECUTABLE} rev-parse --verify -q --short=7 HEAD
       OUTPUT_VARIABLE head
       OUTPUT_STRIP_TRAILING_WHITESPACE
       WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
@@ -20,6 +20,14 @@ else(BUILD_NUMBER)
     set(VERSION_PATCH "${VERSION_PATCH}_g${head}")
   endif()
 endif()
+
+message ("Start build configuration for ARSnovawidget ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH} ...")
+message ("use 'cmake -i' to run CMake in interactive mode")
+message ("or use:")
+message ("  -DTESTS=(ON|OFF)    to build test application")
+message ("  -DCOVERAGE=(ON|OFF) to run test application with code coverage")
+message ("  -DQTPLUGIN=(ON|OFF) to build a Qt designer plugin")
+message ("")
 
 option (TESTS "Enable build of tests" OFF)
 option (COVERAGE "Enable coverage" OFF)
@@ -66,13 +74,13 @@ if(TESTS)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fprofile-arcs -ftest-coverage")
   else (COVERAGE)
-    message ("To execute tests with coverage use param '-DCOVERAGE=ON'")
+    message ("Execute tests with coverage is disabled")
   endif(COVERAGE)
   message ("Build of tests is enabled")
   enable_testing()
   add_subdirectory(tests)
 else(TESTS)
-  message ("To enable build of tests use param '-DTESTS=ON'")
+  message ("Build of tests is disabled")
 endif(TESTS)
 
 #if (TESTS AND COVERAGE)
@@ -83,7 +91,7 @@ endif(TESTS)
 if(QTPLUGIN)
   message ("Build of Qt plugin is enabled")
 else(QTPLUGIN)
-  message ("To enable build of the Qt plugin providing integration of used widgets use param '-DQTPLUGIN=ON'")
+  message ("Build of Qt plugin is disabled")
 endif(QTPLUGIN)
 
 IF (APPLE)

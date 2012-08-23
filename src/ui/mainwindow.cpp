@@ -4,31 +4,37 @@ MainWindow::MainWindow ( QWidget * parent, Qt::WindowFlags f ) : QMainWindow ( p
     ui->setupUi ( this );
     this->menuSignalMapper = new QSignalMapper ( this );
     this->widgetList = new QMap<QString, QWidget *>();
+    this->httpConnection = new HttpConnection();
 
     SplashScreen::instance()->showMessage (
-        QString ( "Running ARSnovawidget " )
+        QString ( "Running ARSnovawidget" )
         + " " + VERSION_MAJOR
         + "." + VERSION_MINOR
         + "." + VERSION_PATCH
     );
+
     this->addWidget ( "Login", new LoginWidget() );
-    this->addWidget ( "Sessions", new SessionWidget() );
+    this->connectLoginWidget();
+
+    this->addWidget ( "Sessions", new SessionWidget ( this->httpConnection ) );
     this->addWidget ( "Settings", new QWidget() );
 
     QRCodeWidget * qrwidget = new QRCodeWidget ();
     qrwidget->setUrl ( QUrl ( "https://ars.thm.de/" ) );
     this->addWidget ( "QR-Code", qrwidget );
-
     this->activateWidget ( "Login" );
+
+    this->overlayWidget = new OverlayWidget ( this->httpConnection, this );
+    this->overlayWidget->setVisible ( false );
 }
 
 MainWindow::~MainWindow() {
-
+    this->overlayWidget->close();
+    delete this->overlayWidget;
 }
 
 const Ui::MainWindow * const MainWindow::getUi() {
     return this->ui;
-
 }
 
 void MainWindow::addWidget ( QString title, QWidget* widget ) {
@@ -57,10 +63,33 @@ void MainWindow::checkLeftMenuButton ( QString title ) {
 void MainWindow::activateWidget ( QString widgetTitle ) {
     this->checkLeftMenuButton ( widgetTitle );
 
+    QWidget * widget = this->findWidget ( widgetTitle );
+    if ( widget != nullptr ) ui->stackedWidget->setCurrentWidget ( widget );
+}
+
+QWidget * MainWindow::findWidget ( QString widgetTitle ) {
     QMap<QString, QWidget *>::iterator i = this->widgetList->find ( widgetTitle );
 
     for ( i = this->widgetList->begin(); i != this->widgetList->end(); i++ ) {
-        if ( i.key() == widgetTitle ) ui->stackedWidget->setCurrentWidget ( i.value() );
+        if ( i.key() == widgetTitle ) return i.value();
+    }
+
+    return nullptr;
+}
+
+void MainWindow::connectLoginWidget() {
+    LoginWidget * loginWidget = ( LoginWidget * ) this->findWidget ( "Login" );
+    if ( loginWidget != nullptr ) {
+        connect ( loginWidget, SIGNAL ( returnPressed() ), this, SLOT ( sessionLogin() ) );
+        connect ( loginWidget, SIGNAL ( exitButtonClicked() ), this, SLOT ( close() ) );
+        connect ( loginWidget, SIGNAL ( loginButtonClicked() ), this, SLOT ( sessionLogin() ) );
     }
 }
 
+void MainWindow::sessionLogin() {
+    LoginWidget * loginWidget = ( LoginWidget * ) this->findWidget ( "Login" );
+    if ( loginWidget != nullptr ) {
+        this->httpConnection->requestSession ( loginWidget->text() );
+        this->activateWidget ( "Sessions" );
+    }
+}

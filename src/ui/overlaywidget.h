@@ -45,9 +45,13 @@ private:
     void setVisibleViewType ( VisibileViewType type );
     void connectSignals();
 
-private slots:
+public slots:
     bool close();
+    void onSessionResponse ( SessionResponse response );
+    void onUnderstandingResponse ( UnderstandingResponse response );
+    void onLoggedInResponse ( LoggedInResponse response );
 
+private slots:
     void sessionLogin();
     void updateHttpResponse ( int ticks );
     void showSessionIdForm();
@@ -55,10 +59,6 @@ private slots:
     void makeFullscreen ( bool enabled );
     void switchView ( bool coloredLogoView );
     void showQRCode ( bool enabled );
-
-    void onSessionResponse ( SessionResponse response );
-    void onUnderstandingResponse ( UnderstandingResponse response );
-    void onLoggedInResponse ( LoggedInResponse response );
 };
 
 #endif // OVERLAYWIDGET_H
