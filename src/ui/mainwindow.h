@@ -29,6 +29,7 @@ private:
     HttpConnection * httpConnection;
 
     void checkLeftMenuButton ( QString title );
+    QWidget * findWidget ( QString widgetTitle );
 
 private slots:
     void activateWidget ( QString widgetTitle );

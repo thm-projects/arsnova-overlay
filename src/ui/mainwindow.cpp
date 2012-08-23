@@ -5,17 +5,16 @@ MainWindow::MainWindow ( QWidget * parent, Qt::WindowFlags f ) : QMainWindow ( p
     this->menuSignalMapper = new QSignalMapper ( this );
     this->widgetList = new QMap<QString, QWidget *>();
     this->httpConnection = new HttpConnection();
-        
+
     SplashScreen::instance()->showMessage (
-        QString ( "Running ARSnovawidget " )
+        QString ( "Running ARSnovawidget" )
         + " " + VERSION_MAJOR
         + "." + VERSION_MINOR
         + "." + VERSION_PATCH
     );
-    
-    
+
     this->addWidget ( "Login", new LoginWidget() );
-    this->addWidget ( "Sessions", new SessionWidget(this->httpConnection) );
+    this->addWidget ( "Sessions", new SessionWidget ( this->httpConnection ) );
     this->addWidget ( "Settings", new QWidget() );
 
     QRCodeWidget * qrwidget = new QRCodeWidget ();
@@ -62,10 +61,18 @@ void MainWindow::checkLeftMenuButton ( QString title ) {
 void MainWindow::activateWidget ( QString widgetTitle ) {
     this->checkLeftMenuButton ( widgetTitle );
 
+    QWidget * widget = this->findWidget ( widgetTitle );
+    if ( widget != nullptr ) ui->stackedWidget->setCurrentWidget ( widget );
+}
+
+QWidget * MainWindow::findWidget ( QString widgetTitle ) {
     QMap<QString, QWidget *>::iterator i = this->widgetList->find ( widgetTitle );
 
     for ( i = this->widgetList->begin(); i != this->widgetList->end(); i++ ) {
-        if ( i.key() == widgetTitle ) ui->stackedWidget->setCurrentWidget ( i.value() );
+        if ( i.key() == widgetTitle ) return i.value();
     }
+
+    return nullptr;
 }
+
 
