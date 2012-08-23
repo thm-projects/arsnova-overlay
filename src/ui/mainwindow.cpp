@@ -4,23 +4,24 @@ MainWindow::MainWindow ( QWidget * parent, Qt::WindowFlags f ) : QMainWindow ( p
     ui->setupUi ( this );
     this->menuSignalMapper = new QSignalMapper ( this );
     this->widgetList = new QMap<QString, QWidget *>();
-
+    this->httpConnection = new HttpConnection();
+        
     SplashScreen::instance()->showMessage (
         QString ( "Running ARSnovawidget " )
         + " " + VERSION_MAJOR
         + "." + VERSION_MINOR
         + "." + VERSION_PATCH
     );
+    
+    
     this->addWidget ( "Login", new LoginWidget() );
-    this->addWidget ( "Sessions", new SessionWidget() );
+    this->addWidget ( "Sessions", new SessionWidget(this->httpConnection) );
     this->addWidget ( "Settings", new QWidget() );
 
     QRCodeWidget * qrwidget = new QRCodeWidget ();
     qrwidget->setUrl ( QUrl ( "https://ars.thm.de/" ) );
     this->addWidget ( "QR-Code", qrwidget );
     this->activateWidget ( "Login" );
-
-    this->httpConnection = new HttpConnection();
 
     this->overlayWidget = new OverlayWidget ( this->httpConnection, this );
     this->overlayWidget->setVisible ( false );
