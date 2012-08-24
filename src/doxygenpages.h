@@ -25,7 +25,7 @@
  ***********************************************************/
 
 /**
- * @mainpage
+ * @mainpage General Information
  * 
  * @section description Description
  * ARSnovawidget is a small widget to display information taken from ars.thm.de
