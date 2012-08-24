@@ -5,7 +5,11 @@
 *.dll
 *.exe
 *.dmg
-*.cmake
+*.orig
+CMake*.cmake
+CPack*.cmake
+CTest*.cmake
+cmake*.cmake
 *.kdev4
 *.cxx*
 *ui_*
