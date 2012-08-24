@@ -12,6 +12,11 @@ public:
     explicit QRCodeWidget ( QWidget* parent = 0, Qt::WindowFlags f = 0 );
     void setUrl ( QUrl url );
     void setFullscreen ( bool fullscreen );
+    /** Returns user interface of this widget.
+     * This method is helpfull if someone needs direct access to the
+     * user interface itself e.g. testing.
+     * @return User interface
+     */
     const Ui::QRCodeWidget * const getUi();
 
 private:

@@ -38,6 +38,15 @@ set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR}/bin)
 set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR}/libs)
 
 CONFIGURE_FILE( version.h.cmake src/version.h )
+CONFIGURE_FILE( Doxyfile.cmake Doxyfile )
+
+add_custom_target(doc)
+find_program(DOXYGEN_EXECUTABLE "doxygen")
+if (DOXYGEN_EXECUTABLE)
+  add_custom_command(TARGET doc POST_BUILD
+    COMMAND ${DOXYGEN_EXECUTABLE}
+  )
+endif()
 
 set(DESKTOP
   src/resources/arsnovawidget.desktop

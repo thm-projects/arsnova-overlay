@@ -10,6 +10,11 @@ class BarDiagramWidget : public QWidget, Ui::BarDiagramWidget {
 
 public:
     explicit BarDiagramWidget ( QWidget* parent = 0, Qt::WindowFlags f = 0 );
+    /** Returns user interface of this widget.
+     * This method is helpfull if someone needs direct access to the
+     * user interface itself e.g. testing.
+     * @return User interface
+     */
     const Ui::BarDiagramWidget * const getUi();
     void updateGraphicsBar ( int index, int value );
     void updateFromResponse(UnderstandingResponse response);

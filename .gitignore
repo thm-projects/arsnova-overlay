@@ -21,5 +21,8 @@ CMakeCache*
 Makefile
 *bin/*
 *coverage*
+*doc*
+Doxyfile
+*.log
 Testing*
 src/version.h
