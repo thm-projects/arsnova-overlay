@@ -5,6 +5,8 @@
 *.dll
 *.exe
 *.dmg
+*.orig
+CMake*.cmake
 CPack*.cmake
 CTest*.cmake
 cmake*.cmake
