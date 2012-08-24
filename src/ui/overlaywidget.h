@@ -19,6 +19,11 @@ class OverlayWidget : public QWidget, Ui::OverlayWidget {
 public:
     explicit OverlayWidget ( AbstractConnection * connection, QWidget* parent = 0, Qt::WindowFlags f = 0 );
     virtual ~OverlayWidget();
+    /** Returns user interface of this widget.
+     * This method is helpfull if someone needs direct access to the
+     * user interface itself e.g. testing.
+     * @return User interface
+     */
     const Ui::OverlayWidget * const getUi();
 
 private:
