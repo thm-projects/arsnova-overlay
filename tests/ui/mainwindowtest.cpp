@@ -24,3 +24,30 @@ void MainWindowTest::testShouldDisplaySplashScreen() {
     QVERIFY ( SplashScreen::instance()->isVisible() );
 }
 
+void MainWindowTest::testShouldDisplaySessionWidget() {
+    QList<QPushButton *> buttons = this->mainWindow->getUi()->leftMenu->findChildren<QPushButton *>();
+    foreach ( QPushButton * button, buttons ) {
+        if ( button->text() == "Sessions" ) {
+            QTest::mouseClick ( button, Qt::LeftButton );
+        }
+    }
+
+    QCOMPARE (
+        this->mainWindow->getUi()->stackedWidget->currentWidget()->metaObject()->className(),
+        "SessionWidget"
+    );
+}
+
+void MainWindowTest::testShouldDisplayLoginWidget() {
+    QList<QPushButton *> buttons = this->mainWindow->getUi()->leftMenu->findChildren<QPushButton *>();
+    foreach ( QPushButton * button, buttons ) {
+        if ( button->text() == "Login" ) {
+            QTest::mouseClick ( button, Qt::LeftButton );
+        }
+    }
+
+    QCOMPARE (
+        this->mainWindow->getUi()->stackedWidget->currentWidget()->metaObject()->className(),
+        "LoginWidget"
+    );
+}

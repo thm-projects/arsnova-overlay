@@ -22,6 +22,8 @@ private slots:
     void testShouldDisplayMainWindow();
     void testThatMainWindowContainsBasicLeftMenu();
     void testShouldDisplaySplashScreen();
+    void testShouldDisplaySessionWidget();
+    void testShouldDisplayLoginWidget();
 
 };
 
