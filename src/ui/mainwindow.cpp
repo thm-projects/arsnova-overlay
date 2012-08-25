@@ -4,7 +4,7 @@ MainWindow::MainWindow ( QWidget * parent, Qt::WindowFlags f ) : QMainWindow ( p
     ui->setupUi ( this );
     this->menuSignalMapper = new QSignalMapper ( this );
     this->widgetList = new QMap<QString, QWidget *>();
-    this->httpConnection = new HttpConnection();
+    this->sessionContext = new SessionContext ( new HttpConnection() );
 
     SplashScreen::instance()->showMessage (
         QString ( "Running ARSnovawidget" )
@@ -16,7 +16,7 @@ MainWindow::MainWindow ( QWidget * parent, Qt::WindowFlags f ) : QMainWindow ( p
     this->addWidget ( "Login", new LoginWidget() );
     this->connectLoginWidget();
 
-    this->addWidget ( "Sessions", new SessionWidget ( this->httpConnection ) );
+    this->addWidget ( "Sessions", new SessionWidget ( this->sessionContext ) );
     this->addWidget ( "Settings", new QWidget() );
 
     QRCodeWidget * qrwidget = new QRCodeWidget ();
@@ -24,7 +24,7 @@ MainWindow::MainWindow ( QWidget * parent, Qt::WindowFlags f ) : QMainWindow ( p
     this->addWidget ( "QR-Code", qrwidget );
     this->activateWidget ( "Login" );
 
-    this->overlayWidget = new OverlayWidget ( this->httpConnection, this );
+    this->overlayWidget = new OverlayWidget ( this->sessionContext->connection(), this );
     this->overlayWidget->setVisible ( false );
 }
 
@@ -89,7 +89,7 @@ void MainWindow::connectLoginWidget() {
 void MainWindow::sessionLogin() {
     LoginWidget * loginWidget = ( LoginWidget * ) this->findWidget ( "Login" );
     if ( loginWidget != nullptr ) {
-        this->httpConnection->requestSession ( loginWidget->text() );
+        this->sessionContext->connection()->requestSession ( loginWidget->text() );
         this->activateWidget ( "Sessions" );
     }
 }

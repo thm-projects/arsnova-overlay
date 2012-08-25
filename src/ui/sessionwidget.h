@@ -2,14 +2,14 @@
 #define SESSIONWIDGET_H
 
 #include <QtGui>
-#include "abstractconnection.h"
+#include "sessioncontext.h"
 #include "ui_sessionwidget.h"
 
 class SessionWidget : public QWidget, Ui::SessionWidget {
     Q_OBJECT
 
 public:
-    explicit SessionWidget ( AbstractConnection * connection, QWidget* parent = 0, Qt::WindowFlags f = 0 );
+    explicit SessionWidget ( SessionContext * context, QWidget* parent = 0, Qt::WindowFlags f = 0 );
     const Ui::SessionWidget * const getUi();
 
 private:

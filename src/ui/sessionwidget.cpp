@@ -1,9 +1,9 @@
 #include "sessionwidget.h"
 
-SessionWidget::SessionWidget ( AbstractConnection * connection, QWidget* parent, Qt::WindowFlags f )
-    : QWidget ( parent, f ), connection ( connection ), _ui ( new Ui::SessionWidget() ) {
+SessionWidget::SessionWidget ( SessionContext * context, QWidget* parent, Qt::WindowFlags f )
+    : QWidget ( parent, f ), connection ( context->connection() ), _ui ( new Ui::SessionWidget() ) {
     _ui->setupUi ( this );
-    
+
     connect ( this->connection, SIGNAL ( requestFinished ( UnderstandingResponse ) ), this, SLOT ( onUnderstandingResponse ( UnderstandingResponse ) ) );
 }
 

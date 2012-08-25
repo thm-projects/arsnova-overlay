@@ -18,6 +18,7 @@ set(arsnovawidget_SRCS
   qplugin/sessioninformationwidget.cpp
   qrcodegenerator.cpp
   interposedquestion.cpp
+  sessioncontext.cpp
   main.cpp
 )
 
@@ -69,6 +70,7 @@ set(arsnovawidget_MOC_SRCS
   qplugin/sessioninformationwidget.h
   qrcodegenerator.h
   interposedquestion.h
+  sessioncontext.h
 )
 
 set(arsnovawidgetplugin_MOC_SRCS

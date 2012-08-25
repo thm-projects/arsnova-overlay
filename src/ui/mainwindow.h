@@ -10,7 +10,7 @@
 #include "ui/qrcodewidget.h"
 #include "ui/sessionwidget.h"
 #include "ui/overlaywidget.h"
-#include "httpconnection.h"
+#include "sessioncontext.h"
 
 class MainWindow : public QMainWindow, Ui::MainWindow {
     Q_OBJECT
@@ -26,7 +26,7 @@ private:
     QSignalMapper * menuSignalMapper;
     QMap<QString, QWidget *> * widgetList;
     OverlayWidget * overlayWidget;
-    HttpConnection * httpConnection;
+    SessionContext * sessionContext;
 
     void checkLeftMenuButton ( QString title );
     QWidget * findWidget ( QString widgetTitle );

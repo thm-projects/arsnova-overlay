@@ -10,6 +10,7 @@
 #include "ui/overlaywidgettest.h"
 #include "ui/qrcodewidgettest.h"
 #include "ui/mainwindowtest.h"
+#include "sessioncontexttest.h"
 
 int main ( int argc, char ** argv ) {
     QApplication app ( argc, argv );
@@ -38,6 +39,9 @@ int main ( int argc, char ** argv ) {
     } else if ( QString ( argv[argc-1] ) == "MainWindowTest" ) {
         MainWindowTest mainWindowTest;
         return QTest::qExec ( &mainWindowTest, argc-1, argv );
+    } else if ( QString ( argv[argc-1] ) == "SessionContextTest" ) {
+        SessionContextTest sessionContextTest;
+        return QTest::qExec ( &sessionContextTest, argc-1, argv );
     } else {
         qDebug() << "Not a valid test case selected. Add test case name as last parameter. (e.g.: tests -xunitxml SvgLogoTest)";
     }

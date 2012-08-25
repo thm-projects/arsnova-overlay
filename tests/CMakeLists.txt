@@ -31,6 +31,8 @@ set(arsnovawidget_SRCS
   ../src/loggedinresponse.cpp
   ../src/qrcodegenerator.cpp
   ../src/interposedquestion.cpp
+  ../src/sessioncontext.cpp
+  sessioncontexttest.cpp
   main.cpp
 )
 
@@ -76,6 +78,8 @@ set(arsnovawidget_MOC_SRCS
   ../src/loggedinresponse.h
   ../src/qrcodegenerator.h
   ../src/interposedquestion.h
+  ../src/sessioncontext.h
+  sessioncontexttest.h
 )
 
 set(arsnovawidget_UIS
@@ -139,3 +143,4 @@ add_test(OverlayWidgetTest ${EXECUTABLE_OUTPUT_PATH}/tests OverlayWidgetTest)
 add_test(SessionInformationWidgetTest ${EXECUTABLE_OUTPUT_PATH}/tests SessionInformationWidgetTest)
 add_test(QRCodeWidgetTest ${EXECUTABLE_OUTPUT_PATH}/tests QRCodeWidgetTest)
 add_test(MainWindowTest ${EXECUTABLE_OUTPUT_PATH}/tests MainWindowTest)
+add_test(SessionContextTest ${EXECUTABLE_OUTPUT_PATH}/tests SessionContextTest)
