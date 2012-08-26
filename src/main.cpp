@@ -27,6 +27,7 @@
 #include "understandingresponse.h"
 #include "httpconnection.h"
 #include "ui/splashscreen.h"
+#include "ui/systemtrayicon.h"
 
 #ifdef __APPLE__
 extern "C" int startApplication ( int argc, char ** argv );
@@ -41,11 +42,13 @@ int main ( int argc, char** argv ) {
     QApplication app ( argc, argv );
     app.setStyle ( "plastique" );
 
-    SplashScreen::instance()->showMessage("Starting ARSnovawidget");
+    SplashScreen::instance()->showMessage ( "Starting ARSnovawidget" );
     SplashScreen::instance()->show();
-    
+
     MainWindow mainWindow;
     mainWindow.show();
+
+    SystemTrayIcon::instance()->show();
 
 #ifdef __APPLE__
     stopApplication();
