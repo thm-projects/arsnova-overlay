@@ -12,6 +12,7 @@
 #include "ui/mainwindowtest.h"
 #include "sessioncontexttest.h"
 #include "ui/splashscreentest.h"
+#include "ui/systemtrayicontest.h"
 
 int main ( int argc, char ** argv ) {
     QApplication app ( argc, argv );
@@ -46,6 +47,9 @@ int main ( int argc, char ** argv ) {
     } else if ( QString ( argv[argc-1] ) == "SplashScreenTest" ) {
         SplashScreenTest splashScreenTest;
         return QTest::qExec ( &splashScreenTest, argc-1, argv );
+    } else if ( QString ( argv[argc-1] ) == "SystemTrayIconTest" ) {
+        SystemTrayIconTest systemTrayIconTest;
+        return QTest::qExec ( &systemTrayIconTest, argc-1, argv );
     } else {
         qDebug() << "Not a valid test case selected. Add test case name as last parameter. (e.g.: tests -xunitxml SvgLogoTest)";
     }

@@ -3,7 +3,6 @@
 SystemTrayIcon * SystemTrayIcon::_instance = nullptr;
 
 SystemTrayIcon::SystemTrayIcon ( QIcon icon ) : QSystemTrayIcon ( icon ) {
-
 }
 
 SystemTrayIcon * SystemTrayIcon::instance() {

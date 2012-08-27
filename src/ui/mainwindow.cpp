@@ -26,6 +26,8 @@ MainWindow::MainWindow ( QWidget * parent, Qt::WindowFlags f ) : QMainWindow ( p
 
     this->overlayWidget = new OverlayWidget ( this->sessionContext->connection(), this );
     this->overlayWidget->setVisible ( false );
+
+    connect ( SystemTrayIcon::instance(), SIGNAL ( activated ( QSystemTrayIcon::ActivationReason ) ), this, SLOT ( onSystemTrayActivated ( QSystemTrayIcon::ActivationReason ) ) );
 }
 
 MainWindow::~MainWindow() {
@@ -57,6 +59,12 @@ void MainWindow::checkLeftMenuButton ( QString title ) {
         } else {
             button->setChecked ( false );
         }
+    }
+}
+
+void MainWindow::onSystemTrayActivated ( QSystemTrayIcon::ActivationReason reason ) {
+    if ( reason == QSystemTrayIcon::Trigger ) {
+        this->setVisible ( ! this->isVisible() );
     }
 }
 

@@ -11,6 +11,7 @@
 #include "ui/sessionwidget.h"
 #include "ui/overlaywidget.h"
 #include "sessioncontext.h"
+#include "ui/systemtrayicon.h"
 
 class MainWindow : public QMainWindow, Ui::MainWindow {
     Q_OBJECT
@@ -33,6 +34,7 @@ private:
     void connectLoginWidget();
 
 private slots:
+    void onSystemTrayActivated ( QSystemTrayIcon::ActivationReason reason );
     void activateWidget ( QString widgetTitle );
     void sessionLogin();
 };
