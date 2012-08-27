@@ -2,6 +2,11 @@
 
 MainWindow::MainWindow ( QWidget * parent, Qt::WindowFlags f ) : QMainWindow ( parent, f ), ui ( new Ui::MainWindow ) {
     ui->setupUi ( this );
+
+    QRect frect = frameGeometry();
+    frect.moveCenter ( QDesktopWidget().availableGeometry().center() );
+    move ( frect.topLeft() );
+
     this->menuSignalMapper = new QSignalMapper ( this );
     this->widgetList = new QMap<QString, QWidget *>();
     this->sessionContext = new SessionContext ( new HttpConnection() );
