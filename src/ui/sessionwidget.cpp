@@ -6,6 +6,7 @@ SessionWidget::SessionWidget ( SessionContext * context, QWidget * parent, Qt::W
 
     connect ( this->connection, SIGNAL ( requestFinished ( UnderstandingResponse ) ), this, SLOT ( onUnderstandingResponse ( UnderstandingResponse ) ) );
     connect ( this->connection, SIGNAL ( requestFinished ( SessionResponse ) ), this, SLOT ( onSessionResponse ( SessionResponse ) ) );
+    connect ( _ui->tableWidget, SIGNAL ( itemClicked ( QTableWidgetItem* ) ), this, SLOT ( onItemClicked ( QTableWidgetItem* ) ) );
 }
 
 const Ui::SessionWidget * const SessionWidget::getUi() {
@@ -32,4 +33,11 @@ void SessionWidget::onSessionResponse ( SessionResponse response ) {
     _ui->tableWidget->setItem ( newRow, 0, new QTableWidgetItem ( response.shortName() ) );
     _ui->tableWidget->setItem ( newRow, 1, new QTableWidgetItem ( response.name() ) );
     _ui->tableWidget->setItem ( newRow, 2, new QTableWidgetItem ( response.sessionId() ) );
+}
+
+void SessionWidget::onItemClicked ( QTableWidgetItem * item ) {
+    _ui->tableWidget->selectRow ( item->row() );
+    QString sessionKey = _ui->tableWidget->item ( item->row(), 2 )->text();
+
+    this->connection->requestSession ( sessionKey );
 }

@@ -19,6 +19,10 @@ private:
 public slots:
     void onUnderstandingResponse ( UnderstandingResponse response );
     void onSessionResponse ( SessionResponse response );
+    void onItemClicked ( QTableWidgetItem * item );
+
+signals:
+    void sessionClicked ( QString sessionKey );
 };
 
 #endif // SESSIONWIDGET_H
