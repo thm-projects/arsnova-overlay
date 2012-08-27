@@ -6,10 +6,10 @@ const int OverlayWidget::ySize = 80;
 const int OverlayWidget::xSize = 180;
 const int OverlayWidget::httpUpdateInterval = 10;
 
-OverlayWidget::OverlayWidget ( AbstractConnection * connection, QWidget * parent, Qt::WindowFlags f )
-    : QWidget ( parent, f ) , ui ( new Ui::OverlayWidget() ), connection ( connection ) {
+OverlayWidget::OverlayWidget ( SessionContext * context, QWidget * parent, Qt::WindowFlags f )
+    : QWidget ( parent, f ) , ui ( new Ui::OverlayWidget() ), connection ( context->connection() ) {
     ui->setupUi ( this );
-    this->qrcodewidget = new QRCodeWidget ();
+    this->qrcodewidget = new QRCodeWidget ( context );
     this->qrcodewidget->setFullscreen ( true );
     this->updateTimer = new UpdateTimer();
     this->connectSignals();

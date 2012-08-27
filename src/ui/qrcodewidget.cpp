@@ -1,9 +1,11 @@
 #include "qrcodewidget.h"
 
-QRCodeWidget::QRCodeWidget ( QWidget* parent, Qt::WindowFlags f )
-    : QWidget ( parent, f ), _ui ( new Ui::QRCodeWidget() ) {
+QRCodeWidget::QRCodeWidget ( SessionContext * context, QWidget* parent, Qt::WindowFlags f )
+    : QWidget ( parent, f ), _sessionContext ( context ), _ui ( new Ui::QRCodeWidget() ) {
     _ui->setupUi ( this );
     this->setFullscreen ( false );
+
+    connect ( _sessionContext, SIGNAL ( sessionChanged() ), this, SLOT ( onSessionChanged() ) );
 }
 
 void QRCodeWidget::setFullscreen ( bool fullscreen ) {
@@ -23,7 +25,7 @@ void QRCodeWidget::setFullscreen ( bool fullscreen ) {
     }
 
     this->adjustSize();
-    
+
     QRect frect = frameGeometry();
     frect.moveCenter ( QApplication::desktop()->availableGeometry().center() );
     move ( frect.topLeft() );
@@ -57,6 +59,10 @@ QString QRCodeWidget::neededFontSize() {
     return QString::number ( fontSize, 10 ) + "px";
 }
 
-const Ui::QRCodeWidget*const QRCodeWidget::getUi() {
+const Ui::QRCodeWidget * const QRCodeWidget::getUi() {
     return this->_ui;
+}
+
+void QRCodeWidget::onSessionChanged() {
+    this->setUrl ( QString ( "https://ars.thm.de/id/" ) + _sessionContext->sessionId() );
 }

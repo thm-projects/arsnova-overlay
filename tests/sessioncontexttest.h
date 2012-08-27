@@ -44,6 +44,7 @@ private slots:
     void testShouldDetectValidSessionContext();
     void testShouldReturnSessionId();
     void testShouldDetectThatThisSessionIsNotKnown();
+    void testShouldEmitSessionChangedSignal();
 };
 
 #endif // SESSIONCONTEXTTEST_H

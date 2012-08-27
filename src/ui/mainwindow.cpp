@@ -24,12 +24,13 @@ MainWindow::MainWindow ( QWidget * parent, Qt::WindowFlags f ) : QMainWindow ( p
     this->addWidget ( "Sessions", new SessionWidget ( this->sessionContext ) );
     this->addWidget ( "Settings", new QWidget() );
 
-    QRCodeWidget * qrwidget = new QRCodeWidget ();
+    QRCodeWidget * qrwidget = new QRCodeWidget ( this->sessionContext );
     qrwidget->setUrl ( QUrl ( "https://ars.thm.de/" ) );
     this->addWidget ( "QR-Code", qrwidget );
+    
     this->activateWidget ( "Login" );
 
-    this->overlayWidget = new OverlayWidget ( this->sessionContext->connection(), this );
+    this->overlayWidget = new OverlayWidget ( this->sessionContext, this );
     this->overlayWidget->setVisible ( false );
 
     connect ( SystemTrayIcon::instance(), SIGNAL ( activated ( QSystemTrayIcon::ActivationReason ) ), this, SLOT ( onSystemTrayActivated ( QSystemTrayIcon::ActivationReason ) ) );

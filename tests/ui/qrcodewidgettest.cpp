@@ -1,9 +1,10 @@
 #include "qrcodewidgettest.h"
 
-QRCodeWidgetTest::QRCodeWidgetTest ( QObject* parent ) : QObject ( parent ) {}
+QRCodeWidgetTest::QRCodeWidgetTest ( QObject * parent ) : QObject ( parent ) {}
 
 void QRCodeWidgetTest::initTestCase() {
-    this->qrCodeWidget = new QRCodeWidget();
+    this->connection = new StubConnection();
+    this->qrCodeWidget = new QRCodeWidget ( new SessionContext ( this->connection ) );
 }
 
 void QRCodeWidgetTest::cleanupTestCase() {
@@ -16,6 +17,11 @@ void QRCodeWidgetTest::testShouldDisplayQRCodeWidget() {
 }
 
 void QRCodeWidgetTest::testShouldDisplayCorrectUrl() {
-    this->qrCodeWidget->setUrl ( QUrl ( "http://example.com" ) );
-    QVERIFY ( this->qrCodeWidget->getUi()->urlLabel->text() == "http://example.com" );
+    this->qrCodeWidget->setUrl ( QUrl ( "https://ars.thm.de/id/87654321" ) );
+    QVERIFY ( this->qrCodeWidget->getUi()->urlLabel->text() == "https://ars.thm.de/id/87654321" );
+}
+
+void QRCodeWidgetTest::testShouldDisplayCorrectUrlAfterSessionLogin() {
+    this->connection->requestSession ( "12345678" );
+    QVERIFY ( this->qrCodeWidget->getUi()->urlLabel->text() == "https://ars.thm.de/id/12345678" );
 }

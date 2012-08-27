@@ -50,3 +50,9 @@ void SessionContextTest::testShouldDetectThatThisSessionIsNotKnown() {
     sessionContext = SessionContext::create ( connection, "" );
     QVERIFY ( sessionContext->isValid() == false );
 }
+
+void SessionContextTest::testShouldEmitSessionChangedSignal() {
+    QSignalSpy spy ( this->sessionContext, SIGNAL ( sessionChanged() ) );
+    connection->requestSession ( "12345678" );
+    QVERIFY ( spy.count() == 1 );
+}

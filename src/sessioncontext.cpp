@@ -52,5 +52,6 @@ void SessionContext::onSessionResponse ( SessionResponse response ) {
     if ( !response.sessionId().isEmpty() ) {
         _sessionId = response.sessionId();
         _isValid = true;
+        emit this->sessionChanged();
     }
 }

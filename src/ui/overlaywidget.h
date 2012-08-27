@@ -7,7 +7,7 @@
 
 #include "ui_overlaywidget.h"
 #include "../updatetimer.h"
-#include "abstractconnection.h"
+#include "sessioncontext.h"
 #include "sessionresponse.h"
 #include "understandingresponse.h"
 #include "svglogo.h"
@@ -17,7 +17,7 @@ class OverlayWidget : public QWidget, Ui::OverlayWidget {
     Q_OBJECT
 
 public:
-    explicit OverlayWidget ( AbstractConnection * connection, QWidget* parent = 0, Qt::WindowFlags f = 0 );
+    explicit OverlayWidget ( SessionContext * context, QWidget* parent = 0, Qt::WindowFlags f = 0 );
     virtual ~OverlayWidget();
     /** Returns user interface of this widget.
      * This method is helpfull if someone needs direct access to the

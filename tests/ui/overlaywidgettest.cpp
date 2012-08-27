@@ -16,7 +16,7 @@ void OverlayWidgetTest::enterSessionId ( QLineEdit * lineEdit ) {
 
 
 void OverlayWidgetTest::initTestCase() {
-    this->overlayWidget = new OverlayWidget ( new StubConnection() );
+    this->overlayWidget = new OverlayWidget ( new SessionContext ( new StubConnection() ) );
     this->widgetSize = this->overlayWidget->size();
 }
 
@@ -26,14 +26,14 @@ void OverlayWidgetTest::cleanupTestCase() {
 
 void OverlayWidgetTest::testShouldExitOnExitButtonClicked() {
     delete this->overlayWidget;
-    this->overlayWidget = new OverlayWidget ( new StubConnection() );
+    this->overlayWidget = new OverlayWidget ( new SessionContext ( new StubConnection() ) );
     this->overlayWidget->show();
 
     QVERIFY ( this->overlayWidget->getUi()->loginwidget->isVisible() );
     QTest::mouseClick ( this->overlayWidget->getUi()->loginwidget->getUi()->exitButton, Qt::LeftButton );
 
     QVERIFY ( this->overlayWidget->isEnabled() );
-    this->overlayWidget = new OverlayWidget ( new StubConnection() );
+    this->overlayWidget = new OverlayWidget ( new SessionContext ( new StubConnection() ) );
 }
 
 void OverlayWidgetTest::testShouldShowOverlayWidget() {

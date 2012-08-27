@@ -4,12 +4,13 @@
 #include <QtGui>
 #include "ui_qrcodewidget.h"
 #include "qrcodegenerator.h"
+#include "sessioncontext.h"
 
 class QRCodeWidget : public QWidget, Ui::QRCodeWidget {
     Q_OBJECT
 
 public:
-    explicit QRCodeWidget ( QWidget* parent = 0, Qt::WindowFlags f = 0 );
+    explicit QRCodeWidget ( SessionContext * context, QWidget* parent = 0, Qt::WindowFlags f = 0 );
     void setUrl ( QUrl url );
     void setFullscreen ( bool fullscreen );
     /** Returns user interface of this widget.
@@ -24,6 +25,10 @@ private:
     void adjustSize();
     QSize neededQRCodeSize();
     QString neededFontSize();
+    SessionContext * _sessionContext;
+
+private slots:
+    void onSessionChanged();
 };
 
 #endif // QRCODEWIDGET_H

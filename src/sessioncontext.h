@@ -72,6 +72,11 @@ private:
 private slots:
     void onUnderstandingResponse ( UnderstandingResponse response );
     void onSessionResponse ( SessionResponse response );
+    
+signals:
+    /** This signal is emitted when the session context successfully changed the session
+     */
+    void sessionChanged();
 };
 
 #endif // SESSIONCONTEXT_H
