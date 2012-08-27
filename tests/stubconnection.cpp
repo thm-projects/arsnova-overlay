@@ -6,7 +6,7 @@ void StubConnection::requestLoggedIn() {
 
 void StubConnection::requestSession ( QString sessionKey ) {
     if ( sessionKey.isEmpty() ) {
-        emit this->requestFinished ( SessionResponse ( QString(), "STUB", "Stub Session" ) );
+        emit this->requestError();
         return;
     }
     emit this->requestFinished ( SessionResponse ( "12345678", "STUB", "Stub Session" ) );

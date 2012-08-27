@@ -73,12 +73,16 @@ void HttpConnection::handleReply ( QNetworkReply * reply ) {
     QScriptValue * responseValue = new QScriptValue ( scriptEngine.evaluate ( QString ( "(" ) + response.data() + ")" ) );
 
     if ( ! responseValue->isValid() ) {
-        //emit this->requestError();
-        //return;
+        emit this->requestError();
+        return;
     }
 
     if ( reply->url().path().contains ( "by_keyword" ) ) {
         this->sessionId = responseValue->property ( "rows" ).property ( 0 ).property ( "id" ).toString();
+        if ( this->sessionId.isEmpty() ) {
+            emit this->requestError();
+            return;
+        }
         QString sessionKey = responseValue->property ( "rows" ).property ( 0 ).property ( "key" ).toString();
         QString shortName = responseValue->property ( "rows" ).property ( 0 ).property ( "value" ).property ( "shortName" ).toString();
         QString name = responseValue->property ( "rows" ).property ( 0 ).property ( "value" ).property ( "name" ).toString();

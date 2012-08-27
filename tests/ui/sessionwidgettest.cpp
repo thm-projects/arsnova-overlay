@@ -19,6 +19,7 @@
  ***************************************************************************/
 
 #include "sessionwidgettest.h"
+#include <qsignalspy.h>
 
 SessionWidgetTest::SessionWidgetTest ( QObject* parent ) : QObject ( parent ) {
     this->stubConnection = new StubConnection();
@@ -46,4 +47,13 @@ void SessionWidgetTest::testShouldNotAddSessionTwice() {
     QVERIFY ( this->sessionWidget->getUi()->tableWidget->rowCount() == 1 );
     this->stubConnection->requestSession ( "12345678" );
     QVERIFY ( this->sessionWidget->getUi()->tableWidget->rowCount() == 1 );
+}
+
+void SessionWidgetTest::testShouldDetectResponseError() {
+    QVERIFY ( this->sessionWidget->getUi()->tableWidget->rowCount() == 1 );
+    QSignalSpy spy ( this->stubConnection, SIGNAL ( requestError() ) );
+    this->stubConnection->requestSession ( QString() );
+
+    QVERIFY ( this->sessionWidget->getUi()->tableWidget->rowCount() == 1 );
+    QCOMPARE ( spy.count(), 1 );
 }

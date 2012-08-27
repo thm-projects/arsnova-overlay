@@ -21,6 +21,7 @@
 #ifndef SESSIONWIDGETTEST_H
 #define SESSIONWIDGETTEST_H
 
+#include <QtTestGui>
 #include <QTest>
 #include "ui/sessionwidget.h"
 #include "stubconnection.h"
@@ -43,7 +44,7 @@ private slots:
 
     void testShouldAddSessionToSessionList();
     void testShouldNotAddSessionTwice();
-
+    void testShouldDetectResponseError();
 };
 
 #endif // SESSIONWIDGETTEST_H
