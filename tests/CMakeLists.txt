@@ -23,6 +23,7 @@ set(arsnovawidget_SRCS
   ../src/ui/mainwindow.cpp
   ../src/ui/splashscreen.cpp
   ../src/ui/sessionwidget.cpp
+  ui/sessionwidgettest.cpp
   ui/qrcodewidgettest.cpp
   ../src/updatetimer.cpp
   ../src/httpconnection.cpp
@@ -73,6 +74,7 @@ set(arsnovawidget_MOC_SRCS
   ../src/ui/mainwindow.h
   ../src/ui/splashscreen.h
   ../src/ui/sessionwidget.h
+  ui/sessionwidgettest.h
   ui/qrcodewidgettest.h
   ../src/updatetimer.h
   ../src/abstractconnection.h
@@ -154,3 +156,4 @@ add_test(MainWindowTest ${EXECUTABLE_OUTPUT_PATH}/tests MainWindowTest)
 add_test(SessionContextTest ${EXECUTABLE_OUTPUT_PATH}/tests SessionContextTest)
 add_test(SplashScreenTest ${EXECUTABLE_OUTPUT_PATH}/tests SplashScreenTest)
 add_test(SystemTrayIconTest ${EXECUTABLE_OUTPUT_PATH}/tests SystemTrayIconTest)
+add_test(SessionWidgetTest ${EXECUTABLE_OUTPUT_PATH}/tests SessionWidgetTest)

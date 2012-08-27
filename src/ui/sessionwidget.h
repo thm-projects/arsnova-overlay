@@ -18,6 +18,7 @@ private:
 
 public slots:
     void onUnderstandingResponse ( UnderstandingResponse response );
+    void onSessionResponse ( SessionResponse response );
 };
 
 #endif // SESSIONWIDGET_H
