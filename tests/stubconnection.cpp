@@ -6,10 +6,10 @@ void StubConnection::requestLoggedIn() {
 
 void StubConnection::requestSession ( QString sessionKey ) {
     if ( sessionKey.isEmpty() ) {
-        emit this->requestFinished ( SessionResponse ( QString(), "STUB" ) );
+        emit this->requestFinished ( SessionResponse ( QString(), "STUB", "Stub Session" ) );
         return;
     }
-    emit this->requestFinished ( SessionResponse ( "12345678", "STUB" ) );
+    emit this->requestFinished ( SessionResponse ( "12345678", "STUB", "Stub Session" ) );
 }
 
 void StubConnection::requestUnderstanding() {

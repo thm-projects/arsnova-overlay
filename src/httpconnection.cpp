@@ -81,7 +81,9 @@ void HttpConnection::handleReply ( QNetworkReply * reply ) {
         this->sessionId = responseValue->property ( "rows" ).property ( 0 ).property ( "id" ).toString();
         QString sessionKey = responseValue->property ( "rows" ).property ( 0 ).property ( "key" ).toString();
         QString shortName = responseValue->property ( "rows" ).property ( 0 ).property ( "value" ).property ( "shortName" ).toString();
-        emit this->requestFinished ( SessionResponse ( sessionKey, shortName ) );
+        QString name = responseValue->property ( "rows" ).property ( 0 ).property ( "value" ).property ( "name" ).toString();
+
+        emit this->requestFinished ( SessionResponse ( sessionKey, shortName, name ) );
     } else if (
         reply->url().path().contains ( "by_session" )
         && reply->url().path().contains ( "understanding" )
@@ -109,7 +111,7 @@ void HttpConnection::handleReply ( QNetworkReply * reply ) {
     } else {
         // Single Document - check 'type' property
         QVariant responseDocument = responseValue->toVariant();
-        if ( responseValue->property ( "type" ).equals("interposed_question") ) {
+        if ( responseValue->property ( "type" ).equals ( "interposed_question" ) ) {
             // Interposed Question
         }
     }
