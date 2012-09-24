@@ -129,7 +129,7 @@ IF( WIN32 AND NOT MINGW )
   SET(arsnovawidget_SRCS ${arsnovawidget_SRCS} arsnovawidgeticon.rc)
 ENDIF( WIN32 AND NOT MINGW )
 
-add_executable(arsnovawidget MACOSX_BUNDLE WIN32
+add_executable(arsnovadesktop MACOSX_BUNDLE WIN32
   ${arsnovawidget_SRCS}
   ${arsnovawidget_UIS_H}
   ${resources_RCC_SRCS}
@@ -143,7 +143,7 @@ if(QTPLUGIN)
   )
 endif(QTPLUGIN)
 
-target_link_libraries(arsnovawidget
+target_link_libraries(arsnovadesktop
   ${QT_QTCORE_LIBRARY}
   ${QT_QTGUI_LIBRARY}
   ${QT_QTNETWORK_LIBRARY}
@@ -167,18 +167,18 @@ IF(APPLE)
       \"\${CMAKE_INSTALL_PREFIX}/../..\"
     )"
   )
-  INSTALL(CODE "EXECUTE_PROCESS(COMMAND macdeployqt ./bin/arsnovawidget.app)")
-  INSTALL(TARGETS arsnovawidget BUNDLE DESTINATION ../../../)
+  INSTALL(CODE "EXECUTE_PROCESS(COMMAND macdeployqt ./bin/arsnovadesktop.app)")
+  INSTALL(TARGETS arsnovadesktop BUNDLE DESTINATION ../../../)
 ENDIF(APPLE)
 
 IF (UNIX AND NOT APPLE)
-  INSTALL(TARGETS arsnovawidget
+  INSTALL(TARGETS arsnovadesktop
     RUNTIME DESTINATION bin
   )
 ENDIF (UNIX AND NOT APPLE)
 
 IF (WIN32)
-  INSTALL(TARGETS arsnovawidget
+  INSTALL(TARGETS arsnovadesktop
     RUNTIME DESTINATION .
   )
 ENDIF (WIN32)
