@@ -8,6 +8,7 @@ void QRCodeWidgetTest::initTestCase() {
 }
 
 void QRCodeWidgetTest::cleanupTestCase() {
+    delete this->connection;
     delete this->qrCodeWidget;
 }
 

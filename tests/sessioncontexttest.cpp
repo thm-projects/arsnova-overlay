@@ -27,6 +27,7 @@ void SessionContextTest::initTestCase() {
 }
 
 void SessionContextTest::cleanupTestCase() {
+    delete connection;
     delete sessionContext;
 }
 

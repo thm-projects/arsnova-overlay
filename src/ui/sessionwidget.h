@@ -10,6 +10,7 @@ class SessionWidget : public QWidget, Ui::SessionWidget {
 
 public:
     explicit SessionWidget ( SessionContext * context, QWidget* parent = 0, Qt::WindowFlags f = 0 );
+    virtual ~SessionWidget();
     const Ui::SessionWidget * const getUi();
 
 private:

@@ -38,7 +38,9 @@ MainWindow::MainWindow ( QWidget * parent, Qt::WindowFlags f ) : QMainWindow ( p
 
 MainWindow::~MainWindow() {
     this->overlayWidget->close();
-    delete this->overlayWidget, ui, widgetList;
+    delete overlayWidget;
+    delete widgetList;
+    delete ui;
 }
 
 const Ui::MainWindow * const MainWindow::getUi() {

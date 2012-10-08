@@ -7,13 +7,14 @@ BarDiagramWidget::BarDiagramWidget ( QWidget* parent, Qt::WindowFlags f )
     : QWidget ( parent, f ), ui ( new Ui::BarDiagramWidget() ) {
     ui->setupUi ( this );
 
-    this->graphicsScene = new QGraphicsScene();
     this->createGraphicsScene();
     ui->graphicsView->setScene ( this->graphicsScene );
 }
 
 BarDiagramWidget::~BarDiagramWidget() {
-    delete this->graphicsScene, this->bars, this->ui;
+    delete this->graphicsScene;
+    delete this->bars;
+    delete this->ui;
 }
 
 const Ui::BarDiagramWidget * const BarDiagramWidget::getUi() {
@@ -21,6 +22,7 @@ const Ui::BarDiagramWidget * const BarDiagramWidget::getUi() {
 }
 
 void BarDiagramWidget::createGraphicsScene() {
+    this->graphicsScene = new QGraphicsScene();
     this->bars = new QList<QGraphicsRectItem*>();
 
     QPen whitePen ( qRgb ( 200,200,200 ) );

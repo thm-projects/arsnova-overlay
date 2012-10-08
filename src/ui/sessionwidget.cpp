@@ -9,6 +9,10 @@ SessionWidget::SessionWidget ( SessionContext * context, QWidget * parent, Qt::W
     connect ( _ui->tableWidget, SIGNAL ( itemClicked ( QTableWidgetItem* ) ), this, SLOT ( onItemClicked ( QTableWidgetItem* ) ) );
 }
 
+SessionWidget::~SessionWidget() {
+    delete _ui;
+}
+
 const Ui::SessionWidget * const SessionWidget::getUi() {
     return this->_ui;
 }
