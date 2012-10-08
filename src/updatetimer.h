@@ -7,12 +7,14 @@ class UpdateTimer : public QObject {
     Q_OBJECT
 
 public:
-    explicit UpdateTimer () ;
+    explicit UpdateTimer ();
+    virtual ~UpdateTimer();
     void reset();
 
 private:
     QTimer * qtimer;
     int ticks;
+    static int tickDuration;
 
 private slots:
     void update() ;

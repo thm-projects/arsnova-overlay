@@ -12,6 +12,7 @@ class LoginWidget : public QWidget, Ui::LoginWidget {
 
 public:
     explicit LoginWidget ( QWidget* parent = 0, Qt::WindowFlags f = 0 );
+    virtual ~LoginWidget();
     QString text();
     void setText ( QString text );
     void clear();

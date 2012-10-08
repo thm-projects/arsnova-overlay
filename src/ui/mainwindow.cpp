@@ -27,7 +27,7 @@ MainWindow::MainWindow ( QWidget * parent, Qt::WindowFlags f ) : QMainWindow ( p
     QRCodeWidget * qrwidget = new QRCodeWidget ( this->sessionContext );
     qrwidget->setUrl ( QUrl ( "https://ars.thm.de/" ) );
     this->addWidget ( "QR-Code", qrwidget );
-    
+
     this->activateWidget ( "Login" );
 
     this->overlayWidget = new OverlayWidget ( this->sessionContext, this );
@@ -38,7 +38,7 @@ MainWindow::MainWindow ( QWidget * parent, Qt::WindowFlags f ) : QMainWindow ( p
 
 MainWindow::~MainWindow() {
     this->overlayWidget->close();
-    delete this->overlayWidget;
+    delete this->overlayWidget, ui, widgetList;
 }
 
 const Ui::MainWindow * const MainWindow::getUi() {

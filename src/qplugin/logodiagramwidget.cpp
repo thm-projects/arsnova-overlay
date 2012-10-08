@@ -10,6 +10,7 @@ LogoDiagramWidget::LogoDiagramWidget ( QWidget * parent, Qt::WindowFlags f )
 
 LogoDiagramWidget::~LogoDiagramWidget() {
     delete this->svgLogo;
+    delete this->ui;
 }
 
 const Ui::LogoDiagramWidget*const LogoDiagramWidget::getUi() {

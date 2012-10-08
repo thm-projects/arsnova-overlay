@@ -12,6 +12,10 @@ BarDiagramWidget::BarDiagramWidget ( QWidget* parent, Qt::WindowFlags f )
     ui->graphicsView->setScene ( this->graphicsScene );
 }
 
+BarDiagramWidget::~BarDiagramWidget() {
+    delete this->graphicsScene, this->bars, this->ui;
+}
+
 const Ui::BarDiagramWidget * const BarDiagramWidget::getUi() {
     return this->ui;
 }

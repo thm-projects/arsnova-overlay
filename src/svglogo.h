@@ -11,21 +11,16 @@ class SvgLogo {
 
 public:
     explicit SvgLogo();
-    
-    void updateFromResponse(UnderstandingResponse response);
+    virtual ~SvgLogo();
+
+    void updateFromResponse ( UnderstandingResponse response );
     QColor color();
     QByteArray toXml();
 
 
 private:
-    QFile * file;
-    QByteArray contents;
-    QByteArray plainContents;
-    QColor baseColor;
-
-    void setColorValue ( float value );
-    void setColors ( QColor start, QColor end, float value );
-    int calculateColor ( int start, int end, float value );
+    class SvgLogoPrivate;
+    SvgLogoPrivate * _private;
 };
 
 #endif // SVGLOGO_H

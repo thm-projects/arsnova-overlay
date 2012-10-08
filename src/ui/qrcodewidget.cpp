@@ -8,6 +8,10 @@ QRCodeWidget::QRCodeWidget ( SessionContext * context, QWidget* parent, Qt::Wind
     connect ( _sessionContext, SIGNAL ( sessionChanged() ), this, SLOT ( onSessionChanged() ) );
 }
 
+QRCodeWidget::~QRCodeWidget() {
+    delete _ui;
+}
+
 void QRCodeWidget::setFullscreen ( bool fullscreen ) {
     if ( fullscreen ) {
         // Rezize widget with 48px padding on each side

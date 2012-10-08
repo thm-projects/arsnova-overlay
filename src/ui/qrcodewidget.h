@@ -11,6 +11,7 @@ class QRCodeWidget : public QWidget, Ui::QRCodeWidget {
 
 public:
     explicit QRCodeWidget ( SessionContext * context, QWidget* parent = 0, Qt::WindowFlags f = 0 );
+    virtual ~QRCodeWidget();
     void setUrl ( QUrl url );
     void setFullscreen ( bool fullscreen );
     /** Returns user interface of this widget.

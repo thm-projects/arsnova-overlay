@@ -37,6 +37,7 @@ void OverlayWidget::connectSignals() {
 OverlayWidget::~OverlayWidget() {
     delete this->connection;
     delete this->updateTimer;
+    delete this->ui;
 }
 
 bool OverlayWidget::close() {

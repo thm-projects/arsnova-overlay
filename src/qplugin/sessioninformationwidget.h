@@ -9,7 +9,7 @@ class SessionInformationWidget : public QWidget, Ui::SessionInformationWidget {
 
 public:
     explicit SessionInformationWidget ( QWidget* parent = 0, Qt::WindowFlags f = 0 );
-
+    virtual ~SessionInformationWidget();
     void updateSessionLabel ( QString sessionName, QString sessionID );
     void updateCounterLabel ( int feedback, int onlineUsers );
     void updateProgressBar ( int value, int max );

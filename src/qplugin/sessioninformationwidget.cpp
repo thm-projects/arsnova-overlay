@@ -5,6 +5,10 @@ SessionInformationWidget::SessionInformationWidget ( QWidget* parent, Qt::Window
     _ui->setupUi ( this );
 }
 
+SessionInformationWidget::~SessionInformationWidget() {
+    delete _ui;
+}
+
 const Ui::SessionInformationWidget*const SessionInformationWidget::getUi() {
     return _ui;
 }

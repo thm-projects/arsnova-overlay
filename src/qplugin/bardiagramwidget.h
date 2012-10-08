@@ -10,6 +10,7 @@ class BarDiagramWidget : public QWidget, Ui::BarDiagramWidget {
 
 public:
     explicit BarDiagramWidget ( QWidget* parent = 0, Qt::WindowFlags f = 0 );
+    virtual ~BarDiagramWidget();
     /** Returns user interface of this widget.
      * This method is helpfull if someone needs direct access to the
      * user interface itself e.g. testing.

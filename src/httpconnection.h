@@ -14,6 +14,7 @@ class HttpConnection : public AbstractConnection {
 
 public:
     explicit HttpConnection ();
+    virtual ~HttpConnection();
     void requestUnderstanding();
     void requestSession ( QString sessionKey );
     void requestLoggedIn();

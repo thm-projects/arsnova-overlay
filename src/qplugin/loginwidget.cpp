@@ -5,6 +5,10 @@ LoginWidget::LoginWidget ( QWidget* parent, Qt::WindowFlags f )
     _ui->setupUi ( this );
 }
 
+LoginWidget::~LoginWidget() {
+    delete _ui;
+}
+
 const Ui::LoginWidget * const LoginWidget::getUi() {
     return this->_ui;
 }

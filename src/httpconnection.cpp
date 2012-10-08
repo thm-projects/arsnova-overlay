@@ -6,6 +6,10 @@ HttpConnection::HttpConnection ()
 
 }
 
+HttpConnection::~HttpConnection() {
+    delete networkAccessManager;
+}
+
 void HttpConnection::requestLoggedIn() {
     // Like ArsNova: ARSnova.models.Feedback.getUserFeedback()
     int timeLimit = 3;
