@@ -12,7 +12,7 @@ MainWindow::MainWindow ( QWidget * parent, Qt::WindowFlags f ) : QMainWindow ( p
     this->sessionContext = new SessionContext ( new HttpConnection() );
 
     SplashScreen::instance()->showMessage (
-        QString ( "Running ARSnovawidget" )
+        QString ( "Running ARSnovaDesktop" )
         + " " + VERSION_MAJOR
         + "." + VERSION_MINOR
         + "." + VERSION_PATCH
