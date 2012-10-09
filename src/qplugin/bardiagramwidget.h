@@ -18,21 +18,19 @@ public:
      */
     const Ui::BarDiagramWidget * const getUi();
     void updateGraphicsBar ( int index, int value );
-    void updateFromResponse(UnderstandingResponse response);
+    void updateFromResponse ( UnderstandingResponse response );
 
 protected:
-    void resizeEvent(QResizeEvent * event);
-    
+    void resizeEvent ( QResizeEvent * event );
+
 private:
-    static const int ySize;
-    static const int xSize;
+    class BarDiagramWidgetPrivate;
+    BarDiagramWidgetPrivate * _private;
 
     Ui::BarDiagramWidget * ui;
-    QList<QGraphicsRectItem *> * bars;
-    QGraphicsScene * graphicsScene;
 
-    void createGraphicsScene();
-    void drawPercentageLines();
+    static const int ySize;
+    static const int xSize;
 };
 
 #endif // BARDIAGRAMWIDGET_H
