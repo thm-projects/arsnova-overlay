@@ -24,6 +24,7 @@ public:
 private:
     QNetworkAccessManager * networkAccessManager;
     QString sessionId;
+    static QString hostname;
 
 private slots:
     void handleReply ( QNetworkReply * reply );

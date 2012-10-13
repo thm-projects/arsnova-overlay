@@ -1,5 +1,7 @@
 #include "httpconnection.h"
 
+QString HttpConnection::hostname = "ars.thm.de";
+
 HttpConnection::HttpConnection ()
     : networkAccessManager ( new QNetworkAccessManager() ) {
     connect ( networkAccessManager, SIGNAL ( finished ( QNetworkReply* ) ), this, SLOT ( handleReply ( QNetworkReply* ) ) );
@@ -18,7 +20,7 @@ void HttpConnection::requestLoggedIn() {
     this->networkAccessManager->get (
         QNetworkRequest (
             QUrl (
-                "https://ars.thm.de/couchdb/arsnova/_design/logged_in/_view/count?_dc=" + dcTimestamp
+                "https://" + HttpConnection::hostname + "/couchdb/arsnova/_design/logged_in/_view/count?_dc=" + dcTimestamp
                 + "&startkey=[\"" + this->sessionId + "\"," + QString::number ( QDateTime::currentMSecsSinceEpoch() - ( timeLimit * 1000 * 60 ),10 ) + "]"
                 + "&endkey=[\"" + this->sessionId + "\",{}]"
             )
@@ -29,7 +31,7 @@ void HttpConnection::requestLoggedIn() {
 void HttpConnection::requestSession ( QString sessionKey ) {
     this->networkAccessManager->get (
         QNetworkRequest (
-            QUrl ( "https://ars.thm.de/couchdb/arsnova/_design/session/_view/by_keyword?key=\"" + sessionKey + "\"" )
+            QUrl ( "https://" + HttpConnection::hostname + "/couchdb/arsnova/_design/session/_view/by_keyword?key=\"" + sessionKey + "\"" )
         )
     );
 }
@@ -41,7 +43,7 @@ void HttpConnection::requestUnderstanding() {
     this->networkAccessManager->get (
         QNetworkRequest (
             QUrl (
-                "https://ars.thm.de/couchdb/arsnova/_design/understanding/_view/by_session?group=true&_dc=" + dcTimestamp
+                "https://" + HttpConnection::hostname + "/couchdb/arsnova/_design/understanding/_view/by_session?group=true&_dc=" + dcTimestamp
                 + "&startkey=[\"" + this->sessionId + "\"]"
                 + "&endkey=[\"" + this->sessionId + "\",{}]"
             )
@@ -53,7 +55,7 @@ void HttpConnection::requestInterposedQuestions() {
     this->networkAccessManager->get (
         QNetworkRequest (
             QUrl (
-                "https://ars.thm.de/couchdb/arsnova/_design/interposed_question/_view/by_session?key=\""
+                "https://" + HttpConnection::hostname + "/couchdb/arsnova/_design/interposed_question/_view/by_session?key=\""
                 + this->sessionId + "\""
             )
         )
@@ -64,7 +66,7 @@ void HttpConnection::requestInterposedQuestion ( QString docID ) {
     this->networkAccessManager->get (
         QNetworkRequest (
             QUrl (
-                "https://ars.thm.de/couchdb/arsnova/" + docID
+                "https://" + HttpConnection::hostname + "/couchdb/arsnova/" + docID
             )
         )
     );
