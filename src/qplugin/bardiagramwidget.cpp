@@ -83,8 +83,7 @@ public:
         this->bars->at ( 7 )->setBrush ( QBrush ( Qt::black ) );
         this->bars->at ( 7 )->setGraphicsEffect ( effectD );
 
-        QGraphicsLineItem * xAxis = this->graphicsScene->addLine ( QLineF ( 0,ySize,BarDiagramWidget::xSize,ySize ), whitePen );
-
+        this->graphicsScene->addLine ( QLineF ( 0,ySize,BarDiagramWidget::xSize,ySize ), whitePen );
         this->graphicsScene->update();
 
         return this->graphicsScene;
