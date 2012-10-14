@@ -5,7 +5,6 @@ QString HttpConnection::hostname = "ars.thm.de";
 HttpConnection::HttpConnection ()
     : networkAccessManager ( new QNetworkAccessManager() ) {
     connect ( networkAccessManager, SIGNAL ( finished ( QNetworkReply* ) ), this, SLOT ( handleReply ( QNetworkReply* ) ) );
-
 }
 
 HttpConnection::~HttpConnection() {
@@ -18,7 +17,7 @@ void HttpConnection::requestLoggedIn() {
     QString dcTimestamp = QString::number ( QDateTime::currentMSecsSinceEpoch() );
 
     this->networkAccessManager->get (
-        QNetworkRequest (
+        this->createRequest (
             QUrl (
                 "https://" + HttpConnection::hostname + "/couchdb/arsnova/_design/logged_in/_view/count?_dc=" + dcTimestamp
                 + "&startkey=[\"" + this->sessionId + "\"," + QString::number ( QDateTime::currentMSecsSinceEpoch() - ( timeLimit * 1000 * 60 ),10 ) + "]"
@@ -30,7 +29,7 @@ void HttpConnection::requestLoggedIn() {
 
 void HttpConnection::requestSession ( QString sessionKey ) {
     this->networkAccessManager->get (
-        QNetworkRequest (
+        this->createRequest (
             QUrl ( "https://" + HttpConnection::hostname + "/couchdb/arsnova/_design/session/_view/by_keyword?key=\"" + sessionKey + "\"" )
         )
     );
@@ -41,7 +40,7 @@ void HttpConnection::requestUnderstanding() {
     QString dcTimestamp = QString::number ( QDateTime::currentMSecsSinceEpoch() );
 
     this->networkAccessManager->get (
-        QNetworkRequest (
+        this->createRequest (
             QUrl (
                 "https://" + HttpConnection::hostname + "/couchdb/arsnova/_design/understanding/_view/by_session?group=true&_dc=" + dcTimestamp
                 + "&startkey=[\"" + this->sessionId + "\"]"
@@ -53,7 +52,7 @@ void HttpConnection::requestUnderstanding() {
 
 void HttpConnection::requestInterposedQuestions() {
     this->networkAccessManager->get (
-        QNetworkRequest (
+        this->createRequest (
             QUrl (
                 "https://" + HttpConnection::hostname + "/couchdb/arsnova/_design/interposed_question/_view/by_session?key=\""
                 + this->sessionId + "\""
@@ -64,7 +63,7 @@ void HttpConnection::requestInterposedQuestions() {
 
 void HttpConnection::requestInterposedQuestion ( QString docID ) {
     this->networkAccessManager->get (
-        QNetworkRequest (
+        this->createRequest (
             QUrl (
                 "https://" + HttpConnection::hostname + "/couchdb/arsnova/" + docID
             )
@@ -126,4 +125,15 @@ void HttpConnection::handleReply ( QNetworkReply * reply ) {
         }
     }
     reply->deleteLater();
+}
+
+QNetworkRequest HttpConnection::createRequest ( QUrl url ) {
+    QNetworkRequest request ( url );
+
+    if ( this->username.isEmpty() || this->password.isEmpty() ) return request;
+
+    QByteArray headerValue = "Basic "
+                             + ( this->username + ":" + this->password ).toLocal8Bit().toBase64();
+    request.setRawHeader ( "Authorization", headerValue );
+    return request;
 }

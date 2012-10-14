@@ -16,6 +16,15 @@ public:
     virtual void requestSession ( QString sessionKey ) = 0;
     virtual void requestLoggedIn() = 0;
 
+    virtual void setCredentials ( QString username, QString password ) final {
+        this->username = username;
+        this->password = password;
+    };
+
+protected:
+    QString username;
+    QString password;
+
 signals:
     void requestError();
     void requestFinished ( SessionResponse response );
