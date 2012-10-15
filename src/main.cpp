@@ -41,17 +41,19 @@ int main ( int argc, char** argv ) {
 
     QApplication app ( argc, argv );
     app.setStyle ( "plastique" );
-
-    SplashScreen::instance()->showMessage ( "Starting ARSnovaDesktop" );
-    SplashScreen::instance()->show();
+    app.setQuitOnLastWindowClosed ( false );
 
     MainWindow mainWindow;
     mainWindow.show();
 
     SystemTrayIcon::instance()->show();
 
+    SplashScreen::instance()->showMessage ( "Starting ARSnovaDesktop" );
+    SplashScreen::instance()->show();
+
 #ifdef __APPLE__
     stopApplication();
 #endif
     return app.exec();
 }
+
