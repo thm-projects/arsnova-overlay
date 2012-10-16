@@ -72,7 +72,20 @@ void HttpConnection::requestInterposedQuestion ( QString docID ) {
 }
 
 void HttpConnection::handleReply ( QNetworkReply * reply ) {
+    for ( QNetworkReply::RawHeaderPair header : reply->rawHeaderPairs().toStdList() ) {
+        if ( header.first == "Location" ) {
+            QString newLocation = header.second.replace("%2522","\"");
+            this->networkAccessManager->get (
+                this->createRequest (
+                    newLocation
+                )
+            );
+            return;
+        }
+    }
+
     QByteArray response = reply->readAll();
+    qDebug() << response;
 
     QScriptEngine scriptEngine;
     QScriptValue * responseValue = new QScriptValue ( scriptEngine.evaluate ( QString ( "(" ) + response.data() + ")" ) );
