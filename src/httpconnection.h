@@ -27,6 +27,7 @@ private:
     static QString hostname;
 
     QNetworkRequest createRequest ( QUrl url );
+    bool isRedirect ( QNetworkReply * reply );
 
 private slots:
     void handleReply ( QNetworkReply * reply );
