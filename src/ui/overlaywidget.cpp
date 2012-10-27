@@ -7,7 +7,10 @@ const int OverlayWidget::xSize = 180;
 const int OverlayWidget::httpUpdateInterval = 10;
 
 OverlayWidget::OverlayWidget ( SessionContext * context, QWidget * parent, Qt::WindowFlags f )
-    : QWidget ( parent, f ) , ui ( new Ui::OverlayWidget() ), connection ( context->connection() ) {
+    : QWidget ( parent, f ),
+      ui ( new Ui::OverlayWidget() ),
+      connection ( context->connection() ),
+      context ( context ) {
     ui->setupUi ( this );
     this->qrcodewidget = new QRCodeWidget ( context );
     this->qrcodewidget->setFullscreen ( true );
@@ -15,7 +18,7 @@ OverlayWidget::OverlayWidget ( SessionContext * context, QWidget * parent, Qt::W
     this->connectSignals();
     this->setMouseTracking ( true );
     this->moveToBottomRightEdge();
-    this->setVisibleViewType ( LOGIN_VIEW );
+    this->setVisibleViewType ( BAR_VIEW );
 }
 
 void OverlayWidget::connectSignals() {
@@ -23,10 +26,6 @@ void OverlayWidget::connectSignals() {
     connect ( this->connection, SIGNAL ( requestFinished ( SessionResponse ) ), this, SLOT ( onSessionResponse ( SessionResponse ) ) );
     connect ( this->connection, SIGNAL ( requestFinished ( UnderstandingResponse ) ), this, SLOT ( onUnderstandingResponse ( UnderstandingResponse ) ) );
     connect ( this->connection, SIGNAL ( requestFinished ( LoggedInResponse ) ), this, SLOT ( onLoggedInResponse ( LoggedInResponse ) ) );
-    connect ( ui->loginwidget, SIGNAL ( returnPressed() ), this, SLOT ( sessionLogin() ) );
-    connect ( ui->loginwidget, SIGNAL ( exitButtonClicked() ), this, SLOT ( close() ) );
-    connect ( ui->loginwidget, SIGNAL ( loginButtonClicked() ), this, SLOT ( sessionLogin() ) );
-    connect ( ui->actionChangeSession, SIGNAL ( triggered ( bool ) ), this, SLOT ( showSessionIdForm() ) );
     connect ( ui->actionMakeTransparent, SIGNAL ( triggered ( bool ) ), this, SLOT ( makeTransparent ( bool ) ) );
     connect ( ui->actionFullscreen, SIGNAL ( triggered ( bool ) ), this, SLOT ( makeFullscreen ( bool ) ) );
     connect ( ui->actionSwitchView, SIGNAL ( triggered ( bool ) ), this, SLOT ( switchView ( bool ) ) );
@@ -58,21 +57,7 @@ void OverlayWidget::moveToBottomRightEdge() {
 
 void OverlayWidget::setVisibleViewType ( OverlayWidget::VisibileViewType type ) {
     switch ( type ) {
-    case LOGIN_VIEW:
-        ui->loginwidget->show();
-        ui->bardiagramwidget->hide();
-        ui->sessioninformationwidget->hide();
-        ui->menuWidget->hide();
-        ui->logodiagramwidget->hide();
-        this->setWindowFlags (
-            Qt::Window
-            | Qt::FramelessWindowHint
-            | Qt::WindowStaysOnTopHint
-        );
-        this->show();
-        break;
     case BAR_VIEW:
-        ui->loginwidget->hide();
         ui->bardiagramwidget->show();
         ui->sessioninformationwidget->show();
         ui->menuWidget->show();
@@ -86,7 +71,6 @@ void OverlayWidget::setVisibleViewType ( OverlayWidget::VisibileViewType type ) 
         this->show();
         break;
     case COLORED_LOGO_VIEW:
-        ui->loginwidget->hide();
         ui->sessioninformationwidget->show();
         ui->bardiagramwidget->hide();
         ui->menuWidget->show();
@@ -138,11 +122,6 @@ void OverlayWidget::updateHttpResponse ( int ticks ) {
     }
 }
 
-void OverlayWidget::sessionLogin() {
-    this->connection->requestSession ( ui->loginwidget->text() );
-    this->moveToBottomRightEdge();
-}
-
 void OverlayWidget::makeTransparent ( bool enabled ) {
     ui->actionMakeTransparent->setChecked ( enabled );
     if ( enabled ) {
@@ -175,12 +154,6 @@ void OverlayWidget::makeFullscreen ( bool enabled ) {
     this->moveToBottomRightEdge();
 }
 
-void OverlayWidget::showSessionIdForm() {
-    this->makeTransparent ( false );
-    this->setVisibleViewType ( LOGIN_VIEW );
-    this->moveToBottomRightEdge();
-}
-
 void OverlayWidget::switchView ( bool coloredLogoView ) {
     if ( coloredLogoView ) {
         this->setVisibleViewType ( COLORED_LOGO_VIEW );
@@ -190,8 +163,9 @@ void OverlayWidget::switchView ( bool coloredLogoView ) {
 }
 
 void OverlayWidget::showQRCode ( bool enabled ) {
-    QUrl url ( QString ( "https://ars.thm.de/id/" ) + ui->loginwidget->text() );
+    QUrl url ( QString ( "https://ars.thm.de/id/" ) + this->context->sessionId() );
     this->qrcodewidget->setUrl ( url );
+
     if ( enabled ) {
         this->qrcodewidget->show();
         return;

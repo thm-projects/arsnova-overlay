@@ -6,6 +6,7 @@
 
 #include "ui/overlaywidget.h"
 #include "stubconnection.h"
+#include "sessioncontext.h"
 
 class OverlayWidgetTest : public QObject {
 
@@ -19,16 +20,13 @@ private:
     QRCodeWidget * qrCodeWidget;
 
     QSize widgetSize;
-    void enterSessionId ( QLineEdit * lineEdit );
+    SessionContext * context;
 
 private slots:
     void initTestCase();
     void cleanupTestCase();
 
-    void testShouldExitOnExitButtonClicked();
     void testShouldShowOverlayWidget();
-    void testShouldNotDisplayBarDiagramWithoutSessionLogin();
-    void testShouldDisplayBarDiagramAfterSessionLogin();
     void testShouldDisplayCorrectCountString();
     void testShouldSwitchToLogoDiagram();
     void testShouldSwitchToBarDiagram();
@@ -38,7 +36,6 @@ private slots:
     void testShouldNotBeFullscreen();
     void testShouldBeOpaque();
     void testShouldNotBeOpaque();
-    void testShouldSwitchToLogin();
 };
 
 #endif // OVERLAYWIDGETTEST_H

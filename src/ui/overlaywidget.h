@@ -35,6 +35,7 @@ private:
     int loggedInUsers;
     int latestUnderstandingResponses;
     QRCodeWidget * qrcodewidget;
+    SessionContext * context;
 
     static const int httpUpdateInterval;
     static const int ySize;
@@ -42,7 +43,6 @@ private:
     void moveToBottomRightEdge();
 
     enum VisibileViewType {
-        LOGIN_VIEW,
         BAR_VIEW,
         COLORED_LOGO_VIEW
     };
@@ -57,9 +57,7 @@ public slots:
     void onLoggedInResponse ( LoggedInResponse response );
 
 private slots:
-    void sessionLogin();
     void updateHttpResponse ( int ticks );
-    void showSessionIdForm();
     void makeTransparent ( bool enabled );
     void makeFullscreen ( bool enabled );
     void switchView ( bool coloredLogoView );
