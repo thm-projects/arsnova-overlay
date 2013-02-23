@@ -25,7 +25,7 @@ MainWindow::MainWindow ( QWidget * parent, Qt::WindowFlags f ) : QMainWindow ( p
     this->addWidget ( "Settings", new QWidget() );
 
     QRCodeWidget * qrwidget = new QRCodeWidget ( this->sessionContext );
-    qrwidget->setUrl ( QUrl ( "https://ars.thm.de/" ) );
+    qrwidget->setUrl ( QUrl ( "https://arsnova.thm.de/" ) );
     this->addWidget ( "QR-Code", qrwidget );
 
     this->activateWidget ( "Login" );

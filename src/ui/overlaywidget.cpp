@@ -163,7 +163,7 @@ void OverlayWidget::switchView ( bool coloredLogoView ) {
 }
 
 void OverlayWidget::showQRCode ( bool enabled ) {
-    QUrl url ( QString ( "https://ars.thm.de/id/" ) + this->context->sessionId() );
+    QUrl url ( QString ( "https://arsnova.thm.de/#id/" ) + this->context->sessionId() );
     this->qrcodewidget->setUrl ( url );
 
     if ( enabled ) {

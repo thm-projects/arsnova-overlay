@@ -68,5 +68,5 @@ const Ui::QRCodeWidget * const QRCodeWidget::getUi() {
 }
 
 void QRCodeWidget::onSessionChanged() {
-    this->setUrl ( QString ( "https://ars.thm.de/id/" ) + _sessionContext->sessionId() );
+    this->setUrl ( QString ( "https://arsnova.thm.de/#id/" ) + _sessionContext->sessionId() );
 }
