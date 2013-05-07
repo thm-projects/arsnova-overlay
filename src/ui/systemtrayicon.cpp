@@ -8,6 +8,10 @@ SystemTrayIcon::SystemTrayIcon ( QIcon icon ) : QSystemTrayIcon ( icon ) {
     this->setContextMenu ( menu );
 }
 
+SystemTrayIcon::~SystemTrayIcon() {
+    delete this->menu;
+}
+
 SystemTrayIcon * SystemTrayIcon::instance() {
     if ( _instance == nullptr ) {
         _instance = new SystemTrayIcon ( QIcon ( ":images/arsnova.svg" ) );

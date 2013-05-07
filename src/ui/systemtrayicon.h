@@ -9,6 +9,7 @@ class SystemTrayIcon : public QSystemTrayIcon {
 
 public:
     static SystemTrayIcon * instance();
+    virtual ~SystemTrayIcon();
 
 private:
     explicit SystemTrayIcon ( QIcon icon );
