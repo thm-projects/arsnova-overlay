@@ -129,6 +129,7 @@ BarDiagramWidget::BarDiagramWidget ( QWidget* parent, Qt::WindowFlags f )
 
 BarDiagramWidget::~BarDiagramWidget() {
     delete this->_private;
+    delete this->ui->graphicsView->scene();
     delete this->ui;
 }
 
