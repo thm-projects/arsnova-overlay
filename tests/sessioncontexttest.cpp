@@ -28,32 +28,37 @@ void SessionContextTest::initTestCase() {
 
 void SessionContextTest::cleanupTestCase() {
     delete connection;
-    delete sessionContext;
 }
 
 void SessionContextTest::testShouldDetectInvalidSessionContext() {
     sessionContext = new SessionContext ( connection );
     QVERIFY ( sessionContext->isValid() == false );
+    delete sessionContext;
 }
 
 void SessionContextTest::testShouldDetectValidSessionContext() {
     sessionContext = new SessionContext ( connection );
     connection->requestSession ( "12345678" );
     QVERIFY ( sessionContext->isValid() == true );
+    delete sessionContext;
 }
 
 void SessionContextTest::testShouldReturnSessionId() {
     sessionContext = SessionContext::create ( connection, "12345678" );
     QVERIFY ( sessionContext->sessionId() == "12345678" );
+    delete sessionContext;
 }
 
 void SessionContextTest::testShouldDetectThatThisSessionIsNotKnown() {
     sessionContext = SessionContext::create ( connection, "" );
     QVERIFY ( sessionContext->isValid() == false );
+    delete sessionContext;
 }
 
 void SessionContextTest::testShouldEmitSessionChangedSignal() {
+    sessionContext = new SessionContext ( connection );
     QSignalSpy spy ( this->sessionContext, SIGNAL ( sessionChanged() ) );
     connection->requestSession ( "12345678" );
     QVERIFY ( spy.count() == 1 );
+    delete sessionContext;
 }
