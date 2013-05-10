@@ -23,11 +23,13 @@ public:
 
 private:
     QNetworkAccessManager * networkAccessManager;
-    QString sessionId;
+    QString sessionKey;
+    QList<QNetworkCookie> * cookies;
     static QString hostname;
 
     QNetworkRequest createRequest ( QUrl url );
     bool isRedirect ( QNetworkReply * reply );
+    void addCookie ( QNetworkCookie cookie );
 
 private slots:
     void handleReply ( QNetworkReply * reply );
