@@ -113,7 +113,8 @@ void HttpConnection::handleReply ( QNetworkReply * reply ) {
 }
 
 QNetworkRequest HttpConnection::createRequest ( QUrl url ) {
-    QNetworkRequest request ( url );
+    QNetworkRequest request;
+    request.setUrl ( url );
     if ( this->cookies->size() > 0 ) {
         request.setRawHeader (
             "Cookie",

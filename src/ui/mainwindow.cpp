@@ -37,9 +37,15 @@ MainWindow::MainWindow ( QWidget * parent, Qt::WindowFlags f ) : QMainWindow ( p
 }
 
 MainWindow::~MainWindow() {
+    SplashScreen::instance()->close();
+    delete SplashScreen::instance();
     this->overlayWidget->close();
     delete overlayWidget;
     delete widgetList;
+    for ( int i = 0; i < ui->stackedWidget->count(); i++ ) {
+        ui->stackedWidget->widget ( i )->close();
+        delete ui->stackedWidget->widget ( i );
+    }
     delete ui;
 }
 
