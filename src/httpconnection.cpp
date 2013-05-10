@@ -16,6 +16,7 @@ HttpConnection::HttpConnection ()
 
 HttpConnection::~HttpConnection() {
     delete networkAccessManager;
+    delete cookies;
 }
 
 void HttpConnection::requestLoggedIn() {
@@ -114,7 +115,10 @@ void HttpConnection::handleReply ( QNetworkReply * reply ) {
 QNetworkRequest HttpConnection::createRequest ( QUrl url ) {
     QNetworkRequest request ( url );
     if ( this->cookies->size() > 0 ) {
-        request.setRawHeader ( "Cookie", "JSESSIONID=" + this->cookies->at ( 0 ).value() );
+        request.setRawHeader (
+            "Cookie",
+            this->cookies->at ( 0 ).name() + "=" + this->cookies->at ( 0 ).value()
+        );
     }
     if ( this->username.isEmpty() || this->password.isEmpty() ) return request;
     QByteArray headerValue = "Basic "
