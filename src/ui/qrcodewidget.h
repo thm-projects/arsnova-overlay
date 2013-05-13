@@ -30,6 +30,7 @@ private:
 
 private slots:
     void onSessionChanged();
+    void onFullscreenButtonToggled ( bool );
 };
 
 #endif // QRCODEWIDGET_H

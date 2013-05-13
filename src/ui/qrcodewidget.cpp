@@ -6,6 +6,7 @@ QRCodeWidget::QRCodeWidget ( SessionContext * context, QWidget* parent, Qt::Wind
     this->setFullscreen ( false );
 
     connect ( _sessionContext, SIGNAL ( sessionChanged() ), this, SLOT ( onSessionChanged() ) );
+    connect ( _ui->toolButton, SIGNAL ( clicked ( bool ) ), this, SLOT ( onFullscreenButtonToggled ( bool ) ) );
 }
 
 QRCodeWidget::~QRCodeWidget() {
@@ -14,7 +15,7 @@ QRCodeWidget::~QRCodeWidget() {
 
 void QRCodeWidget::setFullscreen ( bool fullscreen ) {
     if ( fullscreen ) {
-        // Rezize widget with 48px padding on each side
+      // Rezize widget with 48px padding on each side
         this->resize (
             QApplication::desktop()->screenGeometry().width() - 96,
             QApplication::desktop()->screenGeometry().height() - 96
@@ -26,6 +27,8 @@ void QRCodeWidget::setFullscreen ( bool fullscreen ) {
             | Qt::WindowStaysOnTopHint
             | Qt::X11BypassWindowManagerHint
         );
+    } else {
+        this->setWindowFlags ();      
     }
 
     this->adjustSize();
@@ -69,4 +72,8 @@ const Ui::QRCodeWidget * const QRCodeWidget::getUi() {
 
 void QRCodeWidget::onSessionChanged() {
     this->setUrl ( QString ( "https://arsnova.thm.de/#id/" ) + _sessionContext->sessionId() );
+}
+
+void QRCodeWidget::onFullscreenButtonToggled ( bool enabled ) {
+    this->setFullscreen ( enabled );
 }
