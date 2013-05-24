@@ -33,6 +33,8 @@ private:
     QWidget * findWidget ( QString widgetTitle );
     void connectLoginWidget();
 
+    void disconnectAll();
+
 private slots:
     void onSystemTrayActivated ( QSystemTrayIcon::ActivationReason reason );
     void activateWidget ( QString widgetTitle );

@@ -37,7 +37,7 @@ MainWindow::MainWindow ( QWidget * parent, Qt::WindowFlags f ) : QMainWindow ( p
 }
 
 MainWindow::~MainWindow() {
-    disconnect ( SystemTrayIcon::instance(), SIGNAL ( activated ( QSystemTrayIcon::ActivationReason ) ), this, SLOT ( onSystemTrayActivated ( QSystemTrayIcon::ActivationReason ) ) );
+    this->disconnectAll();
     SystemTrayIcon::destroy();
     SplashScreen::instance()->close();
     SplashScreen::destroy();
@@ -49,6 +49,15 @@ MainWindow::~MainWindow() {
         delete ui->stackedWidget->widget ( i );
     }
     delete ui;
+}
+
+void MainWindow::disconnectAll() {
+    disconnect ( SystemTrayIcon::instance(), SIGNAL ( activated ( QSystemTrayIcon::ActivationReason ) ), this, SLOT ( onSystemTrayActivated ( QSystemTrayIcon::ActivationReason ) ) );
+    disconnect ( SIGNAL ( clicked ( bool ) ), this->menuSignalMapper, SLOT ( map() ) );
+    disconnect ( this->menuSignalMapper, SIGNAL ( mapped ( QString ) ), this, SLOT ( activateWidget ( QString ) ) );
+    disconnect ( this->findWidget ( "Login" ), SIGNAL ( returnPressed() ), this, SLOT ( sessionLogin() ) );
+    disconnect ( this->findWidget ( "Login" ), SIGNAL ( exitButtonClicked() ), this, SLOT ( close() ) );
+    disconnect ( this->findWidget ( "Login" ), SIGNAL ( loginButtonClicked() ), this, SLOT ( sessionLogin() ) );
 }
 
 const Ui::MainWindow * const MainWindow::getUi() {
