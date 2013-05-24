@@ -2,6 +2,8 @@
 #define SYSTEMTRAYICON_H
 
 #include <QtGui>
+#include <atomic>
+#include <mutex>
 
 class SystemTrayIcon : public QSystemTrayIcon {
 
@@ -15,7 +17,7 @@ private:
     explicit SystemTrayIcon ( QIcon icon );
     void addExitAction();
 
-    static SystemTrayIcon * _instance;
+    static std::atomic<SystemTrayIcon *> _instance;
     QMenu * menu;
 
 private slots:
@@ -23,3 +25,5 @@ private slots:
 };
 
 #endif // SYSTEMTRAYICON_H
+
+
