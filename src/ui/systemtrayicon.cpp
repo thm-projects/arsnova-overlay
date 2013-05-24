@@ -9,6 +9,10 @@ SystemTrayIcon::SystemTrayIcon ( QIcon icon ) : QSystemTrayIcon ( icon ) {
 }
 
 SystemTrayIcon::~SystemTrayIcon() {
+    foreach ( QAction * action, this->menu->actions() ) {
+        this->menu->removeAction ( action );
+        delete action;
+    }
     delete this->menu;
 }
 
@@ -16,10 +20,10 @@ SystemTrayIcon * SystemTrayIcon::instance() {
     static std::mutex mutex;
     SystemTrayIcon * systemTrayIcon = _instance.load();
     if ( _instance == nullptr ) {
-        std::lock_guard<std::mutex>  lock(mutex);
-        if (_instance == nullptr ) {
+        std::lock_guard<std::mutex>  lock ( mutex );
+        if ( _instance == nullptr ) {
             systemTrayIcon = new SystemTrayIcon ( QIcon ( ":images/arsnova.svg" ) );
-            _instance.store(systemTrayIcon);
+            _instance.store ( systemTrayIcon );
         }
     }
     return systemTrayIcon;
