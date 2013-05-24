@@ -25,6 +25,10 @@ SystemTrayIcon * SystemTrayIcon::instance() {
     return systemTrayIcon;
 }
 
+void SystemTrayIcon::destroy() {
+    delete _instance.load();
+}
+
 void SystemTrayIcon::addExitAction() {
     QAction * exitAction = new QAction ( QIcon ( ":images/images/application-exit.png" ), tr ( "Exit" ), this );
     menu->addAction ( exitAction );

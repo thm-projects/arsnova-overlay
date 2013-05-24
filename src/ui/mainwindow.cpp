@@ -38,8 +38,9 @@ MainWindow::MainWindow ( QWidget * parent, Qt::WindowFlags f ) : QMainWindow ( p
 
 MainWindow::~MainWindow() {
     disconnect ( SystemTrayIcon::instance(), SIGNAL ( activated ( QSystemTrayIcon::ActivationReason ) ), this, SLOT ( onSystemTrayActivated ( QSystemTrayIcon::ActivationReason ) ) );
+    SystemTrayIcon::destroy();
     SplashScreen::instance()->close();
-    delete SplashScreen::instance();
+    SplashScreen::destroy();
     this->overlayWidget->close();
     delete overlayWidget;
     delete widgetList;

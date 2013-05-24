@@ -11,6 +11,7 @@ class SystemTrayIcon : public QSystemTrayIcon {
 
 public:
     static SystemTrayIcon * instance();
+    static void destroy();
     virtual ~SystemTrayIcon();
 
 private:
