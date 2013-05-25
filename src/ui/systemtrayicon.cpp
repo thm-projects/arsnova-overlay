@@ -1,6 +1,6 @@
 #include "systemtrayicon.h"
 
-std::atomic<SystemTrayIcon *> SystemTrayIcon::_instance ( nullptr );
+SystemTrayIcon * SystemTrayIcon::_instance = nullptr;
 
 SystemTrayIcon::SystemTrayIcon ( QIcon icon ) : QSystemTrayIcon ( icon ) {
     menu = new QMenu ( "ARSnovaDesktop" );
@@ -18,20 +18,14 @@ SystemTrayIcon::~SystemTrayIcon() {
 }
 
 SystemTrayIcon * SystemTrayIcon::instance() {
-    static std::mutex mutex;
-    SystemTrayIcon * systemTrayIcon = _instance.load();
     if ( _instance == nullptr ) {
-        std::lock_guard<std::mutex>  lock ( mutex );
-        if ( _instance == nullptr ) {
-            systemTrayIcon = new SystemTrayIcon ( QIcon ( ":images/arsnova.svg" ) );
-            _instance.store ( systemTrayIcon );
-        }
+        _instance = new SystemTrayIcon ( QIcon ( ":images/arsnova.svg" ) );
     }
-    return systemTrayIcon;
+    return _instance;
 }
 
 void SystemTrayIcon::destroy() {
-    delete _instance.load();
+    delete _instance;
 }
 
 void SystemTrayIcon::addExitAction() {
