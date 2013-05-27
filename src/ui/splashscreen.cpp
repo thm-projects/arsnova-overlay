@@ -13,6 +13,10 @@ SplashScreen * SplashScreen::instance() {
     return _instance;
 }
 
+void SplashScreen::destroy() {
+    delete _instance;
+}
+
 void SplashScreen::showMessage ( QString message ) {
     QSplashScreen::show();
     QSplashScreen::showMessage ( message, Qt::AlignBottom|Qt::AlignLeft, Qt::gray );

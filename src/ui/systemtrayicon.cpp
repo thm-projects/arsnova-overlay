@@ -9,6 +9,11 @@ SystemTrayIcon::SystemTrayIcon ( QIcon icon ) : QSystemTrayIcon ( icon ) {
 }
 
 SystemTrayIcon::~SystemTrayIcon() {
+    disconnect ( SIGNAL ( triggered ( bool ) ), this, SLOT ( exitApplication () ) );
+    foreach ( QAction * action, this->menu->actions() ) {
+        this->menu->removeAction ( action );
+        delete action;
+    }
     delete this->menu;
 }
 
@@ -17,6 +22,10 @@ SystemTrayIcon * SystemTrayIcon::instance() {
         _instance = new SystemTrayIcon ( QIcon ( ":images/arsnova.svg" ) );
     }
     return _instance;
+}
+
+void SystemTrayIcon::destroy() {
+    delete _instance;
 }
 
 void SystemTrayIcon::addExitAction() {
@@ -28,3 +37,5 @@ void SystemTrayIcon::addExitAction() {
 void SystemTrayIcon::exitApplication() {
     exit ( 0 );
 }
+
+

@@ -7,6 +7,7 @@ class SplashScreen : public QSplashScreen {
 
 public:
     static SplashScreen * instance();
+    static void destroy();
     void showMessage ( QString message );
 
 private:
