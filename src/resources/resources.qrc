@@ -14,5 +14,6 @@
     <file>images/background.png</file>
     <file>images/splash.png</file>
     <file>arsnova.svg</file>
+    <file>arsnova-color.svg</file>
   </qresource>
 </RCC>

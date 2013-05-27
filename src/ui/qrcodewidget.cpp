@@ -1,10 +1,10 @@
 #include "qrcodewidget.h"
 
-QRCodeWidget::QRCodeWidget ( SessionContext * context, QWidget* parent, Qt::WindowFlags f )
+QRCodeWidget::QRCodeWidget ( SessionContext * context, QStackedWidget * parent, Qt::WindowFlags f )
     : QWidget ( parent, f ), _ui ( new Ui::QRCodeWidget() ), _sessionContext ( context ) {
     _ui->setupUi ( this );
+    this->parentBackup = parent;
     this->setFullscreen ( false );
-
     connect ( _sessionContext, SIGNAL ( sessionChanged() ), this, SLOT ( onSessionChanged() ) );
     connect ( _ui->toolButton, SIGNAL ( clicked ( bool ) ), this, SLOT ( onFullscreenButtonToggled ( bool ) ) );
 }
@@ -13,9 +13,15 @@ QRCodeWidget::~QRCodeWidget() {
     delete _ui;
 }
 
+void QRCodeWidget::show() {
+    this->adjustSize();
+    QWidget::show();
+}
+
 void QRCodeWidget::setFullscreen ( bool fullscreen ) {
     if ( fullscreen ) {
-      // Rezize widget with 48px padding on each side
+        // Rezize widget with 48px padding on each side
+        this->setParent ( nullptr );
         this->resize (
             QApplication::desktop()->screenGeometry().width() - 96,
             QApplication::desktop()->screenGeometry().height() - 96
@@ -27,15 +33,21 @@ void QRCodeWidget::setFullscreen ( bool fullscreen ) {
             | Qt::WindowStaysOnTopHint
             | Qt::X11BypassWindowManagerHint
         );
+        this->setVisible ( true );
+        this->adjustSize();
     } else {
-        this->setWindowFlags ();      
+        this->setParent ( this->parentBackup );
+        this->parentBackup->addWidget ( this );
+        this->parentBackup->setCurrentWidget ( this );
+        this->setVisible ( true );
+        this->adjustSize();
     }
-
-    this->adjustSize();
 
     QRect frect = frameGeometry();
     frect.moveCenter ( QApplication::desktop()->availableGeometry().center() );
     move ( frect.topLeft() );
+
+    this->_ui->toolButton->setDown ( fullscreen );
 }
 
 void QRCodeWidget::setUrl ( QUrl url ) {
@@ -47,16 +59,15 @@ void QRCodeWidget::setUrl ( QUrl url ) {
 
 void QRCodeWidget::adjustSize() {
     _ui->qrCodeLabel->resize ( this->neededQRCodeSize() );
+    this->onSessionChanged();
     _ui->urlLabel->setStyleSheet ( "font-size: " + this->neededFontSize() );
     this->setStyleSheet ( "background-color: white;" );
 }
 
 QSize QRCodeWidget::neededQRCodeSize() {
-    int edgeSize = ( this->size().width() > this->size().height() )
-                   ? this->size().height()
-                   : this->size().width();
+    int edgeSize = this->size().height();
 
-    return QSize ( edgeSize * .75, edgeSize * .75 );
+    return QSize ( edgeSize * .7, edgeSize * .7 );
 }
 
 QString QRCodeWidget::neededFontSize() {
@@ -77,3 +88,4 @@ void QRCodeWidget::onSessionChanged() {
 void QRCodeWidget::onFullscreenButtonToggled ( bool enabled ) {
     this->setFullscreen ( enabled );
 }
+

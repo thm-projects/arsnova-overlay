@@ -30,8 +30,6 @@ private slots:
     void testShouldDisplayCorrectCountString();
     void testShouldSwitchToLogoDiagram();
     void testShouldSwitchToBarDiagram();
-    void testShouldShowQRCodeWidget();
-    void testShouldNotShowQRCodeWidget();
     void testShouldBeFullscreen();
     void testShouldNotBeFullscreen();
     void testShouldBeOpaque();

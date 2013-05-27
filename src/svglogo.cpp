@@ -81,7 +81,7 @@ private:
 };
 
 SvgLogo::SvgLogo() {
-    this->_private = new SvgLogo::SvgLogoPrivate ( this, new QFile ( ":images/arsnova.svg" ) );
+    this->_private = new SvgLogo::SvgLogoPrivate ( this, new QFile ( ":images/arsnova-color.svg" ) );
 }
 
 SvgLogo::~SvgLogo() {
