@@ -37,8 +37,10 @@ void QRCodeWidget::setFullscreen ( bool fullscreen ) {
         this->adjustSize();
     } else {
         this->setParent ( this->parentBackup );
-        this->parentBackup->addWidget ( this );
-        this->parentBackup->setCurrentWidget ( this );
+        if ( parentBackup != nullptr ) {
+            this->parentBackup->addWidget ( this );
+            this->parentBackup->setCurrentWidget ( this );
+        }
         this->setVisible ( true );
         this->adjustSize();
     }
