@@ -1,7 +1,7 @@
 #include "qrcodewidget.h"
 
 QRCodeWidget::QRCodeWidget ( SessionContext * context, QWidget* parent, Qt::WindowFlags f )
-    : QWidget ( parent, f ), _sessionContext ( context ), _ui ( new Ui::QRCodeWidget() ) {
+    : QWidget ( parent, f ), _ui ( new Ui::QRCodeWidget() ), _sessionContext ( context ) {
     _ui->setupUi ( this );
     this->setFullscreen ( false );
 

@@ -21,7 +21,7 @@
 #include "sessioncontext.h"
 
 SessionContext::SessionContext ( AbstractConnection * connection )
-    : _connection ( connection ), _isValid ( false ) {
+    : _isValid ( false ), _connection ( connection ) {
     connect ( _connection, SIGNAL ( requestFinished ( UnderstandingResponse ) ), this, SLOT ( onUnderstandingResponse ( UnderstandingResponse ) ) );
     connect ( _connection, SIGNAL ( requestFinished ( SessionResponse ) ), this, SLOT ( onSessionResponse ( SessionResponse ) ) );
 }
