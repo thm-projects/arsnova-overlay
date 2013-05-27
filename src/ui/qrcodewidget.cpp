@@ -10,6 +10,8 @@ QRCodeWidget::QRCodeWidget ( SessionContext * context, QStackedWidget * parent, 
 }
 
 QRCodeWidget::~QRCodeWidget() {
+    disconnect ( _sessionContext, SIGNAL ( sessionChanged() ), this, SLOT ( onSessionChanged() ) );
+    disconnect ( _ui->toolButton, SIGNAL ( clicked ( bool ) ), this, SLOT ( onFullscreenButtonToggled ( bool ) ) );
     delete _ui;
 }
 
