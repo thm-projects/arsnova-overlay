@@ -12,8 +12,7 @@ OverlayWidget::OverlayWidget ( SessionContext * context, QWidget * parent, Qt::W
       connection ( context->connection() ),
       context ( context ) {
     ui->setupUi ( this );
-    this->qrcodewidget = new QRCodeWidget ( context );
-    this->qrcodewidget->setFullscreen ( true );
+    this->latestUnderstandingResponses = 0;
     this->updateTimer = new UpdateTimer();
     this->connectSignals();
     this->setMouseTracking ( true );
@@ -30,7 +29,6 @@ void OverlayWidget::connectSignals() {
     connect ( ui->actionFullscreen, SIGNAL ( triggered ( bool ) ), this, SLOT ( makeFullscreen ( bool ) ) );
     connect ( ui->actionSwitchView, SIGNAL ( triggered ( bool ) ), this, SLOT ( switchView ( bool ) ) );
     connect ( ui->actionExit, SIGNAL ( triggered ( bool ) ), this, SLOT ( close() ) );
-    connect ( ui->actionShowQRCode, SIGNAL ( triggered ( bool ) ), this, SLOT ( showQRCode ( bool ) ) );
 }
 
 OverlayWidget::~OverlayWidget() {
@@ -40,7 +38,6 @@ OverlayWidget::~OverlayWidget() {
 }
 
 bool OverlayWidget::close() {
-    this->qrcodewidget->hide();
     return QWidget::close();
 }
 
@@ -160,16 +157,4 @@ void OverlayWidget::switchView ( bool coloredLogoView ) {
         return;
     }
     this->setVisibleViewType ( BAR_VIEW );
-}
-
-void OverlayWidget::showQRCode ( bool enabled ) {
-    QUrl url ( QString ( "https://arsnova.thm.de/#id/" ) + this->context->sessionId() );
-    this->qrcodewidget->setUrl ( url );
-
-    if ( enabled ) {
-        this->qrcodewidget->show();
-        return;
-    }
-
-    this->qrcodewidget->hide();
 }

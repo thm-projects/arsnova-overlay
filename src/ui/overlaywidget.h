@@ -61,7 +61,6 @@ private slots:
     void makeTransparent ( bool enabled );
     void makeFullscreen ( bool enabled );
     void switchView ( bool coloredLogoView );
-    void showQRCode ( bool enabled );
 };
 
 #endif // OVERLAYWIDGET_H

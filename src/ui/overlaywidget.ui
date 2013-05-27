@@ -38,9 +38,6 @@
    <property name="margin">
     <number>0</number>
    </property>
-   <item row="0" column="0">
-    <widget class="SessionInformationWidget" name="sessioninformationwidget"/>
-   </item>
    <item row="3" column="0" colspan="2">
     <widget class="QToolBar" name="menuWidget">
      <property name="sizePolicy">
@@ -61,11 +58,14 @@
        <height>22</height>
       </size>
      </property>
+     <property name="layoutDirection">
+      <enum>Qt::LeftToRight</enum>
+     </property>
      <property name="autoFillBackground">
       <bool>false</bool>
      </property>
      <property name="styleSheet">
-      <string notr="true">background: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(240, 240, 240, 255), stop:1 rgba(160, 160, 160, 255));</string>
+      <string notr="true"/>
      </property>
      <property name="iconSize">
       <size>
@@ -76,29 +76,19 @@
      <addaction name="actionMakeTransparent"/>
      <addaction name="actionFullscreen"/>
      <addaction name="actionSwitchView"/>
-     <addaction name="actionShowQRCode"/>
      <addaction name="actionExit"/>
     </widget>
    </item>
+   <item row="0" column="0">
+    <widget class="SessionInformationWidget" name="sessioninformationwidget" native="true"/>
+   </item>
    <item row="1" column="0" colspan="2">
-    <widget class="LogoDiagramWidget" name="logodiagramwidget"/>
+    <widget class="LogoDiagramWidget" name="logodiagramwidget" native="true"/>
    </item>
    <item row="2" column="0" colspan="2">
-    <widget class="BarDiagramWidget" name="bardiagramwidget"/>
+    <widget class="BarDiagramWidget" name="bardiagramwidget" native="true"/>
    </item>
   </layout>
-  <action name="actionChangeSession">
-   <property name="icon">
-    <iconset resource="../resources/resources.qrc">
-     <normaloff>:/images/images/system-switch-user.png</normaloff>:/images/images/system-switch-user.png</iconset>
-   </property>
-   <property name="text">
-    <string>ChangeSession</string>
-   </property>
-   <property name="shortcut">
-    <string>Ctrl+S</string>
-   </property>
-  </action>
   <action name="actionMakeTransparent">
    <property name="checkable">
     <bool>true</bool>
@@ -170,24 +160,6 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+V</string>
-   </property>
-  </action>
-  <action name="actionShowQRCode">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="icon">
-    <iconset resource="../resources/resources.qrc">
-     <normaloff>:/images/images/qrcode.png</normaloff>:/images/images/qrcode.png</iconset>
-   </property>
-   <property name="text">
-    <string>ShowQRCode</string>
-   </property>
-   <property name="toolTip">
-    <string>ShowQRCode</string>
-   </property>
-   <property name="shortcut">
-    <string>Ctrl+Alt+Q</string>
    </property>
   </action>
  </widget>
