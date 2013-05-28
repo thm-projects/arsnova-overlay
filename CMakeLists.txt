@@ -39,6 +39,7 @@ set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR}/libs)
 
 CONFIGURE_FILE( version.h.cmake src/version.h )
 CONFIGURE_FILE( Doxyfile.cmake Doxyfile )
+CONFIGURE_FILE( sonar.properties.cmake sonar.properties )
 
 add_custom_target(doc)
 find_program(DOXYGEN_EXECUTABLE "doxygen")
