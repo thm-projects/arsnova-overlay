@@ -5,6 +5,8 @@
 #include <QtGui>
 #include <QtSvg>
 
+#include <memory>
+
 #include "understandingresponse.h"
 
 class SvgLogo {
@@ -20,7 +22,7 @@ public:
 
 private:
     class SvgLogoPrivate;
-    SvgLogoPrivate * _private;
+    std::unique_ptr<SvgLogoPrivate> _private;
 };
 
 #endif // SVGLOGO_H

@@ -118,6 +118,9 @@ QPixmap QRCodeWidget::transform ( QPixmap pixmap, Transformation transformation 
     case Transformation::RIGHT:
         yRotate = 20;
         break;
+    case Transformation::NONE:
+    default:
+        break;
     }
 
     translationTransform.scale ( 1, yScaling );
