@@ -43,13 +43,13 @@ int main ( int argc, char** argv ) {
     app.setStyle ( "plastique" );
     app.setQuitOnLastWindowClosed ( false );
 
+    SplashScreen::instance()->showMessage ( "Starting ARSnovaDesktop" );
+    SplashScreen::instance()->show();
+
     MainWindow mainWindow;
     mainWindow.show();
 
     SystemTrayIcon::instance()->show();
-
-    SplashScreen::instance()->showMessage ( "Starting ARSnovaDesktop" );
-    SplashScreen::instance()->show();
 
 #ifdef __APPLE__
     stopApplication();

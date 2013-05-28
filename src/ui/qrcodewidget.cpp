@@ -7,6 +7,7 @@ QRCodeWidget::QRCodeWidget ( SessionContext * context, QStackedWidget * parent, 
     this->setFullscreen ( false );
     connect ( _sessionContext, SIGNAL ( sessionChanged() ), this, SLOT ( onSessionChanged() ) );
     connect ( _ui->toolButton, SIGNAL ( clicked ( bool ) ), this, SLOT ( onFullscreenButtonToggled ( bool ) ) );
+    connect ( _ui->transformComboBox, SIGNAL ( currentIndexChanged ( int ) ), this, SLOT ( onTransformationChanged() ) );
 }
 
 QRCodeWidget::~QRCodeWidget() {
@@ -55,7 +56,7 @@ void QRCodeWidget::setFullscreen ( bool fullscreen ) {
 void QRCodeWidget::setUrl ( QUrl url ) {
     QRCodeGenerator qrgen ( url.toString() );
     QPixmap pixmap = QPixmap::fromImage ( qrgen.generate().scaled ( this->neededQRCodeSize() ) );
-    _ui->qrCodeLabel->setPixmap ( pixmap );
+    _ui->qrCodeLabel->setPixmap ( this->transform ( pixmap, ( Transformation ) this->_ui->transformComboBox->currentIndex() ) );
     _ui->urlLabel->setText ( url.toString() );
 }
 
@@ -87,7 +88,42 @@ void QRCodeWidget::onSessionChanged() {
     this->setUrl ( QString ( "https://arsnova.thm.de/#id/" ) + _sessionContext->sessionId() );
 }
 
+void QRCodeWidget::onTransformationChanged() {
+    this->onSessionChanged();
+}
+
 void QRCodeWidget::onFullscreenButtonToggled ( bool enabled ) {
     this->setFullscreen ( enabled );
 }
+
+QPixmap QRCodeWidget::transform ( QPixmap pixmap, Transformation transformation ) {
+    QTransform translationTransform;
+    qreal yScaling = 1;
+    if ( transformation == Transformation::LEFT || transformation == Transformation::RIGHT ) yScaling = .9;
+    int xRotate = 0;
+    int yRotate = 0;
+
+    switch ( transformation ) {
+    case Transformation::TOP:
+        xRotate = -20;
+        break;
+    case Transformation::BOTTOM:
+        xRotate = 20;
+        break;
+    case Transformation::LEFT:
+        yRotate = -20;
+        break;
+    case Transformation::RIGHT:
+        yRotate = 20;
+        break;
+    }
+
+    translationTransform.scale ( 1, yScaling );
+    translationTransform.translate ( pixmap.width() /2, pixmap.height() /2 );
+    translationTransform.rotate ( xRotate, Qt::XAxis );
+    translationTransform.rotate ( yRotate, Qt::YAxis );
+    translationTransform.translate ( -pixmap.width() /2, -pixmap.height() /2 );
+    return pixmap.transformed ( translationTransform, Qt::SmoothTransformation );
+}
+
 

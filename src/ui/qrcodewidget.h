@@ -23,15 +23,25 @@ public:
     virtual void show();
 
 private:
+    enum Transformation {
+        NONE,
+        TOP,
+        BOTTOM,
+        LEFT,
+        RIGHT
+    };
+
     Ui::QRCodeWidget * _ui;
     void adjustSize();
     QSize neededQRCodeSize();
     QString neededFontSize();
     SessionContext * _sessionContext;
     QStackedWidget * parentBackup;
+    QPixmap transform ( QPixmap pixmap, Transformation transformation );
 
 private slots:
     void onSessionChanged();
+    void onTransformationChanged();
     void onFullscreenButtonToggled ( bool );
 };
 
