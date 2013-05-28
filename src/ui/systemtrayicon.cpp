@@ -9,7 +9,6 @@ SystemTrayIcon::SystemTrayIcon ( QIcon icon ) : QSystemTrayIcon ( icon ) {
 }
 
 SystemTrayIcon::~SystemTrayIcon() {
-    disconnect ( SIGNAL ( triggered ( bool ) ), this, SLOT ( exitApplication () ) );
     foreach ( QAction * action, this->menu->actions() ) {
         this->menu->removeAction ( action );
         delete action;
