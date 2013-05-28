@@ -1,7 +1,7 @@
 # required metadata
 sonar.projectKey=de.thm.arsnova:ARSnovaDesktop
 sonar.projectName=ARSnovaDesktop
-sonar.projectVersion=@VERSION_MAJOR@.@VERSION_MINOR@.@VERSION_PATCH@
+sonar.projectVersion=@VERSION_SHORT@
   
 # path to source directories (required)
 sonar.sources=src

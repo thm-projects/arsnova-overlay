@@ -28,3 +28,4 @@ Doxyfile
 *.log
 Testing*
 src/version.h
+sonar.properties
