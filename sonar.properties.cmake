@@ -14,6 +14,7 @@ sonar.cxx.xunit.reportPath=*Test.xml
 sonar.cxx.coverage.reportPath=coverage.xml
 sonar.cxx.valgrind.reportPath=*Test.memcheck
 sonar.cxx.cppcheck.reportPath=cppcheck.xml
+sonar.cxx.cppncss.reportPath=cppncss.xml
   
 sonar.scm.url=scm:git:git://scm.thm.de/arsnova/arsnovadesktop.git
 
