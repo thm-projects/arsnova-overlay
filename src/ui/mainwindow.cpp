@@ -22,7 +22,6 @@ MainWindow::MainWindow ( QWidget * parent, Qt::WindowFlags f ) : QMainWindow ( p
     this->connectLoginWidget();
 
     this->addWidget ( "Sessions", new SessionWidget ( this->sessionContext ) );
-    this->addWidget ( "Settings", new QWidget() );
 
     QRCodeWidget * qrwidget = new QRCodeWidget ( this->sessionContext, this->ui->stackedWidget );
     qrwidget->setUrl ( QUrl ( "https://arsnova.thm.de/" ) );
@@ -44,11 +43,13 @@ MainWindow::~MainWindow() {
     this->overlayWidget->close();
     delete overlayWidget;
     delete widgetList;
-    for ( int i = 0; i < ui->stackedWidget->count(); i++ ) {
-        ui->stackedWidget->widget ( i )->close();
-        delete ui->stackedWidget->widget ( i );
+    int widgetCount =  ui->stackedWidget->count();
+    for ( int i = 0; i < widgetCount ; i++ ) {
+        ui->stackedWidget->widget ( 0 )->close();
+        delete ui->stackedWidget->widget ( 0 );
     }
     delete ui;
+    delete sessionContext;
 }
 
 void MainWindow::disconnectAll() {
