@@ -32,34 +32,15 @@ void OverlayWidgetTest::testShouldDisplayCorrectCountString() {
 }
 
 void OverlayWidgetTest::testShouldSwitchToLogoDiagram() {
-    QVERIFY ( ! this->overlayWidget->getUi()->actionSwitchView->isChecked() );
-    this->overlayWidget->getUi()->actionSwitchView->trigger();
-    QVERIFY ( this->overlayWidget->getUi()->actionSwitchView->isChecked() );
+    context->setViewType ( SessionContext::ICON_VIEW );
     QVERIFY ( ! this->overlayWidget->getUi()->bardiagramwidget->isVisible() );
     QVERIFY ( this->overlayWidget->getUi()->logodiagramwidget->isVisible() );
 }
 
 void OverlayWidgetTest::testShouldSwitchToBarDiagram() {
-    QVERIFY ( this->overlayWidget->getUi()->actionSwitchView->isChecked() );
-    this->overlayWidget->getUi()->actionSwitchView->trigger();
-    QVERIFY ( ! this->overlayWidget->getUi()->actionSwitchView->isChecked() );
+    context->setViewType ( SessionContext::DIAGRAM_VIEW );
     QVERIFY ( this->overlayWidget->getUi()->bardiagramwidget->isVisible() );
     QVERIFY ( ! this->overlayWidget->getUi()->logodiagramwidget->isVisible() );
-}
-
-void OverlayWidgetTest::testShouldBeFullscreen() {
-    this->overlayWidget->getUi()->actionFullscreen->trigger();
-    int width = QApplication::desktop()->screenGeometry().width();
-    int height = QApplication::desktop()->screenGeometry().height();
-
-    QVERIFY ( this->overlayWidget->width() == width );
-    QVERIFY ( this->overlayWidget->height() == height );
-}
-
-void OverlayWidgetTest::testShouldNotBeFullscreen() {
-    this->overlayWidget->getUi()->actionFullscreen->trigger();
-    QVERIFY ( this->overlayWidget->width() == this->widgetSize.width() );
-    QVERIFY ( this->overlayWidget->height() == this->widgetSize.height() );
 }
 
 void OverlayWidgetTest::testShouldBeOpaque() {

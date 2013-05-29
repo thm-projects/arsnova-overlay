@@ -53,8 +53,6 @@ public slots:
 private slots:
     void updateHttpResponse ( int ticks );
     void makeTransparent ( bool enabled );
-    void makeFullscreen ( bool enabled );
-    void switchView ( bool coloredLogoView );
     void setVisibleViewType ( SessionContext::ViewType type );
 };
 

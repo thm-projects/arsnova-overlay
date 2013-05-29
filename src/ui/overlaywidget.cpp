@@ -26,8 +26,6 @@ void OverlayWidget::connectSignals() {
     connect ( this->connection, SIGNAL ( requestFinished ( UnderstandingResponse ) ), this, SLOT ( onUnderstandingResponse ( UnderstandingResponse ) ) );
     connect ( this->connection, SIGNAL ( requestFinished ( LoggedInResponse ) ), this, SLOT ( onLoggedInResponse ( LoggedInResponse ) ) );
     connect ( ui->actionMakeTransparent, SIGNAL ( triggered ( bool ) ), this, SLOT ( makeTransparent ( bool ) ) );
-    connect ( ui->actionFullscreen, SIGNAL ( triggered ( bool ) ), this, SLOT ( makeFullscreen ( bool ) ) );
-    connect ( ui->actionSwitchView, SIGNAL ( triggered ( bool ) ), this, SLOT ( switchView ( bool ) ) );
     connect ( ui->actionExit, SIGNAL ( triggered ( bool ) ), this, SLOT ( close() ) );
     connect ( context, SIGNAL ( viewTypeChanged ( SessionContext::ViewType ) ), this, SLOT ( setVisibleViewType ( SessionContext::ViewType ) ) );
 }
@@ -132,35 +130,4 @@ void OverlayWidget::makeTransparent ( bool enabled ) {
         return;
     }
     this->setWindowOpacity ( 1 );
-}
-
-void OverlayWidget::makeFullscreen ( bool enabled ) {
-    if ( enabled ) {
-
-        this->move ( 0,0 );
-        this->setMaximumSize (
-            QApplication::desktop()->screenGeometry().width(),
-            QApplication::desktop()->screenGeometry().height()
-        );
-        this->resize (
-            QApplication::desktop()->screenGeometry().width(),
-            QApplication::desktop()->screenGeometry().height()
-        );
-        this->setWindowState ( this->windowState() ^ Qt::WindowFullScreen );
-        QWidget::show();
-        return;
-    }
-
-    this->setWindowState ( this->windowState() & ~Qt::WindowFullScreen );
-    QWidget::show();
-
-    this->moveToBottomRightEdge();
-}
-
-void OverlayWidget::switchView ( bool coloredLogoView ) {
-    if ( coloredLogoView ) {
-        this->setVisibleViewType ( SessionContext::ICON_VIEW );
-        return;
-    }
-    this->setVisibleViewType ( SessionContext::DIAGRAM_VIEW );
 }

@@ -30,8 +30,6 @@ private slots:
     void testShouldDisplayCorrectCountString();
     void testShouldSwitchToLogoDiagram();
     void testShouldSwitchToBarDiagram();
-    void testShouldBeFullscreen();
-    void testShouldNotBeFullscreen();
     void testShouldBeOpaque();
     void testShouldNotBeOpaque();
 };

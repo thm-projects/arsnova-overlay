@@ -74,8 +74,6 @@
       </size>
      </property>
      <addaction name="actionMakeTransparent"/>
-     <addaction name="actionFullscreen"/>
-     <addaction name="actionSwitchView"/>
      <addaction name="actionExit"/>
     </widget>
    </item>
@@ -108,25 +106,6 @@
     <string>Ctrl+T</string>
    </property>
   </action>
-  <action name="actionFullscreen">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="icon">
-    <iconset resource="../resources/resources.qrc">
-     <normaloff>:/images/images/view-fullscreen.png</normaloff>
-     <normalon>:/images/images/view-restore.png</normalon>:/images/images/view-fullscreen.png</iconset>
-   </property>
-   <property name="text">
-    <string>Fullscreen</string>
-   </property>
-   <property name="toolTip">
-    <string>Fullscreen</string>
-   </property>
-   <property name="shortcut">
-    <string>Ctrl+F</string>
-   </property>
-  </action>
   <action name="actionExit">
    <property name="icon">
     <iconset resource="../resources/resources.qrc">
@@ -141,25 +120,6 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+Q</string>
-   </property>
-  </action>
-  <action name="actionSwitchView">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="icon">
-    <iconset resource="../resources/resources.qrc">
-     <normaloff>:/images/images/view-colored-logo.png</normaloff>
-     <normalon>:/images/images/view-statistics.png</normalon>:/images/images/view-colored-logo.png</iconset>
-   </property>
-   <property name="text">
-    <string>Switch View</string>
-   </property>
-   <property name="toolTip">
-    <string>Switch View</string>
-   </property>
-   <property name="shortcut">
-    <string>Ctrl+V</string>
    </property>
   </action>
  </widget>
