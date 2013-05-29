@@ -48,10 +48,6 @@ void HttpConnection::requestUnderstanding() {
     );
 }
 
-void HttpConnection::requestInterposedQuestions() {}
-
-void HttpConnection::requestInterposedQuestion ( QString docID ) {}
-
 bool HttpConnection::isRedirect ( QNetworkReply* reply ) {
     for ( QNetworkReply::RawHeaderPair header : reply->rawHeaderPairs().toStdList() ) {
         if ( header.first == "Location" ) {

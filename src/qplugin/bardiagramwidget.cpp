@@ -6,6 +6,8 @@ const int BarDiagramWidget::xSize = 180;
 class BarDiagramWidget::BarDiagramWidgetPrivate {
 
 public:
+    BarDiagramWidgetPrivate() {}
+
     ~BarDiagramWidgetPrivate() {
         delete this->graphicsScene;
         delete this->bars;

@@ -103,7 +103,7 @@ void MainWindow::activateWidget ( QString widgetTitle ) {
 QWidget * MainWindow::findWidget ( QString widgetTitle ) {
     QMap<QString, QWidget *>::iterator i = this->widgetList->find ( widgetTitle );
 
-    for ( i = this->widgetList->begin(); i != this->widgetList->end(); i++ ) {
+    for ( i = this->widgetList->begin(); i != this->widgetList->end(); ++i ) {
         if ( i.key() == widgetTitle ) return i.value();
     }
 

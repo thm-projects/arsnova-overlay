@@ -18,8 +18,6 @@ public:
     void requestUnderstanding() override;
     void requestSession ( QString sessionKey ) override;
     void requestLoggedIn() override;
-    void requestInterposedQuestions();
-    void requestInterposedQuestion ( QString docID );
 
 private:
     QNetworkAccessManager * networkAccessManager;

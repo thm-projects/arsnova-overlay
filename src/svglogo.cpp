@@ -77,9 +77,8 @@ private:
     QColor _baseColor;
 };
 
-SvgLogo::SvgLogo() {
-    this->_private = std::unique_ptr< SvgLogoPrivate > ( new SvgLogo::SvgLogoPrivate ( std::shared_ptr<QFile> (new QFile ( ":images/arsnova-color.svg" ) ) ) );
-}
+SvgLogo::SvgLogo()
+    : _private ( std::unique_ptr< SvgLogoPrivate > ( new SvgLogo::SvgLogoPrivate ( std::shared_ptr<QFile> ( new QFile ( ":images/arsnova-color.svg" ) ) ) ) ) {}
 
 SvgLogo::~SvgLogo() {}
 
