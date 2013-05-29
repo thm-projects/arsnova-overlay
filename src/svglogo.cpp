@@ -4,14 +4,16 @@
 
 class SvgLogo::SvgLogoPrivate {
 public:
-    explicit SvgLogoPrivate ( std::shared_ptr<QFile> file ) : file ( file ) {
+    explicit SvgLogoPrivate ( QFile * file ) : file ( file ) {
         this->file->open ( QIODevice::ReadOnly );
         this->plainContents = this->file->readAll();
         this->file->close();
         this->setColorValue ( -1 );
     };
 
-    virtual ~SvgLogoPrivate() {}
+    virtual ~SvgLogoPrivate() {
+        delete file;
+    }
 
     void setColorValue ( float value ) {
         this->_contents = this->plainContents;
@@ -71,17 +73,19 @@ public:
     }
 
 private:
-    std::shared_ptr<QFile> file;
+    QFile * file;
     QByteArray _contents;
     QByteArray plainContents;
     QColor _baseColor;
 };
 
 SvgLogo::SvgLogo() {
-    this->_private = std::unique_ptr<SvgLogoPrivate> ( new SvgLogo::SvgLogoPrivate ( std::shared_ptr<QFile> ( new QFile ( ":images/arsnova-color.svg" ) ) ) );
+    this->_private = new SvgLogo::SvgLogoPrivate ( new QFile ( ":images/arsnova-color.svg" ) );
 }
 
-SvgLogo::~SvgLogo() {}
+SvgLogo::~SvgLogo() {
+    delete this->_private;
+}
 
 void SvgLogo::updateFromResponse ( UnderstandingResponse response ) {
     if ( response.values().size() != 4 ) return;
