@@ -22,7 +22,7 @@ public:
 
 private:
     class SvgLogoPrivate;
-    SvgLogoPrivate * _private;
+    std::unique_ptr< SvgLogoPrivate > _private;
 };
 
 #endif // SVGLOGO_H

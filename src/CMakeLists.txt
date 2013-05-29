@@ -161,7 +161,7 @@ if(QTPLUGIN)
 endif(QTPLUGIN)
 
 IF(APPLE)
-  SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mmacosx-version-min=10.6") 
+  SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mmacosx-version-min=10.7") 
   INSTALL(CODE
     "SET(BUNDLE
       \"\${CMAKE_INSTALL_PREFIX}/../..\"

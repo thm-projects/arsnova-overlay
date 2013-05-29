@@ -35,7 +35,7 @@ option (TESTS "Enable build of tests" OFF)
 option (COVERAGE "Enable coverage" OFF)
 option (QTPLUGIN "Enable build of Qt plugin" OFF)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR}/bin)
 set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR}/libs)
 
@@ -69,7 +69,8 @@ IF (UNIX AND NOT APPLE)
 ENDIF (UNIX AND NOT APPLE)
 
 if(APPLE)
-  set(CMAKE_EXE_LINKER_FLAGS "-framework Foundation -w")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
+  set(CMAKE_EXE_LINKER_FLAGS "-framework Foundation -w -stdlib=libc++")
 endif(APPLE)
 
 if (APPLE OR WIN32)
