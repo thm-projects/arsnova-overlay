@@ -60,3 +60,7 @@ void SessionContext::setViewType ( SessionContext::ViewType viewType ) {
     this->_viewType = viewType;
     emit this->viewTypeChanged ( viewType );
 }
+
+SessionContext::ViewType SessionContext::viewType() {
+    return this->_viewType;
+}

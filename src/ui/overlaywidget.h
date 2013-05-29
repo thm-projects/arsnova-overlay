@@ -25,6 +25,7 @@ public:
      * @return User interface
      */
     const Ui::OverlayWidget * const getUi();
+    virtual void show();
 
 private:
     Ui::OverlayWidget * ui;

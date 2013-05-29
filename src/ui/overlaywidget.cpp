@@ -38,6 +38,11 @@ OverlayWidget::~OverlayWidget() {
     delete this->ui;
 }
 
+void OverlayWidget::show() {
+    this->setVisibleViewType ( context->viewType() );
+    QWidget::show();
+}
+
 bool OverlayWidget::close() {
     return QWidget::close();
 }
@@ -54,6 +59,7 @@ void OverlayWidget::moveToBottomRightEdge() {
 }
 
 void OverlayWidget::setVisibleViewType ( SessionContext::ViewType type ) {
+    if ( !context->isValid() ) return;
     switch ( type ) {
     case SessionContext::DIAGRAM_VIEW:
         ui->bardiagramwidget->show();
@@ -66,7 +72,6 @@ void OverlayWidget::setVisibleViewType ( SessionContext::ViewType type ) {
             | Qt::WindowStaysOnTopHint
             | Qt::X11BypassWindowManagerHint
         );
-        this->show();
         break;
     case SessionContext::ICON_VIEW:
         ui->sessioninformationwidget->show();
@@ -79,16 +84,16 @@ void OverlayWidget::setVisibleViewType ( SessionContext::ViewType type ) {
             | Qt::WindowStaysOnTopHint
             | Qt::X11BypassWindowManagerHint
         );
-        this->show();
         break;
     }
+    QWidget::show();
 }
 
 void OverlayWidget::onSessionResponse ( SessionResponse response ) {
     this->sessionId = response.sessionId();
 
     if ( ! this->sessionId.isNull() ) {
-        this->setVisibleViewType ( SessionContext::DIAGRAM_VIEW );
+        this->setVisibleViewType ( context->viewType() );
         this->updateHttpResponse ( OverlayWidget::httpUpdateInterval );
         ui->sessioninformationwidget->updateSessionLabel ( response.shortName(), response.sessionId() );
         return;
@@ -142,12 +147,12 @@ void OverlayWidget::makeFullscreen ( bool enabled ) {
             QApplication::desktop()->screenGeometry().height()
         );
         this->setWindowState ( this->windowState() ^ Qt::WindowFullScreen );
-        this->show();
+        QWidget::show();
         return;
     }
 
     this->setWindowState ( this->windowState() & ~Qt::WindowFullScreen );
-    this->show();
+    QWidget::show();
 
     this->moveToBottomRightEdge();
 }

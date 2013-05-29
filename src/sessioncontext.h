@@ -70,10 +70,14 @@ public:
      * @return The Connection
      */
     AbstractConnection * connection();
-    /** Sends signal with new view type
+    /** Sends signal with new view type and stores value
      * @param viewType New ViewType to be selected
      */
     void setViewType ( ViewType viewType );
+    /** Returns actual view type
+     * @return Actual view type
+     */
+    ViewType viewType();
 
 private:
     QString _sessionId;
