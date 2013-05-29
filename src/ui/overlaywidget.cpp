@@ -17,7 +17,7 @@ OverlayWidget::OverlayWidget ( SessionContext * context, QWidget * parent, Qt::W
     this->connectSignals();
     this->setMouseTracking ( true );
     this->moveToBottomRightEdge();
-    this->setVisibleViewType ( BAR_VIEW );
+    this->setVisibleViewType ( SessionContext::DIAGRAM_VIEW );
 }
 
 void OverlayWidget::connectSignals() {
@@ -29,6 +29,7 @@ void OverlayWidget::connectSignals() {
     connect ( ui->actionFullscreen, SIGNAL ( triggered ( bool ) ), this, SLOT ( makeFullscreen ( bool ) ) );
     connect ( ui->actionSwitchView, SIGNAL ( triggered ( bool ) ), this, SLOT ( switchView ( bool ) ) );
     connect ( ui->actionExit, SIGNAL ( triggered ( bool ) ), this, SLOT ( close() ) );
+    connect ( context, SIGNAL ( viewTypeChanged ( SessionContext::ViewType ) ), this, SLOT ( setVisibleViewType ( SessionContext::ViewType ) ) );
 }
 
 OverlayWidget::~OverlayWidget() {
@@ -52,9 +53,9 @@ void OverlayWidget::moveToBottomRightEdge() {
     this->move ( xPos, yPos );
 }
 
-void OverlayWidget::setVisibleViewType ( OverlayWidget::VisibileViewType type ) {
+void OverlayWidget::setVisibleViewType ( SessionContext::ViewType type ) {
     switch ( type ) {
-    case BAR_VIEW:
+    case SessionContext::DIAGRAM_VIEW:
         ui->bardiagramwidget->show();
         ui->sessioninformationwidget->show();
         ui->menuWidget->show();
@@ -67,7 +68,7 @@ void OverlayWidget::setVisibleViewType ( OverlayWidget::VisibileViewType type ) 
         );
         this->show();
         break;
-    case COLORED_LOGO_VIEW:
+    case SessionContext::ICON_VIEW:
         ui->sessioninformationwidget->show();
         ui->bardiagramwidget->hide();
         ui->menuWidget->show();
@@ -87,7 +88,7 @@ void OverlayWidget::onSessionResponse ( SessionResponse response ) {
     this->sessionId = response.sessionId();
 
     if ( ! this->sessionId.isNull() ) {
-        this->setVisibleViewType ( BAR_VIEW );
+        this->setVisibleViewType ( SessionContext::DIAGRAM_VIEW );
         this->updateHttpResponse ( OverlayWidget::httpUpdateInterval );
         ui->sessioninformationwidget->updateSessionLabel ( response.shortName(), response.sessionId() );
         return;
@@ -153,8 +154,8 @@ void OverlayWidget::makeFullscreen ( bool enabled ) {
 
 void OverlayWidget::switchView ( bool coloredLogoView ) {
     if ( coloredLogoView ) {
-        this->setVisibleViewType ( COLORED_LOGO_VIEW );
+        this->setVisibleViewType ( SessionContext::ICON_VIEW );
         return;
     }
-    this->setVisibleViewType ( BAR_VIEW );
+    this->setVisibleViewType ( SessionContext::DIAGRAM_VIEW );
 }

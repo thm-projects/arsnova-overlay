@@ -1,12 +1,18 @@
 #include "sessionwidget.h"
 
 SessionWidget::SessionWidget ( SessionContext * context, QWidget * parent, Qt::WindowFlags f )
-    : QWidget ( parent, f ), _ui ( new Ui::SessionWidget() ), connection ( context->connection() ) {
+    : QWidget ( parent, f ),
+      _ui ( new Ui::SessionWidget() ),
+      connection ( context->connection() ),
+      context ( context ) {
     _ui->setupUi ( this );
 
     connect ( this->connection, SIGNAL ( requestFinished ( UnderstandingResponse ) ), this, SLOT ( onUnderstandingResponse ( UnderstandingResponse ) ) );
     connect ( this->connection, SIGNAL ( requestFinished ( SessionResponse ) ), this, SLOT ( onSessionResponse ( SessionResponse ) ) );
     connect ( _ui->tableWidget, SIGNAL ( itemClicked ( QTableWidgetItem* ) ), this, SLOT ( onItemClicked ( QTableWidgetItem* ) ) );
+
+    connect ( _ui->diagramRadioButton, SIGNAL ( clicked ( bool ) ), this, SLOT ( onViewModeChanged() ) );
+    connect ( _ui->iconRadioButton, SIGNAL ( clicked ( bool ) ), this, SLOT ( onViewModeChanged() ) );
 }
 
 SessionWidget::~SessionWidget() {
@@ -44,4 +50,12 @@ void SessionWidget::onItemClicked ( QTableWidgetItem * item ) {
     QString sessionKey = _ui->tableWidget->item ( item->row(), 2 )->text();
 
     this->connection->requestSession ( sessionKey );
+}
+
+void SessionWidget::onViewModeChanged() {
+    if ( _ui->diagramRadioButton->isChecked() ) {
+        context->setViewType ( SessionContext::DIAGRAM_VIEW );
+    } else {
+        context->setViewType ( SessionContext::ICON_VIEW );
+    }
 }

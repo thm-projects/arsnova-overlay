@@ -55,3 +55,8 @@ void SessionContext::onSessionResponse ( SessionResponse response ) {
         emit this->sessionChanged();
     }
 }
+
+void SessionContext::setViewType ( SessionContext::ViewType viewType ) {
+    this->_viewType = viewType;
+    emit this->viewTypeChanged ( viewType );
+}

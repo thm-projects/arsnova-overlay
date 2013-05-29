@@ -38,6 +38,13 @@ class SessionContext : public QObject {
     Q_OBJECT
 
 public:
+    /** ViewType the session should be visible
+     */
+    enum ViewType {
+        DIAGRAM_VIEW,
+        ICON_VIEW
+    };
+
     /** Creates session context for an unused connection
      * You are required to request a session for the given connection by yourself!
      * @param connection The connection to the servers session
@@ -63,20 +70,29 @@ public:
      * @return The Connection
      */
     AbstractConnection * connection();
+    /** Sends signal with new view type
+     * @param viewType New ViewType to be selected
+     */
+    void setViewType ( ViewType viewType );
 
 private:
     QString _sessionId;
     bool _isValid;
     AbstractConnection * _connection;
+    ViewType _viewType;
 
 private slots:
     void onUnderstandingResponse ( UnderstandingResponse response );
     void onSessionResponse ( SessionResponse response );
-    
+
 signals:
     /** This signal is emitted when the session context successfully changed the session
      */
     void sessionChanged();
+
+    /** This signal is emitted if the view type changes
+     */
+    void viewTypeChanged ( SessionContext::ViewType viewType );
 };
 
 #endif // SESSIONCONTEXT_H

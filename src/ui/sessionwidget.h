@@ -16,11 +16,13 @@ public:
 private:
     Ui::SessionWidget * _ui;
     AbstractConnection * connection;
+    SessionContext * context;
 
 public slots:
     void onUnderstandingResponse ( UnderstandingResponse response );
     void onSessionResponse ( SessionResponse response );
     void onItemClicked ( QTableWidgetItem * item );
+    void onViewModeChanged();
 
 signals:
     void sessionClicked ( QString sessionKey );
