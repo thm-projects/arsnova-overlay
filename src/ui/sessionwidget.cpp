@@ -16,6 +16,8 @@ SessionWidget::SessionWidget ( SessionContext * context, QWidget * parent, Qt::W
 }
 
 SessionWidget::~SessionWidget() {
+    delete _ui->bardiagramwidget;
+    delete _ui->logodiagramwidget;
     delete _ui;
 }
 

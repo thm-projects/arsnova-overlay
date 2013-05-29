@@ -2,6 +2,7 @@
 #define BARDIAGRAMWIDGET_H
 
 #include <QtGui>
+#include <memory>
 #include "ui_bardiagramwidget.h"
 #include "understandingresponse.h"
 
@@ -25,7 +26,7 @@ protected:
 
 private:
     class BarDiagramWidgetPrivate;
-    BarDiagramWidgetPrivate * _private;
+    std::unique_ptr< BarDiagramWidgetPrivate > _private;
 
     Ui::BarDiagramWidget * ui;
 

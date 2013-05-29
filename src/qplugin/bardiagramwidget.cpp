@@ -6,22 +6,25 @@ const int BarDiagramWidget::xSize = 180;
 class BarDiagramWidget::BarDiagramWidgetPrivate {
 
 public:
-    BarDiagramWidgetPrivate() {}
+    BarDiagramWidgetPrivate()
+        : bars ( std::shared_ptr<QList<QGraphicsRectItem*>> ( new QList<QGraphicsRectItem*>() ) ),
+          _graphicsScene ( new QGraphicsScene() ) {
+        this->fillGraphicsScene();
+    }
 
     ~BarDiagramWidgetPrivate() {
-        delete this->graphicsScene;
-        delete this->bars;
+        delete this->_graphicsScene;
+    }
+
+    QGraphicsScene * graphicsScene() {
+        return this->_graphicsScene;
     }
 
 private:
-    QList<QGraphicsRectItem *> * bars;
-    QGraphicsScene * graphicsScene;
+    std::shared_ptr<QList<QGraphicsRectItem *>> bars;
+    QGraphicsScene * _graphicsScene;
 
-public:
-    QGraphicsScene * createGraphicsScene() {
-        this->graphicsScene = new QGraphicsScene();
-        this->bars = new QList<QGraphicsRectItem*>();
-
+    void fillGraphicsScene() {
         QPen whitePen ( qRgb ( 200,200,200 ) );
         QBrush greyBrush ( qRgb ( 100,100,100 ) );
 
@@ -30,13 +33,13 @@ public:
         // Bars
         for ( int i = 1; i <= 4; i++ ) {
             int xSpace = BarDiagramWidget::xSize / 13;
-            this->bars->append ( this->graphicsScene->addRect ( QRectF ( ( xSpace * i ) + ( xSpace * ( i-1 ) * 2 ), ySize,xSpace*2,0 ) ) );
+            this->bars->append ( this->_graphicsScene->addRect ( QRectF ( ( xSpace * i ) + ( xSpace * ( i-1 ) * 2 ), ySize,xSpace*2,0 ) ) );
         }
 
         // Shadows
         for ( int i = 1; i <= 4; i++ ) {
             int xSpace = BarDiagramWidget::xSize / 13;
-            this->bars->append ( this->graphicsScene->addRect ( QRectF ( ( xSpace * i ) + ( xSpace * ( i-1 ) * 2 ), ySize,xSpace*2,0 ) ) );
+            this->bars->append ( this->_graphicsScene->addRect ( QRectF ( ( xSpace * i ) + ( xSpace * ( i-1 ) * 2 ), ySize,xSpace*2,0 ) ) );
         }
 
         QLinearGradient linearGradient;
@@ -85,12 +88,11 @@ public:
         this->bars->at ( 7 )->setBrush ( QBrush ( Qt::black ) );
         this->bars->at ( 7 )->setGraphicsEffect ( effectD );
 
-        this->graphicsScene->addLine ( QLineF ( 0,ySize,BarDiagramWidget::xSize,ySize ), whitePen );
-        this->graphicsScene->update();
-
-        return this->graphicsScene;
+        this->_graphicsScene->addLine ( QLineF ( 0,ySize,BarDiagramWidget::xSize,ySize ), whitePen );
+        this->_graphicsScene->update();
     }
 
+public:
     void updateGraphicsBar ( int index, int value ) {
         QGraphicsRectItem * item = this->bars->at ( index );
 
@@ -105,7 +107,7 @@ public:
         item->setRect ( QRectF ( x,y,width,height ) );
         item->update();
 
-        this->graphicsScene->update();
+        this->_graphicsScene->update();
     }
 
 private:
@@ -117,7 +119,7 @@ private:
 
         for ( int i = 0; i < 4; i++ ) {
             int y = ( ySize * i ) / 4;
-            this->graphicsScene->addLine ( QLineF ( 0,y,BarDiagramWidget::xSize,y ), whiteDottedPen );
+            this->_graphicsScene->addLine ( QLineF ( 0,y,BarDiagramWidget::xSize,y ), whiteDottedPen );
         }
     }
 };
@@ -125,13 +127,11 @@ private:
 BarDiagramWidget::BarDiagramWidget ( QWidget* parent, Qt::WindowFlags f )
     : QWidget ( parent, f ), ui ( new Ui::BarDiagramWidget() ) {
     ui->setupUi ( this );
-    this->_private = new BarDiagramWidgetPrivate ();
-    ui->graphicsView->setScene ( this->_private->createGraphicsScene() );
+    this->_private = std::unique_ptr< BarDiagramWidgetPrivate > ( new BarDiagramWidgetPrivate () );
+    ui->graphicsView->setScene ( this->_private->graphicsScene() );
 }
 
 BarDiagramWidget::~BarDiagramWidget() {
-    delete this->_private;
-    delete this->ui->graphicsView->scene();
     delete this->ui;
 }
 
