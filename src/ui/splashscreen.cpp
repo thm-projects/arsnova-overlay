@@ -3,7 +3,7 @@
 SplashScreen * SplashScreen::_instance = nullptr;
 
 SplashScreen::SplashScreen ( const QPixmap& pixmap, Qt::WindowFlags f ) : QSplashScreen ( pixmap, f ) {
-
+    this->setWindowFlags ( Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint );
 }
 
 SplashScreen * SplashScreen::instance() {

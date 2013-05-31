@@ -120,6 +120,7 @@ void MainWindow::connectLoginWidget() {
 }
 
 void MainWindow::sessionLogin() {
+    SplashScreen::destroy();
     LoginWidget * loginWidget = ( LoginWidget * ) this->findWidget ( "Login" );
     if ( loginWidget != nullptr ) {
         this->sessionContext->connection()->requestSession ( loginWidget->text() );
