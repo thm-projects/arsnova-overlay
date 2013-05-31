@@ -6,10 +6,15 @@ const int BarDiagramWidget::xSize = 180;
 class BarDiagramWidget::BarDiagramWidgetPrivate {
 
 public:
-    BarDiagramWidgetPrivate()
+    explicit BarDiagramWidgetPrivate()
         : bars ( std::shared_ptr<QList<QGraphicsRectItem*>> ( new QList<QGraphicsRectItem*>() ) ),
           _graphicsScene ( new QGraphicsScene() ) {
         this->fillGraphicsScene();
+    }
+
+    explicit BarDiagramWidgetPrivate ( BarDiagramWidgetPrivate * obj )
+        : bars ( obj->bars ),
+          _graphicsScene ( obj->_graphicsScene ) {
     }
 
     ~BarDiagramWidgetPrivate() {
@@ -36,12 +41,6 @@ private:
             this->bars->append ( this->_graphicsScene->addRect ( QRectF ( ( xSpace * i ) + ( xSpace * ( i-1 ) * 2 ), ySize,xSpace*2,0 ) ) );
         }
 
-        // Shadows
-        for ( int i = 1; i <= 4; i++ ) {
-            int xSpace = BarDiagramWidget::xSize / 13;
-            this->bars->append ( this->_graphicsScene->addRect ( QRectF ( ( xSpace * i ) + ( xSpace * ( i-1 ) * 2 ), ySize,xSpace*2,0 ) ) );
-        }
-
         QLinearGradient linearGradient;
         linearGradient.setStart ( 0,0 );
         linearGradient.setFinalStop ( 0, ySize );
@@ -62,32 +61,6 @@ private:
         linearGradient.setColorAt ( 1, qRgb ( 195,195,195 ) );
         this->bars->at ( 3 )->setBrush ( QBrush ( linearGradient ) );
 
-
-        QGraphicsBlurEffect * effectA = new QGraphicsBlurEffect();
-        effectA->setBlurRadius ( 3 );
-        QGraphicsBlurEffect * effectB = new QGraphicsBlurEffect();
-        effectB->setBlurRadius ( 3 );
-        QGraphicsBlurEffect * effectC = new QGraphicsBlurEffect();
-        effectC->setBlurRadius ( 3 );
-        QGraphicsBlurEffect * effectD = new QGraphicsBlurEffect();
-        effectD->setBlurRadius ( 3 );
-
-        this->bars->at ( 4 )->setZValue ( -2 );
-        this->bars->at ( 4 )->setBrush ( QBrush ( Qt::black ) );
-        this->bars->at ( 4 )->setGraphicsEffect ( effectA );
-
-        this->bars->at ( 5 )->setZValue ( -2 );
-        this->bars->at ( 5 )->setBrush ( QBrush ( Qt::black ) );
-        this->bars->at ( 5 )->setGraphicsEffect ( effectB );
-
-        this->bars->at ( 6 )->setZValue ( -2 );
-        this->bars->at ( 6 )->setBrush ( QBrush ( Qt::black ) );
-        this->bars->at ( 6 )->setGraphicsEffect ( effectC );
-
-        this->bars->at ( 7 )->setZValue ( -2 );
-        this->bars->at ( 7 )->setBrush ( QBrush ( Qt::black ) );
-        this->bars->at ( 7 )->setGraphicsEffect ( effectD );
-
         this->_graphicsScene->addLine ( QLineF ( 0,ySize,BarDiagramWidget::xSize,ySize ), whitePen );
         this->_graphicsScene->update();
     }
@@ -100,10 +73,6 @@ public:
         int y = ySize - value;
         int width = item->rect().width();
         int height = value;
-        item->setRect ( QRectF ( x,y,width,height ) );
-        item->update();
-
-        item = this->bars->at ( index + 4 );
         item->setRect ( QRectF ( x,y,width,height ) );
         item->update();
 
