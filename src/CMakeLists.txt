@@ -10,7 +10,7 @@ set(arsnovawidget_SRCS
   updatetimer.cpp
   httpconnection.cpp
   sessionresponse.cpp
-  understandingresponse.cpp
+  feedbackresponse.cpp
   loggedinresponse.cpp
   svglogo.cpp
   qplugin/loginwidget.cpp
@@ -25,7 +25,7 @@ set(arsnovawidget_SRCS
 
 set(arsnovawidgetplugin_SRCS
   svglogo.cpp
-  understandingresponse.cpp
+  feedbackresponse.cpp
   qplugin/arsnovawidgetcollection.cpp
   qplugin/loginwidget.cpp
   qplugin/loginwidgetplugin.cpp
@@ -63,7 +63,7 @@ set(arsnovawidget_MOC_SRCS
   abstractconnection.h
   httpconnection.h
   sessionresponse.h
-  understandingresponse.h
+  feedbackresponse.h
   loggedinresponse.h
   svglogo.h
   qplugin/loginwidget.h

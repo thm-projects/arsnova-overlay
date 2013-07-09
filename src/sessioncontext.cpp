@@ -22,7 +22,7 @@
 
 SessionContext::SessionContext ( AbstractConnection * connection )
     : _isValid ( false ), _connection ( connection ) {
-    connect ( _connection, SIGNAL ( requestFinished ( UnderstandingResponse ) ), this, SLOT ( onUnderstandingResponse ( UnderstandingResponse ) ) );
+    connect ( _connection, SIGNAL ( requestFinished ( FeedbackResponse ) ), this, SLOT ( onUnderstandingResponse ( FeedbackResponse ) ) );
     connect ( _connection, SIGNAL ( requestFinished ( SessionResponse ) ), this, SLOT ( onSessionResponse ( SessionResponse ) ) );
 }
 
@@ -44,7 +44,7 @@ AbstractConnection * SessionContext::connection() {
     return _connection;
 }
 
-void SessionContext::onUnderstandingResponse ( UnderstandingResponse response ) {
+void SessionContext::onUnderstandingResponse ( FeedbackResponse response ) {
 
 }
 

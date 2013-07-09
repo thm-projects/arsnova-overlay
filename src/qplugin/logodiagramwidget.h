@@ -4,7 +4,7 @@
 #include <QtGui>
 #include "ui_logodiagramwidget.h"
 #include "svglogo.h"
-#include "understandingresponse.h"
+#include "feedbackresponse.h"
 
 class LogoDiagramWidget : public QWidget, Ui::LogoDiagramWidget {
     Q_OBJECT
@@ -18,7 +18,7 @@ public:
      * @return User interface
      */
     const Ui::LogoDiagramWidget * const getUi();
-    void updateFromResponse ( UnderstandingResponse response );
+    void updateFromResponse ( FeedbackResponse response );
 
 private:
     Ui::LogoDiagramWidget * ui;

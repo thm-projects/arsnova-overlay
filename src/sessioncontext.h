@@ -86,7 +86,7 @@ private:
     ViewType _viewType;
 
 private slots:
-    void onUnderstandingResponse ( UnderstandingResponse response );
+    void onUnderstandingResponse ( FeedbackResponse response );
     void onSessionResponse ( SessionResponse response );
 
 signals:

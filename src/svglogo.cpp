@@ -82,7 +82,7 @@ SvgLogo::SvgLogo()
 
 SvgLogo::~SvgLogo() {}
 
-void SvgLogo::updateFromResponse ( UnderstandingResponse response ) {
+void SvgLogo::updateFromResponse ( FeedbackResponse response ) {
     if ( response.values().size() != 4 ) return;
 
     float sum = 0;

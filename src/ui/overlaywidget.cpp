@@ -23,7 +23,7 @@ OverlayWidget::OverlayWidget ( SessionContext * context, QWidget * parent, Qt::W
 void OverlayWidget::connectSignals() {
     connect ( this->updateTimer, SIGNAL ( tick ( int ) ), this, SLOT ( updateHttpResponse ( int ) ) );
     connect ( this->connection, SIGNAL ( requestFinished ( SessionResponse ) ), this, SLOT ( onSessionResponse ( SessionResponse ) ) );
-    connect ( this->connection, SIGNAL ( requestFinished ( UnderstandingResponse ) ), this, SLOT ( onUnderstandingResponse ( UnderstandingResponse ) ) );
+    connect ( this->connection, SIGNAL ( requestFinished ( FeedbackResponse ) ), this, SLOT ( onFeedbackResponse ( FeedbackResponse ) ) );
     connect ( this->connection, SIGNAL ( requestFinished ( LoggedInResponse ) ), this, SLOT ( onLoggedInResponse ( LoggedInResponse ) ) );
     connect ( ui->actionMakeTransparent, SIGNAL ( triggered ( bool ) ), this, SLOT ( makeTransparent ( bool ) ) );
     connect ( ui->actionExit, SIGNAL ( triggered ( bool ) ), this, SLOT ( close() ) );
@@ -99,7 +99,7 @@ void OverlayWidget::onSessionResponse ( SessionResponse response ) {
     this->makeTransparent ( false );
 }
 
-void OverlayWidget::onUnderstandingResponse ( UnderstandingResponse response ) {
+void OverlayWidget::onFeedbackResponse ( FeedbackResponse response ) {
     this->latestUnderstandingResponses = response.count();
 
     ui->bardiagramwidget->updateFromResponse ( response );

@@ -4,7 +4,7 @@
 #include <QtGui>
 #include <memory>
 #include "ui_bardiagramwidget.h"
-#include "understandingresponse.h"
+#include "feedbackresponse.h"
 
 class BarDiagramWidget : public QWidget, Ui::BarDiagramWidget {
     Q_OBJECT
@@ -19,7 +19,7 @@ public:
      */
     const Ui::BarDiagramWidget * const getUi();
     void updateGraphicsBar ( int index, int value );
-    void updateFromResponse ( UnderstandingResponse response );
+    void updateFromResponse ( FeedbackResponse response );
 
 protected:
     void resizeEvent ( QResizeEvent * event );

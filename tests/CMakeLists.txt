@@ -7,7 +7,7 @@ include_directories(
 set(arsnovawidget_SRCS
   ../src/svglogo.cpp
   svglogotest.cpp
-  ../src/understandingresponse.cpp
+  ../src/feedbackresponse.cpp
   ../src/qplugin/loginwidget.cpp
   qplugin/loginwidgettest.cpp
   ../src/qplugin/bardiagramwidget.cpp
@@ -58,7 +58,7 @@ endif(APPLE)
 set(arsnovawidget_MOC_SRCS
   ../src/svglogo.h
   svglogotest.h
-  ../src/understandingresponse.h
+  ../src/feedbackresponse.h
   ../src/qplugin/loginwidget.h
   qplugin/loginwidgettest.h
   ../src/qplugin/bardiagramwidget.h

@@ -5,7 +5,7 @@ LogoDiagramWidget::LogoDiagramWidget ( QWidget * parent, Qt::WindowFlags f )
     ui->setupUi ( this );
 
     this->svgLogo = new SvgLogo();
-    this->updateFromResponse ( UnderstandingResponse ( 0,0,0,0 ) );
+    this->updateFromResponse ( FeedbackResponse ( 0,0,0,0 ) );
 }
 
 LogoDiagramWidget::~LogoDiagramWidget() {
@@ -17,7 +17,7 @@ const Ui::LogoDiagramWidget*const LogoDiagramWidget::getUi() {
     return this->ui;
 }
 
-void LogoDiagramWidget::updateFromResponse ( UnderstandingResponse response ) {
+void LogoDiagramWidget::updateFromResponse ( FeedbackResponse response ) {
     this->svgLogo->updateFromResponse ( response );
     ui->logoWidget->load ( this->svgLogo->toXml() );
 }

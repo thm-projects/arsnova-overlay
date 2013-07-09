@@ -4,7 +4,7 @@
 #include <QtTest>
 
 #include "svglogo.h"
-#include "understandingresponse.h"
+#include "feedbackresponse.h"
 
 class SvgLogoTest : public QObject {
 

@@ -88,11 +88,11 @@ void HttpConnection::handleReply ( QNetworkReply * reply ) {
     ) {
         QVariant variant = responseValue->property ( "values" ).toVariant();
         emit this->requestFinished (
-            UnderstandingResponse (
-                variant.toList().at ( UnderstandingResponse::FEEDBACK_OK ).toInt(),
-                variant.toList().at ( UnderstandingResponse::FEEDBACK_FASTER ).toInt(),
-                variant.toList().at ( UnderstandingResponse::FEEDBACK_SLOWER ).toInt(),
-                variant.toList().at ( UnderstandingResponse::FEEDBACK_AWAY ).toInt()
+            FeedbackResponse (
+                variant.toList().at ( FeedbackResponse::FEEDBACK_OK ).toInt(),
+                variant.toList().at ( FeedbackResponse::FEEDBACK_FASTER ).toInt(),
+                variant.toList().at ( FeedbackResponse::FEEDBACK_SLOWER ).toInt(),
+                variant.toList().at ( FeedbackResponse::FEEDBACK_AWAY ).toInt()
             )
         );
     } else if ( reply->url().path().contains ( "/activeusercount" ) ) {

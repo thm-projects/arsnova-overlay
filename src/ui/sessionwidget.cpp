@@ -25,7 +25,7 @@ const Ui::SessionWidget * const SessionWidget::getUi() {
     return this->_ui;
 }
 
-void SessionWidget::onUnderstandingResponse ( UnderstandingResponse response ) {
+void SessionWidget::onUnderstandingResponse ( FeedbackResponse response ) {
     _ui->bardiagramwidget->updateFromResponse ( response );
     _ui->logodiagramwidget->updateFromResponse ( response );
 }

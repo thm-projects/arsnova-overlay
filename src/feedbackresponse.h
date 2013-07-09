@@ -1,10 +1,10 @@
-#ifndef UNDERSTANDINGRESPONSE_H
-#define UNDERSTANDINGRESPONSE_H
+#ifndef FEEDBACKRESPONSE_H
+#define FEEDBACKRESPONSE_H
 
 #include <QtCore>
 #include <stdarg.h>
 
-class UnderstandingResponse {
+class FeedbackResponse {
 
 public:
 
@@ -16,8 +16,8 @@ public:
     };
 
 public:
-    explicit UnderstandingResponse ( int a, int b, int c, int d );
-    ~UnderstandingResponse();
+    explicit FeedbackResponse ( int a, int b, int c, int d );
+    ~FeedbackResponse();
 
     QList< int > values();
     int count();
@@ -27,4 +27,4 @@ private:
     int _count;
 };
 
-#endif // UNDERSTANDINGRESPONSE_H
+#endif // FEEDBACKRESPONSE_H

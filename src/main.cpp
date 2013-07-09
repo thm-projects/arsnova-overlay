@@ -24,7 +24,7 @@
 #include "ui/overlaywidget.h"
 #include "ui/mainwindow.h"
 #include "svglogo.h"
-#include "understandingresponse.h"
+#include "feedbackresponse.h"
 #include "httpconnection.h"
 #include "ui/splashscreen.h"
 #include "ui/systemtrayicon.h"

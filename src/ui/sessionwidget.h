@@ -19,7 +19,7 @@ private:
     SessionContext * context;
 
 public slots:
-    void onUnderstandingResponse ( UnderstandingResponse response );
+    void onUnderstandingResponse ( FeedbackResponse response );
     void onSessionResponse ( SessionResponse response );
     void onItemClicked ( QTableWidgetItem * item );
     void onViewModeChanged();

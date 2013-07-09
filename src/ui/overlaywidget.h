@@ -9,7 +9,7 @@
 #include "../updatetimer.h"
 #include "sessioncontext.h"
 #include "sessionresponse.h"
-#include "understandingresponse.h"
+#include "feedbackresponse.h"
 #include "svglogo.h"
 #include "qrcodewidget.h"
 
@@ -47,7 +47,7 @@ private:
 public slots:
     bool close();
     void onSessionResponse ( SessionResponse response );
-    void onUnderstandingResponse ( UnderstandingResponse response );
+    void onFeedbackResponse ( FeedbackResponse response );
     void onLoggedInResponse ( LoggedInResponse response );
 
 private slots:

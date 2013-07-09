@@ -5,7 +5,7 @@
 #include <QtScript>
 
 #include "sessionresponse.h"
-#include "understandingresponse.h"
+#include "feedbackresponse.h"
 #include "loggedinresponse.h"
 
 class AbstractConnection : public QObject {
@@ -28,7 +28,7 @@ protected:
 signals:
     void requestError();
     void requestFinished ( SessionResponse response );
-    void requestFinished ( UnderstandingResponse response );
+    void requestFinished ( FeedbackResponse response );
     void requestFinished ( LoggedInResponse response );
 };
 

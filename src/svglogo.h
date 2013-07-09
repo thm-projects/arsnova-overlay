@@ -7,7 +7,7 @@
 
 #include <memory>
 
-#include "understandingresponse.h"
+#include "feedbackresponse.h"
 
 class SvgLogo {
 
@@ -15,7 +15,7 @@ public:
     explicit SvgLogo();
     virtual ~SvgLogo();
 
-    void updateFromResponse ( UnderstandingResponse response );
+    void updateFromResponse ( FeedbackResponse response );
     QColor color();
     QByteArray toXml();
 

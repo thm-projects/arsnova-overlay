@@ -6,7 +6,7 @@
 
 #include "abstractconnection.h"
 #include "sessionresponse.h"
-#include "understandingresponse.h"
+#include "feedbackresponse.h"
 #include "loggedinresponse.h"
 
 class HttpConnection : public AbstractConnection {

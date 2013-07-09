@@ -112,7 +112,7 @@ void BarDiagramWidget::updateGraphicsBar ( int index, int value ) {
     _private->updateGraphicsBar ( index, value );
 }
 
-void BarDiagramWidget::updateFromResponse ( UnderstandingResponse response ) {
+void BarDiagramWidget::updateFromResponse ( FeedbackResponse response ) {
     for ( int i = 0; i < response.values().size(); i++ ) {
         if ( response.count() > 0 ) {
             this->updateGraphicsBar ( i, ( response.values().at ( i ) * ySize ) / response.count() );
