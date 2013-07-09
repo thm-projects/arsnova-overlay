@@ -12,9 +12,9 @@ class AbstractConnection : public QObject {
     Q_OBJECT
 
 public:
-    virtual void requestUnderstanding() = 0;
+    virtual void requestFeedback() = 0;
     virtual void requestSession ( QString sessionKey ) = 0;
-    virtual void requestLoggedIn() = 0;
+    virtual void requestActiveUserCount() = 0;
 
     virtual void setCredentials ( QString username, QString password ) final {
         this->username = username;

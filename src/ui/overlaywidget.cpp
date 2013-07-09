@@ -117,8 +117,8 @@ void OverlayWidget::updateHttpResponse ( int ticks ) {
         ticks == OverlayWidget::httpUpdateInterval
         and ! this->sessionId.isEmpty()
     ) {
-        this->connection->requestUnderstanding();
-        this->connection->requestLoggedIn();
+        this->connection->requestFeedback();
+        this->connection->requestActiveUserCount();
         this->updateTimer->reset();
     }
 }

@@ -6,9 +6,9 @@
 class StubConnection : public AbstractConnection {
 
 public:
-    virtual void requestLoggedIn() override;
+    virtual void requestActiveUserCount() override;
     virtual void requestSession ( QString sessionKey ) override;
-    virtual void requestUnderstanding() override;
+    virtual void requestFeedback() override;
 };
 
 #endif // STUBCONNECTION_H

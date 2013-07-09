@@ -15,9 +15,9 @@ class HttpConnection : public AbstractConnection {
 public:
     explicit HttpConnection ();
     virtual ~HttpConnection();
-    void requestUnderstanding() override;
+    void requestFeedback() override;
     void requestSession ( QString sessionKey ) override;
-    void requestLoggedIn() override;
+    void requestActiveUserCount() override;
 
 private:
     QNetworkAccessManager * networkAccessManager;

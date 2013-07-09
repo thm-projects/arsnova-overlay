@@ -22,7 +22,7 @@ public:
      * @return User interface
      */
     const Ui::LoginWidget * const getUi();
-    
+
 private:
     Ui::LoginWidget * _ui;
 

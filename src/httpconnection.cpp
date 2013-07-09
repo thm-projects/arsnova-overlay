@@ -19,7 +19,7 @@ HttpConnection::~HttpConnection() {
     delete cookies;
 }
 
-void HttpConnection::requestLoggedIn() {
+void HttpConnection::requestActiveUserCount() {
     this->networkAccessManager->get (
         this->createRequest (
             QUrl (
@@ -38,7 +38,7 @@ void HttpConnection::requestSession ( QString sessionKey ) {
     );
 }
 
-void HttpConnection::requestUnderstanding() {
+void HttpConnection::requestFeedback() {
     this->networkAccessManager->get (
         this->createRequest (
             QUrl (

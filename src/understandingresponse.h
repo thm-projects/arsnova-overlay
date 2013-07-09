@@ -15,7 +15,7 @@ public:
         FEEDBACK_AWAY = 3
     };
 
-    public:
+public:
     explicit UnderstandingResponse ( int a, int b, int c, int d );
     ~UnderstandingResponse();
 

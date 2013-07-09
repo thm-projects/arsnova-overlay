@@ -1,6 +1,6 @@
 #include "stubconnection.h"
 
-void StubConnection::requestLoggedIn() {
+void StubConnection::requestActiveUserCount() {
     emit this->requestFinished ( LoggedInResponse ( 3 ) );
 }
 
@@ -12,6 +12,6 @@ void StubConnection::requestSession ( QString sessionKey ) {
     emit this->requestFinished ( SessionResponse ( "12345678", "STUB", "Stub Session" ) );
 }
 
-void StubConnection::requestUnderstanding() {
+void StubConnection::requestFeedback() {
     emit this->requestFinished ( UnderstandingResponse ( 1, 2, 3, 4 ) );
 }

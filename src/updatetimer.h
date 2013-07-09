@@ -20,7 +20,7 @@ private slots:
     void update() ;
 
 signals:
-    void tick(int ticks);
+    void tick ( int ticks );
 };
 
 #endif // UPDATETIMER_H
