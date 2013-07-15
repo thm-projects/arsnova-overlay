@@ -31,6 +31,8 @@ void SessionWidget::onUnderstandingResponse ( FeedbackResponse response ) {
 }
 
 void SessionWidget::onSessionResponse ( SessionResponse response ) {
+    if ( ! this->context->isValid() ) return;
+
     QList<QTableWidgetItem *> items = _ui->tableWidget->findItems ( response.sessionId(), Qt::MatchExactly );
     if ( items.count() > 0 ) {
         items.at ( 0 )->setSelected ( true );
