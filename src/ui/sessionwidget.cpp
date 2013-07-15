@@ -7,7 +7,7 @@ SessionWidget::SessionWidget ( SessionContext * context, QWidget * parent, Qt::W
       context ( context ) {
     _ui->setupUi ( this );
 
-    connect ( this->connection, SIGNAL ( requestFinished ( UnderstandingResponse ) ), this, SLOT ( onUnderstandingResponse ( UnderstandingResponse ) ) );
+    connect ( this->connection, SIGNAL ( requestFinished ( FeedbackResponse ) ), this, SLOT ( onUnderstandingResponse ( FeedbackResponse ) ) );
     connect ( this->connection, SIGNAL ( requestFinished ( SessionResponse ) ), this, SLOT ( onSessionResponse ( SessionResponse ) ) );
     connect ( _ui->tableWidget, SIGNAL ( itemClicked ( QTableWidgetItem* ) ), this, SLOT ( onItemClicked ( QTableWidgetItem* ) ) );
 
