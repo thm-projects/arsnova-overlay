@@ -36,6 +36,7 @@ private slots:
     void testShouldShowLoginWidget();
     void testShouldEmitSignalExitButtonClicked();
     void testShouldEmitSignalLoginButtonClicked();
+    void testShouldNotEmitSignalLoginButtonClickedWithoutSessionKey();
     void testShouldGetAndSetLineEditText();
     void testShouldClearLineEditText();
 };

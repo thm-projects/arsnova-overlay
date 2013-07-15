@@ -1,6 +1,6 @@
 import QtQuick 1.0
 
-Flipable {
+Rectangle {
     id: widgetRectangle
     objectName: "widgetRectangle"
     width: 640

@@ -35,11 +35,25 @@ void LoginWidgetTest::testShouldEmitSignalLoginButtonClicked() {
     this->loginWidget = new LoginWidget();
     this->loginWidget->show();
   
+    this->loginWidget->setText("12345678");
+    
     QSignalSpy spy ( this->loginWidget, SIGNAL ( loginButtonClicked ( ) ) );
-   
-    this->mouseClick( this->loginWidget->getUi(), Qt::LeftButton, QPoint(145, 165) );
+    
+    this->mouseClick( this->loginWidget->getUi(), Qt::LeftButton,  QPoint(145, 165) );
 
     QCOMPARE ( spy.count(), 1 );
+}
+
+void LoginWidgetTest::testShouldNotEmitSignalLoginButtonClickedWithoutSessionKey() {
+    delete this->loginWidget;
+    this->loginWidget = new LoginWidget();
+    this->loginWidget->show();
+  
+    QSignalSpy spy ( this->loginWidget, SIGNAL ( loginButtonClicked ( ) ) );
+    
+    this->mouseClick( this->loginWidget->getUi(), Qt::LeftButton,  QPoint(145, 165) );
+
+    QCOMPARE ( spy.count(), 0 );
 }
 
 void LoginWidgetTest::testShouldGetAndSetLineEditText() {
