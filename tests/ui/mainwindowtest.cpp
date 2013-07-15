@@ -22,7 +22,7 @@ void MainWindowTest::testThatMainWindowContainsBasicLeftMenu() {
 }
 
 void MainWindowTest::testShouldDisplaySplashScreen() {
-    QVERIFY ( SplashScreen::instance()->isVisible() );
+    QVERIFY ( ! SplashScreen::instance()->isVisible() );
 }
 
 void MainWindowTest::testShouldDisplaySessionWidget() {

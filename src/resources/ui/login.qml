@@ -9,11 +9,18 @@ Rectangle {
     signal loginButtonClick()
     signal exitButtonClick()
 
+    Image {
+        id: toplogo
+        x: 180
+        y: 24
+        source: "qrc:/images/images/splash.png"
+    }
+    
     Rectangle {
         id: sessionIdRectangle
         objectName: "sessionIdRectangle"
         x: 140
-        y: 97
+        y: 128
         width: 361
         height: 41
         border.color: sessionIdTextInput.focus ? "#aeacff" : "#dddddd"
@@ -69,7 +76,7 @@ Rectangle {
     Rectangle {
         id: loginbutton
         x: 139
-        y: 160
+        y: 200
         width: 160
         height: 40
         radius: 2
@@ -103,7 +110,7 @@ Rectangle {
         id: exitbutton
         objectName: "exitbutton"
         x: 340
-        y: 160
+        y: 200
         width: 160
         height: 40
         radius: 2

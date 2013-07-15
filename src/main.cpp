@@ -43,9 +43,6 @@ int main ( int argc, char** argv ) {
     app.setStyle ( "plastique" );
     app.setQuitOnLastWindowClosed ( false );
 
-    SplashScreen::instance()->showMessage ( "Starting ARSnovaDesktop" );
-    SplashScreen::instance()->show();
-
     MainWindow mainWindow;
     mainWindow.show();
 

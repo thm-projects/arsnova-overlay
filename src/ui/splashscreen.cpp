@@ -14,7 +14,10 @@ SplashScreen * SplashScreen::instance() {
 }
 
 void SplashScreen::destroy() {
-    if ( _instance != nullptr ) delete _instance;
+    if ( _instance != nullptr ) {
+        _instance->close();
+        delete _instance;
+    }
 }
 
 void SplashScreen::showMessage ( QString message ) {

@@ -25,7 +25,7 @@ void LoginWidgetTest::testShouldEmitSignalExitButtonClicked() {
 
     QSignalSpy spy ( this->loginWidget, SIGNAL ( exitButtonClicked ( ) ) );
     
-    this->mouseClick( this->loginWidget->getUi(), Qt::LeftButton, QPoint(345, 165) );
+    this->mouseClick( this->loginWidget->getUi(), Qt::LeftButton, QPoint(345, 205) );
 
     QCOMPARE ( spy.count(), 1 );
 }
@@ -39,7 +39,7 @@ void LoginWidgetTest::testShouldEmitSignalLoginButtonClicked() {
     
     QSignalSpy spy ( this->loginWidget, SIGNAL ( loginButtonClicked ( ) ) );
     
-    this->mouseClick( this->loginWidget->getUi(), Qt::LeftButton,  QPoint(145, 165) );
+    this->mouseClick( this->loginWidget->getUi(), Qt::LeftButton,  QPoint(145, 205) );
 
     QCOMPARE ( spy.count(), 1 );
 }
@@ -51,7 +51,7 @@ void LoginWidgetTest::testShouldNotEmitSignalLoginButtonClickedWithoutSessionKey
   
     QSignalSpy spy ( this->loginWidget, SIGNAL ( loginButtonClicked ( ) ) );
     
-    this->mouseClick( this->loginWidget->getUi(), Qt::LeftButton,  QPoint(145, 165) );
+    this->mouseClick( this->loginWidget->getUi(), Qt::LeftButton,  QPoint(145, 205) );
 
     QCOMPARE ( spy.count(), 0 );
 }

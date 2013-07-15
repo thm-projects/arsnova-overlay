@@ -11,12 +11,12 @@ MainWindow::MainWindow ( QWidget * parent, Qt::WindowFlags f ) : QMainWindow ( p
     this->widgetList = new QMap<QString, QWidget *>();
     this->sessionContext = new SessionContext ( new HttpConnection() );
 
-    SplashScreen::instance()->showMessage (
+    /*SplashScreen::instance()->showMessage (
         QString ( "Running ARSnovaDesktop" )
         + " " + VERSION_MAJOR
         + "." + VERSION_MINOR
         + "." + VERSION_PATCH
-    );
+    );*/
 
     this->addWidget ( "Login", new LoginWidget() );
     this->connectLoginWidget();
@@ -126,7 +126,7 @@ void MainWindow::connectLoginWidget() {
 }
 
 void MainWindow::sessionLogin() {
-    SplashScreen::destroy();
+    //SplashScreen::destroy();
     LoginWidget * loginWidget = ( LoginWidget * ) this->findWidget ( "Login" );
     if ( loginWidget != nullptr ) {
         this->sessionContext->connection()->requestSession ( loginWidget->text() );
