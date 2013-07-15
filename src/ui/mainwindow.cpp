@@ -97,7 +97,10 @@ void MainWindow::activateWidget ( QString widgetTitle ) {
     this->checkLeftMenuButton ( widgetTitle );
 
     QWidget * widget = this->findWidget ( widgetTitle );
-    if ( widget != nullptr ) ui->stackedWidget->setCurrentWidget ( widget );
+    if ( widget != nullptr ) {
+        ui->stackedWidget->setCurrentWidget ( widget );
+        widget->setFocus();
+    }
 }
 
 QWidget * MainWindow::findWidget ( QString widgetTitle ) {
@@ -113,7 +116,6 @@ QWidget * MainWindow::findWidget ( QString widgetTitle ) {
 void MainWindow::connectLoginWidget() {
     LoginWidget * loginWidget = ( LoginWidget * ) this->findWidget ( "Login" );
     if ( loginWidget != nullptr ) {
-        connect ( loginWidget, SIGNAL ( returnPressed() ), this, SLOT ( sessionLogin() ) );
         connect ( loginWidget, SIGNAL ( exitButtonClicked() ), this, SLOT ( close() ) );
         connect ( loginWidget, SIGNAL ( loginButtonClicked() ), this, SLOT ( sessionLogin() ) );
     }

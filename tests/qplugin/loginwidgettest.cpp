@@ -10,17 +10,6 @@ void LoginWidgetTest::cleanupTestCase() {
     delete this->loginWidget;
 }
 
-void LoginWidgetTest::testShouldEmitSignalExitButtonClicked() {
-    delete this->loginWidget;
-    this->loginWidget = new LoginWidget();
-    this->loginWidget->show();
-
-    QSignalSpy spy ( this->loginWidget, SIGNAL ( exitButtonClicked ( ) ) );
-    QTest::mouseClick ( this->loginWidget->getUi()->exitButton,  Qt::LeftButton );
-
-    QCOMPARE ( spy.count(), 1 );
-}
-
 void LoginWidgetTest::testShouldShowLoginWidget() {
     delete this->loginWidget;
     this->loginWidget = new LoginWidget();
@@ -29,49 +18,38 @@ void LoginWidgetTest::testShouldShowLoginWidget() {
     QVERIFY ( this->loginWidget->isVisible() );
 }
 
-void LoginWidgetTest::testShouldEmitSignalReturnPressed() {
-    QSignalSpy spy ( this->loginWidget, SIGNAL ( returnPressed ( ) ) );
-    QTest::keyClick ( this->loginWidget->getUi()->sessionIdEdit,  Qt::Key_0 );
-    QTest::keyClick ( this->loginWidget->getUi()->sessionIdEdit,  Qt::Key_1 );
-    QTest::keyClick ( this->loginWidget->getUi()->sessionIdEdit,  Qt::Key_2 );
-    QTest::keyClick ( this->loginWidget->getUi()->sessionIdEdit,  Qt::Key_3 );
-    QTest::keyClick ( this->loginWidget->getUi()->sessionIdEdit,  Qt::Key_4 );
-    QTest::keyClick ( this->loginWidget->getUi()->sessionIdEdit,  Qt::Key_5 );
-    QTest::keyClick ( this->loginWidget->getUi()->sessionIdEdit,  Qt::Key_6 );
-    QTest::keyClick ( this->loginWidget->getUi()->sessionIdEdit,  Qt::Key_7 );
-    QTest::keyClick ( this->loginWidget->getUi()->sessionIdEdit,  Qt::Key_Enter );
+void LoginWidgetTest::testShouldEmitSignalExitButtonClicked() {
+    delete this->loginWidget;
+    this->loginWidget = new LoginWidget();
+    this->loginWidget->show();
+
+    QSignalSpy spy ( this->loginWidget, SIGNAL ( exitButtonClicked ( ) ) );
+    
+    this->mouseClick( this->loginWidget->getUi(), Qt::LeftButton, QPoint(345, 165) );
 
     QCOMPARE ( spy.count(), 1 );
-}
-
-void LoginWidgetTest::testShouldNotEmitSignalOnTabPressed() {
-    this->loginWidget->getUi()->sessionIdEdit->setFocus();
-    QSignalSpy spy ( this->loginWidget, SIGNAL ( returnPressed ( ) ) );
-    QTest::keyClick ( this->loginWidget->getUi()->sessionIdEdit,  Qt::Key_Tab );
-    QCOMPARE ( spy.count(), 0 );
 }
 
 void LoginWidgetTest::testShouldEmitSignalLoginButtonClicked() {
+    delete this->loginWidget;
+    this->loginWidget = new LoginWidget();
+    this->loginWidget->show();
+  
     QSignalSpy spy ( this->loginWidget, SIGNAL ( loginButtonClicked ( ) ) );
-    QTest::mouseClick ( this->loginWidget->getUi()->loginButton,  Qt::LeftButton );
+   
+    this->mouseClick( this->loginWidget->getUi(), Qt::LeftButton, QPoint(145, 165) );
 
     QCOMPARE ( spy.count(), 1 );
 }
 
-void LoginWidgetTest::testShouldSetLineEditText() {
+void LoginWidgetTest::testShouldGetAndSetLineEditText() {
     this->loginWidget->setText ( "test321" );
 
-    QCOMPARE ( this->loginWidget->getUi()->sessionIdEdit->text(), QString ( "test321" ) );
-}
-
-void LoginWidgetTest::testShouldGetLineEditText() {
-    this->loginWidget->getUi()->sessionIdEdit->setText ( "test123" );
-
-    QCOMPARE ( this->loginWidget->text(), QString ( "test123" ) );
+    QCOMPARE ( this->loginWidget->text(), QString ( "test321" ) );
 }
 
 void LoginWidgetTest::testShouldClearLineEditText() {
     this->loginWidget->clear();
 
-    QVERIFY ( this->loginWidget->getUi()->sessionIdEdit->text().isEmpty() );
+    QVERIFY ( this->loginWidget->text().isEmpty() );
 }

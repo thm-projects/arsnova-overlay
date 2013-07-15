@@ -95,7 +95,6 @@ set(arsnovawidget_UIS
 )
 
 set(arsnovawidgetplugin_UIS
-  qplugin/loginwidget.ui
   qplugin/bardiagramwidget.ui
   qplugin/logodiagramwidget.ui
   qplugin/sessioninformationwidget.ui
@@ -149,6 +148,7 @@ target_link_libraries(arsnovadesktop
   ${QT_QTNETWORK_LIBRARY}
   ${QT_QTSCRIPT_LIBRARY}
   ${QT_QTSVG_LIBRARY}
+  ${QT_QTDECLARATIVE_LIBRARY}
   qrencode
 )
 

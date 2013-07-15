@@ -17,4 +17,7 @@
     <file>arsnova.svg</file>
     <file>arsnova-color.svg</file>
   </qresource>
+  <qresource prefix="qml">
+    <file>ui/login.qml</file>
+  </qresource>
 </RCC>

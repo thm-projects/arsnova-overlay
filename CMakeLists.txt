@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 2.6)
 find_package(Qt4 REQUIRED)
 
 set(VERSION_MAJOR 0)
-set(VERSION_MINOR 4)
+set(VERSION_MINOR 5)
 set(VERSION_PATCH dev)
 
 set(VERSION_SHORT ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH})
@@ -122,6 +122,7 @@ IF (WIN32)
     ${CMAKE_CURRENT_BINARY_DIR}/lib/libgcc_s_sjlj-1.dll
     ${CMAKE_CURRENT_BINARY_DIR}/lib/libstdc++-6.dll
     ${CMAKE_CURRENT_BINARY_DIR}/lib/QtCore4.dll
+    ${CMAKE_CURRENT_BINARY_DIR}/lib/QtDeclarative4.dll
     ${CMAKE_CURRENT_BINARY_DIR}/lib/QtGui4.dll
     ${CMAKE_CURRENT_BINARY_DIR}/lib/QtNetwork4.dll
     ${CMAKE_CURRENT_BINARY_DIR}/lib/QtScript4.dll

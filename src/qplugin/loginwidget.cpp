@@ -1,32 +1,39 @@
 #include "loginwidget.h"
 
-LoginWidget::LoginWidget ( QWidget* parent, Qt::WindowFlags f )
-    : QWidget ( parent, f ), _ui ( new Ui::LoginWidget() ) {
-    _ui->setupUi ( this );
+LoginWidget::LoginWidget ( QWidget* parent, Qt::WindowFlags f ) {
+    this->setSource(QUrl("qrc:/qml/ui/login.qml"));
+    item = qobject_cast<QDeclarativeItem *>(this->rootObject());
+    connect(item, SIGNAL(loginButtonClick()), this, SLOT(on_loginButton_clicked()));
+    connect(item, SIGNAL(exitButtonClick()), this, SLOT(on_exitButton_clicked()));
 }
 
 LoginWidget::~LoginWidget() {
-    delete _ui;
+    delete item;
 }
 
-const Ui::LoginWidget * const LoginWidget::getUi() {
-    return this->_ui;
+QGraphicsScene * const LoginWidget::getUi() {
+    return this->scene();
 }
 
 QString LoginWidget::text() {
-    return _ui->sessionIdEdit->text();
+    QDeclarativeItem * dItem = item->findChild<QDeclarativeItem *>("sessionIdTextInput");
+    if (dItem != nullptr) {
+        return dItem->property("text").toString();
+    }
 }
 
 void LoginWidget::setText ( QString text ) {
-    _ui->sessionIdEdit->setText ( text );
+    QDeclarativeItem * dItem = item->findChild<QDeclarativeItem *>("sessionIdTextInput");
+    if (dItem != nullptr) {
+        dItem->setProperty("text", text);
+    }
 }
 
 void LoginWidget::clear() {
-    _ui->sessionIdEdit->clear();
-}
-
-void LoginWidget::on_sessionIdEdit_returnPressed() {
-    emit this->returnPressed();
+    QDeclarativeItem * dItem = item->findChild<QDeclarativeItem *>("sessionIdTextInput");
+    if (dItem != nullptr) {
+        dItem->setProperty("text", "");
+    }
 }
 
 void LoginWidget::on_exitButton_clicked() {

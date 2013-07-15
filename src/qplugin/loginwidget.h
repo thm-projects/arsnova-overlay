@@ -2,12 +2,12 @@
 #define LOGINWIDGET_H
 
 #include <QtGui>
-#include "ui_loginwidget.h"
+#include <QtDeclarative>
 
 /** This class provides the ArsNova login widget as a Qt Widget
  * @author Paul-Christian Volkmer <paul-christian.volkmer@mni.thm.de>
  */
-class LoginWidget : public QWidget, Ui::LoginWidget {
+class LoginWidget : public QDeclarativeView {
     Q_OBJECT
 
 public:
@@ -21,18 +21,16 @@ public:
      * user interface itself e.g. testing.
      * @return User interface
      */
-    const Ui::LoginWidget * const getUi();
+    QGraphicsScene * const getUi();
 
 private:
-    Ui::LoginWidget * _ui;
+    QDeclarativeItem * item;
 
 private slots:
-    void on_sessionIdEdit_returnPressed();
     void on_exitButton_clicked();
     void on_loginButton_clicked();
 
 signals:
-    void returnPressed();
     void exitButtonClicked();
     void loginButtonClicked();
 };

@@ -1,8 +1,9 @@
 #ifndef LOGINWIDGETTEST_H
 #define LOGINWIDGETTEST_H
 
-#include <QtTestGui>
 #include <QtTest>
+#include <QtTest/QtTestGui>
+#include <QtDeclarative>
 
 #include "qplugin/loginwidget.h"
 
@@ -16,17 +17,26 @@ public:
 private:
     LoginWidget * loginWidget;
 
+    void mouseClick(QGraphicsScene * scene, Qt::MouseButton button, QPoint position) {
+        QGraphicsSceneMouseEvent pressEvent(QEvent::GraphicsSceneMousePress);
+        pressEvent.setScenePos(position);
+        pressEvent.setButton(button);
+        QApplication::sendEvent(scene, &pressEvent);
+
+        QGraphicsSceneMouseEvent releaseEvent(QEvent::GraphicsSceneMouseRelease);
+        releaseEvent.setScenePos(position);
+        releaseEvent.setButton(button);
+        QApplication::sendEvent(scene, &releaseEvent);
+    }
+
 private slots:
     void initTestCase();
     void cleanupTestCase();
 
-    void testShouldEmitSignalExitButtonClicked();
     void testShouldShowLoginWidget();
-    void testShouldEmitSignalReturnPressed();
-    void testShouldNotEmitSignalOnTabPressed();
+    void testShouldEmitSignalExitButtonClicked();
     void testShouldEmitSignalLoginButtonClicked();
-    void testShouldSetLineEditText();
-    void testShouldGetLineEditText();
+    void testShouldGetAndSetLineEditText();
     void testShouldClearLineEditText();
 };
 

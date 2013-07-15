@@ -93,7 +93,6 @@ set(arsnovawidget_MOC_SRCS
 )
 
 set(arsnovawidget_UIS
-  ../src/qplugin/loginwidget.ui
   ../src/qplugin/bardiagramwidget.ui
   ../src/qplugin/logodiagramwidget.ui
   ../src/qplugin/sessioninformationwidget.ui
@@ -126,6 +125,7 @@ target_link_libraries(tests
   ${QT_QTSVG_LIBRARY}
   ${QT_QTTEST_LIBRARY}
   ${QT_QTTESTGUI_LIBRARY}
+  ${QT_QTDECLARATIVE_LIBRARY}
   qrencode
 )
 
