@@ -45,6 +45,13 @@ public:
         ICON_VIEW
     };
 
+    /** Errors that might occure
+     */
+    enum Error {
+        CONNECTION_ERROR,
+        SESSION_NOT_FOUND
+    };
+
     /** Creates session context for an unused connection
      * You are required to request a session for the given connection by yourself!
      * @param connection The connection to the servers session
@@ -88,11 +95,16 @@ private:
 private slots:
     void onUnderstandingResponse ( FeedbackResponse response );
     void onSessionResponse ( SessionResponse response );
+    void onRequestError();
 
 signals:
     /** This signal is emitted when the session context successfully changed the session
      */
     void sessionChanged();
+
+    /** This signal is emitted when the current session context gets invalid due to network and/or session errors
+     */
+    void error( SessionContext::Error error );
 
     /** This signal is emitted if the view type changes
      */

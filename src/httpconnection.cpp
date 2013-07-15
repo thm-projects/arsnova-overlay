@@ -65,6 +65,10 @@ bool HttpConnection::isRedirect ( QNetworkReply* reply ) {
 }
 
 void HttpConnection::handleReply ( QNetworkReply * reply ) {
+    if (reply->error() != QNetworkReply::NoError) {
+        emit this->requestError();
+    }
+
     if ( reply->url().path().contains ( "auth/login" ) ) {
         foreach ( QNetworkCookie cookie, qvariant_cast<QList<QNetworkCookie> > ( reply->header ( QNetworkRequest::SetCookieHeader ) ) ) {
             this->addCookie ( cookie );
@@ -75,6 +79,7 @@ void HttpConnection::handleReply ( QNetworkReply * reply ) {
     if ( this->isRedirect ( reply ) ) return;
 
     QByteArray response = reply->readAll();
+
     QScriptEngine scriptEngine;
     QScriptValue * responseValue = new QScriptValue ( scriptEngine.evaluate ( QString ( "(" ) + QString::fromUtf8 ( response.data() ) + ")" ) );
 

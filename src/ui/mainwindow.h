@@ -39,6 +39,7 @@ private slots:
     void onSystemTrayActivated ( QSystemTrayIcon::ActivationReason reason );
     void activateWidget ( QString widgetTitle );
     void sessionLogin();
+    void onContextError(SessionContext::Error e);
 };
 
 #endif // MAINWINDOW_H

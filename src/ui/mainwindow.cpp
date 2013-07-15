@@ -33,6 +33,7 @@ MainWindow::MainWindow ( QWidget * parent, Qt::WindowFlags f ) : QMainWindow ( p
     this->overlayWidget->setVisible ( false );
 
     connect ( SystemTrayIcon::instance(), SIGNAL ( activated ( QSystemTrayIcon::ActivationReason ) ), this, SLOT ( onSystemTrayActivated ( QSystemTrayIcon::ActivationReason ) ) );
+    connect ( this->sessionContext, SIGNAL ( error ( SessionContext::Error ) ) , this, SLOT ( onContextError ( SessionContext::Error ) ) );
 }
 
 MainWindow::~MainWindow() {
@@ -91,6 +92,10 @@ void MainWindow::onSystemTrayActivated ( QSystemTrayIcon::ActivationReason reaso
     if ( reason == QSystemTrayIcon::Trigger ) {
         this->setVisible ( ! this->isVisible() );
     }
+}
+
+void MainWindow::onContextError ( SessionContext::Error e ) {
+    this->activateWidget ( "Login" );
 }
 
 void MainWindow::activateWidget ( QString widgetTitle ) {

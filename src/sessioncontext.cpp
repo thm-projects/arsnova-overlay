@@ -24,6 +24,7 @@ SessionContext::SessionContext ( AbstractConnection * connection )
     : _isValid ( false ), _connection ( connection ) {
     connect ( _connection, SIGNAL ( requestFinished ( FeedbackResponse ) ), this, SLOT ( onUnderstandingResponse ( FeedbackResponse ) ) );
     connect ( _connection, SIGNAL ( requestFinished ( SessionResponse ) ), this, SLOT ( onSessionResponse ( SessionResponse ) ) );
+    connect ( _connection, SIGNAL ( requestError() ), this, SLOT ( onRequestError() ) );
 }
 
 SessionContext * SessionContext::create ( AbstractConnection * connection, QString sessionKey ) {
@@ -54,6 +55,10 @@ void SessionContext::onSessionResponse ( SessionResponse response ) {
         _isValid = true;
         emit this->sessionChanged();
     }
+}
+
+void SessionContext::onRequestError() {
+    emit this->error ( Error::CONNECTION_ERROR );
 }
 
 void SessionContext::setViewType ( SessionContext::ViewType viewType ) {
