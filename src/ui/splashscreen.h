@@ -7,13 +7,13 @@
 class SplashScreen : public QSplashScreen {
 
 public:
-    static std::shared_ptr<SplashScreen> instance();
+    static SplashScreen * instance();
     static void destroy();
     void showMessage ( QString message );
 
 private:
     explicit SplashScreen ( const QPixmap& pixmap = QPixmap(), Qt::WindowFlags f = 0 );
-    static std::shared_ptr<SplashScreen> _instance;
+    static SplashScreen * _instance;
 };
 
 #endif // SPLASHSCREEN_H

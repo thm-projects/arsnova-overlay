@@ -56,7 +56,6 @@ MainWindow::~MainWindow() {
 void MainWindow::disconnectAll() {
     disconnect ( SystemTrayIcon::instance(), SIGNAL ( activated ( QSystemTrayIcon::ActivationReason ) ), this, SLOT ( onSystemTrayActivated ( QSystemTrayIcon::ActivationReason ) ) );
     disconnect ( this->menuSignalMapper, SIGNAL ( mapped ( QString ) ), this, SLOT ( activateWidget ( QString ) ) );
-    disconnect ( this->findWidget ( "Login" ), SIGNAL ( returnPressed() ), this, SLOT ( sessionLogin() ) );
     disconnect ( this->findWidget ( "Login" ), SIGNAL ( exitButtonClicked() ), this, SLOT ( close() ) );
     disconnect ( this->findWidget ( "Login" ), SIGNAL ( loginButtonClicked() ), this, SLOT ( sessionLogin() ) );
 }

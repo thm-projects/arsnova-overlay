@@ -20,7 +20,7 @@
 
 #include "splashscreentest.h"
 
-SplashScreenTest::SplashScreenTest ( QObject* parent ) : QObject ( parent ) {}
+SplashScreenTest::SplashScreenTest ( QObject * parent ) : QObject ( parent ) {}
 
 void SplashScreenTest::initTestCase() {
     splashScreen = SplashScreen::instance();
@@ -32,5 +32,3 @@ void SplashScreenTest::testShouldShowSplashScreen() {
     splashScreen->showMessage ( "Test" );
     QVERIFY ( splashScreen->isVisible() );
 }
-
-

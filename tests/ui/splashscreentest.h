@@ -22,7 +22,6 @@
 #define SPLASHSCREENTEST_H
 
 #include <QTest>
-#include <memory>
 
 #include "ui/splashscreen.h"
 
@@ -34,7 +33,7 @@ public:
     explicit SplashScreenTest ( QObject* parent = 0 );
 
 private:
-    std::shared_ptr<SplashScreen> splashScreen;
+    SplashScreen * splashScreen;
 
 private slots:
     void initTestCase();
