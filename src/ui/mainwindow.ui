@@ -6,20 +6,26 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>780</width>
-    <height>460</height>
+    <width>778</width>
+    <height>445</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="minimumSize">
    <size>
     <width>778</width>
-    <height>442</height>
+    <height>445</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>2048</width>
-    <height>2048</height>
+    <width>778</width>
+    <height>445</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -52,6 +58,9 @@ QPushButton:checked {
 	color: #fff;
 	font-weight: bold;
 }</string>
+  </property>
+  <property name="unifiedTitleAndToolBarOnMac">
+   <bool>true</bool>
   </property>
   <widget class="QWidget" name="centralwidget">
    <property name="autoFillBackground">
@@ -140,6 +149,9 @@ QPushButton:checked {
         <property name="frameShape">
          <enum>QFrame::Box</enum>
         </property>
+        <property name="lineWidth">
+         <number>1</number>
+        </property>
        </widget>
       </item>
      </layout>
@@ -151,7 +163,7 @@ QPushButton:checked {
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>780</width>
+     <width>778</width>
      <height>20</height>
     </rect>
    </property>
@@ -168,7 +180,14 @@ QPushButton:checked {
    <addaction name="menuHelp"/>
    <addaction name="menuHelp_2"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QStatusBar" name="statusbar">
+   <property name="statusTip">
+    <string/>
+   </property>
+   <property name="sizeGripEnabled">
+    <bool>false</bool>
+   </property>
+  </widget>
  </widget>
  <resources>
   <include location="../resources/resources.qrc"/>

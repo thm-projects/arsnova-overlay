@@ -17,10 +17,109 @@
    inkscape:version="0.48.4 r9939"
    sodipodi:docname="splash.svg"
    inkscape:export-filename="/home/pcvolkmer/Projekte/arsnovadesktop/src/resources/images/splash.png"
-   inkscape:export-xdpi="90"
-   inkscape:export-ydpi="90">
+   inkscape:export-xdpi="120"
+   inkscape:export-ydpi="120">
   <defs
      id="defs4">
+    <linearGradient
+       id="linearGradient4115">
+      <stop
+         style="stop-color:#55ad3f;stop-opacity:1;"
+         offset="0"
+         id="stop4117" />
+      <stop
+         style="stop-color:#2e6923;stop-opacity:0.94117647;"
+         offset="1"
+         id="stop4119" />
+    </linearGradient>
+    <inkscape:path-effect
+       effect="construct_grid"
+       id="path-effect3929"
+       is_visible="true"
+       nr_x="5"
+       nr_y="5" />
+    <inkscape:path-effect
+       effect="vonkoch"
+       id="path-effect3927"
+       is_visible="true"
+       ref_path="m -143.5,812.71062 549.33197,0"
+       generator="m -143.5,871.09931 183.110657,0 m 183.110653,0 183.11066,0"
+       similar_only="false"
+       nbgenerations="1"
+       drawall="true"
+       maxComplexity="1000" />
+    <inkscape:path-effect
+       effect="interpolate"
+       id="path-effect3925"
+       is_visible="true"
+       trajectory="M 0,0 0,0"
+       equidistant_spacing="true"
+       steps="5" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect3923"
+       is_visible="true" />
+    <inkscape:path-effect
+       effect="sketch"
+       id="path-effect3921"
+       is_visible="true"
+       nbiter_approxstrokes="5"
+       strokelength="100"
+       strokelength_rdm="0.3;1"
+       strokeoverlap="0.3"
+       strokeoverlap_rdm="0.3;1"
+       ends_tolerance="0.1;1"
+       parallel_offset="5;1"
+       tremble_size="5;1"
+       tremble_frequency="1"
+       nbtangents="5"
+       tgt_places_rdmness="1;1"
+       tgtscale="10"
+       tgtlength="100"
+       tgtlength_rdm="0.3;1" />
+    <inkscape:path-effect
+       effect="bend_path"
+       id="path-effect3919"
+       is_visible="true"
+       bendpath="m -143.5,812.71062 538.83197,1.5"
+       prop_scale="1"
+       scale_y_rel="false"
+       vertical="false"
+       bendpath-nodetypes="cc" />
+    <inkscape:path-effect
+       effect="envelope"
+       id="path-effect3917"
+       is_visible="true"
+       yy="true"
+       xx="true"
+       bendpath1="m -143.5,754.32193 549.33197,0"
+       bendpath2="m 405.83197,754.32193 0,116.77738"
+       bendpath3="m -143.5,871.09931 549.33197,0"
+       bendpath4="m -143.5,754.32193 0,116.77738" />
+    <inkscape:path-effect
+       effect="rough_hatches"
+       id="path-effect3915"
+       is_visible="true"
+       direction="127.66598,807.71062 , 137.33299,0"
+       dist_rdm="75;1"
+       growth="0"
+       do_bend="true"
+       bender="127.66598,812.71062 , 5,0"
+       bottom_edge_variation="11.677738;1"
+       top_edge_variation="11.677738;1"
+       bottom_tgt_variation="0;1"
+       top_tgt_variation="0;1"
+       scale_bf="1"
+       scale_bb="1"
+       scale_tf="1"
+       scale_tb="1"
+       top_smth_variation="0;1"
+       bottom_smth_variation="0;1"
+       fat_output="true"
+       stroke_width_top="1"
+       stroke_width_bottom="1"
+       front_thickness="1"
+       back_thickness="0.25" />
     <linearGradient
        id="linearGradient4171">
       <stop
@@ -140,7 +239,7 @@
        x2="461"
        y2="80"
        gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(1.4842768,0,0,0.94285714,-236.45283,916.36218)" />
+       gradientTransform="matrix(1.4842768,0,0,0.94285714,-236.45283,1056.3622)" />
     <linearGradient
        inkscape:collect="always"
        xlink:href="#linearGradient4171-2"
@@ -170,6 +269,43 @@
          stdDeviation="1.55"
          id="feGaussianBlur4298" />
     </filter>
+    <filter
+       inkscape:collect="always"
+       id="filter3877"
+       x="-0.14393566"
+       width="1.2878713"
+       y="-0.1440644"
+       height="1.2881288">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="3.838302"
+         id="feGaussianBlur3879" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       id="filter4091">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.26630515"
+         id="feGaussianBlur4093" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       id="filter4109">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.089389466"
+         id="feGaussianBlur4111" />
+    </filter>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4115"
+       id="linearGradient4121"
+       x1="-4.4999995"
+       y1="951.02399"
+       x2="486.5"
+       y2="951.02399"
+       gradientUnits="userSpaceOnUse" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -178,15 +314,15 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.70710678"
-     inkscape:cx="22.501659"
+     inkscape:zoom="2"
+     inkscape:cx="140.85232"
      inkscape:cy="69.720058"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
      width="480px"
-     inkscape:window-width="1366"
-     inkscape:window-height="721"
+     inkscape:window-width="1920"
+     inkscape:window-height="1028"
      inkscape:window-x="-8"
      inkscape:window-y="-4"
      inkscape:window-maximized="1" />
@@ -207,6 +343,16 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(0,-912.36218)">
+    <path
+       style="fill:url(#linearGradient4121);fill-opacity:1.0;stroke:none"
+       d="m -0.93595405,906.3622 c -1.98045605,0 -3.56404555,1.3787 -3.56404555,3.1029 l 0,86.2207 c 0,0 195.0020996,-13.5451 276.8501296,-23.6262 C 354.19818,961.9784 486.5,937.4829 486.5,937.4829 l 0,-28.0178 c 0,-1.7242 -1.58359,-3.1029 -3.56405,-3.1029 z"
+       id="path3948"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:#80ba24;fill-opacity:1;stroke:none"
+       d="m 486.5,941.8622 c -100.10805,38.0256 -238.2183,41.8533 -319.33852,46.625 -57.23699,3.4206 -169.2345655,10.4811 -171.6614796,10.5625 l 0,9.7187 c 0,0.4311 0.099876,0.8158 0.2792947,1.1875 l 0,-4.6562 c 2.4269141,-0.051 114.4244949,-4.4749 171.6614749,-6.625 81.0458,-2.9966 218.97342,-5.4098 319.05923,-29.25 l 0,-27.5625 z"
+       id="rect3888"
+       inkscape:connector-curvature="0" />
     <rect
        style="fill:#000000;fill-opacity:0.50196078;stroke:none;filter:url(#filter4296)"
        id="rect4169-2"
@@ -214,16 +360,16 @@
        height="140"
        x="3.7199998"
        y="908.64215"
-       transform="matrix(0.98473658,0,0,0.9495388,0,53.10346)" />
+       transform="matrix(0.98473658,0,0,0.9495388,0,193.10346)" />
     <rect
        style="fill:url(#linearGradient4177);fill-opacity:1;stroke:none"
        id="rect4169"
        width="472"
        height="132"
        x="4"
-       y="916.36218" />
+       y="1056.3622" />
     <g
-       transform="matrix(0.16,0,0,0.16,374.8,878.12709)"
+       transform="matrix(0.16,0,0,0.16,374.8,1018.1271)"
        id="layer1-1"
        inkscape:label="Ebene 1">
       <g
@@ -315,39 +461,78 @@
         </g>
       </g>
     </g>
+    <rect
+       style="fill:#000000;fill-opacity:0.25098041;stroke:none;filter:url(#filter3877)"
+       id="rect3889-2"
+       width="64.000298"
+       height="63.943104"
+       x="20.999855"
+       y="929.89062"
+       ry="4.2628741"
+       transform="matrix(0.72794202,0,0,0.72844749,1.41907,251.69609)" />
+    <g
+       id="g4123">
+      <rect
+         ry="3.1052799"
+         y="928.00598"
+         x="15.978034"
+         height="46.579193"
+         width="46.588505"
+         id="rect3889"
+         style="fill:#80ba24;fill-opacity:1;stroke:none" />
+      <path
+         id="rect3058-3"
+         style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:0.3878985;stroke-opacity:1;filter:url(#filter4109)"
+         d="m 36.16069,947.81352 c 1.633536,-0.94634 4.640361,-0.94634 6.273896,0 1.633539,0.94633 1.944278,2.25922 2.509559,4.38413 0.565281,2.12491 0.561353,5.05164 0,8.14196 -0.561352,3.09027 -2.388247,10.05401 -4.548581,10.02087 -2.160332,-0.0335 -0.560126,-0.0335 -2.544412,0 -1.984289,0.0328 -3.638669,-6.9306 -4.200021,-10.02087 -0.561352,-3.09032 -0.697801,-5.5189 0,-8.14196 0.432757,-1.62676 0.87602,-3.4378 2.509559,-4.38413 z m 0,0 c 1.633536,-0.94634 4.640361,-0.94634 6.273896,0 1.633539,0.94633 1.944278,2.25922 2.509559,4.38413 0.565281,2.12491 0.561353,5.05164 0,8.14196 -0.561352,3.09027 -2.388247,10.05401 -4.548581,10.02087 -2.160332,-0.0335 -0.560126,-0.0335 -2.544412,0 -1.984289,0.0328 -3.638669,-6.9306 -4.200021,-10.02087 -0.561352,-3.09032 -0.697801,-5.5189 0,-8.14196 0.432757,-1.62676 0.87602,-3.4378 2.509559,-4.38413 z m 8.757917,-7.25306 c 0,3.11308 -2.528027,5.63675 -5.646505,5.63675 -3.118481,0 -5.646509,-2.52367 -5.646509,-5.63675 0,-3.11308 2.528028,-5.63674 5.646509,-5.63674 3.118478,0 5.646505,2.52366 5.646505,5.63674 z m 0,0 c 0,3.11308 -2.528027,5.63675 -5.646505,5.63675 -3.118481,0 -5.646509,-2.52367 -5.646509,-5.63675 0,-3.11308 2.528028,-5.63674 5.646509,-5.63674 3.118478,0 5.646505,2.52366 5.646505,5.63674 z m 1.503578,-5.95427 c 1.291101,1.28531 2.141901,3.47229 2.141901,5.95427 0,2.482 -0.8508,4.66897 -2.141901,5.95427 0.806902,-1.58232 1.297952,-3.66811 1.297952,-5.95427 0,-2.28614 -0.49105,-4.37194 -1.297952,-5.95427 z m 2.574383,-1.1879 c 1.969307,1.54172 3.267035,4.16502 3.267035,7.14217 0,2.97716 -1.297728,5.60045 -3.267035,7.14217 1.230765,-1.898 1.979759,-4.39992 1.979759,-7.14217 0,-2.74224 -0.748994,-5.24416 -1.979759,-7.14217 z m 2.507944,-1.18767 c 2.687432,1.7981 4.458387,4.85761 4.458387,8.32984 0,3.47223 -1.770955,6.53174 -4.458387,8.32985 1.679572,-2.21363 2.701696,-5.1316 2.701696,-8.32985 0,-3.19825 -1.022124,-6.11622 -2.701696,-8.32984 z m -19.382497,2.37557 c -1.291097,1.28531 -2.141901,3.47229 -2.141901,5.95427 0,2.482 0.850804,4.66897 2.141901,5.95427 -0.806902,-1.58232 -1.297949,-3.66811 -1.297949,-5.95427 0,-2.28614 0.491047,-4.37194 1.297949,-5.95427 z m -2.574383,-1.1879 c -1.969307,1.54172 -3.267032,4.16502 -3.267032,7.14217 0,2.97716 1.297725,5.60045 3.267032,7.14217 -1.230762,-1.898 -1.979759,-4.39992 -1.979759,-7.14217 0,-2.74224 0.748997,-5.24416 1.979759,-7.14217 z m -2.50794,-1.18767 c -2.687432,1.7981 -4.458388,4.85761 -4.458388,8.32984 0,3.47223 1.770956,6.53174 4.458388,8.32985 -1.679575,-2.21363 -2.701697,-5.1316 -2.701697,-8.32985 0,-3.19825 1.022122,-6.11622 2.701697,-8.32984 z"
+         inkscape:connector-curvature="0" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Latin Modern Sans Demi Cond;-inkscape-font-specification:Latin Modern Sans Demi Cond Semi-Bold;filter:url(#filter4091)"
+       x="71.378906"
+       y="962.578"
+       id="text3198-6-8"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/pcvolkmer/Projekte/arsnovadesktop/src/resources/images/splash.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan3200-0-0"
+         x="71.378906"
+         y="962.578"
+         style="font-size:28px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:-2px;writing-mode:lr-tb;text-anchor:start;fill:#80ba24;fill-opacity:1;font-family:Cantarell;-inkscape-font-specification:Cantarell"
+         dx="0"
+         rotate="0 0 0 0 0 0 0 0"><tspan
+           style="font-weight:normal;fill:#aedb5e;fill-opacity:1;-inkscape-font-specification:Cantarell"
+           id="tspan4035">ARSnov<tspan
+   style="word-spacing:0px;font-weight:normal;-inkscape-font-specification:Cantarell"
+   id="tspan4037"
+   dx="0">a</tspan></tspan><tspan
+           style="font-size:28px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:-2px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;font-family:Cantarell;-inkscape-font-specification:Cantarell"
+           id="tspan3097"
+           rotate="0 0 0 0 0 0 0 0"
+           dx="0.029999999 0"><tspan
+   style="word-spacing:0px"
+   id="tspan4039">D</tspan>esktop</tspan></tspan></text>
     <text
        xml:space="preserve"
        style="font-size:40px;font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Latin Modern Sans Demi Cond;-inkscape-font-specification:Latin Modern Sans Demi Cond Semi-Bold"
-       x="121.37891"
-       y="970.578"
-       id="text3198-6-8"
-       sodipodi:linespacing="125%"><tspan
+       x="-153.11307"
+       y="1100.5082"
+       id="text3198-6-8-3"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/pcvolkmer/Projekte/arsnovadesktop/src/resources/images/splash.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
          sodipodi:role="line"
-         id="tspan3200-0-0"
-         x="121.37891"
-         y="970.578"
-         style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:-2px;writing-mode:lr-tb;text-anchor:start;fill:#80ba24;fill-opacity:1;font-family:Cantarell;-inkscape-font-specification:Cantarell"
+         id="tspan3200-0-0-1"
+         x="-153.11307"
+         y="1100.5082"
+         style="font-size:28px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:-2px;writing-mode:lr-tb;text-anchor:start;fill:#80ba24;fill-opacity:1;font-family:Cantarell;-inkscape-font-specification:Cantarell"
          dx="0"
-         rotate="0 0 0 0 0 0 0 0"><tspan
-   style="font-size:44px;letter-spacing:-2px"
-   id="tspan3909">ARS</tspan>nova<tspan
-   style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:-2px;writing-mode:lr-tb;text-anchor:start;fill:#4a5c66;fill-opacity:1;font-family:Cantarell;-inkscape-font-specification:Cantarell"
-   id="tspan3097"
-   rotate="0 0 0 0 0 0 0 0"><tspan
-   style="font-size:44px;letter-spacing:-2px"
-   id="tspan3911">D</tspan>esktop</tspan></tspan></text>
-    <rect
-       style="fill:#80ba24;fill-opacity:1;stroke:none"
-       id="rect3889"
-       width="64.000298"
-       height="63.943104"
-       x="20.00017"
-       y="928.42645"
-       ry="4.2628741" />
-    <path
-       inkscape:connector-curvature="0"
-       d="m 47.725807,955.61786 c 2.244046,-1.29912 6.374629,-1.29912 8.618675,0 2.244051,1.29911 2.670924,3.10141 3.447471,6.01845 0.776547,2.91705 0.77115,6.93481 0,11.17715 -0.771149,4.24227 -3.280821,13.80197 -6.248549,13.75647 -2.967725,-0.046 -0.769465,-0.046 -3.495349,0 -2.725889,0.045 -4.99857,-9.5142 -5.769719,-13.75647 -0.77115,-4.24234 -0.958594,-7.57625 0,-11.17715 0.594493,-2.23318 1.20342,-4.71934 3.447471,-6.01845 z m 0,0 c 2.244046,-1.29912 6.374629,-1.29912 8.618675,0 2.244051,1.29911 2.670924,3.10141 3.447471,6.01845 0.776547,2.91705 0.77115,6.93481 0,11.17715 -0.771149,4.24227 -3.280821,13.80197 -6.248549,13.75647 -2.967725,-0.046 -0.769465,-0.046 -3.495349,0 -2.725889,0.045 -4.99857,-9.5142 -5.769719,-13.75647 -0.77115,-4.24234 -0.958594,-7.57625 0,-11.17715 0.594493,-2.23318 1.20342,-4.71934 3.447471,-6.01845 z m 12.031064,-9.95688 c 0,4.27359 -3.472842,7.73803 -7.756806,7.73803 -4.28397,0 -7.756812,-3.46444 -7.756812,-7.73803 0,-4.27358 3.472842,-7.73801 7.756812,-7.73801 4.283964,0 7.756806,3.46443 7.756806,7.73801 z m 0,0 c 0,4.27359 -3.472842,7.73803 -7.756806,7.73803 -4.28397,0 -7.756812,-3.46444 -7.756812,-7.73803 0,-4.27358 3.472842,-7.73801 7.756812,-7.73801 4.283964,0 7.756806,3.46443 7.756806,7.73801 z m 2.065519,-8.17392 c 1.773631,1.76446 2.942406,4.7667 2.942406,8.17393 0,3.40724 -1.168775,6.40948 -2.942406,8.17391 1.108469,-2.17218 1.783043,-5.03552 1.783043,-8.17391 0,-3.13838 -0.674574,-6.00173 -1.783043,-8.17393 z m 3.536521,-1.63072 c 2.705308,2.11645 4.488043,5.71766 4.488043,9.80465 0,4.08699 -1.782735,7.68819 -4.488043,9.80464 1.690746,-2.60554 2.719666,-6.04014 2.719666,-9.80464 0,-3.76451 -1.02892,-7.1991 -2.719666,-9.80465 z m 3.445253,-1.63042 c 3.691822,2.4684 6.124645,6.66845 6.124645,11.43507 0,4.76661 -2.432823,8.96665 -6.124645,11.43506 2.307288,-3.03882 3.711416,-7.04456 3.711416,-11.43506 0,-4.39051 -1.404128,-8.39624 -3.711416,-11.43507 z m -26.62643,3.26114 c -1.773626,1.76446 -2.942406,4.7667 -2.942406,8.17393 0,3.40724 1.16878,6.40948 2.942406,8.17391 -1.10847,-2.17218 -1.783039,-5.03552 -1.783039,-8.17391 0,-3.13838 0.674569,-6.00173 1.783039,-8.17393 z m -3.536522,-1.63072 c -2.705307,2.11645 -4.488038,5.71766 -4.488038,9.80465 0,4.08699 1.782731,7.68819 4.488038,9.80464 -1.690742,-2.60554 -2.719666,-6.04014 -2.719666,-9.80464 0,-3.76451 1.028924,-7.1991 2.719666,-9.80465 z m -3.445247,-1.63042 c -3.691821,2.4684 -6.124647,6.66845 -6.124647,11.43507 0,4.76661 2.432826,8.96665 6.124647,11.43506 -2.307292,-3.03882 -3.711418,-7.04456 -3.711418,-11.43506 0,-4.39051 1.404126,-8.39624 3.711418,-11.43507 z"
-       style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:0.53268516;stroke-opacity:1"
-       id="rect3058-3" />
+         rotate="0 0 0 0 0 0 0 0">ARSnova<tspan
+   style="font-size:28px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:-2px;writing-mode:lr-tb;text-anchor:start;fill:#4a5c66;fill-opacity:1;font-family:Cantarell;-inkscape-font-specification:Cantarell"
+   id="tspan3097-5"
+   rotate="0 0 0 0 0 0 0 0">Desktop</tspan></tspan></text>
   </g>
 </svg>

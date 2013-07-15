@@ -1,10 +1,21 @@
 #include "loginwidget.h"
+#include "version.h"
 
 LoginWidget::LoginWidget ( QWidget* parent, Qt::WindowFlags f ) {
-    this->setSource(QUrl("qrc:/qml/ui/login.qml"));
-    item = qobject_cast<QDeclarativeItem *>(this->rootObject());
-    connect(item, SIGNAL(loginButtonClick()), this, SLOT(on_loginButton_clicked()));
-    connect(item, SIGNAL(exitButtonClick()), this, SLOT(on_exitButton_clicked()));
+    this->setSource ( QUrl ( "qrc:/qml/ui/login.qml" ) );
+    item = qobject_cast<QDeclarativeItem *> ( this->rootObject() );
+    connect ( item, SIGNAL ( loginButtonClick() ), this, SLOT ( on_loginButton_clicked() ) );
+    connect ( item, SIGNAL ( exitButtonClick() ), this, SLOT ( on_exitButton_clicked() ) );
+
+    QDeclarativeItem * dItem = item->findChild<QDeclarativeItem *> ( "versionstring" );
+    if ( dItem != nullptr ) {
+        dItem->setProperty (
+            "text",
+            QString ( "ARSnovaDesktop" )
+            + " " + VERSION_MAJOR
+            + "." + VERSION_MINOR
+            + "." + VERSION_PATCH );
+    }
 }
 
 LoginWidget::~LoginWidget() {
@@ -16,23 +27,23 @@ QGraphicsScene * const LoginWidget::getUi() {
 }
 
 QString LoginWidget::text() {
-    QDeclarativeItem * dItem = item->findChild<QDeclarativeItem *>("sessionIdTextInput");
-    if (dItem != nullptr) {
-        return dItem->property("text").toString();
+    QDeclarativeItem * dItem = item->findChild<QDeclarativeItem *> ( "sessionIdTextInput" );
+    if ( dItem != nullptr ) {
+        return dItem->property ( "text" ).toString();
     }
 }
 
 void LoginWidget::setText ( QString text ) {
-    QDeclarativeItem * dItem = item->findChild<QDeclarativeItem *>("sessionIdTextInput");
-    if (dItem != nullptr) {
-        dItem->setProperty("text", text);
+    QDeclarativeItem * dItem = item->findChild<QDeclarativeItem *> ( "sessionIdTextInput" );
+    if ( dItem != nullptr ) {
+        dItem->setProperty ( "text", text );
     }
 }
 
 void LoginWidget::clear() {
-    QDeclarativeItem * dItem = item->findChild<QDeclarativeItem *>("sessionIdTextInput");
-    if (dItem != nullptr) {
-        dItem->setProperty("text", "");
+    QDeclarativeItem * dItem = item->findChild<QDeclarativeItem *> ( "sessionIdTextInput" );
+    if ( dItem != nullptr ) {
+        dItem->setProperty ( "text", "" );
     }
 }
 

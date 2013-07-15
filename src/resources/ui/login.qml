@@ -11,16 +11,25 @@ Rectangle {
 
     Image {
         id: toplogo
-        x: 180
-        y: 24
+        x: 0
+        y: 0
         source: "qrc:/images/images/splash.png"
+    }
+    
+    Text {
+        id: versionstring
+        objectName: "versionstring"
+        x: 8
+        y: 380
+        color: "#555555"
+        text: ""
     }
     
     Rectangle {
         id: sessionIdRectangle
         objectName: "sessionIdRectangle"
         x: 140
-        y: 128
+        y: 140
         width: 361
         height: 41
         border.color: sessionIdTextInput.focus ? "#aeacff" : "#dddddd"
