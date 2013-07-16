@@ -21,7 +21,8 @@ Rectangle {
         objectName: "versionstring"
         x: 8
         y: 380
-        color: "#555555"
+        font.pixelSize: 11
+        color: "#777777"
         text: ""
     }
     
@@ -32,7 +33,7 @@ Rectangle {
         y: 140
         width: 361
         height: 41
-        border.color: sessionIdTextInput.focus ? "#aeacff" : "#dddddd"
+        border.color: sessionIdTextInput.focus ? "#55ad3d" : "#dddddd"
         radius: 2
         anchors.horizontalCenter: parent.horizontalCenter
 
