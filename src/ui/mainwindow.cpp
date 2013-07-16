@@ -86,6 +86,7 @@ void MainWindow::onSystemTrayActivated ( QSystemTrayIcon::ActivationReason reaso
 
 void MainWindow::onContextError ( SessionContext::Error e ) {
     this->activateWidget ( "Login" );
+    this->getUi()->statusbar->showMessage ( tr ( "Unable to request session from server" ), 5000 );
 }
 
 void MainWindow::activateWidget ( QString widgetTitle ) {
@@ -117,7 +118,7 @@ void MainWindow::connectLoginWidget() {
 }
 
 void MainWindow::sessionLogin() {
-    //SplashScreen::destroy();
+    this->getUi()->statusbar->showMessage ( tr ( "Connected to session" ), 5000 );
     LoginWidget * loginWidget = ( LoginWidget * ) this->findWidget ( "Login" );
     if ( loginWidget != nullptr ) {
         this->sessionContext->connection()->requestSession ( loginWidget->text() );
