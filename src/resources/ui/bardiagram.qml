@@ -23,6 +23,8 @@ Rectangle {
                 color: "#52901c"
             }
         }
+
+        Behavior on height { PropertyAnimation { easing.type: Easing.OutBounce; easing.amplitude: 2.0; easing.period: 1.5; duration: 750 } }
     }
 
     Rectangle {
@@ -43,6 +45,8 @@ Rectangle {
                 color: "#d6a100"
             }
         }
+
+        Behavior on height { PropertyAnimation { easing.type: Easing.OutBounce; easing.amplitude: 2.0; easing.period: 1.5; duration: 750 } }
     }
 
     Rectangle {
@@ -63,6 +67,8 @@ Rectangle {
                 color: "#c53800"
             }
         }
+
+        Behavior on height { PropertyAnimation { easing.type: Easing.OutBounce; easing.amplitude: 2.0; easing.period: 1.5; duration: 750 } }
     }
 
     Rectangle {
@@ -83,6 +89,8 @@ Rectangle {
                 color: "#c3c3c3"
             }
         }
+
+        Behavior on height { PropertyAnimation { easing.type: Easing.OutBounce; easing.amplitude: 2.0; easing.period: 1.5; duration: 750 } }
     }
 
     Rectangle {
