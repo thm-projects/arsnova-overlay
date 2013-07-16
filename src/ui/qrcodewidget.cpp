@@ -40,7 +40,7 @@ void QRCodeWidget::setFullscreen ( bool fullscreen, int screen ) {
                                : QApplication::desktop()->availableGeometry ( screen )
                            );
 
-    if ( fullscreen && this->fullscreenWidget != nullptr ) {
+    if ( QApplication::desktop()->screenCount() > 1 && fullscreen && this->fullscreenWidget != nullptr ) {
         // Rezize widget with 48px padding on each side
 
         this->fullscreenWidget->resize (
@@ -60,8 +60,46 @@ void QRCodeWidget::setFullscreen ( bool fullscreen, int screen ) {
         QRect frect = this->fullscreenWidget->frameGeometry();
         frect.moveCenter ( screenGeometry.center() );
         this->fullscreenWidget->move ( frect.topLeft() );
-    } else if ( ! fullscreen && this->fullscreenWidget != nullptr ) {
+    } else if ( QApplication::desktop()->screenCount() > 1 && ! fullscreen && this->fullscreenWidget != nullptr ) {
         this->fullscreenWidget->close();
+    } else if ( QApplication::desktop()->screenCount() == 1 && fullscreen && this->fullscreenWidget != nullptr ) {
+        if ( fullscreen ) {
+            // Rezize widget with 48px padding on each side
+            this->setParent ( nullptr );
+            this->resize (
+                QApplication::desktop()->screenGeometry().width() - 96,
+                QApplication::desktop()->screenGeometry().height() - 96
+            );
+
+            this->setWindowFlags (
+                Qt::Window
+                | Qt::FramelessWindowHint
+                | Qt::WindowStaysOnTopHint
+                | Qt::X11BypassWindowManagerHint
+            );
+            this->setVisible ( true );
+            this->adjustSize();
+        } else {
+            this->setParent ( this->parentBackup );
+            if ( parentBackup != nullptr ) {
+                this->parentBackup->addWidget ( this );
+                this->parentBackup->setCurrentWidget ( this );
+            }
+            this->setVisible ( true );
+            this->adjustSize();
+        }
+
+        QRect frect = frameGeometry();
+        frect.moveCenter ( QApplication::desktop()->availableGeometry().center() );
+        move ( frect.topLeft() );
+    } else if ( QApplication::desktop()->screenCount() == 1 && ! fullscreen && this->fullscreenWidget != nullptr ) {
+        this->setParent ( this->parentBackup );
+        if ( parentBackup != nullptr ) {
+            this->parentBackup->addWidget ( this );
+            this->parentBackup->setCurrentWidget ( this );
+        }
+        this->setVisible ( true );
+        this->adjustSize();
     }
 
     this->_ui->toolButton->setDown ( fullscreen );
