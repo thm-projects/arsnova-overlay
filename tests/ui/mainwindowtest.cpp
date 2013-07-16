@@ -21,10 +21,6 @@ void MainWindowTest::testThatMainWindowContainsBasicLeftMenu() {
     QVERIFY ( buttons.size() == 3 );
 }
 
-void MainWindowTest::testShouldDisplaySplashScreen() {
-    QVERIFY ( ! SplashScreen::instance()->isVisible() );
-}
-
 void MainWindowTest::testShouldDisplaySessionWidget() {
     QList<QPushButton *> buttons = this->mainWindow->getUi()->leftMenu->findChildren<QPushButton *>();
     foreach ( QPushButton * button, buttons ) {

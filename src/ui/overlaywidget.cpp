@@ -4,7 +4,7 @@
 
 const int OverlayWidget::ySize = 80;
 const int OverlayWidget::xSize = 180;
-const int OverlayWidget::httpUpdateInterval = 10;
+const int OverlayWidget::httpUpdateInterval = 3;
 
 OverlayWidget::OverlayWidget ( SessionContext * context, QWidget * parent, Qt::WindowFlags f )
     : QWidget ( parent, f ),

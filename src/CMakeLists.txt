@@ -4,7 +4,6 @@ set(arsnovawidget_SRCS
   ui/mainwindow.cpp
   ui/overlaywidget.cpp
   ui/qrcodewidget.cpp
-  ui/splashscreen.cpp
   ui/sessionwidget.cpp
   ui/systemtrayicon.cpp
   updatetimer.cpp
@@ -56,7 +55,6 @@ set(arsnovawidget_MOC_SRCS
   ui/mainwindow.h
   ui/overlaywidget.h
   ui/qrcodewidget.h
-  ui/splashscreen.h
   ui/sessionwidget.h
   ui/systemtrayicon.h
   updatetimer.h
@@ -95,7 +93,6 @@ set(arsnovawidget_UIS
 )
 
 set(arsnovawidgetplugin_UIS
-  qplugin/bardiagramwidget.ui
   qplugin/logodiagramwidget.ui
   qplugin/sessioninformationwidget.ui
 )

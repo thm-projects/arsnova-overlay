@@ -26,7 +26,6 @@
 #include "svglogo.h"
 #include "feedbackresponse.h"
 #include "httpconnection.h"
-#include "ui/splashscreen.h"
 #include "ui/systemtrayicon.h"
 
 #ifdef __APPLE__

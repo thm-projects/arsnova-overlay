@@ -11,13 +11,6 @@ MainWindow::MainWindow ( QWidget * parent, Qt::WindowFlags f ) : QMainWindow ( p
     this->widgetList = new QMap<QString, QWidget *>();
     this->sessionContext = new SessionContext ( new HttpConnection() );
 
-    /*SplashScreen::instance()->showMessage (
-        QString ( "Running ARSnovaDesktop" )
-        + " " + VERSION_MAJOR
-        + "." + VERSION_MINOR
-        + "." + VERSION_PATCH
-    );*/
-
     this->addWidget ( "Login", new LoginWidget() );
     this->connectLoginWidget();
 
@@ -39,8 +32,6 @@ MainWindow::MainWindow ( QWidget * parent, Qt::WindowFlags f ) : QMainWindow ( p
 MainWindow::~MainWindow() {
     this->disconnectAll();
     SystemTrayIcon::destroy();
-    SplashScreen::instance()->close();
-    SplashScreen::destroy();
     this->overlayWidget->close();
     delete overlayWidget;
     delete widgetList;

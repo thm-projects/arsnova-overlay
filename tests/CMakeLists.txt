@@ -21,7 +21,6 @@ set(arsnovawidget_SRCS
   ../src/ui/qrcodewidget.cpp
   ui/mainwindowtest.cpp
   ../src/ui/mainwindow.cpp
-  ../src/ui/splashscreen.cpp
   ../src/ui/sessionwidget.cpp
   ui/sessionwidgettest.cpp
   ui/qrcodewidgettest.cpp
@@ -34,8 +33,6 @@ set(arsnovawidget_SRCS
   ../src/interposedquestion.cpp
   ../src/sessioncontext.cpp
   sessioncontexttest.cpp
-  ../src/ui/splashscreen.cpp
-  ui/splashscreentest.cpp
   ../src/ui/systemtrayicon.cpp
   ui/systemtrayicontest.cpp
   main.cpp
@@ -72,7 +69,6 @@ set(arsnovawidget_MOC_SRCS
   ../src/ui/qrcodewidget.h
   ui/mainwindowtest.h
   ../src/ui/mainwindow.h
-  ../src/ui/splashscreen.h
   ../src/ui/sessionwidget.h
   ui/sessionwidgettest.h
   ui/qrcodewidgettest.h
@@ -86,14 +82,11 @@ set(arsnovawidget_MOC_SRCS
   ../src/interposedquestion.h
   ../src/sessioncontext.h
   sessioncontexttest.h
-  ../src/ui/splashscreen.h
-  ui/splashscreentest.h
   ../src/ui/systemtrayicon.h
   ui/systemtrayicontest.h
 )
 
 set(arsnovawidget_UIS
-  ../src/qplugin/bardiagramwidget.ui
   ../src/qplugin/logodiagramwidget.ui
   ../src/qplugin/sessioninformationwidget.ui
   ../src/ui/overlaywidget.ui
@@ -154,6 +147,5 @@ add_test(SessionInformationWidgetTest ${EXECUTABLE_OUTPUT_PATH}/tests SessionInf
 add_test(QRCodeWidgetTest ${EXECUTABLE_OUTPUT_PATH}/tests QRCodeWidgetTest)
 add_test(MainWindowTest ${EXECUTABLE_OUTPUT_PATH}/tests MainWindowTest)
 add_test(SessionContextTest ${EXECUTABLE_OUTPUT_PATH}/tests SessionContextTest)
-add_test(SplashScreenTest ${EXECUTABLE_OUTPUT_PATH}/tests SplashScreenTest)
 add_test(SystemTrayIconTest ${EXECUTABLE_OUTPUT_PATH}/tests SystemTrayIconTest)
 add_test(SessionWidgetTest ${EXECUTABLE_OUTPUT_PATH}/tests SessionWidgetTest)

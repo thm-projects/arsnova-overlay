@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>200</width>
-    <height>213</height>
+    <height>209</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -77,14 +77,27 @@
      <addaction name="actionExit"/>
     </widget>
    </item>
-   <item row="0" column="0">
-    <widget class="SessionInformationWidget" name="sessioninformationwidget" native="true"/>
-   </item>
    <item row="1" column="0" colspan="2">
     <widget class="LogoDiagramWidget" name="logodiagramwidget" native="true"/>
    </item>
    <item row="2" column="0" colspan="2">
     <widget class="BarDiagramWidget" name="bardiagramwidget" native="true"/>
+   </item>
+   <item row="0" column="0" colspan="2">
+    <widget class="SessionInformationWidget" name="sessioninformationwidget" native="true">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>20</height>
+      </size>
+     </property>
+    </widget>
    </item>
   </layout>
   <action name="actionMakeTransparent">
