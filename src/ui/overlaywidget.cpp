@@ -49,10 +49,17 @@ const Ui::OverlayWidget*const OverlayWidget::getUi() {
     return this->ui;
 }
 
-void OverlayWidget::moveToBottomRightEdge() {
+void OverlayWidget::moveToBottomRightEdge ( int screen ) {
     this->resize ( QSize ( xSize+20, ( ySize*2 ) + 32 ) );
-    int xPos = QApplication::desktop()->screenGeometry().width() - this->size().width() - 8;
-    int yPos = QApplication::desktop()->screenGeometry().height() - this->size().height() - 8;
+
+    QRect screenGeometry = (
+                               screen == -1
+                               ? QApplication::desktop()->availableGeometry ( QApplication::desktop()->screenCount() - 1 )
+                               : QApplication::desktop()->availableGeometry ( screen )
+                           );
+
+    int xPos = screenGeometry.width() + screenGeometry.x() - this->size().width() - 8;
+    int yPos = screenGeometry.height() + screenGeometry.y() - this->size().height() - 8;
     this->move ( xPos, yPos );
 }
 

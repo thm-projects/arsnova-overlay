@@ -41,7 +41,7 @@ private:
     static const int httpUpdateInterval;
     static const int ySize;
     static const int xSize;
-    void moveToBottomRightEdge();
+    void moveToBottomRightEdge ( int screen = -1 );
     void connectSignals();
 
 public slots:
