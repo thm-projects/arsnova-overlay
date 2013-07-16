@@ -6,8 +6,6 @@
 #include "qrcodegenerator.h"
 #include "sessioncontext.h"
 
-class MainWindow;
-
 class QRCodeWidget : public QWidget, Ui::QRCodeWidget {
     Q_OBJECT
 

@@ -10,12 +10,22 @@ QRCodeWidget::QRCodeWidget ( SessionContext * context, QStackedWidget * parent, 
     connect ( _sessionContext, SIGNAL ( sessionChanged() ), this, SLOT ( onSessionChanged() ) );
     connect ( _ui->toolButton, SIGNAL ( clicked ( bool ) ), this, SLOT ( onFullscreenButtonToggled ( bool ) ) );
     connect ( _ui->transformComboBox, SIGNAL ( currentIndexChanged ( int ) ), this, SLOT ( onTransformationChanged() ) );
+
+    if ( parent != nullptr ) {
+        this->fullscreenWidget = new QRCodeWidget ( this->_sessionContext, nullptr );
+        this->fullscreenWidget->_ui->toolButton->hide();
+        this->fullscreenWidget->_ui->transformComboBox->hide();
+        connect ( _sessionContext, SIGNAL ( sessionChanged() ), this->fullscreenWidget, SLOT ( onSessionChanged() ) );
+        connect ( _ui->transformComboBox, SIGNAL ( currentIndexChanged ( int ) ), this->fullscreenWidget, SLOT ( onTransformationChanged() ) );
+    }
+
 }
 
 QRCodeWidget::~QRCodeWidget() {
     disconnect ( _sessionContext, SIGNAL ( sessionChanged() ), this, SLOT ( onSessionChanged() ) );
     disconnect ( _ui->toolButton, SIGNAL ( clicked ( bool ) ), this, SLOT ( onFullscreenButtonToggled ( bool ) ) );
     delete _ui;
+    if ( this->parentBackup != nullptr ) delete this->fullscreenWidget;
 }
 
 void QRCodeWidget::show() {
@@ -30,12 +40,8 @@ void QRCodeWidget::setFullscreen ( bool fullscreen, int screen ) {
                                : QApplication::desktop()->availableGeometry ( screen )
                            );
 
-    if ( fullscreen && parentBackup != nullptr ) {
+    if ( fullscreen && this->fullscreenWidget != nullptr ) {
         // Rezize widget with 48px padding on each side
-
-        this->fullscreenWidget = new QRCodeWidget ( this->_sessionContext, nullptr );
-        this->fullscreenWidget->_ui->toolButton->hide();
-        this->fullscreenWidget->_ui->transformComboBox->hide();
 
         this->fullscreenWidget->resize (
             screenGeometry.width() - 96,
@@ -54,11 +60,8 @@ void QRCodeWidget::setFullscreen ( bool fullscreen, int screen ) {
         QRect frect = this->fullscreenWidget->frameGeometry();
         frect.moveCenter ( screenGeometry.center() );
         this->fullscreenWidget->move ( frect.topLeft() );
-    } else {
-        if ( this->fullscreenWidget != nullptr && parentBackup != nullptr && this->fullscreenWidget->isVisible()) {
-            this->fullscreenWidget->close();
-            delete this->fullscreenWidget;
-        }
+    } else if ( ! fullscreen && this->fullscreenWidget != nullptr ) {
+        this->fullscreenWidget->close();
     }
 
     this->_ui->toolButton->setDown ( fullscreen );
@@ -100,6 +103,9 @@ void QRCodeWidget::onSessionChanged() {
 }
 
 void QRCodeWidget::onTransformationChanged() {
+    if ( this->fullscreenWidget != nullptr ) {
+        this->fullscreenWidget->_ui->transformComboBox->setCurrentIndex ( this->_ui->transformComboBox->currentIndex() );
+    }
     this->onSessionChanged();
 }
 
