@@ -21,13 +21,19 @@ void QRCodeWidget::show() {
     QWidget::show();
 }
 
-void QRCodeWidget::setFullscreen ( bool fullscreen ) {
+void QRCodeWidget::setFullscreen ( bool fullscreen, int screen ) {
+    QRect screenGeometry = (
+                               screen == -1
+                               ? QApplication::desktop()->availableGeometry ( QApplication::desktop()->screenCount() - 1 )
+                               : QApplication::desktop()->availableGeometry ( screen )
+                           );
+
     if ( fullscreen ) {
         // Rezize widget with 48px padding on each side
         this->setParent ( nullptr );
         this->resize (
-            QApplication::desktop()->screenGeometry().width() - 96,
-            QApplication::desktop()->screenGeometry().height() - 96
+            screenGeometry.width() - 96,
+            screenGeometry.height() - 96
         );
 
         this->setWindowFlags (
@@ -49,7 +55,7 @@ void QRCodeWidget::setFullscreen ( bool fullscreen ) {
     }
 
     QRect frect = frameGeometry();
-    frect.moveCenter ( QApplication::desktop()->availableGeometry().center() );
+    frect.moveCenter ( screenGeometry.center() );
     move ( frect.topLeft() );
 
     this->_ui->toolButton->setDown ( fullscreen );

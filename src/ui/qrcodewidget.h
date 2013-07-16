@@ -13,7 +13,7 @@ public:
     explicit QRCodeWidget ( SessionContext * context, QStackedWidget* parent = 0, Qt::WindowFlags f = 0 );
     virtual ~QRCodeWidget();
     void setUrl ( QUrl url );
-    void setFullscreen ( bool fullscreen );
+    void setFullscreen ( bool fullscreen, int screen = -1 );
     /** Returns user interface of this widget.
      * This method is helpfull if someone needs direct access to the
      * user interface itself e.g. testing.
