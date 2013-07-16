@@ -1,10 +1,12 @@
 #include "qrcodewidget.h"
+#include "mainwindow.h"
 
 QRCodeWidget::QRCodeWidget ( SessionContext * context, QStackedWidget * parent, Qt::WindowFlags f )
     : QWidget ( parent, f ), _ui ( new Ui::QRCodeWidget() ), _sessionContext ( context ) {
     _ui->setupUi ( this );
+
     this->parentBackup = parent;
-    this->setFullscreen ( false );
+
     connect ( _sessionContext, SIGNAL ( sessionChanged() ), this, SLOT ( onSessionChanged() ) );
     connect ( _ui->toolButton, SIGNAL ( clicked ( bool ) ), this, SLOT ( onFullscreenButtonToggled ( bool ) ) );
     connect ( _ui->transformComboBox, SIGNAL ( currentIndexChanged ( int ) ), this, SLOT ( onTransformationChanged() ) );
@@ -28,35 +30,36 @@ void QRCodeWidget::setFullscreen ( bool fullscreen, int screen ) {
                                : QApplication::desktop()->availableGeometry ( screen )
                            );
 
-    if ( fullscreen ) {
+    if ( fullscreen && parentBackup != nullptr ) {
         // Rezize widget with 48px padding on each side
-        this->setParent ( nullptr );
-        this->resize (
+
+        this->fullscreenWidget = new QRCodeWidget ( this->_sessionContext, nullptr );
+        this->fullscreenWidget->_ui->toolButton->hide();
+        this->fullscreenWidget->_ui->transformComboBox->hide();
+
+        this->fullscreenWidget->resize (
             screenGeometry.width() - 96,
             screenGeometry.height() - 96
         );
 
-        this->setWindowFlags (
+        this->fullscreenWidget->setWindowFlags (
             Qt::Window
             | Qt::FramelessWindowHint
             | Qt::WindowStaysOnTopHint
             | Qt::X11BypassWindowManagerHint
         );
-        this->setVisible ( true );
-        this->adjustSize();
-    } else {
-        this->setParent ( this->parentBackup );
-        if ( parentBackup != nullptr ) {
-            this->parentBackup->addWidget ( this );
-            this->parentBackup->setCurrentWidget ( this );
-        }
-        this->setVisible ( true );
-        this->adjustSize();
-    }
+        this->fullscreenWidget->setVisible ( true );
+        this->fullscreenWidget->adjustSize();
 
-    QRect frect = frameGeometry();
-    frect.moveCenter ( screenGeometry.center() );
-    move ( frect.topLeft() );
+        QRect frect = this->fullscreenWidget->frameGeometry();
+        frect.moveCenter ( screenGeometry.center() );
+        this->fullscreenWidget->move ( frect.topLeft() );
+    } else {
+        if ( this->fullscreenWidget != nullptr && parentBackup != nullptr && this->fullscreenWidget->isVisible()) {
+            this->fullscreenWidget->close();
+            delete this->fullscreenWidget;
+        }
+    }
 
     this->_ui->toolButton->setDown ( fullscreen );
 }
@@ -136,5 +139,6 @@ QPixmap QRCodeWidget::transform ( QPixmap pixmap, Transformation transformation 
     translationTransform.translate ( -pixmap.width() /2, -pixmap.height() /2 );
     return pixmap.transformed ( translationTransform, Qt::SmoothTransformation );
 }
+
 
 

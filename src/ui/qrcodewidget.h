@@ -6,11 +6,13 @@
 #include "qrcodegenerator.h"
 #include "sessioncontext.h"
 
+class MainWindow;
+
 class QRCodeWidget : public QWidget, Ui::QRCodeWidget {
     Q_OBJECT
 
 public:
-    explicit QRCodeWidget ( SessionContext * context, QStackedWidget* parent = 0, Qt::WindowFlags f = 0 );
+    explicit QRCodeWidget ( SessionContext * context, QStackedWidget * parent = 0, Qt::WindowFlags f = 0 );
     virtual ~QRCodeWidget();
     void setUrl ( QUrl url );
     void setFullscreen ( bool fullscreen, int screen = -1 );
@@ -38,6 +40,8 @@ private:
     SessionContext * _sessionContext;
     QStackedWidget * parentBackup;
     QPixmap transform ( QPixmap pixmap, Transformation transformation );
+
+    QRCodeWidget * fullscreenWidget;
 
 private slots:
     void onSessionChanged();
