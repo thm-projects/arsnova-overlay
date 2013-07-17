@@ -10,8 +10,8 @@
   <lib_qt Hide declarative views>
   Memcheck:Leak
   ...
-  fun:*QDeclarativeView*
   obj:/usr/*lib*/libQt*
+  fun:*QDeclarativeView*
 }
 
 {
