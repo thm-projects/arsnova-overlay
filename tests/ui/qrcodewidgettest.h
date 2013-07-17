@@ -14,15 +14,17 @@ public:
 
 private:
     QRCodeWidget * qrCodeWidget;
+    QStackedWidget * stackedWidget;
     StubConnection * connection;
 
 private slots:
     void initTestCase();
     void cleanupTestCase();
 
-    void testShouldDisplayQRCodeWidget();
     void testShouldDisplayCorrectUrl();
     void testShouldDisplayCorrectUrlAfterSessionLogin();
+    void testShouldSwitchToFullscreenMode();
+    void testShouldSelectAllTransformationModes();
 };
 
 #endif // QRCODEWIDGETTEST_H
