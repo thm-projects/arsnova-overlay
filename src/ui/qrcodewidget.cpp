@@ -11,6 +11,7 @@ QRCodeWidget::QRCodeWidget ( SessionContext * context, QStackedWidget * parent, 
     connect ( _ui->toolButton, SIGNAL ( clicked ( bool ) ), this, SLOT ( onFullscreenButtonToggled ( bool ) ) );
     connect ( _ui->transformComboBox, SIGNAL ( currentIndexChanged ( int ) ), this, SLOT ( onTransformationChanged() ) );
 
+    this->fullscreenWidget = nullptr;
     if ( parent != nullptr ) {
         this->fullscreenWidget = new QRCodeWidget ( this->_sessionContext, nullptr );
         this->fullscreenWidget->_ui->toolButton->hide();
@@ -18,7 +19,6 @@ QRCodeWidget::QRCodeWidget ( SessionContext * context, QStackedWidget * parent, 
         connect ( _sessionContext, SIGNAL ( sessionChanged() ), this->fullscreenWidget, SLOT ( onSessionChanged() ) );
         connect ( _ui->transformComboBox, SIGNAL ( currentIndexChanged ( int ) ), this->fullscreenWidget, SLOT ( onTransformationChanged() ) );
     }
-
 }
 
 QRCodeWidget::~QRCodeWidget() {
