@@ -36,9 +36,13 @@ void BarDiagramWidget::updateGraphicsBar ( int index, int value ) {
 }
 
 void BarDiagramWidget::updateFromResponse ( FeedbackResponse response ) {
+    int max = 0;
+    for ( int i = 0; i < response.values().size(); i++ ) {
+        max = response.values().at ( i ) > max ? response.values().at ( i ) : max;
+    }
     for ( int i = 0; i < response.values().size(); i++ ) {
         if ( response.count() > 0 ) {
-            this->updateGraphicsBar ( i, ( response.values().at ( i ) * 100 ) / response.count() );
+            this->updateGraphicsBar ( i, ( response.values().at ( i ) * 100 ) / max );
         } else {
             this->updateGraphicsBar ( i, 0 );
         }
