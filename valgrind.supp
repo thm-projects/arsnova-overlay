@@ -1,0 +1,52 @@
+{
+  <lib_qt Hide network access>
+  Memcheck:Leak
+  ...
+  fun:*QNetworkAccessManager*createRequest*
+  obj:/usr/*lib*/libQt*
+}
+
+{
+  <lib_qt Hide declarative views>
+  Memcheck:Leak
+  ...
+  fun:*QDeclarativeView*
+  obj:/usr/*lib*/libQt*
+}
+
+{
+  <lib_x11>
+  Memcheck:Leak
+  ...
+  obj:/usr/*lib*/libX11*
+}
+
+{
+  <lib_fontconfig>
+  Memcheck:Leak
+  ...
+  obj:/usr/*lib*/libfontconfig*
+}
+
+{
+  <lib_dl>
+  Memcheck:Leak
+  ...
+  obj:/*lib*/libdl*
+}
+
+{
+  <lib_dbus>
+  Memcheck:Leak
+  ...
+  obj:/*lib*/libdbus*
+}
+
+{
+  <lib_crypto>
+  Memcheck:Leak
+  ...
+  fun:CRYPTO_*
+  ...
+  obj:/*lib*/libcrypto*
+}
