@@ -19,6 +19,7 @@ set(arsnovawidget_SRCS
   qrcodegenerator.cpp
   interposedquestion.cpp
   sessioncontext.cpp
+  abstractconnection.cpp
   main.cpp
 )
 
@@ -102,14 +103,14 @@ set(resources_RCCS
   resources/resources.qrc
 )
 
-qt4_add_resources(resources_RCC_SRCS ${resources_RCCS})
+qt5_add_resources(resources_RCC_SRCS ${resources_RCCS})
 #####
 
-qt4_wrap_cpp(arsnovawidget_SRCS ${arsnovawidget_MOC_SRCS})
-qt4_wrap_ui(arsnovawidget_UIS_H ${arsnovawidget_UIS} ${arsnovawidgetplugin_UIS})
+#qt5_wrap_cpp(arsnovawidget_SRCS ${arsnovawidget_MOC_SRCS})
+#qt5_wrap_ui(arsnovawidget_UIS_H ${arsnovawidget_UIS} ${arsnovawidgetplugin_UIS})
 
-qt4_wrap_cpp(arsnovawidgetplugin_SRCS ${arsnovawidgetplugin_MOC_SRCS})
-qt4_wrap_ui(arsnovawidgetplugin_UIS_H ${arsnovawidgetplugin_UIS})
+#qt5_wrap_cpp(arsnovawidgetplugin_SRCS ${arsnovawidgetplugin_MOC_SRCS})
+#qt5_wrap_ui(arsnovawidgetplugin_UIS_H ${arsnovawidgetplugin_UIS})
 
 IF( WIN32 AND MINGW )
   # To cross compile on Linux use: 'i686-w64-mingw32-windres' or similar command shipped with mingw cross compiler.
@@ -127,34 +128,37 @@ ENDIF( WIN32 AND NOT MINGW )
 
 add_executable(arsnovadesktop MACOSX_BUNDLE WIN32
   ${arsnovawidget_SRCS}
-  ${arsnovawidget_UIS_H}
+  #${arsnovawidget_UIS_H}
   ${resources_RCC_SRCS}
 )
 
 if(QTPLUGIN)
   add_library(qarsnova SHARED
     ${arsnovawidgetplugin_SRCS}
-    ${arsnovawidgetplugin_UIS_H}
+    #${arsnovawidgetplugin_UIS_H}
     ${resources_RCC_SRCS}
   )
 endif(QTPLUGIN)
 
+qt5_use_modules(arsnovadesktop Core Widgets Declarative Network Svg)
+
 target_link_libraries(arsnovadesktop
-  ${QT_QTCORE_LIBRARY}
-  ${QT_QTGUI_LIBRARY}
-  ${QT_QTNETWORK_LIBRARY}
-  ${QT_QTSCRIPT_LIBRARY}
-  ${QT_QTSVG_LIBRARY}
-  ${QT_QTDECLARATIVE_LIBRARY}
+#  ${QT_QTCORE_LIBRARY}
+#  ${QT_QTGUI_LIBRARY}
+#  ${QT_QTNETWORK_LIBRARY}
+#  ${QT_QTSCRIPT_LIBRARY}
+#  ${QT_QTSVG_LIBRARY}
+#  ${QT_QTDECLARATIVE_LIBRARY}
   qrencode
 )
 
 if(QTPLUGIN)
-  target_link_libraries(qarsnova
-    ${QT_QTCORE_LIBRARY}
-    ${QT_QTGUI_LIBRARY}
-    ${QT_QTSVG_LIBRARY}
-  )
+  #target_link_libraries(qarsnova
+  #  ${QT_QTCORE_LIBRARY}
+  #  ${QT_QTGUI_LIBRARY}
+  #  ${QT_QTSVG_LIBRARY}
+  #)
+  qt5_use_modules(qarsnova Core Widgets)
 endif(QTPLUGIN)
 
 IF(APPLE)

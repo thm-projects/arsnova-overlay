@@ -35,6 +35,7 @@ set(arsnovawidget_SRCS
   sessioncontexttest.cpp
   ../src/ui/systemtrayicon.cpp
   ui/systemtrayicontest.cpp
+  ../src/abstractconnection.cpp
   main.cpp
 )
 
@@ -98,27 +99,29 @@ set(resources_RCCS
   ../src/resources/resources.qrc
 )
 
-qt4_add_resources(resources_RCC_SRCS ${resources_RCCS})
+qt5_add_resources(resources_RCC_SRCS ${resources_RCCS})
 #####
 
-qt4_wrap_cpp(arsnovawidget_SRCS ${arsnovawidget_MOC_SRCS})
-qt4_wrap_ui(arsnovawidget_UIS_H ${arsnovawidget_UIS})
+#qt5_wrap_cpp(arsnovawidget_SRCS ${arsnovawidget_MOC_SRCS})
+#qt5_wrap_ui(arsnovawidget_UIS_H ${arsnovawidget_UIS})
 
 add_executable(tests
   ${arsnovawidget_SRCS}
-  ${arsnovawidget_UIS_H}
+  #${arsnovawidget_UIS_H}
   ${resources_RCC_SRCS}
 )
 
+qt5_use_modules(tests Core Widgets Declarative Network Svg Test)
+
 target_link_libraries(tests
-  ${QT_QTCORE_LIBRARY}
-  ${QT_QTGUI_LIBRARY}
-  ${QT_QTNETWORK_LIBRARY}
-  ${QT_QTSCRIPT_LIBRARY}
-  ${QT_QTSVG_LIBRARY}
-  ${QT_QTTEST_LIBRARY}
-  ${QT_QTTESTGUI_LIBRARY}
-  ${QT_QTDECLARATIVE_LIBRARY}
+  #${QT_QTCORE_LIBRARY}
+  #${QT_QTGUI_LIBRARY}
+  #${QT_QTNETWORK_LIBRARY}
+  #${QT_QTSCRIPT_LIBRARY}
+  #${QT_QTSVG_LIBRARY}
+  #${QT_QTTEST_LIBRARY}
+  #${QT_QTTESTGUI_LIBRARY}
+  #${QT_QTDECLARATIVE_LIBRARY}
   qrencode
 )
 

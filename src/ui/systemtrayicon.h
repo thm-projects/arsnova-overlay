@@ -1,7 +1,7 @@
 #ifndef SYSTEMTRAYICON_H
 #define SYSTEMTRAYICON_H
 
-#include <QtGui>
+#include <QtWidgets>
 
 class SystemTrayIcon : public QSystemTrayIcon {
 

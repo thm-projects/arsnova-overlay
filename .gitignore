@@ -29,3 +29,4 @@ Doxyfile
 Testing*
 src/version.h
 sonar.properties
+*moc_*
