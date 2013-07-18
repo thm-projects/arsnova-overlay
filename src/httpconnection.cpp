@@ -65,7 +65,7 @@ bool HttpConnection::isRedirect ( QNetworkReply* reply ) {
 }
 
 void HttpConnection::handleReply ( QNetworkReply * reply ) {
-    if (reply->error() != QNetworkReply::NoError) {
+    if ( reply->error() != QNetworkReply::NoError ) {
         emit this->requestError();
     }
 

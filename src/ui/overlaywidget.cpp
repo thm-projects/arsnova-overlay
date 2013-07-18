@@ -67,10 +67,13 @@ void OverlayWidget::setVisibleViewType ( SessionContext::ViewType type ) {
     if ( !context->isValid() ) return;
     switch ( type ) {
     case SessionContext::DIAGRAM_VIEW:
-        ui->bardiagramwidget->show();
         ui->sessioninformationwidget->show();
         ui->menuWidget->show();
+
+        ui->bardiagramwidget->show();
         ui->logodiagramwidget->hide();
+        ui->emotediagramwidget->hide();
+
         this->setWindowFlags (
             Qt::Window
             | Qt::FramelessWindowHint
@@ -80,9 +83,27 @@ void OverlayWidget::setVisibleViewType ( SessionContext::ViewType type ) {
         break;
     case SessionContext::ICON_VIEW:
         ui->sessioninformationwidget->show();
-        ui->bardiagramwidget->hide();
         ui->menuWidget->show();
+
+        ui->bardiagramwidget->hide();
         ui->logodiagramwidget->show();
+        ui->emotediagramwidget->hide();
+
+        this->setWindowFlags (
+            Qt::Window
+            | Qt::FramelessWindowHint
+            | Qt::WindowStaysOnTopHint
+            | Qt::X11BypassWindowManagerHint
+        );
+        break;
+    case SessionContext::EMOTE_VIEW:
+        ui->sessioninformationwidget->show();
+        ui->menuWidget->show();
+
+        ui->bardiagramwidget->hide();
+        ui->logodiagramwidget->hide();
+        ui->emotediagramwidget->show();
+
         this->setWindowFlags (
             Qt::Window
             | Qt::FramelessWindowHint
@@ -111,6 +132,7 @@ void OverlayWidget::onFeedbackResponse ( FeedbackResponse response ) {
 
     ui->bardiagramwidget->updateFromResponse ( response );
     ui->logodiagramwidget->updateFromResponse ( response );
+    ui->emotediagramwidget->updateFromResponse ( response );
 }
 
 void OverlayWidget::onLoggedInResponse ( LoggedInResponse response ) {

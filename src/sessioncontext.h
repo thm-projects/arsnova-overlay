@@ -42,7 +42,8 @@ public:
      */
     enum ViewType {
         DIAGRAM_VIEW,
-        ICON_VIEW
+        ICON_VIEW,
+        EMOTE_VIEW
     };
 
     /** Errors that might occure
@@ -104,7 +105,7 @@ signals:
 
     /** This signal is emitted when the current session context gets invalid due to network and/or session errors
      */
-    void error( SessionContext::Error error );
+    void error ( SessionContext::Error error );
 
     /** This signal is emitted if the view type changes
      */

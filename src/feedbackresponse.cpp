@@ -20,3 +20,15 @@ QList< int > FeedbackResponse::values() {
 int FeedbackResponse::count() {
     return this->_count;
 }
+
+int FeedbackResponse::averageRounded() {
+    if ( this->count() == 0 ) return 0;
+
+    double count = this->count();
+    double sum = 0;
+    for ( int i = 0; i < values().size(); i++ ) {
+        sum += ( values().at ( i ) * i );
+    }
+
+    return ( int ) round ( sum / count );
+}

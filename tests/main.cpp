@@ -6,6 +6,7 @@
 #include "qplugin/loginwidgettest.h"
 #include "qplugin/bardiagramwidgettest.h"
 #include "qplugin/logodiagramwidgettest.h"
+#include "qplugin/emotediagramwidgettest.h"
 #include "qplugin/sessioninformationwidgettest.h"
 #include "ui/overlaywidgettest.h"
 #include "ui/qrcodewidgettest.h"
@@ -13,6 +14,7 @@
 #include "sessioncontexttest.h"
 #include "ui/systemtrayicontest.h"
 #include "ui/sessionwidgettest.h"
+#include "feedbackresponsetest.h"
 
 int main ( int argc, char ** argv ) {
     QApplication app ( argc, argv );
@@ -29,6 +31,9 @@ int main ( int argc, char ** argv ) {
     } else if ( QString ( argv[argc-1] ) == "LogoDiagramWidgetTest" ) {
         LogoDiagramWidgetTest logoDiagramWidgetTest;
         return QTest::qExec ( &logoDiagramWidgetTest, argc-1, argv );
+    } else if ( QString ( argv[argc-1] ) == "EmoteDiagramWidgetTest" ) {
+        EmoteDiagramWidgetTest emoteDiagramWidgetTest;
+        return QTest::qExec ( &emoteDiagramWidgetTest, argc-1, argv );
     } else if ( QString ( argv[argc-1] ) == "OverlayWidgetTest" ) {
         OverlayWidgetTest overlayWidgetTest;
         return QTest::qExec ( &overlayWidgetTest, argc-1, argv );
@@ -50,6 +55,9 @@ int main ( int argc, char ** argv ) {
     } else if ( QString ( argv[argc-1] ) == "SessionWidgetTest" ) {
         SessionWidgetTest sessionWidgetTest;
         return QTest::qExec ( &sessionWidgetTest, argc-1, argv );
+    } else if ( QString ( argv[argc-1] ) == "FeedbackResponseTest" ) {
+        FeedbackResponseTest feedbackResponseTest;
+        return QTest::qExec ( &feedbackResponseTest, argc-1, argv );
     } else {
         qDebug() << "Not a valid test case selected. Add test case name as last parameter. (e.g.: tests -xunitxml SvgLogoTest)";
     }

@@ -15,6 +15,7 @@ set(arsnovawidget_SRCS
   qplugin/loginwidget.cpp
   qplugin/bardiagramwidget.cpp
   qplugin/logodiagramwidget.cpp
+  qplugin/emotediagramwidget.cpp
   qplugin/sessioninformationwidget.cpp
   qrcodegenerator.cpp
   interposedquestion.cpp
@@ -32,6 +33,8 @@ set(arsnovawidgetplugin_SRCS
   qplugin/bardiagramwidgetplugin.cpp
   qplugin/logodiagramwidget.cpp
   qplugin/logodiagramwidgetplugin.cpp
+  qplugin/emotediagramwidget.cpp
+  qplugin/emotediagramwidgetplugin.cpp
   qplugin/sessioninformationwidget.cpp
   qplugin/sessioninformationwidgetplugin.cpp
 )
@@ -67,6 +70,7 @@ set(arsnovawidget_MOC_SRCS
   qplugin/loginwidget.h
   qplugin/bardiagramwidget.h
   qplugin/logodiagramwidget.h
+  qplugin/emotediagramwidget.h
   qplugin/sessioninformationwidget.h
   qrcodegenerator.h
   interposedquestion.h
@@ -81,6 +85,8 @@ set(arsnovawidgetplugin_MOC_SRCS
   qplugin/bardiagramwidgetplugin.h
   qplugin/logodiagramwidget.h
   qplugin/logodiagramwidgetplugin.h
+  qplugin/emotediagramwidget.h
+  qplugin/emotediagramwidgetplugin.h
   qplugin/sessioninformationwidget.h
   qplugin/sessioninformationwidgetplugin.h
 )
@@ -93,6 +99,7 @@ set(arsnovawidget_UIS
 )
 
 set(arsnovawidgetplugin_UIS
+  qplugin/emotediagramwidget.ui
   qplugin/logodiagramwidget.ui
   qplugin/sessioninformationwidget.ui
 )
