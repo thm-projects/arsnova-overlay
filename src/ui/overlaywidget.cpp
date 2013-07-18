@@ -13,7 +13,6 @@ OverlayWidget::OverlayWidget ( SessionContext * context, QWidget * parent, Qt::W
       context ( context ) {
     ui->setupUi ( this );
     this->latestUnderstandingResponses = 0;
-    this->updateTimer = new UpdateTimer();
     this->connectSignals();
     this->setMouseTracking ( true );
     this->moveToBottomRightEdge();
@@ -21,7 +20,7 @@ OverlayWidget::OverlayWidget ( SessionContext * context, QWidget * parent, Qt::W
 }
 
 void OverlayWidget::connectSignals() {
-    connect ( this->updateTimer, SIGNAL ( tick ( int ) ), this, SLOT ( updateHttpResponse ( int ) ) );
+    connect ( this->context->updateTimer(), SIGNAL ( tick ( int ) ), this, SLOT ( updateHttpResponse ( int ) ) );
     connect ( this->connection, SIGNAL ( requestFinished ( SessionResponse ) ), this, SLOT ( onSessionResponse ( SessionResponse ) ) );
     connect ( this->connection, SIGNAL ( requestFinished ( FeedbackResponse ) ), this, SLOT ( onFeedbackResponse ( FeedbackResponse ) ) );
     connect ( this->connection, SIGNAL ( requestFinished ( LoggedInResponse ) ), this, SLOT ( onLoggedInResponse ( LoggedInResponse ) ) );
@@ -32,7 +31,6 @@ void OverlayWidget::connectSignals() {
 
 OverlayWidget::~OverlayWidget() {
     delete this->connection;
-    delete this->updateTimer;
     delete this->ui;
 }
 
@@ -144,11 +142,11 @@ void OverlayWidget::updateHttpResponse ( int ticks ) {
     ui->sessioninformationwidget->updateProgressBar ( ticks, OverlayWidget::httpUpdateInterval );
     if (
         ticks == OverlayWidget::httpUpdateInterval
-        and ! this->sessionId.isEmpty()
+        && ! this->sessionId.isEmpty()
     ) {
         this->connection->requestFeedback();
         this->connection->requestActiveUserCount();
-        this->updateTimer->reset();
+        this->context->updateTimer()->reset();
     }
 }
 

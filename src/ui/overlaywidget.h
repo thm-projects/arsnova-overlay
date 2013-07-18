@@ -29,7 +29,6 @@ public:
 
 private:
     Ui::OverlayWidget * ui;
-    UpdateTimer * updateTimer;
 
     AbstractConnection * connection;
     QString sessionId;

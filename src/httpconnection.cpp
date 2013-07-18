@@ -65,6 +65,8 @@ bool HttpConnection::isRedirect ( QNetworkReply* reply ) {
 }
 
 void HttpConnection::handleReply ( QNetworkReply * reply ) {
+    reply->deleteLater();
+
     if ( reply->error() != QNetworkReply::NoError ) {
         emit this->requestError();
     }
@@ -92,6 +94,9 @@ void HttpConnection::handleReply ( QNetworkReply * reply ) {
         reply->url().path().contains ( "/feedback" )
     ) {
         QVariant variant = responseValue->property ( "values" ).toVariant();
+
+        if ( variant.toList().size() != FeedbackResponse::FEEDBACK_AWAY + 1 ) return;
+
         emit this->requestFinished (
             FeedbackResponse (
                 variant.toList().at ( FeedbackResponse::FEEDBACK_OK ).toInt(),
@@ -109,8 +114,6 @@ void HttpConnection::handleReply ( QNetworkReply * reply ) {
         QString name = responseValue->property ( "name" ).toString();
         emit this->requestFinished ( SessionResponse ( sessionKey, shortName, name ) );
     }
-
-    reply->deleteLater();
 }
 
 QNetworkRequest HttpConnection::createRequest ( QUrl url ) {
@@ -140,3 +143,4 @@ void HttpConnection::addCookie ( QNetworkCookie cookie ) {
     }
     this->cookies->append ( cookie );
 }
+

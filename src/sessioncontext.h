@@ -23,6 +23,7 @@
 
 #include <QtCore>
 #include "httpconnection.h"
+#include "updatetimer.h"
 
 /** @brief SessionContext holds the context of a session.
  *
@@ -86,12 +87,17 @@ public:
      * @return Actual view type
      */
     ViewType viewType();
+    /** Returns the used update timer
+     * @return UpdateTimer
+     */
+    UpdateTimer * updateTimer();
 
 private:
     QString _sessionId;
     bool _isValid;
     AbstractConnection * _connection;
     ViewType _viewType;
+    UpdateTimer * _updateTimer;
 
 private slots:
     void onUnderstandingResponse ( FeedbackResponse response );
