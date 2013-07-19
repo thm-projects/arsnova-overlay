@@ -119,24 +119,24 @@ IF (WIN32)
   )
   SET(WINQTFILES
     # This part should contain DLL files to be included in package e.g.:
-    ${CMAKE_CURRENT_BINARY_DIR}/lib/libgcc_s_sjlj-1.dll
-    ${CMAKE_CURRENT_BINARY_DIR}/lib/libstdc++-6.dll
-    ${CMAKE_CURRENT_BINARY_DIR}/lib/QtCore4.dll
-    ${CMAKE_CURRENT_BINARY_DIR}/lib/QtDeclarative4.dll
-    ${CMAKE_CURRENT_BINARY_DIR}/lib/QtGui4.dll
-    ${CMAKE_CURRENT_BINARY_DIR}/lib/QtNetwork4.dll
-    ${CMAKE_CURRENT_BINARY_DIR}/lib/QtScript4.dll
-    ${CMAKE_CURRENT_BINARY_DIR}/lib/QtSvg4.dll
-    ${CMAKE_CURRENT_BINARY_DIR}/lib/QtSql4.dll
-    ${CMAKE_CURRENT_BINARY_DIR}/lib/QtXml4.dll
-    ${CMAKE_CURRENT_BINARY_DIR}/lib/QtXmlPatterns4.dll
-    ${CMAKE_CURRENT_BINARY_DIR}/lib/libjpeg-8.dll 
-    ${CMAKE_CURRENT_BINARY_DIR}/lib/libpng15-15.dll
-    ${CMAKE_CURRENT_BINARY_DIR}/lib/libtiff-5.dll
-    ${CMAKE_CURRENT_BINARY_DIR}/lib/liblzma-5.dll
-    ${CMAKE_CURRENT_BINARY_DIR}/lib/zlib1.dll
-    ${CMAKE_CURRENT_BINARY_DIR}/lib/libssl-8.dll
-    ${CMAKE_CURRENT_BINARY_DIR}/lib/libcrypto-8.dll
+    ${QT_LIBRARY_DIR}/libgcc_s_sjlj-1.dll
+    ${QT_LIBRARY_DIR}/libstdc++-6.dll
+    ${QT_LIBRARY_DIR}/QtCore4.dll
+    ${QT_LIBRARY_DIR}/QtDeclarative4.dll
+    ${QT_LIBRARY_DIR}/QtGui4.dll
+    ${QT_LIBRARY_DIR}/QtNetwork4.dll
+    ${QT_LIBRARY_DIR}/QtScript4.dll
+    ${QT_LIBRARY_DIR}/QtSvg4.dll
+    ${QT_LIBRARY_DIR}/QtSql4.dll
+    ${QT_LIBRARY_DIR}/QtXml4.dll
+    ${QT_LIBRARY_DIR}/QtXmlPatterns4.dll
+    ${QT_LIBRARY_DIR}/libjpeg-8.dll
+    ${QT_LIBRARY_DIR}/libpng15-15.dll
+    ${QT_LIBRARY_DIR}/libtiff-5.dll
+    ${QT_LIBRARY_DIR}/liblzma-5.dll
+    ${QT_LIBRARY_DIR}/zlib1.dll
+    ${QT_LIBRARY_DIR}/libssl-8.dll
+    ${QT_LIBRARY_DIR}/libcrypto-8.dll
     ${CMAKE_CURRENT_BINARY_DIR}/libs/libqrencode.dll
   )
   INSTALL(FILES ${WINQTFILES}
@@ -185,7 +185,7 @@ IF (WIN32)
   SET(CPACK_NSIS_PACKAGE_NAME "arsnovadesktop")
   SET(CPACK_NSIS_DISPLAY_NAME "ARSnovaDesktop")
   SET(CPACK_NSIS_CONTACT "${CPACK_PACKAGE_VENDOR}")
-  SET(CPACK_PACKAGE_EXECUTABLES  ..\\\\arsnovadesktop;"ARSnovaDesktop")
+  SET(CPACK_PACKAGE_EXECUTABLES  ..\\\\arsnovadesktop;ARSnovaDesktop)
   SET(CPACK_CREATE_DESKTOP_LINKS ..\\\\arsnovadesktop)
   SET(CPACK_PACKAGE_INSTALL_DIRECTORY arsnovadesktop)
   SET(CPACK_STRIP_FILES  ${CMAKE_CURRENT_BINARY_DIR}/bin/arsnovadesktop)
