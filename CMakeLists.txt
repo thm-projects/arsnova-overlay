@@ -147,7 +147,7 @@ ENDIF (WIN32)
 # CPACK
 INCLUDE(InstallRequiredSystemLibraries)
 SET(CPACK_RESOURCE_FILE_LICENSE "COPYING")
-SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "ARSnovaDesktop is a small widget to display information taken from ars.thm.de")
+SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "ARSnovaDesktop is a small widget to display information taken from arsnova.thm.de")
 SET(CPACK_PACKAGE_VENDOR "Paul-Christian Volkmer <paul-christian.volkmer@mni.thm.de>")
 SET(CPACK_PACKAGE_CONTACT "Paul-Christian Volkmer <paul-christian.volkmer@mni.thm.de>")
 SET(CPACK_PACKAGE_VERSION_MAJOR ${VERSION_MAJOR})
@@ -161,7 +161,7 @@ IF (UNIX AND NOT APPLE)
   SET(CPACK_RPM_PACKAGE_LICENSE "GPLv3")
   SET(
     CPACK_RPM_PACKAGE_DESCRIPTION
-    "ARSnovaDesktop is a small widget to display information taken from ars.thm.de."
+    "ARSnovaDesktop is a small widget to display information taken from arsnova.thm.de."
   )
   #SET(CPACK_RPM_CHANGELOG_FILE ${CMAKE_CURRENT_BINARY_DIR}/CHANGES)
   SET(CPACK_STRIP_FILES  ${CMAKE_CURRENT_BINARY_DIR}/bin/arsnovadesktop)
@@ -183,7 +183,7 @@ ENDIF (WIN32)
 
 IF (APPLE)
   SET(CPACK_GENERATOR  "Bundle")
-  SET(CPACK_BUNDLE_NAME "arsnovadesktop")
+  SET(CPACK_BUNDLE_NAME "ARSnovaDesktop")
   SET(CPACK_BUNDLE_PLIST ${CMAKE_CURRENT_BINARY_DIR}/Info.plist)
   SET(CPACK_BUNDLE_ICON ${CMAKE_CURRENT_BINARY_DIR}/src/resources/images/arsnovawidget.icns)
 ENDIF (APPLE)
