@@ -2,8 +2,8 @@
 X-SuSE-translate=true
 Categories=
 Encoding=UTF-8
-Name=ArsNovaWidget
-GenericName=ArsNovaWidget
+Name=ArsNovaDesktop
+GenericName=ArsNovaDesktop
 Type=Application
-Exec=arsnovawidget
+Exec=arsnovadesktop
 Icon=arsnova
