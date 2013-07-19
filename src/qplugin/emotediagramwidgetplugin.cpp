@@ -31,7 +31,7 @@ bool EmoteDiagramWidgetPlugin::isContainer() const {
 }
 
 QWidget* EmoteDiagramWidgetPlugin::createWidget ( QWidget * parent ) {
-    return new LogoDiagramWidget ( parent );
+    return new EmoteDiagramWidget ( parent );
 }
 
 //Q_EXPORT_PLUGIN2 ( emotediagramwidgetplugin, EmoteDiagramWidgetPlugin )
