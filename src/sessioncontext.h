@@ -64,6 +64,7 @@ public:
      * @param sessionKey The session key of the session it should connect to
      * @return A new session context
      */
+    virtual ~SessionContext();
     static SessionContext * create ( AbstractConnection * connection, QString sessionKey );
     /** Returns the session ID if SessionContext is valid
      * @return The session ID

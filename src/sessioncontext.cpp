@@ -29,6 +29,10 @@ SessionContext::SessionContext ( AbstractConnection * connection )
     connect ( _connection, SIGNAL ( requestError() ), this, SLOT ( onRequestError() ) );
 }
 
+SessionContext::~SessionContext() {
+    delete this->_updateTimer;
+}
+
 SessionContext * SessionContext::create ( AbstractConnection * connection, QString sessionKey ) {
     SessionContext * context = new SessionContext ( connection );
     connection->requestSession ( sessionKey );
