@@ -99,7 +99,7 @@ set(arsnovawidget_UIS
   ui/overlaywidget.ui
   ui/qrcodewidget.ui
   ui/sessionwidget.ui
-  ui/sessionwidget.ui
+  ui/settingswidget.ui
 )
 
 set(arsnovawidgetplugin_UIS
