@@ -16,7 +16,6 @@ OverlayWidget::OverlayWidget ( SessionContext * context, QWidget * parent, Qt::W
     this->connectSignals();
     this->setMouseTracking ( true );
     this->moveToBottomRightEdge();
-    this->setVisibleViewType ( SessionContext::DIAGRAM_VIEW );
 }
 
 void OverlayWidget::connectSignals() {
@@ -56,8 +55,26 @@ void OverlayWidget::moveToBottomRightEdge ( int screen ) {
                                : QApplication::desktop()->availableGeometry ( screen )
                            );
 
-    int xPos = screenGeometry.width() + screenGeometry.x() - this->size().width() - 8;
-    int yPos = screenGeometry.height() + screenGeometry.y() - this->size().height() - 8;
+    int xPos = 8;
+    int yPos = 8;
+
+    switch ( Settings::instance()->widgetPosition() ) {
+    case Settings::BOTTOM_RIGHT:
+        xPos = screenGeometry.width() + screenGeometry.x() - this->size().width() - 8;
+        yPos = screenGeometry.height() + screenGeometry.y() - this->size().height() - 8;
+        break;
+    case Settings::BOTTOM_LEFT:
+        yPos = screenGeometry.height() + screenGeometry.y() - this->size().height() - 8;
+        break;
+    case Settings::TOP_LEFT:
+        // No
+        break;
+    case Settings::TOP_RIGHT:
+        xPos = screenGeometry.width() + screenGeometry.x() - this->size().width() - 8;
+        break;
+    }
+
+
     this->move ( xPos, yPos );
 }
 
@@ -117,7 +134,6 @@ void OverlayWidget::onSessionResponse ( SessionResponse response ) {
     this->sessionId = response.sessionId();
 
     if ( ! this->sessionId.isNull() ) {
-        this->setVisibleViewType ( context->viewType() );
         this->updateHttpResponse ( OverlayWidget::httpUpdateInterval );
         ui->sessioninformationwidget->updateSessionLabel ( response.shortName(), response.sessionId() );
         return;

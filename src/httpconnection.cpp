@@ -1,7 +1,5 @@
 #include "httpconnection.h"
 
-QString HttpConnection::hostname = "arsnova.thm.de";
-
 HttpConnection::HttpConnection ()
     : networkAccessManager ( new QNetworkAccessManager() ),
       cookies ( new QList<QNetworkCookie>() ) {
@@ -9,7 +7,7 @@ HttpConnection::HttpConnection ()
 
     this->networkAccessManager->get (
         this->createRequest (
-            QUrl ( "https://" + HttpConnection::hostname + "/auth/login?type=guest" )
+            QUrl ( Settings::instance()->serverUrl().toString() + "/auth/login?type=guest" )
         )
     );
 }
@@ -23,7 +21,7 @@ void HttpConnection::requestActiveUserCount() {
     this->networkAccessManager->get (
         this->createRequest (
             QUrl (
-                "https://" + HttpConnection::hostname + "/session/" + sessionKey + "/activeusercount"
+                Settings::instance()->serverUrl().toString() + "/session/" + sessionKey + "/activeusercount"
             )
         )
     );
@@ -33,7 +31,7 @@ void HttpConnection::requestSession ( QString sessionKey ) {
     this->sessionKey = sessionKey;
     this->networkAccessManager->get (
         this->createRequest (
-            QUrl ( "https://" + HttpConnection::hostname + "/session/" + sessionKey )
+            QUrl ( Settings::instance()->serverUrl().toString() + "/session/" + sessionKey )
         )
     );
 }
@@ -42,7 +40,7 @@ void HttpConnection::requestFeedback() {
     this->networkAccessManager->get (
         this->createRequest (
             QUrl (
-                "https://" + HttpConnection::hostname + "/session/" + sessionKey + "/feedback"
+                Settings::instance()->serverUrl().toString() + "/session/" + sessionKey + "/feedback"
             )
         )
     );
@@ -143,4 +141,5 @@ void HttpConnection::addCookie ( QNetworkCookie cookie ) {
     }
     this->cookies->append ( cookie );
 }
+
 

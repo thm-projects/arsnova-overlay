@@ -11,6 +11,8 @@
 #include "ui/overlaywidget.h"
 #include "sessioncontext.h"
 #include "ui/systemtrayicon.h"
+#include "httpconnection.h"
+#include "ui/settingswidget.h"
 
 class MainWindow : public QMainWindow, Ui::MainWindow {
     Q_OBJECT

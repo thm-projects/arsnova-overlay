@@ -8,6 +8,7 @@
 #include "sessionresponse.h"
 #include "feedbackresponse.h"
 #include "loggedinresponse.h"
+#include "settings.h"
 
 class HttpConnection : public AbstractConnection {
     Q_OBJECT
@@ -23,7 +24,6 @@ private:
     QNetworkAccessManager * networkAccessManager;
     QString sessionKey;
     QList<QNetworkCookie> * cookies;
-    static QString hostname;
 
     QNetworkRequest createRequest ( QUrl url );
     bool isRedirect ( QNetworkReply * reply );

@@ -12,6 +12,7 @@
 #include "feedbackresponse.h"
 #include "svglogo.h"
 #include "qrcodewidget.h"
+#include "settings.h"
 
 class OverlayWidget : public QWidget, Ui::OverlayWidget {
     Q_OBJECT

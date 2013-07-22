@@ -6,6 +6,7 @@ set(arsnovawidget_SRCS
   ui/qrcodewidget.cpp
   ui/sessionwidget.cpp
   ui/systemtrayicon.cpp
+  ui/settingswidget.cpp
   updatetimer.cpp
   httpconnection.cpp
   sessionresponse.cpp
@@ -20,6 +21,7 @@ set(arsnovawidget_SRCS
   qrcodegenerator.cpp
   interposedquestion.cpp
   sessioncontext.cpp
+  settings.cpp
   main.cpp
 )
 
@@ -60,6 +62,7 @@ set(arsnovawidget_MOC_SRCS
   ui/qrcodewidget.h
   ui/sessionwidget.h
   ui/systemtrayicon.h
+  ui/settingswidget.h
   updatetimer.h
   abstractconnection.h
   httpconnection.h
@@ -95,6 +98,7 @@ set(arsnovawidget_UIS
   ui/mainwindow.ui
   ui/overlaywidget.ui
   ui/qrcodewidget.ui
+  ui/sessionwidget.ui
   ui/sessionwidget.ui
 )
 

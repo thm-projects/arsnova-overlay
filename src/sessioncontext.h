@@ -22,7 +22,7 @@
 #define SESSIONCONTEXT_H
 
 #include <QtCore>
-#include "httpconnection.h"
+#include "abstractconnection.h"
 #include "updatetimer.h"
 
 /** @brief SessionContext holds the context of a session.

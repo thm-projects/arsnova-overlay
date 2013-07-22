@@ -38,6 +38,8 @@ set(arsnovawidget_SRCS
   ../src/ui/systemtrayicon.cpp
   ui/systemtrayicontest.cpp
   feedbackresponsetest.cpp
+  ../src/ui/settingswidget.cpp
+  ../src/settings.cpp
   main.cpp
 )
 
@@ -90,6 +92,7 @@ set(arsnovawidget_MOC_SRCS
   ../src/ui/systemtrayicon.h
   ui/systemtrayicontest.h
   feedbackresponsetest.h
+  ../src/ui/settingswidget.h
 )
 
 set(arsnovawidget_UIS
@@ -98,6 +101,7 @@ set(arsnovawidget_UIS
   ../src/qplugin/sessioninformationwidget.ui
   ../src/ui/overlaywidget.ui
   ../src/ui/sessionwidget.ui
+  ../src/ui/settingswidget.ui
 )
 
 ## Resources ##

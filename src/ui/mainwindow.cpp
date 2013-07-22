@@ -20,9 +20,11 @@ MainWindow::MainWindow ( QWidget * parent, Qt::WindowFlags f ) : QMainWindow ( p
     qrwidget->setUrl ( QUrl ( "https://arsnova.thm.de/" ) );
     this->addWidget ( "QR-Code", qrwidget );
 
+    this->addWidget ( "Settings", new SettingsWidget ( this->sessionContext ) );
+
     this->activateWidget ( "Login" );
 
-    this->overlayWidget = new OverlayWidget ( this->sessionContext, this );
+    this->overlayWidget = new OverlayWidget ( this->sessionContext, QApplication::desktop()->screen() );
     this->overlayWidget->setVisible ( false );
 
     connect ( SystemTrayIcon::instance(), SIGNAL ( activated ( QSystemTrayIcon::ActivationReason ) ), this, SLOT ( onSystemTrayActivated ( QSystemTrayIcon::ActivationReason ) ) );
