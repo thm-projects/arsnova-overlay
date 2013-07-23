@@ -13,6 +13,7 @@
 #include "svglogo.h"
 #include "qrcodewidget.h"
 #include "settings.h"
+#include "abstractconnection.h"
 
 class OverlayWidget : public QWidget, Ui::OverlayWidget {
     Q_OBJECT
@@ -41,7 +42,7 @@ private:
     static const int httpUpdateInterval;
     static const int ySize;
     static const int xSize;
-    void moveToBottomRightEdge ( int screen = -1 );
+    void moveToEdge ( int screen = -1 );
     void connectSignals();
 
 public slots:
@@ -49,6 +50,7 @@ public slots:
     void onSessionResponse ( SessionResponse response );
     void onFeedbackResponse ( FeedbackResponse response );
     void onLoggedInResponse ( LoggedInResponse response );
+    void onSettingsChanged();
 
 private slots:
     void updateHttpResponse ( int ticks );

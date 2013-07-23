@@ -78,6 +78,7 @@ set(arsnovawidget_MOC_SRCS
   qrcodegenerator.h
   interposedquestion.h
   sessioncontext.h
+  settings.h
 )
 
 set(arsnovawidgetplugin_MOC_SRCS

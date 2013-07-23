@@ -93,6 +93,7 @@ set(arsnovawidget_MOC_SRCS
   ui/systemtrayicontest.h
   feedbackresponsetest.h
   ../src/ui/settingswidget.h
+  ../src/settings.h
 )
 
 set(arsnovawidget_UIS

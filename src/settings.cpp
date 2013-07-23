@@ -45,6 +45,7 @@ Settings::WidgetPosition Settings::widgetPosition() {
 
 void Settings::setWidgetPosition ( Settings::WidgetPosition widgetPosition ) {
     qsettings->setValue ( "widgetPosition", widgetPosition );
+    emit this->settingsChanged();
 }
 
 QUrl Settings::serverUrl() {
@@ -59,6 +60,7 @@ void Settings::setServerUrl ( QUrl serverUrl ) {
     if ( serverUrl.isValid() ) {
         qsettings->setValue ( "serverUrl", serverUrl );
     }
+    emit this->settingsChanged();
 }
 
 int Settings::screen() {
@@ -67,4 +69,5 @@ int Settings::screen() {
 
 void Settings::setScreen ( int screen ) {
     qsettings->setValue ( "screen", screen );
+    emit this->settingsChanged();
 }

@@ -15,7 +15,7 @@ OverlayWidget::OverlayWidget ( SessionContext * context, QWidget * parent, Qt::W
     this->latestUnderstandingResponses = 0;
     this->connectSignals();
     this->setMouseTracking ( true );
-    this->moveToBottomRightEdge();
+    this->moveToEdge();
 }
 
 void OverlayWidget::connectSignals() {
@@ -26,6 +26,7 @@ void OverlayWidget::connectSignals() {
     connect ( ui->actionMakeTransparent, SIGNAL ( triggered ( bool ) ), this, SLOT ( makeTransparent ( bool ) ) );
     connect ( ui->actionExit, SIGNAL ( triggered ( bool ) ), this, SLOT ( close() ) );
     connect ( context, SIGNAL ( viewTypeChanged ( SessionContext::ViewType ) ), this, SLOT ( setVisibleViewType ( SessionContext::ViewType ) ) );
+    connect ( Settings::instance().get(), SIGNAL ( settingsChanged() ), this, SLOT ( onSettingsChanged() ) );
 }
 
 OverlayWidget::~OverlayWidget() {
@@ -46,7 +47,7 @@ const Ui::OverlayWidget*const OverlayWidget::getUi() {
     return this->ui;
 }
 
-void OverlayWidget::moveToBottomRightEdge ( int screen ) {
+void OverlayWidget::moveToEdge ( int screen ) {
     this->resize ( QSize ( xSize+20, ( ySize*2 ) + 32 ) );
 
     QRect screenGeometry = (
@@ -152,6 +153,10 @@ void OverlayWidget::onFeedbackResponse ( FeedbackResponse response ) {
 void OverlayWidget::onLoggedInResponse ( LoggedInResponse response ) {
     this->loggedInUsers = response.value();
     ui->sessioninformationwidget->updateCounterLabel ( this->latestUnderstandingResponses, this->loggedInUsers );
+}
+
+void OverlayWidget::onSettingsChanged() {
+    this->moveToEdge();
 }
 
 void OverlayWidget::updateHttpResponse ( int ticks ) {

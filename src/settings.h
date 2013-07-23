@@ -25,7 +25,10 @@
 #include <QUrl>
 #include <memory>
 
-class Settings {
+class Settings : public QObject {
+
+    Q_OBJECT
+
 public:
     enum WidgetPosition {
         BOTTOM_RIGHT,
@@ -51,6 +54,9 @@ private:
     Settings();
     QSettings * qsettings;
     static std::shared_ptr<Settings> _instance;
+
+signals:
+    void settingsChanged();
 
 };
 
