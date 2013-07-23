@@ -3,15 +3,15 @@
 QRCodeWidgetTest::QRCodeWidgetTest ( QObject * parent ) : QObject ( parent ) {}
 
 void QRCodeWidgetTest::initTestCase() {
-    this->connection = new StubConnection();
+    this->context = new SessionContext ( new StubConnection() );
     this->stackedWidget = new QStackedWidget();
-    this->qrCodeWidget = new QRCodeWidget ( new SessionContext ( this->connection ), this->stackedWidget );
+    this->qrCodeWidget = new QRCodeWidget ( context, this->stackedWidget );
 }
 
 void QRCodeWidgetTest::cleanupTestCase() {
-    delete this->connection;
     delete this->qrCodeWidget;
     delete this->stackedWidget;
+    delete this->context;
 }
 
 void QRCodeWidgetTest::testShouldDisplayCorrectUrl() {
@@ -20,7 +20,7 @@ void QRCodeWidgetTest::testShouldDisplayCorrectUrl() {
 }
 
 void QRCodeWidgetTest::testShouldDisplayCorrectUrlAfterSessionLogin() {
-    this->connection->requestSession ( "12345678" );
+    this->context->connection()->requestSession ( "12345678" );
     QVERIFY ( this->qrCodeWidget->getUi()->urlLabel->text() == "https://arsnova.thm.de/#id/12345678" );
 }
 

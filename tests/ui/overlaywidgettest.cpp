@@ -11,6 +11,7 @@ void OverlayWidgetTest::initTestCase() {
 
 void OverlayWidgetTest::cleanupTestCase() {
     delete this->overlayWidget;
+    delete this->context;
 }
 
 void OverlayWidgetTest::testShouldShowOverlayWidget() {
