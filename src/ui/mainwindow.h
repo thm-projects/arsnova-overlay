@@ -41,6 +41,7 @@ private slots:
     void activateWidget ( QString widgetTitle );
     void sessionLogin();
     void onContextError(SessionContext::Error e);
+    void exitApplication();
 };
 
 #endif // MAINWINDOW_H

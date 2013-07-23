@@ -51,6 +51,7 @@ public:
      */
     enum Error {
         CONNECTION_ERROR,
+        SERVER_NOT_FOUND,
         SESSION_NOT_FOUND
     };
 

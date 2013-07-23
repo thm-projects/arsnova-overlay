@@ -28,11 +28,12 @@ const Ui::SettingsWidget * const SettingsWidget::getUi() {
 }
 
 void SettingsWidget::onSettingsAccepted() {
+    if ( this->_ui->serverUriLineEdit->text() != Settings::instance()->serverUrl().toString() ) {
+        QMessageBox::about ( this, "Restart required", "Please restart this application to enable new server location" );
+    }
     Settings::instance()->setServerUrl ( QUrl ( this->_ui->serverUriLineEdit->text() ) );
     Settings::instance()->setWidgetPosition ( ( Settings::WidgetPosition ) this->_ui->widgetPositionComboBox->currentIndex() );
     Settings::instance()->setScreen ( this->_ui->screenComboBox->currentIndex() );
-
-    QMessageBox::about ( this, "Restart required", "Please restart this application to enable new settings" );
 }
 
 void SettingsWidget::onSettingsRejected() {

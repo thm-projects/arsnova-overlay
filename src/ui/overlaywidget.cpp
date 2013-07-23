@@ -51,7 +51,7 @@ void OverlayWidget::moveToEdge ( int screen ) {
     this->resize ( QSize ( xSize+20, ( ySize*2 ) + 32 ) );
 
     QRect screenGeometry = (
-                               screen == -1
+                               screen == -1 || screen > ( QApplication::desktop()->screenCount() - 1 )
                                ? QApplication::desktop()->availableGeometry ( QApplication::desktop()->screenCount() - 1 )
                                : QApplication::desktop()->availableGeometry ( screen )
                            );
