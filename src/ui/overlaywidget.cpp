@@ -59,8 +59,6 @@ void OverlayWidget::moveToEdge ( int screen ) {
     int xPos = 8;
     int yPos = 8;
 
-    qDebug() << screenGeometry;
-
     switch ( Settings::instance()->widgetPosition() ) {
     case Settings::BOTTOM_RIGHT:
         xPos = screenGeometry.width() + screenGeometry.x() - this->size().width() - 8;

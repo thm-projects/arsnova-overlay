@@ -22,20 +22,21 @@
 #include <qsignalspy.h>
 
 SessionWidgetTest::SessionWidgetTest ( QObject* parent ) : QObject ( parent ) {
-    this->stubConnection = new StubConnection();
+    this->context = new SessionContext ( new StubConnection() );
 }
 
 void SessionWidgetTest::initTestCase() {
-    this->sessionWidget = new SessionWidget ( new SessionContext ( this->stubConnection ) );
+    this->sessionWidget = new SessionWidget ( this->context );
     this->sessionWidget->show();
 }
 
 void SessionWidgetTest::cleanupTestCase() {
-
+    delete this->sessionWidget;
+    delete this->context;
 }
 
 void SessionWidgetTest::testShouldAddSessionToSessionList() {
-    this->stubConnection->requestSession ( "12345678" );
+    this->context->connection()->requestSession ( "12345678" );
 
     QVERIFY ( this->sessionWidget->getUi()->tableWidget->rowCount() == 1 );
 
@@ -45,14 +46,14 @@ void SessionWidgetTest::testShouldAddSessionToSessionList() {
 
 void SessionWidgetTest::testShouldNotAddSessionTwice() {
     QVERIFY ( this->sessionWidget->getUi()->tableWidget->rowCount() == 1 );
-    this->stubConnection->requestSession ( "12345678" );
+    this->context->connection()->requestSession ( "12345678" );
     QVERIFY ( this->sessionWidget->getUi()->tableWidget->rowCount() == 1 );
 }
 
 void SessionWidgetTest::testShouldDetectResponseError() {
     QVERIFY ( this->sessionWidget->getUi()->tableWidget->rowCount() == 1 );
-    QSignalSpy spy ( this->stubConnection, SIGNAL ( requestError() ) );
-    this->stubConnection->requestSession ( QString() );
+    QSignalSpy spy ( this->context->connection(), SIGNAL ( requestError() ) );
+    this->context->connection()->requestSession ( QString() );
 
     QVERIFY ( this->sessionWidget->getUi()->tableWidget->rowCount() == 1 );
     QCOMPARE ( spy.count(), 1 );
