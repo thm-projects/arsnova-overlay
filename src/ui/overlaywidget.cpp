@@ -15,7 +15,7 @@ OverlayWidget::OverlayWidget ( SessionContext * context, QWidget * parent, Qt::W
     this->latestUnderstandingResponses = 0;
     this->connectSignals();
     this->setMouseTracking ( true );
-    this->moveToEdge();
+    this->moveToEdge ( Settings::instance()->screen() );
 }
 
 void OverlayWidget::connectSignals() {
@@ -59,22 +59,26 @@ void OverlayWidget::moveToEdge ( int screen ) {
     int xPos = 8;
     int yPos = 8;
 
+    qDebug() << screenGeometry;
+
     switch ( Settings::instance()->widgetPosition() ) {
     case Settings::BOTTOM_RIGHT:
         xPos = screenGeometry.width() + screenGeometry.x() - this->size().width() - 8;
         yPos = screenGeometry.height() + screenGeometry.y() - this->size().height() - 8;
         break;
     case Settings::BOTTOM_LEFT:
+        xPos = screenGeometry.x() + 8;
         yPos = screenGeometry.height() + screenGeometry.y() - this->size().height() - 8;
         break;
     case Settings::TOP_LEFT:
-        // No
+        xPos = screenGeometry.x() + 8;
+        yPos = screenGeometry.y() + 8;
         break;
     case Settings::TOP_RIGHT:
         xPos = screenGeometry.width() + screenGeometry.x() - this->size().width() - 8;
+        yPos = screenGeometry.y() + 8;
         break;
     }
-
 
     this->move ( xPos, yPos );
 }
@@ -156,7 +160,7 @@ void OverlayWidget::onLoggedInResponse ( LoggedInResponse response ) {
 }
 
 void OverlayWidget::onSettingsChanged() {
-    this->moveToEdge();
+    this->moveToEdge ( Settings::instance()->screen() );
 }
 
 void OverlayWidget::updateHttpResponse ( int ticks ) {
