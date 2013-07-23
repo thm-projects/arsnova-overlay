@@ -27,6 +27,10 @@ Settings::Settings() {
     qsettings->setDefaultFormat ( QSettings::NativeFormat );
 }
 
+Settings::~Settings() {
+    delete qsettings;
+}
+
 std::shared_ptr< Settings > Settings::instance() {
     if ( ! _instance ) {
         _instance = std::shared_ptr<Settings> ( new Settings() );

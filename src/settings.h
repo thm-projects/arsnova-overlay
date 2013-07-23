@@ -27,14 +27,16 @@
 
 class Settings {
 public:
-    static std::shared_ptr<Settings> instance();
-
     enum WidgetPosition {
         BOTTOM_RIGHT,
         BOTTOM_LEFT,
         TOP_LEFT,
         TOP_RIGHT
     };
+
+    static std::shared_ptr<Settings> instance();
+
+    ~Settings();
 
     Settings::WidgetPosition widgetPosition();
     void setWidgetPosition ( Settings::WidgetPosition widgetPosition );
