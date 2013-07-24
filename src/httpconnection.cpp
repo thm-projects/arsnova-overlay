@@ -1,7 +1,5 @@
 #include "httpconnection.h"
 
-QString HttpConnection::hostname = "arsnova.thm.de";
-
 HttpConnection::HttpConnection ()
     : networkAccessManager ( new QNetworkAccessManager() ),
       cookies ( new QList<QNetworkCookie>() ) {
@@ -9,7 +7,7 @@ HttpConnection::HttpConnection ()
 
     this->networkAccessManager->get (
         this->createRequest (
-            QUrl ( "https://" + HttpConnection::hostname + "/auth/login?type=guest" )
+            QUrl ( Settings::instance()->serverUrl().toString() + "/auth/login?type=guest" )
         )
     );
 }
@@ -23,7 +21,7 @@ void HttpConnection::requestActiveUserCount() {
     this->networkAccessManager->get (
         this->createRequest (
             QUrl (
-                "https://" + HttpConnection::hostname + "/session/" + sessionKey + "/activeusercount"
+                Settings::instance()->serverUrl().toString() + "/session/" + sessionKey + "/activeusercount"
             )
         )
     );
@@ -33,7 +31,7 @@ void HttpConnection::requestSession ( QString sessionKey ) {
     this->sessionKey = sessionKey;
     this->networkAccessManager->get (
         this->createRequest (
-            QUrl ( "https://" + HttpConnection::hostname + "/session/" + sessionKey )
+            QUrl ( Settings::instance()->serverUrl().toString() + "/session/" + sessionKey )
         )
     );
 }
@@ -42,7 +40,7 @@ void HttpConnection::requestFeedback() {
     this->networkAccessManager->get (
         this->createRequest (
             QUrl (
-                "https://" + HttpConnection::hostname + "/session/" + sessionKey + "/feedback"
+                Settings::instance()->serverUrl().toString() + "/session/" + sessionKey + "/feedback"
             )
         )
     );
@@ -65,7 +63,9 @@ bool HttpConnection::isRedirect ( QNetworkReply* reply ) {
 }
 
 void HttpConnection::handleReply ( QNetworkReply * reply ) {
-    if (reply->error() != QNetworkReply::NoError) {
+    reply->deleteLater();
+
+    if ( reply->error() != QNetworkReply::NoError ) {
         emit this->requestError();
     }
 
@@ -92,6 +92,9 @@ void HttpConnection::handleReply ( QNetworkReply * reply ) {
         reply->url().path().contains ( "/feedback" )
     ) {
         QVariant variant = responseValue->property ( "values" ).toVariant();
+
+        if ( variant.toList().size() != FeedbackResponse::FEEDBACK_AWAY + 1 ) return;
+
         emit this->requestFinished (
             FeedbackResponse (
                 variant.toList().at ( FeedbackResponse::FEEDBACK_OK ).toInt(),
@@ -109,8 +112,6 @@ void HttpConnection::handleReply ( QNetworkReply * reply ) {
         QString name = responseValue->property ( "name" ).toString();
         emit this->requestFinished ( SessionResponse ( sessionKey, shortName, name ) );
     }
-
-    reply->deleteLater();
 }
 
 QNetworkRequest HttpConnection::createRequest ( QUrl url ) {
@@ -140,3 +141,5 @@ void HttpConnection::addCookie ( QNetworkCookie cookie ) {
     }
     this->cookies->append ( cookie );
 }
+
+

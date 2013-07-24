@@ -14,6 +14,8 @@ set(arsnovawidget_SRCS
   qplugin/bardiagramwidgettest.cpp
   ../src/qplugin/logodiagramwidget.cpp
   qplugin/logodiagramwidgettest.cpp
+  ../src/qplugin/emotediagramwidget.cpp
+  qplugin/emotediagramwidgettest.cpp
   ../src/qplugin/sessioninformationwidget.cpp
   qplugin/sessioninformationwidgettest.cpp
   ../src/ui/overlaywidget.cpp
@@ -36,6 +38,9 @@ set(arsnovawidget_SRCS
   ../src/ui/systemtrayicon.cpp
   ui/systemtrayicontest.cpp
   ../src/abstractconnection.cpp
+  feedbackresponsetest.cpp
+  ../src/ui/settingswidget.cpp
+  ../src/settings.cpp
   main.cpp
 )
 
@@ -63,6 +68,8 @@ set(arsnovawidget_MOC_SRCS
   qplugin/bardiagramwidgettest.h
   ../src/qplugin/logodiagramwidget.h
   qplugin/logodiagramwidgettest.h
+  ../src/qplugin/emotediagramwidget.h
+  qplugin/emotediagramwidgettest.h
   ../src/qplugin/sessioninformationwidget.h
   qplugin/sessioninformationwidgettest.h
   ../src/ui/overlaywidget.h
@@ -85,13 +92,18 @@ set(arsnovawidget_MOC_SRCS
   sessioncontexttest.h
   ../src/ui/systemtrayicon.h
   ui/systemtrayicontest.h
+  feedbackresponsetest.h
+  ../src/ui/settingswidget.h
+  ../src/settings.h
 )
 
 set(arsnovawidget_UIS
   ../src/qplugin/logodiagramwidget.ui
+  ../src/qplugin/emotediagramwidget.ui
   ../src/qplugin/sessioninformationwidget.ui
   ../src/ui/overlaywidget.ui
   ../src/ui/sessionwidget.ui
+  ../src/ui/settingswidget.ui
 )
 
 ## Resources ##
@@ -103,11 +115,11 @@ qt5_add_resources(resources_RCC_SRCS ${resources_RCCS})
 #####
 
 #qt5_wrap_cpp(arsnovawidget_SRCS ${arsnovawidget_MOC_SRCS})
-#qt5_wrap_ui(arsnovawidget_UIS_H ${arsnovawidget_UIS})
+qt5_wrap_ui(arsnovawidget_UIS_H ${arsnovawidget_UIS})
 
 add_executable(tests
   ${arsnovawidget_SRCS}
-  #${arsnovawidget_UIS_H}
+  ${arsnovawidget_UIS_H}
   ${resources_RCC_SRCS}
 )
 
@@ -145,6 +157,7 @@ add_test(SvgLogoTest ${EXECUTABLE_OUTPUT_PATH}/tests SvgLogoTest)
 add_test(LoginWidgetTest ${EXECUTABLE_OUTPUT_PATH}/tests LoginWidgetTest)
 add_test(BarDiagramWidgetTest ${EXECUTABLE_OUTPUT_PATH}/tests BarDiagramWidgetTest)
 add_test(LogoDiagramWidgetTest ${EXECUTABLE_OUTPUT_PATH}/tests LogoDiagramWidgetTest)
+add_test(EmoteDiagramWidgetTest ${EXECUTABLE_OUTPUT_PATH}/tests EmoteDiagramWidgetTest)
 add_test(OverlayWidgetTest ${EXECUTABLE_OUTPUT_PATH}/tests OverlayWidgetTest)
 add_test(SessionInformationWidgetTest ${EXECUTABLE_OUTPUT_PATH}/tests SessionInformationWidgetTest)
 add_test(QRCodeWidgetTest ${EXECUTABLE_OUTPUT_PATH}/tests QRCodeWidgetTest)
@@ -152,3 +165,4 @@ add_test(MainWindowTest ${EXECUTABLE_OUTPUT_PATH}/tests MainWindowTest)
 add_test(SessionContextTest ${EXECUTABLE_OUTPUT_PATH}/tests SessionContextTest)
 add_test(SystemTrayIconTest ${EXECUTABLE_OUTPUT_PATH}/tests SystemTrayIconTest)
 add_test(SessionWidgetTest ${EXECUTABLE_OUTPUT_PATH}/tests SessionWidgetTest)
+add_test(FeedbackResponseTest ${EXECUTABLE_OUTPUT_PATH}/tests FeedbackResponseTest)

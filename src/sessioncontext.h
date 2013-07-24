@@ -22,7 +22,8 @@
 #define SESSIONCONTEXT_H
 
 #include <QtCore>
-#include "httpconnection.h"
+#include "abstractconnection.h"
+#include "updatetimer.h"
 
 /** @brief SessionContext holds the context of a session.
  *
@@ -42,13 +43,15 @@ public:
      */
     enum ViewType {
         DIAGRAM_VIEW,
-        ICON_VIEW
+        ICON_VIEW,
+        EMOTE_VIEW
     };
 
     /** Errors that might occure
      */
     enum Error {
         CONNECTION_ERROR,
+        SERVER_NOT_FOUND,
         SESSION_NOT_FOUND
     };
 
@@ -62,6 +65,7 @@ public:
      * @param sessionKey The session key of the session it should connect to
      * @return A new session context
      */
+    virtual ~SessionContext();
     static SessionContext * create ( AbstractConnection * connection, QString sessionKey );
     /** Returns the session ID if SessionContext is valid
      * @return The session ID
@@ -85,12 +89,17 @@ public:
      * @return Actual view type
      */
     ViewType viewType();
+    /** Returns the used update timer
+     * @return UpdateTimer
+     */
+    UpdateTimer * updateTimer();
 
 private:
     QString _sessionId;
     bool _isValid;
     AbstractConnection * _connection;
     ViewType _viewType;
+    UpdateTimer * _updateTimer;
 
 private slots:
     void onUnderstandingResponse ( FeedbackResponse response );
@@ -104,7 +113,7 @@ signals:
 
     /** This signal is emitted when the current session context gets invalid due to network and/or session errors
      */
-    void error( SessionContext::Error error );
+    void error ( SessionContext::Error error );
 
     /** This signal is emitted if the view type changes
      */

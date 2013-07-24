@@ -36,29 +36,7 @@
     <normaloff>:/images/images/view-logo.png</normaloff>:/images/images/view-logo.png</iconset>
   </property>
   <property name="styleSheet">
-   <string notr="true">QPushButton {
-	border-top: 1px solid #555;
-	border-bottom: 1px solid #000;
-	border-left: 3px solid #333;
-	padding: 8px;
-	background-color: #333;
-	text-align: left;
-	color: #eee;
-}
-
-QPushButton:hover {
-	background-color: #111;
-	border-left: 3px solid #888;
-	color: #fff;
-	font-weight: bold;
-}
-
-QPushButton:checked {
-	background-color: #111;
-	border-left: 3px solid #80ba24;
-	color: #fff;
-	font-weight: bold;
-}</string>
+   <string notr="true"/>
   </property>
   <property name="unifiedTitleAndToolBarOnMac">
    <bool>true</bool>
@@ -84,6 +62,31 @@ QPushButton:checked {
       </property>
       <item>
        <widget class="QWidget" name="leftMenu" native="true">
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+	border-top: 1px solid #555;
+	border-bottom: 1px solid #000;
+	border-left: 3px solid #333;
+	padding: 8px;
+	background-color: #333;
+	text-align: left;
+	color: #eee;
+}
+
+QPushButton:hover {
+	background-color: #111;
+	border-left: 3px solid #888;
+	color: #fff;
+	font-weight: bold;
+}
+
+QPushButton:checked {
+	background-color: #111;
+	border-left: 3px solid #80ba24;
+	color: #fff;
+	font-weight: bold;
+}</string>
+        </property>
         <layout class="QVBoxLayout" name="leftMenuLayout">
          <property name="spacing">
           <number>0</number>

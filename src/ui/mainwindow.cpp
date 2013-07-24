@@ -20,9 +20,11 @@ MainWindow::MainWindow ( QWidget * parent, Qt::WindowFlags f ) : QMainWindow ( p
     qrwidget->setUrl ( QUrl ( "https://arsnova.thm.de/" ) );
     this->addWidget ( "QR-Code", qrwidget );
 
+    this->addWidget ( "Settings", new SettingsWidget ( this->sessionContext ) );
+
     this->activateWidget ( "Login" );
 
-    this->overlayWidget = new OverlayWidget ( this->sessionContext, this );
+    this->overlayWidget = new OverlayWidget ( this->sessionContext, QApplication::desktop()->screen() );
     this->overlayWidget->setVisible ( false );
 
     connect ( SystemTrayIcon::instance(), SIGNAL ( activated ( QSystemTrayIcon::ActivationReason ) ), this, SLOT ( onSystemTrayActivated ( QSystemTrayIcon::ActivationReason ) ) );
@@ -47,7 +49,7 @@ MainWindow::~MainWindow() {
 void MainWindow::disconnectAll() {
     disconnect ( SystemTrayIcon::instance(), SIGNAL ( activated ( QSystemTrayIcon::ActivationReason ) ), this, SLOT ( onSystemTrayActivated ( QSystemTrayIcon::ActivationReason ) ) );
     disconnect ( this->menuSignalMapper, SIGNAL ( mapped ( QString ) ), this, SLOT ( activateWidget ( QString ) ) );
-    disconnect ( this->findWidget ( "Login" ), SIGNAL ( exitButtonClicked() ), this, SLOT ( close() ) );
+    disconnect ( this->findWidget ( "Login" ), SIGNAL ( exitButtonClicked() ), this, SLOT ( exitApplication() ) );
     disconnect ( this->findWidget ( "Login" ), SIGNAL ( loginButtonClicked() ), this, SLOT ( sessionLogin() ) );
 }
 
@@ -112,7 +114,7 @@ QWidget * MainWindow::findWidget ( QString widgetTitle ) {
 void MainWindow::connectLoginWidget() {
     LoginWidget * loginWidget = ( LoginWidget * ) this->findWidget ( "Login" );
     if ( loginWidget != nullptr ) {
-        connect ( loginWidget, SIGNAL ( exitButtonClicked() ), this, SLOT ( close() ) );
+        connect ( loginWidget, SIGNAL ( exitButtonClicked() ), this, SLOT ( exitApplication() ) );
         connect ( loginWidget, SIGNAL ( loginButtonClicked() ), this, SLOT ( sessionLogin() ) );
     }
 }
@@ -124,4 +126,8 @@ void MainWindow::sessionLogin() {
         this->sessionContext->connection()->requestSession ( loginWidget->text() );
         this->activateWidget ( "Sessions" );
     }
+}
+
+void MainWindow::exitApplication() {
+    exit ( 0 );
 }

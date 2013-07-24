@@ -6,6 +6,7 @@ set(arsnovawidget_SRCS
   ui/qrcodewidget.cpp
   ui/sessionwidget.cpp
   ui/systemtrayicon.cpp
+  ui/settingswidget.cpp
   updatetimer.cpp
   httpconnection.cpp
   sessionresponse.cpp
@@ -15,11 +16,13 @@ set(arsnovawidget_SRCS
   qplugin/loginwidget.cpp
   qplugin/bardiagramwidget.cpp
   qplugin/logodiagramwidget.cpp
+  qplugin/emotediagramwidget.cpp
   qplugin/sessioninformationwidget.cpp
   qrcodegenerator.cpp
   interposedquestion.cpp
   sessioncontext.cpp
   abstractconnection.cpp
+  settings.cpp
   main.cpp
 )
 
@@ -33,6 +36,8 @@ set(arsnovawidgetplugin_SRCS
   qplugin/bardiagramwidgetplugin.cpp
   qplugin/logodiagramwidget.cpp
   qplugin/logodiagramwidgetplugin.cpp
+  qplugin/emotediagramwidget.cpp
+  qplugin/emotediagramwidgetplugin.cpp
   qplugin/sessioninformationwidget.cpp
   qplugin/sessioninformationwidgetplugin.cpp
 )
@@ -58,6 +63,7 @@ set(arsnovawidget_MOC_SRCS
   ui/qrcodewidget.h
   ui/sessionwidget.h
   ui/systemtrayicon.h
+  ui/settingswidget.h
   updatetimer.h
   abstractconnection.h
   httpconnection.h
@@ -68,10 +74,12 @@ set(arsnovawidget_MOC_SRCS
   qplugin/loginwidget.h
   qplugin/bardiagramwidget.h
   qplugin/logodiagramwidget.h
+  qplugin/emotediagramwidget.h
   qplugin/sessioninformationwidget.h
   qrcodegenerator.h
   interposedquestion.h
   sessioncontext.h
+  settings.h
 )
 
 set(arsnovawidgetplugin_MOC_SRCS
@@ -82,6 +90,8 @@ set(arsnovawidgetplugin_MOC_SRCS
   qplugin/bardiagramwidgetplugin.h
   qplugin/logodiagramwidget.h
   qplugin/logodiagramwidgetplugin.h
+  qplugin/emotediagramwidget.h
+  qplugin/emotediagramwidgetplugin.h
   qplugin/sessioninformationwidget.h
   qplugin/sessioninformationwidgetplugin.h
 )
@@ -91,9 +101,11 @@ set(arsnovawidget_UIS
   ui/overlaywidget.ui
   ui/qrcodewidget.ui
   ui/sessionwidget.ui
+  ui/settingswidget.ui
 )
 
 set(arsnovawidgetplugin_UIS
+  qplugin/emotediagramwidget.ui
   qplugin/logodiagramwidget.ui
   qplugin/sessioninformationwidget.ui
 )
@@ -107,10 +119,10 @@ qt5_add_resources(resources_RCC_SRCS ${resources_RCCS})
 #####
 
 #qt5_wrap_cpp(arsnovawidget_SRCS ${arsnovawidget_MOC_SRCS})
-#qt5_wrap_ui(arsnovawidget_UIS_H ${arsnovawidget_UIS} ${arsnovawidgetplugin_UIS})
+qt5_wrap_ui(arsnovawidget_UIS_H ${arsnovawidget_UIS} ${arsnovawidgetplugin_UIS})
 
 #qt5_wrap_cpp(arsnovawidgetplugin_SRCS ${arsnovawidgetplugin_MOC_SRCS})
-#qt5_wrap_ui(arsnovawidgetplugin_UIS_H ${arsnovawidgetplugin_UIS})
+qt5_wrap_ui(arsnovawidgetplugin_UIS_H ${arsnovawidgetplugin_UIS})
 
 IF( WIN32 AND MINGW )
   # To cross compile on Linux use: 'i686-w64-mingw32-windres' or similar command shipped with mingw cross compiler.
@@ -128,7 +140,7 @@ ENDIF( WIN32 AND NOT MINGW )
 
 add_executable(arsnovadesktop MACOSX_BUNDLE WIN32
   ${arsnovawidget_SRCS}
-  #${arsnovawidget_UIS_H}
+  ${arsnovawidget_UIS_H}
   ${resources_RCC_SRCS}
 )
 
@@ -158,7 +170,7 @@ if(QTPLUGIN)
   #  ${QT_QTGUI_LIBRARY}
   #  ${QT_QTSVG_LIBRARY}
   #)
-  qt5_use_modules(qarsnova Core Widgets)
+  qt5_use_modules(qarsnova Core Widgets Declarative Svg)
 endif(QTPLUGIN)
 
 IF(APPLE)

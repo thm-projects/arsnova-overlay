@@ -21,10 +21,16 @@
 #include "sessioncontext.h"
 
 SessionContext::SessionContext ( AbstractConnection * connection )
-    : _isValid ( false ), _connection ( connection ) {
+    : _isValid ( false ),
+      _connection ( connection ),
+      _updateTimer ( new UpdateTimer() ) {
     connect ( _connection, SIGNAL ( requestFinished ( FeedbackResponse ) ), this, SLOT ( onUnderstandingResponse ( FeedbackResponse ) ) );
     connect ( _connection, SIGNAL ( requestFinished ( SessionResponse ) ), this, SLOT ( onSessionResponse ( SessionResponse ) ) );
     connect ( _connection, SIGNAL ( requestError() ), this, SLOT ( onRequestError() ) );
+}
+
+SessionContext::~SessionContext() {
+    delete this->_updateTimer;
 }
 
 SessionContext * SessionContext::create ( AbstractConnection * connection, QString sessionKey ) {
@@ -68,4 +74,8 @@ void SessionContext::setViewType ( SessionContext::ViewType viewType ) {
 
 SessionContext::ViewType SessionContext::viewType() {
     return this->_viewType;
+}
+
+UpdateTimer * SessionContext::updateTimer() {
+    return _updateTimer;
 }

@@ -18,7 +18,7 @@ void MainWindowTest::testShouldDisplayMainWindow() {
 
 void MainWindowTest::testThatMainWindowContainsBasicLeftMenu() {
     QList<QPushButton *> buttons = this->mainWindow->getUi()->leftMenu->findChildren<QPushButton *>();
-    QVERIFY ( buttons.size() == 3 );
+    QVERIFY ( buttons.size() == 4 );
 }
 
 void MainWindowTest::testShouldDisplaySessionWidget() {

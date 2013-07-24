@@ -19,12 +19,12 @@ private:
 private slots:
     void initTestCase();
     void cleanupTestCase();
-    
+
     void testShouldShowGreenLogo();
     void testShouldShowYellowLogo();
     void testShouldShowRedLogo();
     void testShouldShowGrayLogo();
-    
+
     void testShouldShowMiddleGreenYellowLogo();
 };
 

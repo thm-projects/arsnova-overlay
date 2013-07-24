@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>200</width>
-    <height>209</height>
+    <height>200</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -38,7 +38,23 @@
    <property name="margin">
     <number>0</number>
    </property>
-   <item row="3" column="0" colspan="2">
+   <item row="0" column="0" colspan="2">
+    <widget class="SessionInformationWidget" name="sessioninformationwidget" native="true">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>20</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0" colspan="2">
     <widget class="QToolBar" name="menuWidget">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -80,24 +96,11 @@
    <item row="1" column="0" colspan="2">
     <widget class="LogoDiagramWidget" name="logodiagramwidget" native="true"/>
    </item>
-   <item row="2" column="0" colspan="2">
+   <item row="3" column="0" colspan="2">
     <widget class="BarDiagramWidget" name="bardiagramwidget" native="true"/>
    </item>
-   <item row="0" column="0" colspan="2">
-    <widget class="SessionInformationWidget" name="sessioninformationwidget" native="true">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>16777215</width>
-       <height>20</height>
-      </size>
-     </property>
-    </widget>
+   <item row="2" column="0" colspan="2">
+    <widget class="EmoteDiagramWidget" name="emotediagramwidget" native="true"/>
    </item>
   </layout>
   <action name="actionMakeTransparent">
@@ -146,6 +149,11 @@
    <class>LogoDiagramWidget</class>
    <extends>QWidget</extends>
    <header>qplugin/logodiagramwidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>EmoteDiagramWidget</class>
+   <extends>QWidget</extends>
+   <header>qplugin/emotediagramwidget.h</header>
   </customwidget>
   <customwidget>
    <class>SessionInformationWidget</class>

@@ -35,7 +35,7 @@ void QRCodeWidget::show() {
 
 void QRCodeWidget::setFullscreen ( bool fullscreen, int screen ) {
     QRect screenGeometry = (
-                               screen == -1
+                               screen == -1 || screen > ( QApplication::desktop()->screenCount() - 1 )
                                ? QApplication::desktop()->availableGeometry ( QApplication::desktop()->screenCount() - 1 )
                                : QApplication::desktop()->availableGeometry ( screen )
                            );
@@ -148,7 +148,7 @@ void QRCodeWidget::onTransformationChanged() {
 }
 
 void QRCodeWidget::onFullscreenButtonToggled ( bool enabled ) {
-    this->setFullscreen ( enabled );
+    this->setFullscreen ( enabled, Settings::instance()->screen() );
 }
 
 QPixmap QRCodeWidget::transform ( QPixmap pixmap, Transformation transformation ) {

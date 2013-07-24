@@ -13,26 +13,24 @@ OverlayWidget::OverlayWidget ( SessionContext * context, QWidget * parent, Qt::W
       context ( context ) {
     ui->setupUi ( this );
     this->latestUnderstandingResponses = 0;
-    this->updateTimer = new UpdateTimer();
     this->connectSignals();
     this->setMouseTracking ( true );
-    this->moveToBottomRightEdge();
-    this->setVisibleViewType ( SessionContext::DIAGRAM_VIEW );
+    this->moveToEdge ( Settings::instance()->screen() );
 }
 
 void OverlayWidget::connectSignals() {
-    connect ( this->updateTimer, SIGNAL ( tick ( int ) ), this, SLOT ( updateHttpResponse ( int ) ) );
+    connect ( this->context->updateTimer(), SIGNAL ( tick ( int ) ), this, SLOT ( updateHttpResponse ( int ) ) );
     connect ( this->connection, SIGNAL ( requestFinished ( SessionResponse ) ), this, SLOT ( onSessionResponse ( SessionResponse ) ) );
     connect ( this->connection, SIGNAL ( requestFinished ( FeedbackResponse ) ), this, SLOT ( onFeedbackResponse ( FeedbackResponse ) ) );
     connect ( this->connection, SIGNAL ( requestFinished ( LoggedInResponse ) ), this, SLOT ( onLoggedInResponse ( LoggedInResponse ) ) );
     connect ( ui->actionMakeTransparent, SIGNAL ( triggered ( bool ) ), this, SLOT ( makeTransparent ( bool ) ) );
     connect ( ui->actionExit, SIGNAL ( triggered ( bool ) ), this, SLOT ( close() ) );
     connect ( context, SIGNAL ( viewTypeChanged ( SessionContext::ViewType ) ), this, SLOT ( setVisibleViewType ( SessionContext::ViewType ) ) );
+    connect ( Settings::instance().get(), SIGNAL ( settingsChanged() ), this, SLOT ( onSettingsChanged() ) );
 }
 
 OverlayWidget::~OverlayWidget() {
     delete this->connection;
-    delete this->updateTimer;
     delete this->ui;
 }
 
@@ -49,17 +47,37 @@ const Ui::OverlayWidget*const OverlayWidget::getUi() {
     return this->ui;
 }
 
-void OverlayWidget::moveToBottomRightEdge ( int screen ) {
+void OverlayWidget::moveToEdge ( int screen ) {
     this->resize ( QSize ( xSize+20, ( ySize*2 ) + 32 ) );
 
     QRect screenGeometry = (
-                               screen == -1
+                               screen == -1 || screen > ( QApplication::desktop()->screenCount() - 1 )
                                ? QApplication::desktop()->availableGeometry ( QApplication::desktop()->screenCount() - 1 )
                                : QApplication::desktop()->availableGeometry ( screen )
                            );
 
-    int xPos = screenGeometry.width() + screenGeometry.x() - this->size().width() - 8;
-    int yPos = screenGeometry.height() + screenGeometry.y() - this->size().height() - 8;
+    int xPos = 8;
+    int yPos = 8;
+
+    switch ( Settings::instance()->widgetPosition() ) {
+    case Settings::BOTTOM_RIGHT:
+        xPos = screenGeometry.width() + screenGeometry.x() - this->size().width() - 8;
+        yPos = screenGeometry.height() + screenGeometry.y() - this->size().height() - 8;
+        break;
+    case Settings::BOTTOM_LEFT:
+        xPos = screenGeometry.x() + 8;
+        yPos = screenGeometry.height() + screenGeometry.y() - this->size().height() - 8;
+        break;
+    case Settings::TOP_LEFT:
+        xPos = screenGeometry.x() + 8;
+        yPos = screenGeometry.y() + 8;
+        break;
+    case Settings::TOP_RIGHT:
+        xPos = screenGeometry.width() + screenGeometry.x() - this->size().width() - 8;
+        yPos = screenGeometry.y() + 8;
+        break;
+    }
+
     this->move ( xPos, yPos );
 }
 
@@ -67,10 +85,13 @@ void OverlayWidget::setVisibleViewType ( SessionContext::ViewType type ) {
     if ( !context->isValid() ) return;
     switch ( type ) {
     case SessionContext::DIAGRAM_VIEW:
-        ui->bardiagramwidget->show();
         ui->sessioninformationwidget->show();
         ui->menuWidget->show();
+
+        ui->bardiagramwidget->show();
         ui->logodiagramwidget->hide();
+        ui->emotediagramwidget->hide();
+
         this->setWindowFlags (
             Qt::Window
             | Qt::FramelessWindowHint
@@ -80,9 +101,27 @@ void OverlayWidget::setVisibleViewType ( SessionContext::ViewType type ) {
         break;
     case SessionContext::ICON_VIEW:
         ui->sessioninformationwidget->show();
-        ui->bardiagramwidget->hide();
         ui->menuWidget->show();
+
+        ui->bardiagramwidget->hide();
         ui->logodiagramwidget->show();
+        ui->emotediagramwidget->hide();
+
+        this->setWindowFlags (
+            Qt::Window
+            | Qt::FramelessWindowHint
+            | Qt::WindowStaysOnTopHint
+            | Qt::X11BypassWindowManagerHint
+        );
+        break;
+    case SessionContext::EMOTE_VIEW:
+        ui->sessioninformationwidget->show();
+        ui->menuWidget->show();
+
+        ui->bardiagramwidget->hide();
+        ui->logodiagramwidget->hide();
+        ui->emotediagramwidget->show();
+
         this->setWindowFlags (
             Qt::Window
             | Qt::FramelessWindowHint
@@ -98,7 +137,6 @@ void OverlayWidget::onSessionResponse ( SessionResponse response ) {
     this->sessionId = response.sessionId();
 
     if ( ! this->sessionId.isNull() ) {
-        this->setVisibleViewType ( context->viewType() );
         this->updateHttpResponse ( OverlayWidget::httpUpdateInterval );
         ui->sessioninformationwidget->updateSessionLabel ( response.shortName(), response.sessionId() );
         return;
@@ -111,6 +149,7 @@ void OverlayWidget::onFeedbackResponse ( FeedbackResponse response ) {
 
     ui->bardiagramwidget->updateFromResponse ( response );
     ui->logodiagramwidget->updateFromResponse ( response );
+    ui->emotediagramwidget->updateFromResponse ( response );
 }
 
 void OverlayWidget::onLoggedInResponse ( LoggedInResponse response ) {
@@ -118,15 +157,19 @@ void OverlayWidget::onLoggedInResponse ( LoggedInResponse response ) {
     ui->sessioninformationwidget->updateCounterLabel ( this->latestUnderstandingResponses, this->loggedInUsers );
 }
 
+void OverlayWidget::onSettingsChanged() {
+    this->moveToEdge ( Settings::instance()->screen() );
+}
+
 void OverlayWidget::updateHttpResponse ( int ticks ) {
     ui->sessioninformationwidget->updateProgressBar ( ticks, OverlayWidget::httpUpdateInterval );
     if (
         ticks == OverlayWidget::httpUpdateInterval
-        and ! this->sessionId.isEmpty()
+        && ! this->sessionId.isEmpty()
     ) {
         this->connection->requestFeedback();
         this->connection->requestActiveUserCount();
-        this->updateTimer->reset();
+        this->context->updateTimer()->reset();
     }
 }
 

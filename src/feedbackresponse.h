@@ -21,6 +21,7 @@ public:
 
     QList< int > values();
     int count();
+    int averageRounded();
 
 private:
     QList<int> _values;

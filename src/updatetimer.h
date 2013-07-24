@@ -2,6 +2,7 @@
 #define UPDATETIMER_H
 
 #include <QtCore>
+#include <memory>
 
 class UpdateTimer : public QObject {
     Q_OBJECT
@@ -12,7 +13,7 @@ public:
     void reset();
 
 private:
-    QTimer * qtimer;
+    std::unique_ptr<QTimer> qtimer;
     int ticks;
     static int tickDuration;
 

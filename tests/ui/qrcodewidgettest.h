@@ -15,7 +15,7 @@ public:
 private:
     QRCodeWidget * qrCodeWidget;
     QStackedWidget * stackedWidget;
-    StubConnection * connection;
+    SessionContext * context;
 
 private slots:
     void initTestCase();

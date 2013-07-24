@@ -20,7 +20,7 @@
 
 #include "systemtrayicontest.h"
 
-SystemTrayIconTest::SystemTrayIconTest ( QObject* parent ) : QObject ( parent ) {}
+SystemTrayIconTest::SystemTrayIconTest ( QObject * parent ) : QObject ( parent ) {}
 
 void SystemTrayIconTest::initTestCase() {
     systemTrayIcon = SystemTrayIcon::instance();
@@ -28,7 +28,7 @@ void SystemTrayIconTest::initTestCase() {
 }
 
 void SystemTrayIconTest::cleanupTestCase() {
-    delete systemTrayIcon;
+    systemTrayIcon->destroy();
 }
 
 void SystemTrayIconTest::testShouldDisplaySystemTrayIcon() {

@@ -11,6 +11,8 @@
 #include "ui/overlaywidget.h"
 #include "sessioncontext.h"
 #include "ui/systemtrayicon.h"
+#include "httpconnection.h"
+#include "ui/settingswidget.h"
 
 class MainWindow : public QMainWindow, Ui::MainWindow {
     Q_OBJECT
@@ -39,6 +41,7 @@ private slots:
     void activateWidget ( QString widgetTitle );
     void sessionLogin();
     void onContextError(SessionContext::Error e);
+    void exitApplication();
 };
 
 #endif // MAINWINDOW_H

@@ -128,24 +128,24 @@ IF (WIN32)
   )
   SET(WINQTFILES
     # This part should contain DLL files to be included in package e.g.:
-    ${CMAKE_CURRENT_BINARY_DIR}/lib/libgcc_s_sjlj-1.dll
-    ${CMAKE_CURRENT_BINARY_DIR}/lib/libstdc++-6.dll
-    ${CMAKE_CURRENT_BINARY_DIR}/lib/QtCore4.dll
-    ${CMAKE_CURRENT_BINARY_DIR}/lib/QtDeclarative4.dll
-    ${CMAKE_CURRENT_BINARY_DIR}/lib/QtGui4.dll
-    ${CMAKE_CURRENT_BINARY_DIR}/lib/QtNetwork4.dll
-    ${CMAKE_CURRENT_BINARY_DIR}/lib/QtScript4.dll
-    ${CMAKE_CURRENT_BINARY_DIR}/lib/QtSvg4.dll
-    ${CMAKE_CURRENT_BINARY_DIR}/lib/QtSql4.dll
-    ${CMAKE_CURRENT_BINARY_DIR}/lib/QtXml4.dll
-    ${CMAKE_CURRENT_BINARY_DIR}/lib/QtXmlPatterns4.dll
-    ${CMAKE_CURRENT_BINARY_DIR}/lib/libjpeg-8.dll 
-    ${CMAKE_CURRENT_BINARY_DIR}/lib/libpng15-15.dll
-    ${CMAKE_CURRENT_BINARY_DIR}/lib/libtiff-5.dll
-    ${CMAKE_CURRENT_BINARY_DIR}/lib/liblzma-5.dll
-    ${CMAKE_CURRENT_BINARY_DIR}/lib/zlib1.dll
-    ${CMAKE_CURRENT_BINARY_DIR}/lib/libssl-8.dll
-    ${CMAKE_CURRENT_BINARY_DIR}/lib/libcrypto-8.dll
+    ${QT_LIBRARY_DIR}/libgcc_s_sjlj-1.dll
+    ${QT_LIBRARY_DIR}/libstdc++-6.dll
+    ${QT_LIBRARY_DIR}/QtCore4.dll
+    ${QT_LIBRARY_DIR}/QtDeclarative4.dll
+    ${QT_LIBRARY_DIR}/QtGui4.dll
+    ${QT_LIBRARY_DIR}/QtNetwork4.dll
+    ${QT_LIBRARY_DIR}/QtScript4.dll
+    ${QT_LIBRARY_DIR}/QtSvg4.dll
+    ${QT_LIBRARY_DIR}/QtSql4.dll
+    ${QT_LIBRARY_DIR}/QtXml4.dll
+    ${QT_LIBRARY_DIR}/QtXmlPatterns4.dll
+    ${QT_LIBRARY_DIR}/libjpeg-8.dll
+    ${QT_LIBRARY_DIR}/libpng15-15.dll
+    ${QT_LIBRARY_DIR}/libtiff-5.dll
+    ${QT_LIBRARY_DIR}/liblzma-5.dll
+    ${QT_LIBRARY_DIR}/zlib1.dll
+    ${QT_LIBRARY_DIR}/libssl-8.dll
+    ${QT_LIBRARY_DIR}/libcrypto-8.dll
     ${CMAKE_CURRENT_BINARY_DIR}/libs/libqrencode.dll
   )
   INSTALL(FILES ${WINQTFILES}
@@ -156,7 +156,7 @@ ENDIF (WIN32)
 # CPACK
 INCLUDE(InstallRequiredSystemLibraries)
 SET(CPACK_RESOURCE_FILE_LICENSE "COPYING")
-SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "ARSnovaDesktop is a small widget to display information taken from ars.thm.de")
+SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "ARSnovaDesktop is a small widget to display information taken from arsnova.thm.de")
 SET(CPACK_PACKAGE_VENDOR "Paul-Christian Volkmer <paul-christian.volkmer@mni.thm.de>")
 SET(CPACK_PACKAGE_CONTACT "Paul-Christian Volkmer <paul-christian.volkmer@mni.thm.de>")
 SET(CPACK_PACKAGE_VERSION_MAJOR ${VERSION_MAJOR})
@@ -164,13 +164,23 @@ SET(CPACK_PACKAGE_VERSION_MINOR ${VERSION_MINOR})
 SET(CPACK_PACKAGE_VERSION_PATCH ${VERSION_PATCH})
 
 IF (UNIX AND NOT APPLE)
+  find_program(ARCH_EXECUTABLE "arch")
+  if(ARCH_EXECUTABLE)
+    execute_process(
+      COMMAND ${ARCH_EXECUTABLE}
+      OUTPUT_VARIABLE arch
+      OUTPUT_STRIP_TRAILING_WHITESPACE
+      WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+    )
+    set(CPACK_RPM_PACKAGE_ARCHITECTURE "${arch}")
+  endif()
   SET(CPACK_GENERATOR  "RPM")
-  SET(CPACK_SYSTEM_NAME "i586")
+  SET(CPACK_SYSTEM_NAME ${CPACK_RPM_PACKAGE_ARCHITECTURE})
   SET(CPACK_RPM_PACKAGE_RELEASE "1")
   SET(CPACK_RPM_PACKAGE_LICENSE "GPLv3")
   SET(
     CPACK_RPM_PACKAGE_DESCRIPTION
-    "ARSnovaDesktop is a small widget to display information taken from ars.thm.de."
+    "ARSnovaDesktop is a small widget to display information taken from arsnova.thm.de."
   )
   #SET(CPACK_RPM_CHANGELOG_FILE ${CMAKE_CURRENT_BINARY_DIR}/CHANGES)
   SET(CPACK_STRIP_FILES  ${CMAKE_CURRENT_BINARY_DIR}/bin/arsnovadesktop)
@@ -181,18 +191,18 @@ IF (WIN32)
   SET(CPACK_SYSTEM_NAME "win32")
   SET(CPACK_RESOURCE_FILE_LICENSE ${CMAKE_CURRENT_BINARY_DIR}/COPYING)
   SET(CPACK_NSIS_MODIFY_PATH ON)
-  SET(CPACK_NSIS_PACKAGE_NAME "arsnovadesktop")
+  SET(CPACK_NSIS_PACKAGE_NAME "ARSnovaDesktop")
   SET(CPACK_NSIS_DISPLAY_NAME "ARSnovaDesktop")
   SET(CPACK_NSIS_CONTACT "${CPACK_PACKAGE_VENDOR}")
-  SET(CPACK_PACKAGE_EXECUTABLES  ..\\\\arsnovadesktop;arsnovadesktop)
+  SET(CPACK_PACKAGE_EXECUTABLES  ..\\\\arsnovadesktop;ARSnovaDesktop)
   SET(CPACK_CREATE_DESKTOP_LINKS ..\\\\arsnovadesktop)
-  SET(CPACK_PACKAGE_INSTALL_DIRECTORY arsnovadesktop)
-  SET(CPACK_STRIP_FILES  ${CMAKE_CURRENT_BINARY_DIR}/bin/arsnovadesktop)
+  SET(CPACK_PACKAGE_INSTALL_DIRECTORY ARSnovaDesktop)
+  SET(CPACK_STRIP_FILES  ${CMAKE_CURRENT_BINARY_DIR}/bin/arsnovadesktop.exe)
 ENDIF (WIN32)
 
 IF (APPLE)
   SET(CPACK_GENERATOR  "Bundle")
-  SET(CPACK_BUNDLE_NAME "arsnovadesktop")
+  SET(CPACK_BUNDLE_NAME "ARSnovaDesktop")
   SET(CPACK_BUNDLE_PLIST ${CMAKE_CURRENT_BINARY_DIR}/Info.plist)
   SET(CPACK_BUNDLE_ICON ${CMAKE_CURRENT_BINARY_DIR}/src/resources/images/arsnovawidget.icns)
 ENDIF (APPLE)
