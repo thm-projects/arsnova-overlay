@@ -18,16 +18,16 @@ const Ui::EmoteDiagramWidget*const EmoteDiagramWidget::getUi() {
 void EmoteDiagramWidget::updateFromResponse ( FeedbackResponse response ) {
 
     switch ( response.averageRounded() ) {
-    case 0:
+    case FeedbackResponse::FEEDBACK_OK:
         this->ui->logoWidget->load ( QString ( ":images/images/emotes/face-smile.svg" ) );
         break;
-    case 1:
+    case FeedbackResponse::FEEDBACK_FASTER:
         this->ui->logoWidget->load ( QString ( ":images/images/emotes/face-wink.svg" ) );
         break;
-    case 2:
+    case FeedbackResponse::FEEDBACK_SLOWER:
         this->ui->logoWidget->load ( QString ( ":images/images/emotes/face-surprise.svg" ) );
         break;
-    case 3:
+    case FeedbackResponse::FEEDBACK_AWAY:
         this->ui->logoWidget->load ( QString ( ":images/images/emotes/face-sad.svg" ) );
         break;
     }

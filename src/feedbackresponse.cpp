@@ -26,8 +26,13 @@ int FeedbackResponse::averageRounded() {
 
     double count = this->count();
     double sum = 0;
-    for ( int i = 0; i < values().size(); i++ ) {
-        sum += ( values().at ( i ) * i );
+
+    // Switch FEEDBACK_FASTER and FEEDBACK_OK
+    QList<int> switchedValues = this->_values;
+    switchedValues.swap ( FEEDBACK_FASTER, FEEDBACK_OK );
+
+    for ( int i = 0; i < switchedValues.size(); i++ ) {
+        sum += ( switchedValues.at ( i ) * i );
     }
 
     return ( int ) round ( sum / count );
