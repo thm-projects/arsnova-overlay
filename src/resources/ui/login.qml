@@ -67,7 +67,14 @@ Rectangle {
                     sessionIdRectangle.color = "#ffffff"
                 }
             }
-
+            Keys.onPressed: {
+                if (
+                        text.match(/\d{8}/)
+                        && (event.key === Qt.Key_Enter || event.key === Qt.Key_Return)
+                ) {
+                    widgetRectangle.loginButtonClick()
+                }
+            }
             Text {
                 id: sessionIdPlaceholderText
                 color: "#676963"

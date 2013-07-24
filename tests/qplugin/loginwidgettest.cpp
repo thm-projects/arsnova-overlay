@@ -67,3 +67,31 @@ void LoginWidgetTest::testShouldClearLineEditText() {
 
     QVERIFY ( this->loginWidget->text().isEmpty() );
 }
+
+void LoginWidgetTest::testShouldEmitSignalOnEnterKey() {
+    delete this->loginWidget;
+    this->loginWidget = new LoginWidget();
+    this->loginWidget->show();
+
+    this->loginWidget->setText ( "12345678" );
+
+    QSignalSpy spy ( this->loginWidget, SIGNAL ( loginButtonClicked ( ) ) );
+
+    QTest::keyPress ( this->loginWidget, Qt::Key_Enter );
+
+    QCOMPARE ( spy.count(), 1 );
+}
+
+void LoginWidgetTest::testShouldEmitSignalOnReturnKey() {
+    delete this->loginWidget;
+    this->loginWidget = new LoginWidget();
+    this->loginWidget->show();
+
+    this->loginWidget->setText ( "12345678" );
+
+    QSignalSpy spy ( this->loginWidget, SIGNAL ( loginButtonClicked ( ) ) );
+
+    QTest::keyPress ( this->loginWidget, Qt::Key_Return );
+
+    QCOMPARE ( spy.count(), 1 );
+}
