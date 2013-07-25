@@ -15,3 +15,7 @@ void StubConnection::requestSession ( QString sessionKey ) {
 void StubConnection::requestFeedback() {
     emit this->requestFinished ( FeedbackResponse ( 1, 2, 3, 4 ) );
 }
+
+void StubConnection::requestAudienceQuestionsCount() {
+    emit this->requestFinished ( AudienceQuestionCountResponse ( 1, 2, 3 ) );
+}

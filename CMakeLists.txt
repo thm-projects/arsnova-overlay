@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 2.6)
 find_package(Qt4 REQUIRED)
 
 set(VERSION_MAJOR 0)
-set(VERSION_MINOR 5)
+set(VERSION_MINOR 6)
 set(VERSION_PATCH dev)
 
 set(VERSION_SHORT ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH})

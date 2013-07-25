@@ -12,6 +12,7 @@ set(arsnovawidget_SRCS
   sessionresponse.cpp
   feedbackresponse.cpp
   loggedinresponse.cpp
+  audiencequestioncountresponse.cpp
   svglogo.cpp
   qplugin/loginwidget.cpp
   qplugin/bardiagramwidget.cpp
@@ -69,6 +70,7 @@ set(arsnovawidget_MOC_SRCS
   sessionresponse.h
   feedbackresponse.h
   loggedinresponse.h
+  audiencequestioncountresponse.h
   svglogo.h
   qplugin/loginwidget.h
   qplugin/bardiagramwidget.h
