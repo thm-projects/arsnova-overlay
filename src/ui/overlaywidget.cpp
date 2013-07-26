@@ -4,7 +4,6 @@
 
 const int OverlayWidget::ySize = 80;
 const int OverlayWidget::xSize = 180;
-const int OverlayWidget::httpUpdateInterval = 3;
 
 OverlayWidget::OverlayWidget ( SessionContext * context, QWidget * parent, Qt::WindowFlags f )
     : QWidget ( parent, f ),
@@ -19,10 +18,10 @@ OverlayWidget::OverlayWidget ( SessionContext * context, QWidget * parent, Qt::W
 }
 
 void OverlayWidget::connectSignals() {
-    connect ( this->context->updateTimer(), SIGNAL ( tick ( int ) ), this, SLOT ( updateHttpResponse ( int ) ) );
     connect ( this->connection, SIGNAL ( requestFinished ( SessionResponse ) ), this, SLOT ( onSessionResponse ( SessionResponse ) ) );
     connect ( this->connection, SIGNAL ( requestFinished ( FeedbackResponse ) ), this, SLOT ( onFeedbackResponse ( FeedbackResponse ) ) );
     connect ( this->connection, SIGNAL ( requestFinished ( LoggedInResponse ) ), this, SLOT ( onLoggedInResponse ( LoggedInResponse ) ) );
+    connect ( this->connection, SIGNAL ( requestFinished ( AudienceQuestionCountResponse ) ), this, SLOT ( onAudienceQuestionCountResponse ( AudienceQuestionCountResponse ) ) );
     connect ( ui->actionMakeTransparent, SIGNAL ( triggered ( bool ) ), this, SLOT ( makeTransparent ( bool ) ) );
     connect ( ui->actionExit, SIGNAL ( triggered ( bool ) ), this, SLOT ( close() ) );
     connect ( context, SIGNAL ( viewTypeChanged ( SessionContext::ViewType ) ), this, SLOT ( setVisibleViewType ( SessionContext::ViewType ) ) );
@@ -137,7 +136,6 @@ void OverlayWidget::onSessionResponse ( SessionResponse response ) {
     this->sessionId = response.sessionId();
 
     if ( ! this->sessionId.isNull() ) {
-        this->updateHttpResponse ( OverlayWidget::httpUpdateInterval );
         ui->sessioninformationwidget->updateSessionLabel ( response.shortName(), response.sessionId() );
         return;
     }
@@ -157,20 +155,12 @@ void OverlayWidget::onLoggedInResponse ( LoggedInResponse response ) {
     ui->sessioninformationwidget->updateCounterLabel ( this->latestUnderstandingResponses, this->loggedInUsers );
 }
 
-void OverlayWidget::onSettingsChanged() {
-    this->moveToEdge ( Settings::instance()->screen() );
+void OverlayWidget::onAudienceQuestionCountResponse ( AudienceQuestionCountResponse response ) {
+    ui->sessioninformationwidget->updateAudienceQuestionCount( response );
 }
 
-void OverlayWidget::updateHttpResponse ( int ticks ) {
-    ui->sessioninformationwidget->updateProgressBar ( ticks, OverlayWidget::httpUpdateInterval );
-    if (
-        ticks == OverlayWidget::httpUpdateInterval
-        && ! this->sessionId.isEmpty()
-    ) {
-        this->connection->requestFeedback();
-        this->connection->requestActiveUserCount();
-        this->context->updateTimer()->reset();
-    }
+void OverlayWidget::onSettingsChanged() {
+    this->moveToEdge ( Settings::instance()->screen() );
 }
 
 void OverlayWidget::makeTransparent ( bool enabled ) {

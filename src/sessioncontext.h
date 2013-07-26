@@ -100,11 +100,13 @@ private:
     AbstractConnection * _connection;
     ViewType _viewType;
     UpdateTimer * _updateTimer;
+    static const int httpUpdateInterval;
 
 private slots:
     void onUnderstandingResponse ( FeedbackResponse response );
     void onSessionResponse ( SessionResponse response );
     void onRequestError();
+    void updateHttpResponse ( int ticks );
 
 signals:
     /** This signal is emitted when the session context successfully changed the session

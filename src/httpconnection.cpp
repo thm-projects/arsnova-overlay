@@ -50,7 +50,7 @@ void HttpConnection::requestAudienceQuestionsCount() {
     this->networkAccessManager->get (
         this->createRequest (
             QUrl (
-                Settings::instance()->serverUrl().toString() + "/audiencequestions/readcount/?sessionkey=" + sessionKey
+                Settings::instance()->serverUrl().toString() + "/audiencequestion/readcount/?sessionkey=" + sessionKey
             )
         )
     );
@@ -121,7 +121,7 @@ void HttpConnection::handleReply ( QNetworkReply * reply ) {
         QString shortName = responseValue->property ( "shortName" ).toString();
         QString name = responseValue->property ( "name" ).toString();
         emit this->requestFinished ( SessionResponse ( sessionKey, shortName, name ) );
-    } else if ( reply->url().path().contains ( "/audiencequestions" ) ) {
+    } else if ( reply->url().path().contains ( "/audiencequestion" ) ) {
         int read = responseValue->property ( "read" ).toInteger();
         int unread = responseValue->property ( "unread" ).toInteger();
         int total = responseValue->property ( "total" ).toInteger();

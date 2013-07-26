@@ -39,7 +39,6 @@ private:
     QRCodeWidget * qrcodewidget;
     SessionContext * context;
 
-    static const int httpUpdateInterval;
     static const int ySize;
     static const int xSize;
     void moveToEdge ( int screen = -1 );
@@ -50,10 +49,10 @@ public slots:
     void onSessionResponse ( SessionResponse response );
     void onFeedbackResponse ( FeedbackResponse response );
     void onLoggedInResponse ( LoggedInResponse response );
+    void onAudienceQuestionCountResponse ( AudienceQuestionCountResponse response );
     void onSettingsChanged();
 
 private slots:
-    void updateHttpResponse ( int ticks );
     void makeTransparent ( bool enabled );
     void setVisibleViewType ( SessionContext::ViewType type );
 };

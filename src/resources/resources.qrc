@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="images">
+    <file>images/mail-mark-unread.png</file>
     <file>images/view-logo.png</file>
     <file>images/thm-logo.png</file>
     <file>images/qrcode.png</file>
@@ -24,5 +25,6 @@
   <qresource prefix="qml">
     <file>ui/login.qml</file>
     <file>ui/bardiagram.qml</file>
+    <file>ui/sessioninformation.qml</file>
   </qresource>
 </RCC>

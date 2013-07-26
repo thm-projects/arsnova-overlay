@@ -20,10 +20,13 @@
 
 #include "sessioncontext.h"
 
+const int SessionContext::httpUpdateInterval = 3;
+
 SessionContext::SessionContext ( AbstractConnection * connection )
     : _isValid ( false ),
       _connection ( connection ),
       _updateTimer ( new UpdateTimer() ) {
+    connect ( _updateTimer, SIGNAL ( tick ( int ) ), this, SLOT ( updateHttpResponse ( int ) ) );
     connect ( _connection, SIGNAL ( requestFinished ( FeedbackResponse ) ), this, SLOT ( onUnderstandingResponse ( FeedbackResponse ) ) );
     connect ( _connection, SIGNAL ( requestFinished ( SessionResponse ) ), this, SLOT ( onSessionResponse ( SessionResponse ) ) );
     connect ( _connection, SIGNAL ( requestError() ), this, SLOT ( onRequestError() ) );
@@ -59,12 +62,25 @@ void SessionContext::onSessionResponse ( SessionResponse response ) {
     if ( !response.sessionId().isEmpty() ) {
         _sessionId = response.sessionId();
         _isValid = true;
+        this->updateHttpResponse ( SessionContext::httpUpdateInterval );
         emit this->sessionChanged();
     }
 }
 
 void SessionContext::onRequestError() {
     emit this->error ( Error::CONNECTION_ERROR );
+}
+
+void SessionContext::updateHttpResponse ( int ticks ) {
+    if (
+        ticks == SessionContext::httpUpdateInterval
+        && ! this->_sessionId.isEmpty()
+    ) {
+        this->_connection->requestFeedback();
+        this->_connection->requestActiveUserCount();
+        this->_connection->requestAudienceQuestionsCount();
+        this->_updateTimer->reset();
+    }
 }
 
 void SessionContext::setViewType ( SessionContext::ViewType viewType ) {
