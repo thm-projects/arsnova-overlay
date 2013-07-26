@@ -20,7 +20,6 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         fillMode: Image.PreserveAspectFit
         source: "qrc:/images/images/mail-mark-unread.png"
-        //source: "../images/mail-mark-unread.png"
         opacity: unreadMessages > 0 ? 1 : .5
     }
 
@@ -69,7 +68,7 @@ Rectangle {
         width: 64
         height: 16
         color: "#20ffffff"
-        radius: 4
+        radius: 2
         border.width: 1
         border.color: "#40ffffff"
 
