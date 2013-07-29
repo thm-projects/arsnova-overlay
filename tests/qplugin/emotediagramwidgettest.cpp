@@ -13,7 +13,6 @@ void EmoteDiagramWidgetTest::cleanupTestCase() {
 void EmoteDiagramWidgetTest::testShouldShowEmoteDiagramWidget() {
     this->emoteDiagramWidget->show();
     QVERIFY ( this->emoteDiagramWidget->isVisible() );
-    QVERIFY ( this->emoteDiagramWidget->getUi()->logoWidget->isVisible() );
 }
 
 void EmoteDiagramWidgetTest::testShouldScaleSvgWidget() {
