@@ -27,5 +27,5 @@ void SessionInformationWidget::updateSessionLabel ( QString sessionName, QString
 }
 
 void SessionInformationWidget::updateAudienceQuestionCount ( AudienceQuestionCountResponse response ) {
-    item->setProperty ( "unreadMessages", response.read() );
+    item->setProperty ( "unreadMessages", response.unread() );
 }
