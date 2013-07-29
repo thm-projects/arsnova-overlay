@@ -3,7 +3,7 @@ import QtQuick 1.1
 Rectangle {
     id: rectangle2
     width: 200
-    height: 32
+    height: 42
     color: "#00000000"
 
     property int unreadMessages: 1
@@ -14,8 +14,8 @@ Rectangle {
         id: image1
         x: 10
         y: 6
-        width: 22
-        height: 22
+        width: 32
+        height: 32
         anchors.verticalCenterOffset: 0
         anchors.verticalCenter: parent.verticalCenter
         fillMode: Image.PreserveAspectFit
@@ -25,7 +25,7 @@ Rectangle {
 
     Rectangle {
         id: rectangleMessagesShadow
-        x: 40 - width
+        x: 48 - width
         y: 4
         width: text.text.length > 1 ? 24 : 16;
         height: 16
@@ -37,7 +37,7 @@ Rectangle {
 
     Rectangle {
         id: rectangleMessages
-        x: 40 - width
+        x: 48 - width
         y: 4
         width: text.text.length > 1 ? 24 : 16;
         height: 16
@@ -63,8 +63,8 @@ Rectangle {
 
     Rectangle {
         id: rectangleCount
-        x: 132
-        y: 8
+        x: 128
+        y: 14
         width: 64
         height: 16
         color: "#20ffffff"
