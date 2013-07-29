@@ -17,6 +17,8 @@ const Ui::EmoteDiagramWidget*const EmoteDiagramWidget::getUi() {
 
 void EmoteDiagramWidget::updateFromResponse ( FeedbackResponse response ) {
 
+    this->ui->logoWidget->setVisible ( response.count() != 0 );
+
     switch ( response.averageRounded() ) {
     case FeedbackResponse::FEEDBACK_OK:
         this->ui->logoWidget->load ( QString ( ":images/images/emotes/face-smile.svg" ) );
