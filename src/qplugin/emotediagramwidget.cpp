@@ -54,3 +54,8 @@ void EmoteDiagramWidget::resizeEvent ( QResizeEvent* event ) {
     );
     QWidget::resizeEvent ( event );
 }
+
+void EmoteDiagramWidget::mousePressEvent ( QMouseEvent* event ) {
+    QWidget::mousePressEvent ( event );
+    emit this->clicked();
+}

@@ -23,6 +23,10 @@ private:
     Ui::EmoteDiagramWidget * ui;
 
     void resizeEvent ( QResizeEvent * event );
+    void mousePressEvent ( QMouseEvent * event );
+
+signals:
+    void clicked ( bool checked = false );
 };
 
 #endif // EMOTEDIAGRAMWIDGET_H
