@@ -108,7 +108,6 @@ set(arsnovawidget_UIS
 set(arsnovawidgetplugin_UIS
   qplugin/emotediagramwidget.ui
   qplugin/logodiagramwidget.ui
-  qplugin/sessioninformationwidget.ui
 )
 
 ## Resources ##
