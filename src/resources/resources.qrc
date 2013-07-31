@@ -11,10 +11,10 @@
     <file>images/layer-visible-off.png</file>
     <file>images/layer-visible-on.png</file>
     <file>images/system-switch-user.png</file>
-    <file>images/view-fullscreen.png</file>
-    <file>images/view-restore.png</file>
     <file>images/background.png</file>
     <file>images/splash.png</file>
+    <file>fullscreen-disable.svg</file>
+    <file>fullscreen-enable.svg</file>
     <file>arsnova.svg</file>
     <file>arsnova-color.svg</file>
     <file>images/emotes/face-sad.svg</file>
