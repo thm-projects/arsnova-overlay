@@ -12,9 +12,6 @@ OverlayWidget::OverlayWidget ( SessionContext * context, QWidget * parent, Qt::W
       context ( context ) {
     ui->setupUi ( this );
 
-    this->setAttribute ( Qt::WA_TranslucentBackground );
-    this->setStyleSheet ( "background: rgba(128,128,128,16);" );
-
     this->latestUnderstandingResponses = 0;
     this->connectSignals();
     this->setMouseTracking ( true );
@@ -86,11 +83,13 @@ void OverlayWidget::moveToEdge ( int screen ) {
 
 void OverlayWidget::setVisibleViewType ( SessionContext::ViewType type ) {
     if ( !context->isValid() ) return;
+
+    this->setAttribute ( Qt::WA_TranslucentBackground, false );
+    this->setUpdatesEnabled ( false );
+
     switch ( type ) {
     case SessionContext::DIAGRAM_VIEW:
         ui->sessioninformationwidget->show();
-        //ui->menuWidget->show();
-
         ui->bardiagramwidget->show();
         ui->logodiagramwidget->hide();
         ui->emotediagramwidget->hide();
@@ -104,8 +103,6 @@ void OverlayWidget::setVisibleViewType ( SessionContext::ViewType type ) {
         break;
     case SessionContext::ICON_VIEW:
         ui->sessioninformationwidget->show();
-        //ui->menuWidget->show();
-
         ui->bardiagramwidget->hide();
         ui->logodiagramwidget->show();
         ui->emotediagramwidget->hide();
@@ -119,8 +116,6 @@ void OverlayWidget::setVisibleViewType ( SessionContext::ViewType type ) {
         break;
     case SessionContext::EMOTE_VIEW:
         ui->sessioninformationwidget->show();
-        //ui->menuWidget->show();
-
         ui->bardiagramwidget->hide();
         ui->logodiagramwidget->hide();
         ui->emotediagramwidget->show();
@@ -133,7 +128,11 @@ void OverlayWidget::setVisibleViewType ( SessionContext::ViewType type ) {
         );
         break;
     }
+
+    this->setUpdatesEnabled ( true );
     QWidget::show();
+    this->setAttribute ( Qt::WA_TranslucentBackground, true );
+    this->setStyleSheet ( "background: rgba(128,128,128,16);" );
 }
 
 void OverlayWidget::onSessionResponse ( SessionResponse response ) {
