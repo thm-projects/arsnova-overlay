@@ -19,6 +19,7 @@ Rectangle {
         anchors.fill: parent
         fillMode: Image.Tile
         source: "qrc:/images/images/background.png"
+        opacity: .3
     }
 
     Image {
@@ -75,61 +76,36 @@ Rectangle {
     Rectangle {
         id: rectangleCount
         x: 56
-        y: 14
-        width: 64
-        height: 16
-        color: "#20ffffff"
+        y: 10
+        width: 42
+        height: 22
+        color: "#ff606060"
         radius: 2
+        anchors.horizontalCenter: parent.horizontalCenter
         border.width: 1
-        border.color: "#40ffffff"
+        border.color: "#99ffffff"
 
         Text {
-            id: feedbackCountText
+            id: countText
             y: 0
-            width: 24
+            anchors.fill: parent
             color: "#ffffff"
-            text: feedbackCount.toString()
+            text: feedbackCount.toString() + "/" + userCount.toString()
             horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
             font.bold: true
-            anchors.left: parent.left
-            anchors.leftMargin: 4
             font.pixelSize: 14
         }
-
-        Rectangle {
-            id: rectangle1
-            x: 32
-            y: 0
-            width: 1
-            height: 16
-            color: "#40ffffff"
-        }
-
-        Text {
-            id: useCountText
-            x: 43
-            y: 0
-            width: 24
-            color: "#ffffff"
-            text: userCount.toString()
-            horizontalAlignment: Text.AlignHCenter
-            font.bold: true
-            anchors.right: parent.right
-            anchors.rightMargin: 4
-            font.pixelSize: 14
-        }
-
-
     }
 
     Image {
         id: closeButton
-        x: 130
+        x: 134
         y: 12
         width: 18
-        height: 19
+        height: 18
 
-        source: "qrc:/images/images/application-exit.png"
+        source: "qrc:/images/images/close.png"
 
         MouseArea {
             id: closeButtonMouseArea
