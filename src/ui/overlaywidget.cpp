@@ -12,8 +12,8 @@ OverlayWidget::OverlayWidget ( SessionContext * context, QWidget * parent, Qt::W
       context ( context ) {
     ui->setupUi ( this );
 
-    this->setAttribute(Qt::WA_TranslucentBackground);
-    this->setStyleSheet("background: rgba(128,128,128,16);");
+    this->setAttribute ( Qt::WA_TranslucentBackground );
+    this->setStyleSheet ( "background: rgba(128,128,128,16);" );
 
     this->latestUnderstandingResponses = 0;
     this->connectSignals();
@@ -27,7 +27,7 @@ void OverlayWidget::connectSignals() {
     connect ( this->connection, SIGNAL ( requestFinished ( LoggedInResponse ) ), this, SLOT ( onLoggedInResponse ( LoggedInResponse ) ) );
     connect ( this->connection, SIGNAL ( requestFinished ( AudienceQuestionCountResponse ) ), this, SLOT ( onAudienceQuestionCountResponse ( AudienceQuestionCountResponse ) ) );
     connect ( ui->actionMakeTransparent, SIGNAL ( triggered ( bool ) ), this, SLOT ( makeTransparent ( bool ) ) );
-    connect ( ui->actionExit, SIGNAL ( triggered ( bool ) ), this, SLOT ( close() ) );
+    connect ( ui->sessioninformationwidget, SIGNAL ( closeButtonClicked() ), this, SLOT ( close() ) );
     connect ( context, SIGNAL ( viewTypeChanged ( SessionContext::ViewType ) ), this, SLOT ( setVisibleViewType ( SessionContext::ViewType ) ) );
     connect ( Settings::instance().get(), SIGNAL ( settingsChanged() ), this, SLOT ( onSettingsChanged() ) );
 }

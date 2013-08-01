@@ -25,6 +25,12 @@ public:
 
 private:
     QDeclarativeItem * item;
+
+private slots:
+    void onCloseButtonClicked();
+
+signals:
+    void closeButtonClicked();
 };
 
 #endif // SESSIONINFORMATIONWIDGET_H

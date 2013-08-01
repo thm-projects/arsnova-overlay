@@ -1,8 +1,8 @@
 import QtQuick 1.1
 
 Rectangle {
-    id: rectangle2
-    width: 200
+    id: rectangleWidget
+    width: 160
     height: 42
     color: "#00000000"
     radius: 3
@@ -11,6 +11,8 @@ Rectangle {
     property int unreadMessages: 1
     property int userCount: 2
     property int feedbackCount: 3
+
+    signal closeButtonClick()
 
     Image {
         id: backgroundImage
@@ -72,7 +74,7 @@ Rectangle {
 
     Rectangle {
         id: rectangleCount
-        x: 66
+        x: 56
         y: 14
         width: 64
         height: 16
@@ -119,4 +121,24 @@ Rectangle {
 
 
     }
+
+    Image {
+        id: closeButton
+        x: 130
+        y: 12
+        width: 18
+        height: 19
+
+        source: "qrc:/images/images/application-exit.png"
+
+        MouseArea {
+            id: closeButtonMouseArea
+            anchors.fill: parent
+            onClicked: {
+                rectangleWidget.closeButtonClick()
+            }
+        }
+    }
+
+
 }

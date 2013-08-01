@@ -3,6 +3,8 @@
 SessionInformationWidget::SessionInformationWidget ( QWidget* parent, Qt::WindowFlags f ) {
     this->setSource ( QUrl ( "qrc:/qml/ui/sessioninformation.qml" ) );
     item = qobject_cast<QDeclarativeItem *> ( this->rootObject() );
+
+    connect ( item, SIGNAL ( closeButtonClick() ), this, SLOT ( onCloseButtonClicked() ) );
 }
 
 SessionInformationWidget::~SessionInformationWidget() {
@@ -28,4 +30,8 @@ void SessionInformationWidget::updateSessionLabel ( QString sessionName, QString
 
 void SessionInformationWidget::updateAudienceQuestionCount ( AudienceQuestionCountResponse response ) {
     item->setProperty ( "unreadMessages", response.unread() );
+}
+
+void SessionInformationWidget::onCloseButtonClicked() {
+  emit this->closeButtonClicked();
 }
