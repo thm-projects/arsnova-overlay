@@ -5,10 +5,19 @@ Rectangle {
     width: 200
     height: 42
     color: "#00000000"
+    radius: 3
+    smooth: true
 
     property int unreadMessages: 1
     property int userCount: 2
     property int feedbackCount: 3
+
+    Image {
+        id: backgroundImage
+        anchors.fill: parent
+        fillMode: Image.Tile
+        source: "qrc:/images/images/background.png"
+    }
 
     Image {
         id: image1
@@ -63,7 +72,7 @@ Rectangle {
 
     Rectangle {
         id: rectangleCount
-        x: 128
+        x: 66
         y: 14
         width: 64
         height: 16

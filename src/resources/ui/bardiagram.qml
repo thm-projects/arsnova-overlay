@@ -1,16 +1,16 @@
 import QtQuick 1.1
 
 Rectangle {
-    width: 180
-    height: 100
+    width: 120
+    height: 120
     color: "#00000000"
 
     Rectangle {
         id: okBar
         objectName: "okBar"
-        x: 20
-        y: 100 - height
-        width: 32
+        x: 6
+        y: 112 - height
+        width: 24
         height: 0
         gradient: Gradient {
             GradientStop {
@@ -30,9 +30,9 @@ Rectangle {
     Rectangle {
         id: toSlowBar
         objectName: "toSlowBar"
-        x: 56
-        y: 100 - height
-        width: 32
+        x: 34
+        y: 112 - height
+        width: 24
         height: 0
         gradient: Gradient {
             GradientStop {
@@ -52,9 +52,9 @@ Rectangle {
     Rectangle {
         id: toFastBar
         objectName: "toFastBar"
-        x: 92
-        y: 100 - height
-        width: 32
+        x: 62
+        y: 112 - height
+        width: 24
         height: 0
         gradient: Gradient {
             GradientStop {
@@ -74,9 +74,9 @@ Rectangle {
     Rectangle {
         id: awayBar
         objectName: "awayBar"
-        x: 128
-        y: 100 - height
-        width: 32
+        x: 90
+        y: 112 - height
+        width: 24
         height: 0
         gradient: Gradient {
             GradientStop {
@@ -95,9 +95,9 @@ Rectangle {
 
     Rectangle {
         id: baseline
-        x: 10
-        y: 99
-        width: 160
+        x: 4
+        y: 111
+        width: 112
         height: 1
         rotation: 0
         color: "#9e9e9e"

@@ -2,8 +2,8 @@
 
 #include "qrcodegenerator.h"
 
-const int OverlayWidget::ySize = 80;
-const int OverlayWidget::xSize = 180;
+const int OverlayWidget::ySize = 160;
+const int OverlayWidget::xSize = 160;
 
 OverlayWidget::OverlayWidget ( SessionContext * context, QWidget * parent, Qt::WindowFlags f )
     : QWidget ( parent, f ),
@@ -11,6 +11,10 @@ OverlayWidget::OverlayWidget ( SessionContext * context, QWidget * parent, Qt::W
       connection ( context->connection() ),
       context ( context ) {
     ui->setupUi ( this );
+
+    this->setAttribute(Qt::WA_TranslucentBackground);
+    this->setStyleSheet("background: rgba(128,128,128,16);");
+
     this->latestUnderstandingResponses = 0;
     this->connectSignals();
     this->setMouseTracking ( true );
@@ -85,7 +89,7 @@ void OverlayWidget::setVisibleViewType ( SessionContext::ViewType type ) {
     switch ( type ) {
     case SessionContext::DIAGRAM_VIEW:
         ui->sessioninformationwidget->show();
-        ui->menuWidget->show();
+        //ui->menuWidget->show();
 
         ui->bardiagramwidget->show();
         ui->logodiagramwidget->hide();
@@ -100,7 +104,7 @@ void OverlayWidget::setVisibleViewType ( SessionContext::ViewType type ) {
         break;
     case SessionContext::ICON_VIEW:
         ui->sessioninformationwidget->show();
-        ui->menuWidget->show();
+        //ui->menuWidget->show();
 
         ui->bardiagramwidget->hide();
         ui->logodiagramwidget->show();
@@ -115,7 +119,7 @@ void OverlayWidget::setVisibleViewType ( SessionContext::ViewType type ) {
         break;
     case SessionContext::EMOTE_VIEW:
         ui->sessioninformationwidget->show();
-        ui->menuWidget->show();
+        //ui->menuWidget->show();
 
         ui->bardiagramwidget->hide();
         ui->logodiagramwidget->hide();
@@ -156,7 +160,7 @@ void OverlayWidget::onLoggedInResponse ( LoggedInResponse response ) {
 }
 
 void OverlayWidget::onAudienceQuestionCountResponse ( AudienceQuestionCountResponse response ) {
-    ui->sessioninformationwidget->updateAudienceQuestionCount( response );
+    ui->sessioninformationwidget->updateAudienceQuestionCount ( response );
 }
 
 void OverlayWidget::onSettingsChanged() {
