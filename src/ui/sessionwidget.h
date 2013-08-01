@@ -23,6 +23,10 @@ public slots:
     void onSessionResponse ( SessionResponse response );
     void onItemClicked ( QTableWidgetItem * item );
     void onViewModeChanged();
+    
+    void onBarDiagramSelected();
+    void onLogoDiagramSelected();
+    void onEmoteDiagramSelected();
 
 signals:
     void sessionClicked ( QString sessionKey );

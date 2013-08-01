@@ -38,3 +38,8 @@ void LogoDiagramWidget::resizeEvent ( QResizeEvent* event ) {
     );
     QWidget::resizeEvent ( event );
 }
+
+void LogoDiagramWidget::mousePressEvent ( QMouseEvent* event ) {
+    QWidget::mousePressEvent ( event );
+    emit this->clicked();
+}
