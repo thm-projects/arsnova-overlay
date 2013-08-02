@@ -9,13 +9,17 @@ OverlayWidget::OverlayWidget ( SessionContext * context, QWidget * parent, Qt::W
     : QWidget ( parent, f ),
       ui ( new Ui::OverlayWidget() ),
       connection ( context->connection() ),
-      context ( context ) {
+      context ( context ) {  
     ui->setupUi ( this );
+    this->setAttribute(Qt::WA_MacNoShadow, true);
+    this->setAttribute ( Qt::WA_TranslucentBackground, true );
+    this->setStyleSheet ( "background: rgba(128,128,128,16);" );
+          
+    this->moveToEdge ( Settings::instance()->screen() );
 
     this->latestUnderstandingResponses = 0;
     this->connectSignals();
     this->setMouseTracking ( true );
-    this->moveToEdge ( Settings::instance()->screen() );
 }
 
 void OverlayWidget::connectSignals() {
@@ -25,7 +29,7 @@ void OverlayWidget::connectSignals() {
     connect ( this->connection, SIGNAL ( requestFinished ( AudienceQuestionCountResponse ) ), this, SLOT ( onAudienceQuestionCountResponse ( AudienceQuestionCountResponse ) ) );
     connect ( ui->actionMakeTransparent, SIGNAL ( triggered ( bool ) ), this, SLOT ( makeTransparent ( bool ) ) );
     connect ( ui->sessioninformationwidget, SIGNAL ( closeButtonClicked() ), this, SLOT ( close() ) );
-    connect ( context, SIGNAL ( viewTypeChanged ( SessionContext::ViewType ) ), this, SLOT ( setVisibleViewType ( SessionContext::ViewType ) ) );
+    connect ( context, SIGNAL ( viewTypeChanged ( SessionContext::ViewType ) ), this, SLOT ( show() ) );
     connect ( Settings::instance().get(), SIGNAL ( settingsChanged() ), this, SLOT ( onSettingsChanged() ) );
 }
 
@@ -84,9 +88,6 @@ void OverlayWidget::moveToEdge ( int screen ) {
 void OverlayWidget::setVisibleViewType ( SessionContext::ViewType type ) {
     if ( !context->isValid() ) return;
 
-    this->setAttribute ( Qt::WA_TranslucentBackground, false );
-    this->setUpdatesEnabled ( false );
-
     switch ( type ) {
     case SessionContext::DIAGRAM_VIEW:
         ui->sessioninformationwidget->show();
@@ -99,6 +100,7 @@ void OverlayWidget::setVisibleViewType ( SessionContext::ViewType type ) {
             | Qt::FramelessWindowHint
             | Qt::WindowStaysOnTopHint
             | Qt::X11BypassWindowManagerHint
+            | Qt::SplashScreen
         );
         break;
     case SessionContext::ICON_VIEW:
@@ -112,6 +114,7 @@ void OverlayWidget::setVisibleViewType ( SessionContext::ViewType type ) {
             | Qt::FramelessWindowHint
             | Qt::WindowStaysOnTopHint
             | Qt::X11BypassWindowManagerHint
+                              | Qt::SplashScreen
         );
         break;
     case SessionContext::EMOTE_VIEW:
@@ -125,14 +128,10 @@ void OverlayWidget::setVisibleViewType ( SessionContext::ViewType type ) {
             | Qt::FramelessWindowHint
             | Qt::WindowStaysOnTopHint
             | Qt::X11BypassWindowManagerHint
+                              | Qt::SplashScreen
         );
         break;
     }
-
-    this->setUpdatesEnabled ( true );
-    QWidget::show();
-    this->setAttribute ( Qt::WA_TranslucentBackground, true );
-    this->setStyleSheet ( "background: rgba(128,128,128,16);" );
 }
 
 void OverlayWidget::onSessionResponse ( SessionResponse response ) {
@@ -151,6 +150,8 @@ void OverlayWidget::onFeedbackResponse ( FeedbackResponse response ) {
     ui->bardiagramwidget->updateFromResponse ( response );
     ui->logodiagramwidget->updateFromResponse ( response );
     ui->emotediagramwidget->updateFromResponse ( response );
+    
+    this->repaint();
 }
 
 void OverlayWidget::onLoggedInResponse ( LoggedInResponse response ) {
@@ -160,6 +161,7 @@ void OverlayWidget::onLoggedInResponse ( LoggedInResponse response ) {
 
 void OverlayWidget::onAudienceQuestionCountResponse ( AudienceQuestionCountResponse response ) {
     ui->sessioninformationwidget->updateAudienceQuestionCount ( response );
+    this->repaint();
 }
 
 void OverlayWidget::onSettingsChanged() {

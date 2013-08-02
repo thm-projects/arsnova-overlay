@@ -27,7 +27,6 @@ public:
      * @return User interface
      */
     const Ui::OverlayWidget * const getUi();
-    virtual void show();
 
 private:
     Ui::OverlayWidget * ui;
@@ -43,8 +42,10 @@ private:
     static const int xSize;
     void moveToEdge ( int screen = -1 );
     void connectSignals();
+    void setVisibleViewType ( SessionContext::ViewType type );
 
 public slots:
+    virtual void show();
     bool close();
     void onSessionResponse ( SessionResponse response );
     void onFeedbackResponse ( FeedbackResponse response );
@@ -54,7 +55,6 @@ public slots:
 
 private slots:
     void makeTransparent ( bool enabled );
-    void setVisibleViewType ( SessionContext::ViewType type );
 };
 
 #endif // OVERLAYWIDGET_H
