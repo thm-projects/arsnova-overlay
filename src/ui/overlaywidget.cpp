@@ -9,12 +9,12 @@ OverlayWidget::OverlayWidget ( SessionContext * context, QWidget * parent, Qt::W
     : QWidget ( parent, f ),
       ui ( new Ui::OverlayWidget() ),
       connection ( context->connection() ),
-      context ( context ) {  
+      context ( context ) {
     ui->setupUi ( this );
-    this->setAttribute(Qt::WA_MacNoShadow, true);
+    this->setAttribute ( Qt::WA_MacNoShadow, true );
     this->setAttribute ( Qt::WA_TranslucentBackground, true );
     this->setStyleSheet ( "background: rgba(128,128,128,16);" );
-          
+
     this->moveToEdge ( Settings::instance()->screen() );
 
     this->latestUnderstandingResponses = 0;
@@ -100,7 +100,6 @@ void OverlayWidget::setVisibleViewType ( SessionContext::ViewType type ) {
             | Qt::FramelessWindowHint
             | Qt::WindowStaysOnTopHint
             | Qt::X11BypassWindowManagerHint
-            | Qt::SplashScreen
         );
         break;
     case SessionContext::ICON_VIEW:
@@ -114,7 +113,6 @@ void OverlayWidget::setVisibleViewType ( SessionContext::ViewType type ) {
             | Qt::FramelessWindowHint
             | Qt::WindowStaysOnTopHint
             | Qt::X11BypassWindowManagerHint
-                              | Qt::SplashScreen
         );
         break;
     case SessionContext::EMOTE_VIEW:
@@ -128,7 +126,6 @@ void OverlayWidget::setVisibleViewType ( SessionContext::ViewType type ) {
             | Qt::FramelessWindowHint
             | Qt::WindowStaysOnTopHint
             | Qt::X11BypassWindowManagerHint
-                              | Qt::SplashScreen
         );
         break;
     }
@@ -150,7 +147,7 @@ void OverlayWidget::onFeedbackResponse ( FeedbackResponse response ) {
     ui->bardiagramwidget->updateFromResponse ( response );
     ui->logodiagramwidget->updateFromResponse ( response );
     ui->emotediagramwidget->updateFromResponse ( response );
-    
+
     this->repaint();
 }
 
