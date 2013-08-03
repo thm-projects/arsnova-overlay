@@ -28,12 +28,14 @@
        </property>
        <property name="icon">
         <iconset resource="../resources/resources.qrc">
-         <normaloff>:/images/fullscreen-enable.svg</normaloff>
-         <normalon>:/images/fullscreen-disable.svg</normalon>
-         <disabledoff>:/images/fullscreen-enable.svg</disabledoff>
-         <disabledon>:/images/fullscreen-disable.svg</disabledon>
-         <activeon>:/images/fullscreen-disable.svg</activeon>
-         <selectedon>:/images/fullscreen-disable.svg</selectedon>:/images/fullscreen-enable.svg</iconset>
+         <normaloff>:/images/images/fullscreen-enable.png</normaloff>
+         <normalon>:/images/images/fullscreen-disable.png</normalon>
+         <disabledoff>:/images/images/fullscreen-enable.png</disabledoff>
+         <disabledon>:/images/images/fullscreen-disable.png</disabledon>
+         <activeoff>:/images/images/fullscreen-enable.png</activeoff>
+         <activeon>:/images/images/fullscreen-disable.png</activeon>
+         <selectedoff>:/images/images/fullscreen-enable.png</selectedoff>
+         <selectedon>:/images/images/fullscreen-disable.png</selectedon>:/images/images/fullscreen-enable.png</iconset>
        </property>
        <property name="iconSize">
         <size>
