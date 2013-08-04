@@ -27,7 +27,6 @@ void OverlayWidget::connectSignals() {
     connect ( this->connection, SIGNAL ( requestFinished ( FeedbackResponse ) ), this, SLOT ( onFeedbackResponse ( FeedbackResponse ) ) );
     connect ( this->connection, SIGNAL ( requestFinished ( LoggedInResponse ) ), this, SLOT ( onLoggedInResponse ( LoggedInResponse ) ) );
     connect ( this->connection, SIGNAL ( requestFinished ( AudienceQuestionCountResponse ) ), this, SLOT ( onAudienceQuestionCountResponse ( AudienceQuestionCountResponse ) ) );
-    connect ( ui->actionMakeTransparent, SIGNAL ( triggered ( bool ) ), this, SLOT ( makeTransparent ( bool ) ) );
     connect ( ui->sessioninformationwidget, SIGNAL ( closeButtonClicked() ), this, SLOT ( close() ) );
     connect ( context, SIGNAL ( viewTypeChanged ( SessionContext::ViewType ) ), this, SLOT ( show() ) );
     connect ( Settings::instance().get(), SIGNAL ( settingsChanged() ), this, SLOT ( onSettingsChanged() ) );
@@ -138,7 +137,6 @@ void OverlayWidget::onSessionResponse ( SessionResponse response ) {
         ui->sessioninformationwidget->updateSessionLabel ( response.shortName(), response.sessionId() );
         return;
     }
-    this->makeTransparent ( false );
 }
 
 void OverlayWidget::onFeedbackResponse ( FeedbackResponse response ) {
@@ -163,13 +161,4 @@ void OverlayWidget::onAudienceQuestionCountResponse ( AudienceQuestionCountRespo
 
 void OverlayWidget::onSettingsChanged() {
     this->moveToEdge ( Settings::instance()->screen() );
-}
-
-void OverlayWidget::makeTransparent ( bool enabled ) {
-    ui->actionMakeTransparent->setChecked ( enabled );
-    if ( enabled ) {
-        this->setWindowOpacity ( .5 );
-        return;
-    }
-    this->setWindowOpacity ( 1 );
 }

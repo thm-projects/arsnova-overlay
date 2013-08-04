@@ -30,8 +30,6 @@ private slots:
     void testShouldDisplayCorrectCountString();
     void testShouldSwitchToLogoDiagram();
     void testShouldSwitchToBarDiagram();
-    void testShouldBeOpaque();
-    void testShouldNotBeOpaque();
 };
 
 #endif // OVERLAYWIDGETTEST_H
