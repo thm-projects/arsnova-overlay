@@ -43,13 +43,3 @@ void OverlayWidgetTest::testShouldSwitchToBarDiagram() {
     QVERIFY ( this->overlayWidget->getUi()->bardiagramwidget->isVisible() );
     QVERIFY ( ! this->overlayWidget->getUi()->logodiagramwidget->isVisible() );
 }
-
-void OverlayWidgetTest::testShouldBeOpaque() {
-    this->overlayWidget->getUi()->actionMakeTransparent->trigger();
-    QVERIFY ( this->overlayWidget->windowOpacity() < 1.0 );
-}
-
-void OverlayWidgetTest::testShouldNotBeOpaque() {
-    this->overlayWidget->getUi()->actionMakeTransparent->trigger();
-    QVERIFY ( this->overlayWidget->windowOpacity() == 1.0 );
-}

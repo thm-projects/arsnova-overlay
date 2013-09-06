@@ -52,9 +52,6 @@ public slots:
     void onLoggedInResponse ( LoggedInResponse response );
     void onAudienceQuestionCountResponse ( AudienceQuestionCountResponse response );
     void onSettingsChanged();
-
-private slots:
-    void makeTransparent ( bool enabled );
 };
 
 #endif // OVERLAYWIDGET_H
