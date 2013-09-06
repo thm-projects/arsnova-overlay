@@ -126,19 +126,19 @@ qt4_wrap_ui(arsnovawidgetplugin_UIS_H ${arsnovawidgetplugin_UIS})
 
 IF( WIN32 AND MINGW )
   # To cross compile on Linux use: 'i686-w64-mingw32-windres' or similar command shipped with mingw cross compiler.
-  # Change resources/arsnovawidgeticon.rc to use the correct path seperator depending on used plattform.
-  ADD_CUSTOM_COMMAND( OUTPUT arsnovawidgeticon.rc.obj
-    COMMAND i686-w64-mingw32-windres -I${CMAKE_CURRENT_SOURCE_DIR} -i${CMAKE_CURRENT_SOURCE_DIR}/resources/arsnovawidgeticon.rc 
-	-o arsnovawidgeticon.rc.obj
+  # Change resources/arsnovaoverlayicon.rc to use the correct path seperator depending on used plattform.
+  ADD_CUSTOM_COMMAND( OUTPUT arsnovaoverlayicon.rc.obj
+    COMMAND i686-w64-mingw32-windres -I${CMAKE_CURRENT_SOURCE_DIR} -i${CMAKE_CURRENT_SOURCE_DIR}/resources/arsnovaoverlayicon.rc 
+	-o arsnovaoverlayicon.rc.obj
   )
-  SET(arsnovawidget_SRCS ${arsnovawidget_SRCS} ${CMAKE_CURRENT_BINARY_DIR}/arsnovawidgeticon.rc.obj)
+  SET(arsnovawidget_SRCS ${arsnovawidget_SRCS} ${CMAKE_CURRENT_BINARY_DIR}/arsnovaoverlayicon.rc.obj)
 ENDIF( WIN32 AND MINGW )
 
 IF( WIN32 AND NOT MINGW )
-  SET(arsnovawidget_SRCS ${arsnovawidget_SRCS} arsnovawidgeticon.rc)
+  SET(arsnovawidget_SRCS ${arsnovawidget_SRCS} arsnovaoverlayicon.rc)
 ENDIF( WIN32 AND NOT MINGW )
 
-add_executable(arsnovadesktop MACOSX_BUNDLE WIN32
+add_executable(arsnovaoverlay MACOSX_BUNDLE WIN32
   ${arsnovawidget_SRCS}
   ${arsnovawidget_UIS_H}
   ${resources_RCC_SRCS}
@@ -152,7 +152,7 @@ if(QTPLUGIN)
   )
 endif(QTPLUGIN)
 
-target_link_libraries(arsnovadesktop
+target_link_libraries(arsnovaoverlay
   ${QT_QTCORE_LIBRARY}
   ${QT_QTGUI_LIBRARY}
   ${QT_QTNETWORK_LIBRARY}
@@ -178,18 +178,18 @@ IF(APPLE)
       \"\${CMAKE_INSTALL_PREFIX}/../..\"
     )"
   )
-  INSTALL(CODE "EXECUTE_PROCESS(COMMAND macdeployqt ./bin/arsnovadesktop.app)")
-  INSTALL(TARGETS arsnovadesktop BUNDLE DESTINATION ../../../)
+  INSTALL(CODE "EXECUTE_PROCESS(COMMAND macdeployqt ./bin/arsnovaoverlay.app)")
+  INSTALL(TARGETS arsnovaoverlay BUNDLE DESTINATION ../../../)
 ENDIF(APPLE)
 
 IF (UNIX AND NOT APPLE)
-  INSTALL(TARGETS arsnovadesktop
+  INSTALL(TARGETS arsnovaoverlay
     RUNTIME DESTINATION bin
   )
 ENDIF (UNIX AND NOT APPLE)
 
 IF (WIN32)
-  INSTALL(TARGETS arsnovadesktop
+  INSTALL(TARGETS arsnovaoverlay
     RUNTIME DESTINATION .
   )
 ENDIF (WIN32)

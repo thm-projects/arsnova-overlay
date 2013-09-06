@@ -316,13 +316,13 @@
      inkscape:pageshadow="2"
      inkscape:zoom="2"
      inkscape:cx="140.85232"
-     inkscape:cy="69.720058"
+     inkscape:cy="69.970058"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
      width="480px"
      inkscape:window-width="1920"
-     inkscape:window-height="1028"
+     inkscape:window-height="1025"
      inkscape:window-x="-8"
      inkscape:window-y="-4"
      inkscape:window-maximized="1" />
@@ -334,7 +334,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -488,7 +488,7 @@
     </g>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Latin Modern Sans Demi Cond;-inkscape-font-specification:Latin Modern Sans Demi Cond Semi-Bold;filter:url(#filter4091)"
+       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;filter:url(#filter4091);font-family:Latin Modern Sans Demi Cond;-inkscape-font-specification:Latin Modern Sans Demi Cond Semi-Bold"
        x="71.378906"
        y="962.578"
        id="text3198-6-8"
@@ -502,18 +502,18 @@
          y="962.578"
          style="font-size:28px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:-2px;writing-mode:lr-tb;text-anchor:start;fill:#80ba24;fill-opacity:1;font-family:Cantarell;-inkscape-font-specification:Cantarell"
          dx="0"
-         rotate="0 0 0 0 0 0 0 0"><tspan
+         rotate="0 0 0 0 0 0 0"><tspan
            style="font-weight:normal;fill:#aedb5e;fill-opacity:1;-inkscape-font-specification:Cantarell"
            id="tspan4035">ARSnov<tspan
-   style="word-spacing:0px;font-weight:normal;-inkscape-font-specification:Cantarell"
+   style="font-weight:normal;word-spacing:0px;-inkscape-font-specification:Cantarell"
    id="tspan4037"
-   dx="0">a</tspan></tspan><tspan
+   dx="0">a </tspan></tspan><tspan
            style="font-size:28px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:-2px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;font-family:Cantarell;-inkscape-font-specification:Cantarell"
            id="tspan3097"
            rotate="0 0 0 0 0 0 0 0"
-           dx="0.029999999 0"><tspan
-   style="word-spacing:0px"
-   id="tspan4039">D</tspan>esktop</tspan></tspan></text>
+           dx="0 0 0 0 0 0 0"><tspan
+             style="word-spacing:0px"
+             id="tspan4039">Overlay</tspan></tspan></tspan></text>
     <text
        xml:space="preserve"
        style="font-size:40px;font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Latin Modern Sans Demi Cond;-inkscape-font-specification:Latin Modern Sans Demi Cond Semi-Bold"

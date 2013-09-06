@@ -2,8 +2,8 @@
 X-SuSE-translate=true
 Categories=
 Encoding=UTF-8
-Name=ARSnovaDesktop
-GenericName=ARSnovaDesktop
+Name=ARSnova Overlay
+GenericName=ARSnova Overlay
 Type=Application
-Exec=arsnovadesktop
+Exec=arsnovaoverlay
 Icon=arsnova

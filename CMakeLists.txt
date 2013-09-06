@@ -1,4 +1,4 @@
-project(arsnovadesktop)
+project(arsnovaoverlay)
 cmake_minimum_required(VERSION 2.6)
 find_package(Qt4 REQUIRED)
 
@@ -23,7 +23,7 @@ else(BUILD_NUMBER)
   endif()
 endif()
 
-message ("Start build configuration for ARSnovaDesktop ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH} ...")
+message ("Start build configuration for ARSnova Overlay ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH} ...")
 message ("use 'cmake -i' to run CMake in interactive mode")
 message ("or use:")
 message ("  -DTESTS=(ON|OFF)    to build test application")
@@ -52,7 +52,7 @@ if (DOXYGEN_EXECUTABLE)
 endif()
 
 set(DESKTOP
-  src/resources/arsnovawidget.desktop
+  src/resources/arsnovaoverlay.desktop
 )
 
 set(ICONS
@@ -147,7 +147,7 @@ ENDIF (WIN32)
 # CPACK
 INCLUDE(InstallRequiredSystemLibraries)
 SET(CPACK_RESOURCE_FILE_LICENSE "COPYING")
-SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "ARSnovaDesktop is a small widget to display information taken from arsnova.thm.de")
+SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "ARSnova Overlay is a small widget to display information taken from arsnova.thm.de")
 SET(CPACK_PACKAGE_VENDOR "Paul-Christian Volkmer <paul-christian.volkmer@mni.thm.de>")
 SET(CPACK_PACKAGE_CONTACT "Paul-Christian Volkmer <paul-christian.volkmer@mni.thm.de>")
 SET(CPACK_PACKAGE_VERSION_MAJOR ${VERSION_MAJOR})
@@ -171,10 +171,10 @@ IF (UNIX AND NOT APPLE)
   SET(CPACK_RPM_PACKAGE_LICENSE "GPLv3")
   SET(
     CPACK_RPM_PACKAGE_DESCRIPTION
-    "ARSnovaDesktop is a small widget to display information taken from arsnova.thm.de."
+    "ARSnova Overlay is a small widget to display information taken from arsnova.thm.de."
   )
   #SET(CPACK_RPM_CHANGELOG_FILE ${CMAKE_CURRENT_BINARY_DIR}/CHANGES)
-  SET(CPACK_STRIP_FILES  ${CMAKE_CURRENT_BINARY_DIR}/bin/arsnovadesktop)
+  SET(CPACK_STRIP_FILES  ${CMAKE_CURRENT_BINARY_DIR}/bin/arsnovaoverlay)
 ENDIF (UNIX AND NOT APPLE)
 
 IF (WIN32)
@@ -182,19 +182,19 @@ IF (WIN32)
   SET(CPACK_SYSTEM_NAME "win32")
   SET(CPACK_RESOURCE_FILE_LICENSE ${CMAKE_CURRENT_BINARY_DIR}/COPYING)
   SET(CPACK_NSIS_MODIFY_PATH ON)
-  SET(CPACK_NSIS_PACKAGE_NAME "ARSnovaDesktop")
-  SET(CPACK_NSIS_DISPLAY_NAME "ARSnovaDesktop")
+  SET(CPACK_NSIS_PACKAGE_NAME "ARSnova Overlay")
+  SET(CPACK_NSIS_DISPLAY_NAME "ARSnova Overlay")
   SET(CPACK_NSIS_CONTACT "${CPACK_PACKAGE_VENDOR}")
-  SET(CPACK_PACKAGE_EXECUTABLES  ..\\\\arsnovadesktop;ARSnovaDesktop)
-  SET(CPACK_CREATE_DESKTOP_LINKS ..\\\\arsnovadesktop)
-  SET(CPACK_PACKAGE_INSTALL_DIRECTORY ARSnovaDesktop)
-  SET(CPACK_STRIP_FILES  ${CMAKE_CURRENT_BINARY_DIR}/bin/arsnovadesktop.exe)
+  SET(CPACK_PACKAGE_EXECUTABLES  ..\\\\arsnovaoverlay;ARSnova Overlay)
+  SET(CPACK_CREATE_DESKTOP_LINKS ..\\\\arsnovaoverlay)
+  SET(CPACK_PACKAGE_INSTALL_DIRECTORY ARSnova Overlay)
+  SET(CPACK_STRIP_FILES  ${CMAKE_CURRENT_BINARY_DIR}/bin/arsnovaoverlay.exe)
 ENDIF (WIN32)
 
 IF (APPLE)
   SET(CPACK_GENERATOR  "Bundle")
-  SET(CPACK_BUNDLE_NAME "ARSnovaDesktop")
+  SET(CPACK_BUNDLE_NAME "ARSnova Overlay")
   SET(CPACK_BUNDLE_PLIST ${CMAKE_CURRENT_BINARY_DIR}/Info.plist)
-  SET(CPACK_BUNDLE_ICON ${CMAKE_CURRENT_BINARY_DIR}/src/resources/images/arsnovawidget.icns)
+  SET(CPACK_BUNDLE_ICON ${CMAKE_CURRENT_BINARY_DIR}/src/resources/images/arsnovaoverlay.icns)
 ENDIF (APPLE)
 INCLUDE(CPack)
