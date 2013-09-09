@@ -64,6 +64,8 @@ void SessionWidget::onItemClicked ( QTableWidgetItem * item ) {
 }
 
 void SessionWidget::onViewModeChanged() {
+    if ( ! context->isValid() ) return;
+
     if ( _ui->diagramRadioButton->isChecked() ) {
         context->setViewType ( SessionContext::DIAGRAM_VIEW );
     } else if ( _ui->iconRadioButton->isChecked() ) {
