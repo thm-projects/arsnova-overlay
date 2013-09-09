@@ -19,6 +19,11 @@ public:
 
 private:
     QDeclarativeItem * item;
+    
+    void mousePressEvent(QMouseEvent * event);
+    
+signals:
+    void clicked(bool checked = false);
 };
 
 #endif // BARDIAGRAMWIDGET_H

@@ -27,7 +27,6 @@ public:
      * @return User interface
      */
     const Ui::OverlayWidget * const getUi();
-    virtual void show();
 
 private:
     Ui::OverlayWidget * ui;
@@ -39,23 +38,20 @@ private:
     QRCodeWidget * qrcodewidget;
     SessionContext * context;
 
-    static const int httpUpdateInterval;
     static const int ySize;
     static const int xSize;
     void moveToEdge ( int screen = -1 );
     void connectSignals();
+    void setVisibleViewType ( SessionContext::ViewType type );
 
 public slots:
+    virtual void show();
     bool close();
     void onSessionResponse ( SessionResponse response );
     void onFeedbackResponse ( FeedbackResponse response );
     void onLoggedInResponse ( LoggedInResponse response );
+    void onAudienceQuestionCountResponse ( AudienceQuestionCountResponse response );
     void onSettingsChanged();
-
-private slots:
-    void updateHttpResponse ( int ticks );
-    void makeTransparent ( bool enabled );
-    void setVisibleViewType ( SessionContext::ViewType type );
 };
 
 #endif // OVERLAYWIDGET_H

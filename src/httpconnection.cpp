@@ -46,6 +46,16 @@ void HttpConnection::requestFeedback() {
     );
 }
 
+void HttpConnection::requestAudienceQuestionsCount() {
+    this->networkAccessManager->get (
+        this->createRequest (
+            QUrl (
+                Settings::instance()->serverUrl().toString() + "/audiencequestion/?sessionkey=" + sessionKey
+            )
+        )
+    );
+}
+
 bool HttpConnection::isRedirect ( QNetworkReply* reply ) {
     for ( QNetworkReply::RawHeaderPair header : reply->rawHeaderPairs().toStdList() ) {
         if ( header.first == "Location" ) {
@@ -111,6 +121,23 @@ void HttpConnection::handleReply ( QNetworkReply * reply ) {
         QString shortName = responseValue->property ( "shortName" ).toString();
         QString name = responseValue->property ( "name" ).toString();
         emit this->requestFinished ( SessionResponse ( sessionKey, shortName, name ) );
+    } else if ( reply->url().path().contains ( "/audiencequestion" ) ) {
+        if ( ! responseValue->isArray() ) {
+            return;
+        }
+        int read = 0;
+        int unread = 0;
+
+        for ( int i = 0; i < responseValue->toVariant().toList().size(); i++ ) {
+            if ( ! responseValue->property ( i ).property ( "read" ).isBool() ) continue;
+
+            if ( responseValue->property ( i ).property ( "read" ).toBool() ) {
+                read++;
+            } else {
+                unread++;
+            }
+        }
+        emit this->requestFinished ( AudienceQuestionCountResponse ( read, unread, read+unread ) );
     }
 }
 

@@ -1,31 +1,37 @@
 #include "sessioninformationwidget.h"
 
-SessionInformationWidget::SessionInformationWidget ( QWidget* parent, Qt::WindowFlags f )
-    : QWidget ( parent ), _ui ( new Ui::SessionInformationWidget ) {
-    _ui->setupUi ( this );
+SessionInformationWidget::SessionInformationWidget ( QWidget* parent, Qt::WindowFlags f ) {
+    this->setSource ( QUrl ( "qrc:/qml/ui/sessioninformation.qml" ) );
+    item = qobject_cast<QDeclarativeItem *> ( this->rootObject() );
+
+    connect ( item, SIGNAL ( closeButtonClick() ), this, SLOT ( onCloseButtonClicked() ) );
 }
 
 SessionInformationWidget::~SessionInformationWidget() {
-    delete _ui;
+    delete item;
 }
 
-const Ui::SessionInformationWidget*const SessionInformationWidget::getUi() {
-    return _ui;
+QGraphicsScene * const SessionInformationWidget::getUi() {
+    return item->scene();
 }
 
 void SessionInformationWidget::updateCounterLabel ( int feedback, int onlineUsers ) {
-    _ui->onlineUsersLabel->setText (
-        QString ( "(" ) + QString::number ( feedback, 10 )
-        + "/"
-        + QString::number ( onlineUsers, 10 ) + ")"
-    );
+    item->setProperty ( "feedbackCount", feedback );
+    item->setProperty ( "userCount", onlineUsers );
 }
 
 void SessionInformationWidget::updateProgressBar ( int value, int max ) {
-    _ui->progressBar->setMaximum ( max );
-    _ui->progressBar->setValue ( value );
+
 }
 
 void SessionInformationWidget::updateSessionLabel ( QString sessionName, QString sessionID ) {
-    _ui->sessionNameLabel->setText ( sessionID );
+
+}
+
+void SessionInformationWidget::updateAudienceQuestionCount ( AudienceQuestionCountResponse response ) {
+    item->setProperty ( "unreadMessages", response.unread() );
+}
+
+void SessionInformationWidget::onCloseButtonClicked() {
+  emit this->closeButtonClicked();
 }

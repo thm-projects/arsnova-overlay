@@ -1,6 +1,6 @@
 # required metadata
-sonar.projectKey=de.thm.arsnova:ARSnovaDesktop
-sonar.projectName=ARSnovaDesktop
+sonar.projectKey=de.thm.arsnova:arsnova-overlay
+sonar.projectName=ARSnova Overlay
 sonar.projectVersion=@VERSION_SHORT@
   
 # path to source directories (required)
@@ -16,7 +16,7 @@ sonar.cxx.valgrind.reportPath=*Test.memcheck
 sonar.cxx.cppcheck.reportPath=cppcheck.xml
 sonar.cxx.cppncss.reportPath=cppncss.xml
   
-sonar.scm.url=scm:git:git://scm.thm.de/arsnova/arsnovadesktop.git
+sonar.scm.url=scm:git:git://scm.thm.de/arsnova/arsnovaoverlay.git
 
 # exclude qt created files
 sonar.exclusions=**/ui_*.h

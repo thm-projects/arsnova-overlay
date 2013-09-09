@@ -2,20 +2,20 @@
  *   Copyright (C) 2012  Paul-Christian Volkmer
  *   <paul-christian.volkmer@mni.thm.de>
  *
- *   This file is part of ARSnovaDesktop.
+ *   This file is part of ARSnova Overlay.
  *
- *   ARSnovaDesktop is free software: you can redistribute it and/or modify
+ *   ARSnova Overlay is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
  *   the Free Software Foundation, either version 3 of the License, or
  *   (at your option) any later version.
  *
- *   ARSnovaDesktop is distributed in the hope that it will be useful,
+ *   ARSnova Overlay is distributed in the hope that it will be useful,
  *   but WITHOUT ANY WARRANTY; without even the implied warranty of
  *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *   GNU General Public License for more details.
  *
  *   You should have received a copy of the GNU General Public License
- *   along with ARSnovaDesktop.  If not, see <http://www.gnu.org/licenses/>.
+ *   along with ARSnova Overlay.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 /*************************************************************
@@ -28,10 +28,10 @@
  * @mainpage General Information
  *
  * @section description Description
- * ARSnovaDesktop is a small widget to display information taken from ars.thm.de
+ * ARSnova Overlay is a small widget to display information taken from ars.thm.de
  *
  * @section usage Usage
- * You should be able to run ARSnovaDesktop from desktop. It starts with a simple
+ * You should be able to run ARSnova Overlay from desktop. It starts with a simple
  * graphical user interface which allows to enter a ARSnova session key.
  *
  * After entering a valid key, the application will show some information about
@@ -41,10 +41,10 @@
  *
  * @section moreinfo More information
  *
- * To get information about how to build ARSnovaDesktop, take a look at the
+ * To get information about how to build ARSnova Overlay, take a look at the
  * @link build build instructions @endlink.
  *
- * ARSnovaDesktop uses unit testing. Make shoure you have read the
+ * ARSnova Overlay uses unit testing. Make shoure you have read the
  * @link testing testing instruction @endlink on how to use unit testing.
  *
  * @page build Build instructions
@@ -75,7 +75,7 @@
  * and the installation package will be created in base folder.
  *
  * @page testing Testing instructions
- * ARSnovaDesktop uses unit tests to ensure a higher quality of the resulting software.
+ * ARSnova Overlay uses unit tests to ensure a higher quality of the resulting software.
  * To ensure not to break any existing unit tests (which at most will result in
  * software bugs) your are REQUIRED to write your own tests for new code you provide.
  *

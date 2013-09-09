@@ -14,6 +14,10 @@ SessionWidget::SessionWidget ( SessionContext * context, QWidget * parent, Qt::W
     connect ( _ui->diagramRadioButton, SIGNAL ( clicked ( bool ) ), this, SLOT ( onViewModeChanged() ) );
     connect ( _ui->iconRadioButton, SIGNAL ( clicked ( bool ) ), this, SLOT ( onViewModeChanged() ) );
     connect ( _ui->emoteRadioButton, SIGNAL ( clicked ( bool ) ), this, SLOT ( onViewModeChanged() ) );
+
+    connect ( _ui->bardiagramwidget, SIGNAL ( clicked ( bool ) ), this, SLOT ( onBarDiagramSelected() ) );
+    connect ( _ui->logodiagramwidget, SIGNAL ( clicked ( bool ) ), this, SLOT ( onLogoDiagramSelected() ) );
+    connect ( _ui->emotediagramwidget, SIGNAL ( clicked ( bool ) ), this, SLOT ( onEmoteDiagramSelected() ) );
 }
 
 SessionWidget::~SessionWidget() {
@@ -60,6 +64,8 @@ void SessionWidget::onItemClicked ( QTableWidgetItem * item ) {
 }
 
 void SessionWidget::onViewModeChanged() {
+    if ( ! context->isValid() ) return;
+
     if ( _ui->diagramRadioButton->isChecked() ) {
         context->setViewType ( SessionContext::DIAGRAM_VIEW );
     } else if ( _ui->iconRadioButton->isChecked() ) {
@@ -67,4 +73,19 @@ void SessionWidget::onViewModeChanged() {
     } else if ( _ui->emoteRadioButton->isChecked() ) {
         context->setViewType ( SessionContext::EMOTE_VIEW );
     }
+}
+
+void SessionWidget::onBarDiagramSelected() {
+    _ui->diagramRadioButton->setChecked ( true );
+    this->onViewModeChanged();
+}
+
+void SessionWidget::onLogoDiagramSelected() {
+    _ui->iconRadioButton->setChecked ( true );
+    this->onViewModeChanged();
+}
+
+void SessionWidget::onEmoteDiagramSelected() {
+    _ui->emoteRadioButton->setChecked ( true );
+    this->onViewModeChanged();
 }

@@ -18,10 +18,6 @@ private:
 private slots:
     void initTestCase();
     void cleanupTestCase();
-
-    void testShouldDisplayCorrectSessionName();
-    void testShouldDisplayCorrectProgressBar();
-    void testShouldDisplayCorrectUserAndFeedbackCount();
 };
 
 #endif // SESSIONINFORMATIONWIDGETTEST_H

@@ -11,7 +11,7 @@ LoginWidget::LoginWidget ( QWidget* parent, Qt::WindowFlags f ) {
     if ( dItem != nullptr ) {
         dItem->setProperty (
             "text",
-            QString ( "ARSnovaDesktop" )
+            QString ( "ARSnova Overlay" )
             + " " + VERSION_MAJOR
             + "." + VERSION_MINOR
             + "." + VERSION_PATCH );

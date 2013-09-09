@@ -17,16 +17,16 @@ public:
 private:
     LoginWidget * loginWidget;
 
-    void mouseClick(QGraphicsScene * scene, Qt::MouseButton button, QPoint position) {
-        QGraphicsSceneMouseEvent pressEvent(QEvent::GraphicsSceneMousePress);
-        pressEvent.setScenePos(position);
-        pressEvent.setButton(button);
-        QApplication::sendEvent(scene, &pressEvent);
+    void mouseClick ( QGraphicsScene * scene, Qt::MouseButton button, QPoint position ) {
+        QGraphicsSceneMouseEvent pressEvent ( QEvent::GraphicsSceneMousePress );
+        pressEvent.setScenePos ( position );
+        pressEvent.setButton ( button );
+        QApplication::sendEvent ( scene, &pressEvent );
 
-        QGraphicsSceneMouseEvent releaseEvent(QEvent::GraphicsSceneMouseRelease);
-        releaseEvent.setScenePos(position);
-        releaseEvent.setButton(button);
-        QApplication::sendEvent(scene, &releaseEvent);
+        QGraphicsSceneMouseEvent releaseEvent ( QEvent::GraphicsSceneMouseRelease );
+        releaseEvent.setScenePos ( position );
+        releaseEvent.setButton ( button );
+        QApplication::sendEvent ( scene, &releaseEvent );
     }
 
 private slots:
@@ -39,6 +39,8 @@ private slots:
     void testShouldNotEmitSignalLoginButtonClickedWithoutSessionKey();
     void testShouldGetAndSetLineEditText();
     void testShouldClearLineEditText();
+    void testShouldEmitSignalOnEnterKey();
+    void testShouldEmitSignalOnReturnKey();
 };
 
 #endif // LOGINWIDGETTEST_H

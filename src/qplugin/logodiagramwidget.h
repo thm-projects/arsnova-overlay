@@ -25,6 +25,10 @@ private:
     SvgLogo * svgLogo;
 
     void resizeEvent ( QResizeEvent * event );
+    void mousePressEvent ( QMouseEvent * event );
+
+signals:
+    void clicked ( bool checked = false );
 };
 
 #endif // LOGODIAGRAMWIDGET_H

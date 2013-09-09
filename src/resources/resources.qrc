@@ -1,20 +1,18 @@
 <RCC>
   <qresource prefix="images">
+    <file>images/mail-mark-unread.png</file>
     <file>images/view-logo.png</file>
     <file>images/thm-logo.png</file>
-    <file>images/qrcode.png</file>
     <file>THM.svg</file>
-    <file>images/view-colored-logo.png</file>
-    <file>images/view-statistics.png</file>
-    <file>images/application-exit.png</file>
     <file>images/layer-visible-off.png</file>
+    <file>images/close.png</file>
     <file>images/layer-visible-on.png</file>
-    <file>images/system-switch-user.png</file>
-    <file>images/view-fullscreen.png</file>
-    <file>images/view-restore.png</file>
     <file>images/background.png</file>
     <file>images/splash.png</file>
+    <file>images/fullscreen-disable.png</file>
+    <file>images/fullscreen-enable.png</file>
     <file>arsnova.svg</file>
+    <file>images/arsnova.png</file>
     <file>arsnova-color.svg</file>
     <file>images/emotes/face-sad.svg</file>
     <file>images/emotes/face-smile.svg</file>
@@ -24,5 +22,6 @@
   <qresource prefix="qml">
     <file>ui/login.qml</file>
     <file>ui/bardiagram.qml</file>
+    <file>ui/sessioninformation.qml</file>
   </qresource>
 </RCC>

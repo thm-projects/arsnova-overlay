@@ -2,9 +2,8 @@
 
 #include "qrcodegenerator.h"
 
-const int OverlayWidget::ySize = 80;
-const int OverlayWidget::xSize = 180;
-const int OverlayWidget::httpUpdateInterval = 3;
+const int OverlayWidget::ySize = 160;
+const int OverlayWidget::xSize = 160;
 
 OverlayWidget::OverlayWidget ( SessionContext * context, QWidget * parent, Qt::WindowFlags f )
     : QWidget ( parent, f ),
@@ -12,20 +11,24 @@ OverlayWidget::OverlayWidget ( SessionContext * context, QWidget * parent, Qt::W
       connection ( context->connection() ),
       context ( context ) {
     ui->setupUi ( this );
+    this->setAttribute ( Qt::WA_MacNoShadow, true );
+    this->setAttribute ( Qt::WA_TranslucentBackground, true );
+    this->setStyleSheet ( "background: rgba(128,128,128,16);" );
+
+    this->moveToEdge ( Settings::instance()->screen() );
+
     this->latestUnderstandingResponses = 0;
     this->connectSignals();
     this->setMouseTracking ( true );
-    this->moveToEdge ( Settings::instance()->screen() );
 }
 
 void OverlayWidget::connectSignals() {
-    connect ( this->context->updateTimer(), SIGNAL ( tick ( int ) ), this, SLOT ( updateHttpResponse ( int ) ) );
     connect ( this->connection, SIGNAL ( requestFinished ( SessionResponse ) ), this, SLOT ( onSessionResponse ( SessionResponse ) ) );
     connect ( this->connection, SIGNAL ( requestFinished ( FeedbackResponse ) ), this, SLOT ( onFeedbackResponse ( FeedbackResponse ) ) );
     connect ( this->connection, SIGNAL ( requestFinished ( LoggedInResponse ) ), this, SLOT ( onLoggedInResponse ( LoggedInResponse ) ) );
-    connect ( ui->actionMakeTransparent, SIGNAL ( triggered ( bool ) ), this, SLOT ( makeTransparent ( bool ) ) );
-    connect ( ui->actionExit, SIGNAL ( triggered ( bool ) ), this, SLOT ( close() ) );
-    connect ( context, SIGNAL ( viewTypeChanged ( SessionContext::ViewType ) ), this, SLOT ( setVisibleViewType ( SessionContext::ViewType ) ) );
+    connect ( this->connection, SIGNAL ( requestFinished ( AudienceQuestionCountResponse ) ), this, SLOT ( onAudienceQuestionCountResponse ( AudienceQuestionCountResponse ) ) );
+    connect ( ui->sessioninformationwidget, SIGNAL ( closeButtonClicked() ), this, SLOT ( close() ) );
+    connect ( context, SIGNAL ( viewTypeChanged ( SessionContext::ViewType ) ), this, SLOT ( show() ) );
     connect ( Settings::instance().get(), SIGNAL ( settingsChanged() ), this, SLOT ( onSettingsChanged() ) );
 }
 
@@ -83,11 +86,10 @@ void OverlayWidget::moveToEdge ( int screen ) {
 
 void OverlayWidget::setVisibleViewType ( SessionContext::ViewType type ) {
     if ( !context->isValid() ) return;
+
     switch ( type ) {
     case SessionContext::DIAGRAM_VIEW:
         ui->sessioninformationwidget->show();
-        ui->menuWidget->show();
-
         ui->bardiagramwidget->show();
         ui->logodiagramwidget->hide();
         ui->emotediagramwidget->hide();
@@ -101,8 +103,6 @@ void OverlayWidget::setVisibleViewType ( SessionContext::ViewType type ) {
         break;
     case SessionContext::ICON_VIEW:
         ui->sessioninformationwidget->show();
-        ui->menuWidget->show();
-
         ui->bardiagramwidget->hide();
         ui->logodiagramwidget->show();
         ui->emotediagramwidget->hide();
@@ -116,8 +116,6 @@ void OverlayWidget::setVisibleViewType ( SessionContext::ViewType type ) {
         break;
     case SessionContext::EMOTE_VIEW:
         ui->sessioninformationwidget->show();
-        ui->menuWidget->show();
-
         ui->bardiagramwidget->hide();
         ui->logodiagramwidget->hide();
         ui->emotediagramwidget->show();
@@ -130,18 +128,15 @@ void OverlayWidget::setVisibleViewType ( SessionContext::ViewType type ) {
         );
         break;
     }
-    QWidget::show();
 }
 
 void OverlayWidget::onSessionResponse ( SessionResponse response ) {
     this->sessionId = response.sessionId();
 
     if ( ! this->sessionId.isNull() ) {
-        this->updateHttpResponse ( OverlayWidget::httpUpdateInterval );
         ui->sessioninformationwidget->updateSessionLabel ( response.shortName(), response.sessionId() );
         return;
     }
-    this->makeTransparent ( false );
 }
 
 void OverlayWidget::onFeedbackResponse ( FeedbackResponse response ) {
@@ -150,6 +145,8 @@ void OverlayWidget::onFeedbackResponse ( FeedbackResponse response ) {
     ui->bardiagramwidget->updateFromResponse ( response );
     ui->logodiagramwidget->updateFromResponse ( response );
     ui->emotediagramwidget->updateFromResponse ( response );
+
+    this->repaint();
 }
 
 void OverlayWidget::onLoggedInResponse ( LoggedInResponse response ) {
@@ -157,27 +154,11 @@ void OverlayWidget::onLoggedInResponse ( LoggedInResponse response ) {
     ui->sessioninformationwidget->updateCounterLabel ( this->latestUnderstandingResponses, this->loggedInUsers );
 }
 
+void OverlayWidget::onAudienceQuestionCountResponse ( AudienceQuestionCountResponse response ) {
+    ui->sessioninformationwidget->updateAudienceQuestionCount ( response );
+    this->repaint();
+}
+
 void OverlayWidget::onSettingsChanged() {
     this->moveToEdge ( Settings::instance()->screen() );
-}
-
-void OverlayWidget::updateHttpResponse ( int ticks ) {
-    ui->sessioninformationwidget->updateProgressBar ( ticks, OverlayWidget::httpUpdateInterval );
-    if (
-        ticks == OverlayWidget::httpUpdateInterval
-        && ! this->sessionId.isEmpty()
-    ) {
-        this->connection->requestFeedback();
-        this->connection->requestActiveUserCount();
-        this->context->updateTimer()->reset();
-    }
-}
-
-void OverlayWidget::makeTransparent ( bool enabled ) {
-    ui->actionMakeTransparent->setChecked ( enabled );
-    if ( enabled ) {
-        this->setWindowOpacity ( .5 );
-        return;
-    }
-    this->setWindowOpacity ( 1 );
 }

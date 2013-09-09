@@ -18,7 +18,11 @@ SystemTrayIcon::~SystemTrayIcon() {
 
 SystemTrayIcon * SystemTrayIcon::instance() {
     if ( _instance == nullptr ) {
+#ifdef __WIN32__
+        _instance = new SystemTrayIcon ( QIcon ( ":images/images/arsnova.png" ) );
+#else
         _instance = new SystemTrayIcon ( QIcon ( ":images/arsnova.svg" ) );
+#endif
     }
     return _instance;
 }

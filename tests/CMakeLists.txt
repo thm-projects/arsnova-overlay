@@ -31,6 +31,7 @@ set(arsnovawidget_SRCS
   stubconnection.cpp
   ../src/sessionresponse.cpp
   ../src/loggedinresponse.cpp
+  ../src/audiencequestioncountresponse.cpp
   ../src/qrcodegenerator.cpp
   ../src/interposedquestion.cpp
   ../src/sessioncontext.cpp
@@ -86,6 +87,7 @@ set(arsnovawidget_MOC_SRCS
   stubconnection.h
   ../src/sessionresponse.h
   ../src/loggedinresponse.h
+  ../src/audiencequestioncountresponse.h
   ../src/qrcodegenerator.h
   ../src/interposedquestion.h
   ../src/sessioncontext.h
@@ -100,7 +102,6 @@ set(arsnovawidget_MOC_SRCS
 set(arsnovawidget_UIS
   ../src/qplugin/logodiagramwidget.ui
   ../src/qplugin/emotediagramwidget.ui
-  ../src/qplugin/sessioninformationwidget.ui
   ../src/ui/overlaywidget.ui
   ../src/ui/sessionwidget.ui
   ../src/ui/settingswidget.ui

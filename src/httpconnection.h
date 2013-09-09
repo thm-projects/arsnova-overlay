@@ -19,6 +19,7 @@ public:
     void requestFeedback() override;
     void requestSession ( QString sessionKey ) override;
     void requestActiveUserCount() override;
+    void requestAudienceQuestionsCount() override;
 
 private:
     QNetworkAccessManager * networkAccessManager;

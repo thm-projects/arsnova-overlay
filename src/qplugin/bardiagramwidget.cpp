@@ -48,3 +48,8 @@ void BarDiagramWidget::updateFromResponse ( FeedbackResponse response ) {
         }
     }
 }
+
+void BarDiagramWidget::mousePressEvent ( QMouseEvent* event ) {
+    QGraphicsView::mousePressEvent ( event );
+    emit this->clicked();
+}

@@ -61,24 +61,33 @@ Rectangle {
                 if (!text.match(/\d{8}/)) {
                     sessionIdRectangle.border.color = "#c33333"
                     sessionIdRectangle.color = "#fffff7"
+                    loginbutton.loginbuttonColor = "#777777"
                 }
                 else {
                     sessionIdRectangle.border.color = "#dddddd"
                     sessionIdRectangle.color = "#ffffff"
+                    loginbutton.loginbuttonColor = "#55ad3d"
                 }
             }
-
+            Keys.onPressed: {
+                if (
+                    text.match(/\d{8}/)
+                    && (event.key === Qt.Key_Enter || event.key === Qt.Key_Return)
+                ) {
+                    widgetRectangle.loginButtonClick()
+                }
+            }
             Text {
                 id: sessionIdPlaceholderText
-                color: "#676963"
+                color: "#a0676963"
                 text: "Session Key"
                 anchors.fill: parent
                 horizontalAlignment: Text.AlignHCenter
-                font.bold: true
+                font.bold: false
                 font.pixelSize: 18
                 verticalAlignment: Text.AlignTop
                 z: 1
-                visible: (sessionIdTextInput.text == "") && (!sessionIdTextInput.activeFocus)
+                visible: (sessionIdTextInput.text == "")
             }
         }
     }
@@ -113,7 +122,7 @@ Rectangle {
             hoverEnabled: true
         }
 
-        color: loginbuttonMouseArea.pressed || loginbuttonMouseArea.containsMouse ? Qt.darker(loginbuttonColor, 1.5) : loginbuttonColor
+        color: loginbuttonColor != "#777777" && (loginbuttonMouseArea.pressed || loginbuttonMouseArea.containsMouse) ? Qt.darker(loginbuttonColor, 1.5) : loginbuttonColor
     }
 
     Rectangle {

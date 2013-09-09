@@ -17,17 +17,22 @@ const Ui::EmoteDiagramWidget*const EmoteDiagramWidget::getUi() {
 
 void EmoteDiagramWidget::updateFromResponse ( FeedbackResponse response ) {
 
+    if ( response.count() == 0 ) {
+        this->ui->logoWidget->load ( QString ( ":images/images/emotes/face-smile.svg" ) );
+        return;
+    }
+
     switch ( response.averageRounded() ) {
-    case 0:
+    case FeedbackResponse::FEEDBACK_OK:
         this->ui->logoWidget->load ( QString ( ":images/images/emotes/face-smile.svg" ) );
         break;
-    case 1:
+    case FeedbackResponse::FEEDBACK_FASTER:
         this->ui->logoWidget->load ( QString ( ":images/images/emotes/face-wink.svg" ) );
         break;
-    case 2:
+    case FeedbackResponse::FEEDBACK_SLOWER:
         this->ui->logoWidget->load ( QString ( ":images/images/emotes/face-surprise.svg" ) );
         break;
-    case 3:
+    case FeedbackResponse::FEEDBACK_AWAY:
         this->ui->logoWidget->load ( QString ( ":images/images/emotes/face-sad.svg" ) );
         break;
     }
@@ -48,4 +53,9 @@ void EmoteDiagramWidget::resizeEvent ( QResizeEvent* event ) {
         0
     );
     QWidget::resizeEvent ( event );
+}
+
+void EmoteDiagramWidget::mousePressEvent ( QMouseEvent* event ) {
+    QWidget::mousePressEvent ( event );
+    emit this->clicked();
 }

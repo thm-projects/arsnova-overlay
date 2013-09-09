@@ -9,6 +9,7 @@ public:
     virtual void requestActiveUserCount() override;
     virtual void requestSession ( QString sessionKey ) override;
     virtual void requestFeedback() override;
+    virtual void requestAudienceQuestionsCount() override;
 };
 
 #endif // STUBCONNECTION_H

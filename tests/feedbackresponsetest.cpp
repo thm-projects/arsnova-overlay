@@ -14,15 +14,15 @@ void FeedbackResponseTest::testShouldReturnCorrectFeedbackCount() {
 }
 
 void FeedbackResponseTest::testShouldReturnCorrectAverageResponse() {
-    FeedbackResponse fr1 ( 5, 0, 5, 0 );
+    FeedbackResponse fr1 ( 0, 5, 5, 0 );
     QVERIFY ( fr1.averageRounded() == 1 );
 
-    FeedbackResponse fr2 ( 5, 0, 0, 0 );
+    FeedbackResponse fr2 ( 0, 5, 0, 0 );
     QVERIFY ( fr2.averageRounded() == 0 );
 
     FeedbackResponse fr3 ( 0, 0, 0, 5 );
     QVERIFY ( fr3.averageRounded() == 3 );
 
-    FeedbackResponse fr4 ( 2, 3, 5, 11 );
+    FeedbackResponse fr4 ( 3, 2, 5, 11 );
     QVERIFY ( fr4.averageRounded() == 2 );
 }
