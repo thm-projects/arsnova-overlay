@@ -31,6 +31,7 @@ QString LoginWidget::text() {
     if ( dItem != nullptr ) {
         return dItem->property ( "text" ).toString();
     }
+    return QString();
 }
 
 void LoginWidget::setText ( QString text ) {

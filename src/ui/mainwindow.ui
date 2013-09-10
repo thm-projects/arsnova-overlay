@@ -33,7 +33,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="../resources/resources.qrc">
-    <normaloff>:/images/images/view-logo.png</normaloff>:/images/images/view-logo.png</iconset>
+    <normaloff>:/images/images/logo_22.png</normaloff>:/images/images/logo_22.png</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true"/>
