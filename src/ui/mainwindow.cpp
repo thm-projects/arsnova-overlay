@@ -7,6 +7,8 @@ MainWindow::MainWindow ( QWidget * parent, Qt::WindowFlags f ) : QMainWindow ( p
     frect.moveCenter ( QDesktopWidget().availableGeometry().center() );
     move ( frect.topLeft() );
 
+    infoDialog = new InfoDialog ( this );
+
     this->menuSignalMapper = new QSignalMapper ( this );
     this->widgetList = new QMap<QString, QWidget *>();
     this->sessionContext = new SessionContext ( new HttpConnection() );
@@ -29,6 +31,9 @@ MainWindow::MainWindow ( QWidget * parent, Qt::WindowFlags f ) : QMainWindow ( p
 
     connect ( SystemTrayIcon::instance(), SIGNAL ( activated ( QSystemTrayIcon::ActivationReason ) ), this, SLOT ( onSystemTrayActivated ( QSystemTrayIcon::ActivationReason ) ) );
     connect ( this->sessionContext, SIGNAL ( error ( SessionContext::Error ) ) , this, SLOT ( onContextError ( SessionContext::Error ) ) );
+    connect ( this->ui->actionAbout, SIGNAL ( triggered ( bool ) ), this, SLOT ( showInfoDialog() ) );
+    connect ( this->ui->actionExit, SIGNAL ( triggered ( bool ) ), this, SLOT ( exitApplication() ) );
+    connect ( this->ui->actionLogin, SIGNAL ( triggered ( bool ) ), this, SLOT ( showLoginWidget() ) );
 }
 
 MainWindow::~MainWindow() {
@@ -130,4 +135,14 @@ void MainWindow::sessionLogin() {
 
 void MainWindow::exitApplication() {
     exit ( 0 );
+}
+
+void MainWindow::showInfoDialog() {
+    if ( ! infoDialog->isVisible() ) {
+        infoDialog->show();
+    }
+}
+
+void MainWindow::showLoginWidget() {
+    this->activateWidget ( "Login" );
 }

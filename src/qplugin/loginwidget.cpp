@@ -6,16 +6,6 @@ LoginWidget::LoginWidget ( QWidget* parent, Qt::WindowFlags f ) {
     item = qobject_cast<QDeclarativeItem *> ( this->rootObject() );
     connect ( item, SIGNAL ( loginButtonClick() ), this, SLOT ( on_loginButton_clicked() ) );
     connect ( item, SIGNAL ( exitButtonClick() ), this, SLOT ( on_exitButton_clicked() ) );
-
-    QDeclarativeItem * dItem = item->findChild<QDeclarativeItem *> ( "versionstring" );
-    if ( dItem != nullptr ) {
-        dItem->setProperty (
-            "text",
-            QString ( "ARSnova Overlay" )
-            + " " + VERSION_MAJOR
-            + "." + VERSION_MINOR
-            + "." + VERSION_PATCH );
-    }
 }
 
 LoginWidget::~LoginWidget() {

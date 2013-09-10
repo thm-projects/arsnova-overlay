@@ -1,6 +1,7 @@
 <RCC>
   <qresource prefix="images">
     <file>images/mail-mark-unread.png</file>
+    <file>images/infodialog.png</file>
     <file>images/thm-logo.png</file>
     <file>THM.svg</file>
     <file>images/layer-visible-off.png</file>

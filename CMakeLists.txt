@@ -2,9 +2,9 @@ project(arsnovaoverlay)
 cmake_minimum_required(VERSION 2.6)
 find_package(Qt4 REQUIRED)
 
-set(VERSION_MAJOR 0)
-set(VERSION_MINOR 8)
-set(VERSION_PATCH dev)
+set(VERSION_MAJOR 1)
+set(VERSION_MINOR 0)
+set(VERSION_PATCH rc1)
 
 set(VERSION_SHORT ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH})
 

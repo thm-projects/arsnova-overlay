@@ -13,6 +13,7 @@
 #include "ui/systemtrayicon.h"
 #include "httpconnection.h"
 #include "ui/settingswidget.h"
+#include "ui/infodialog.h"
 
 class MainWindow : public QMainWindow, Ui::MainWindow {
     Q_OBJECT
@@ -29,6 +30,7 @@ private:
     QMap<QString, QWidget *> * widgetList;
     OverlayWidget * overlayWidget;
     SessionContext * sessionContext;
+    InfoDialog * infoDialog;
 
     void checkLeftMenuButton ( QString title );
     QWidget * findWidget ( QString widgetTitle );
@@ -42,6 +44,8 @@ private slots:
     void sessionLogin();
     void onContextError(SessionContext::Error e);
     void exitApplication();
+    void showInfoDialog();
+    void showLoginWidget();
 };
 
 #endif // MAINWINDOW_H
