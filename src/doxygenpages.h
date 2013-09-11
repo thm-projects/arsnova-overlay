@@ -1,5 +1,5 @@
 /**
- *   Copyright (C) 2012  Paul-Christian Volkmer
+ *   Copyright (C) 2013  Paul-Christian Volkmer
  *   <paul-christian.volkmer@mni.thm.de>
  *
  *   This file is part of ARSnova Overlay.

@@ -49,7 +49,9 @@ if (DOXYGEN_EXECUTABLE)
   add_custom_command(TARGET doc POST_BUILD
     COMMAND ${DOXYGEN_EXECUTABLE}
   )
-endif()
+else(DOXYGEN_EXECUTABLE)
+  message ("ERROR: Doxygen not available")
+endif(DOXYGEN_EXECUTABLE)
 
 set(DESKTOP
   src/resources/arsnovaoverlay.desktop
