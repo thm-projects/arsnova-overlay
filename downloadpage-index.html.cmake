@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>ARSnovaDesktop - Download</title>
+<title>ARSnova Overlay - Download</title>
 <meta charset="UTF-8" />
-<meta name="description" content="ARSnovaDesktop - Download" />
+<meta name="description" content="ARSnova Overlay - Download" />
 <meta name="author" content="ARSnovaDesktop - Download" />
 <link type="text/css" href="//fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
 <link type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet" />
@@ -54,10 +54,10 @@
 	</div>
 	<h2>Download der aktuellen Version @VERSION_SHORT@</h2>
 	<div id="downloadselector">
-		<a id="win" href="http://download.mni.thm.de/arsnova/arsnovaoverlay-@VERSION_MAJOR@.@VERSION_MINOR@.@VERSION_PATCH@-win32.exe">Windows</a>
-		<a id="osx" href="http://download.mni.thm.de/arsnova/arsnovaoverlay-@VERSION_MAJOR@.@VERSION_MINOR@.@VERSION_PATCH@-Darwin.dmg">Mac OS X</a>
-		<a id="deb" href="http://download.mni.thm.de/arsnova/arsnovaoverlay_@VERSION_MAJOR@.@VERSION_MINOR@.@VERSION_PATCH@_amd64.deb">Linux DEB</a>
-		<a id="rpm" href="http://download.mni.thm.de/arsnova/arsnovaoverlay-@VERSION_MAJOR@.@VERSION_MINOR@.@VERSION_PATCH@.x86_64.rpm">Linux RPM</a>
+		<a id="win" href="./arsnovaoverlay-@VERSION_MAJOR@.@VERSION_MINOR@.@VERSION_PATCH@-win32.exe">Windows</a>
+		<a id="osx" href="./arsnovaoverlay-@VERSION_MAJOR@.@VERSION_MINOR@.@VERSION_PATCH@-Darwin.dmg">Mac OS X</a>
+		<a id="deb" href="./arsnovaoverlay_@VERSION_MAJOR@.@VERSION_MINOR@.@VERSION_PATCH@_amd64.deb">Linux DEB</a>
+		<a id="rpm" href="./arsnovaoverlay-@VERSION_MAJOR@.@VERSION_MINOR@.@VERSION_PATCH@.x86_64.rpm">Linux RPM</a>
 		<div id="others">
 			Ältere Versionen finden Sie <a href="http://download.mni.thm.de/arsnova">hier</a>
 		</div>
