@@ -21,7 +21,7 @@ private slots:
     void initTestCase();
     void cleanupTestCase();
 
-    void testShouldDisplayCorrectUrl();
+    void testShouldDisplayCorrectUrlOnStart();
     void testShouldDisplayCorrectUrlAfterSessionLogin();
     void testShouldSwitchToFullscreenMode();
     void testShouldSelectAllTransformationModes();

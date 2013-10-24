@@ -1,4 +1,5 @@
 #include "qrcodewidgettest.h"
+#include <settings.h>
 
 QRCodeWidgetTest::QRCodeWidgetTest ( QObject * parent ) : QObject ( parent ) {}
 
@@ -14,14 +15,13 @@ void QRCodeWidgetTest::cleanupTestCase() {
     delete this->context;
 }
 
-void QRCodeWidgetTest::testShouldDisplayCorrectUrl() {
-    this->qrCodeWidget->setUrl ( QUrl ( "https://arsnova.thm.de/#id/87654321" ) );
-    QVERIFY ( this->qrCodeWidget->getUi()->urlLabel->text() == "https://arsnova.thm.de/#id/87654321" );
+void QRCodeWidgetTest::testShouldDisplayCorrectUrlOnStart() {
+    QVERIFY ( this->qrCodeWidget->getUi()->urlLabel->text().startsWith(Settings::instance()->serverUrl().toString()) );
 }
 
 void QRCodeWidgetTest::testShouldDisplayCorrectUrlAfterSessionLogin() {
     this->context->connection()->requestSession ( "12345678" );
-    QVERIFY ( this->qrCodeWidget->getUi()->urlLabel->text() == "https://arsnova.thm.de/#id/12345678" );
+    QVERIFY ( this->qrCodeWidget->getUi()->urlLabel->text().endsWith("/#id/12345678") );
 }
 
 void QRCodeWidgetTest::testShouldSwitchToFullscreenMode() {
