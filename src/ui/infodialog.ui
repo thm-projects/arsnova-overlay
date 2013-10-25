@@ -225,6 +225,9 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;License: &lt;a href=&quot;http://www.gnu.org/licenses/gpl-3.0.txt&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#296fbe;&quot;&gt;GNU General Public License Version 3&lt;br /&gt;&lt;/span&gt;&lt;/a&gt;Visit ARSnova on &lt;a href=&quot;https://arsnova.eu&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#296fbe;&quot;&gt;https://arsnova.eu&lt;br /&gt;&lt;/span&gt;&lt;/a&gt;More information on &lt;a href=&quot;https://arsnova.eu/blog/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#296fbe;&quot;&gt;https://arsnova.eu/blog/&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
+       <property name="openExternalLinks">
+        <bool>true</bool>
+       </property>
       </widget>
      </item>
     </layout>
