@@ -21,11 +21,11 @@
 #include "sessionwidgettest.h"
 #include <qsignalspy.h>
 
-SessionWidgetTest::SessionWidgetTest ( QObject* parent ) : QObject ( parent ) {
-    this->context = new SessionContext ( new StubConnection() );
-}
+SessionWidgetTest::SessionWidgetTest ( QObject* parent ) : QObject ( parent ) {}
 
 void SessionWidgetTest::initTestCase() {
+    this->connection = new StubConnection();
+    this->context = new SessionContext ( this->connection );
     this->sessionWidget = new SessionWidget ( this->context );
     this->sessionWidget->show();
 }
@@ -33,6 +33,7 @@ void SessionWidgetTest::initTestCase() {
 void SessionWidgetTest::cleanupTestCase() {
     delete this->sessionWidget;
     delete this->context;
+    delete this->connection;
 }
 
 void SessionWidgetTest::testShouldAddSessionToSessionList() {

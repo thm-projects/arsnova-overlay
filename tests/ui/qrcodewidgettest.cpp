@@ -4,7 +4,8 @@
 QRCodeWidgetTest::QRCodeWidgetTest ( QObject * parent ) : QObject ( parent ) {}
 
 void QRCodeWidgetTest::initTestCase() {
-    this->context = new SessionContext ( new StubConnection() );
+    this->connection = new StubConnection();
+    this->context = new SessionContext ( this->connection );
     this->stackedWidget = new QStackedWidget();
     this->qrCodeWidget = new QRCodeWidget ( context, this->stackedWidget );
 }
@@ -13,6 +14,7 @@ void QRCodeWidgetTest::cleanupTestCase() {
     delete this->qrCodeWidget;
     delete this->stackedWidget;
     delete this->context;
+    delete this->connection;
 }
 
 void QRCodeWidgetTest::testShouldDisplayCorrectUrlOnStart() {
