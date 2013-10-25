@@ -8,7 +8,3 @@ InfoDialog::InfoDialog ( QWidget* parent, Qt::WFlags fl )
 
 InfoDialog::~InfoDialog() {
 }
-
-void InfoDialog::on_closeButton_clicked() {
-    this->close();
-}

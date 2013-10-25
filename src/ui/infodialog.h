@@ -13,13 +13,6 @@ public:
     InfoDialog ( QWidget* parent = 0, Qt::WFlags fl = 0 );
     ~InfoDialog();
 
-public slots:
-
-protected:
-
-protected slots:
-    void on_closeButton_clicked();
-
 };
 
 #endif
