@@ -24,6 +24,7 @@ set(arsnovawidget_SRCS
   ui/mainwindowtest.cpp
   ../src/ui/mainwindow.cpp
   ../src/ui/sessionwidget.cpp
+  ../src/ui/infodialog.cpp
   ui/sessionwidgettest.cpp
   ui/qrcodewidgettest.cpp
   ../src/updatetimer.cpp
@@ -79,6 +80,7 @@ set(arsnovawidget_MOC_SRCS
   ui/mainwindowtest.h
   ../src/ui/mainwindow.h
   ../src/ui/sessionwidget.h
+  ../src/ui/infodialog.h
   ui/sessionwidgettest.h
   ui/qrcodewidgettest.h
   ../src/updatetimer.h
@@ -105,6 +107,7 @@ set(arsnovawidget_UIS
   ../src/ui/overlaywidget.ui
   ../src/ui/sessionwidget.ui
   ../src/ui/settingswidget.ui
+  ../src/ui/infodialog.ui
 )
 
 ## Resources ##

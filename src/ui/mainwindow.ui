@@ -33,7 +33,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="../resources/resources.qrc">
-    <normaloff>:/images/images/view-logo.png</normaloff>:/images/images/view-logo.png</iconset>
+    <normaloff>:/images/images/logo_22.png</normaloff>:/images/images/logo_22.png</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true"/>
@@ -202,13 +202,17 @@ QPushButton:checked {
    </property>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
-     <string>File</string>
+     <string>Session</string>
     </property>
+    <addaction name="actionLogin"/>
+    <addaction name="separator"/>
+    <addaction name="actionExit"/>
    </widget>
    <widget class="QMenu" name="menuHelp_2">
     <property name="title">
      <string>Help</string>
     </property>
+    <addaction name="actionAbout"/>
    </widget>
    <addaction name="menuHelp"/>
    <addaction name="menuHelp_2"/>
@@ -221,6 +225,29 @@ QPushButton:checked {
     <bool>false</bool>
    </property>
   </widget>
+  <action name="actionLogin">
+   <property name="text">
+    <string>Login</string>
+   </property>
+  </action>
+  <action name="actionShow_overlay">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show overlay</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
  </widget>
  <resources>
   <include location="../resources/resources.qrc"/>

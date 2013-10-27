@@ -1,8 +1,9 @@
 #include "systemtrayicon.h"
+#include "mainwindow.h"
 
 SystemTrayIcon * SystemTrayIcon::_instance = nullptr;
 
-SystemTrayIcon::SystemTrayIcon ( QIcon icon ) : QSystemTrayIcon ( icon ) {
+SystemTrayIcon::SystemTrayIcon ( QIcon icon ) : QSystemTrayIcon ( icon, QApplication::desktop() ) {
     menu = new QMenu ( "ARSnovaDesktop" );
     this->addExitAction();
     this->setContextMenu ( menu );
@@ -19,7 +20,7 @@ SystemTrayIcon::~SystemTrayIcon() {
 SystemTrayIcon * SystemTrayIcon::instance() {
     if ( _instance == nullptr ) {
 #ifdef __WIN32__
-        _instance = new SystemTrayIcon ( QIcon ( ":images/images/arsnova.png" ) );
+        _instance = new SystemTrayIcon ( QIcon ( ":images/images/logo_64.png" ) );
 #else
         _instance = new SystemTrayIcon ( QIcon ( ":images/arsnova.svg" ) );
 #endif
@@ -40,5 +41,3 @@ void SystemTrayIcon::addExitAction() {
 void SystemTrayIcon::exitApplication() {
     exit ( 0 );
 }
-
-

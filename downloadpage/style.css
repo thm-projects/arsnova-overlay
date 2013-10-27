@@ -1,0 +1,172 @@
+@CHARSET "UTF-8";
+
+body {
+	margin: 0;
+	color: #333;
+	font-size: 13px;
+	font-family: "open sans";
+}
+
+header {
+	background-color: #f5f5f5;
+	border-bottom: 1px solid #eee;
+	padding: 8px 0;
+}
+
+a {
+	color: #336699;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+a.bold-link {
+	font-weight: 600;
+}
+
+a:hover {
+	color: #993333;
+	text-decoration: underline;
+}
+
+a.menu-link,
+a:hover.menu-link {
+	color: black;
+}
+
+.help {
+	background-image: url(help-about.png);
+	background-position: right center;
+	background-repeat: no-repeat;
+	color: #336699;
+	padding-right: 20px;
+}
+
+.help:hover {
+	color: #993333;
+}
+
+h1, h2, h3 {
+	color: #333;
+	text-align: center;
+	font-weight: 300;
+}
+
+h2 {
+	font-size: 32px;
+}
+
+article {
+	font-weight: 300;
+	color: #777;
+	font-size: 14px;
+	text-align: center;
+	margin: 100px 0;
+}
+
+.automargin {
+	width: 800px;
+	margin: 0 auto;
+	padding: 0;
+}
+
+#topmenu {
+	font-size: 12px;
+	margin-top: 10px;
+}
+
+#topmenu ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+#topmenu li {
+	float: left;
+	margin-right: 48px;
+	padding: 8px 0;
+}
+
+#content {
+	padding: 16px 4px 0px;
+	margin: 4px auto;
+	width: 800px;
+}
+
+#content .intro {
+	margin: 48px 0;
+	text-align: center;
+}
+
+#content .intro img {
+	display: block;
+	margin: 32px -40px;
+	border-radius: 3px;
+}
+
+#content .intro h2 {
+	color: #202020;
+	font-size: 32px;
+	margin: 2px;
+}
+
+#content .intro p {
+	font-weight: 300;
+	color: #777;
+	font-size: 16px;
+}
+
+#downloadselector {
+	margin: 32px auto 8px;
+	width: 570px;
+}
+
+#downloadselector > #win,
+#downloadselector > #osx,
+#downloadselector > #deb,
+#downloadselector > #rpm {
+	background-color: rgba(128,128,128,0.1);
+	background-repeat: no-repeat;
+	background-position: center top;
+	border-radius: 4px;
+	display: inline-block;
+	height: 30px;
+	width: 100px;
+	padding: 100px 4px 4px;
+	margin: 16px;
+	font-size: 18px;
+	text-align: center;
+}
+
+#downloadselector > #win:hover,
+#downloadselector > #osx:hover,
+#downloadselector > #deb:hover,
+#downloadselector > #rpm:hover {
+	transform: scale(1.05);
+	-moz-transform: scale(1.05);
+	-webkit-transform: scale(1.05);
+	-ms-transform: scale(1.05);
+}
+
+#downloadselector > #win {
+	background-image: url(windows-logo.png);
+}
+
+#downloadselector > #osx {
+	background-image: url(osx-logo.png);
+}
+
+#downloadselector > #deb {
+	background-image: url(linux-deb.png);
+}
+
+#downloadselector > #rpm {
+	background-image: url(linux-rpm.png);
+}
+
+#downloadselector > #others {
+	font-size: 14px;
+	font-weight: bold;
+	width: 400px;
+	margin: 10px auto;
+	text-align: center;
+}

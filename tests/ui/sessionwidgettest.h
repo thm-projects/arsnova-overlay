@@ -37,6 +37,7 @@ public:
 private:
     SessionWidget * sessionWidget;
     SessionContext * context;
+    AbstractConnection * connection;
 
 private slots:
     void initTestCase();

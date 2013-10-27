@@ -11,9 +11,9 @@ find_package(Qt5Network REQUIRED)
 find_package(Qt5Svg REQUIRED)
 find_package(Qt5Test REQUIRED)
 
-set(VERSION_MAJOR 0)
-set(VERSION_MINOR 8)
-set(VERSION_PATCH dev)
+set(VERSION_MAJOR 1)
+set(VERSION_MINOR 0)
+set(VERSION_PATCH rc3)
 
 set(VERSION_SHORT ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH})
 
@@ -51,6 +51,7 @@ set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR}/libs)
 CONFIGURE_FILE( version.h.cmake src/version.h )
 CONFIGURE_FILE( Doxyfile.cmake Doxyfile )
 CONFIGURE_FILE( sonar.properties.cmake sonar.properties )
+CONFIGURE_FILE( downloadpage-index.html.cmake downloadpage/index.html )
 
 add_custom_target(doc)
 find_program(DOXYGEN_EXECUTABLE "doxygen")
@@ -58,7 +59,9 @@ if (DOXYGEN_EXECUTABLE)
   add_custom_command(TARGET doc POST_BUILD
     COMMAND ${DOXYGEN_EXECUTABLE}
   )
-endif()
+else(DOXYGEN_EXECUTABLE)
+  message ("ERROR: Doxygen not available")
+endif(DOXYGEN_EXECUTABLE)
 
 set(DESKTOP
   src/resources/arsnovaoverlay.desktop
@@ -162,6 +165,7 @@ SET(CPACK_PACKAGE_CONTACT "Paul-Christian Volkmer <paul-christian.volkmer@mni.th
 SET(CPACK_PACKAGE_VERSION_MAJOR ${VERSION_MAJOR})
 SET(CPACK_PACKAGE_VERSION_MINOR ${VERSION_MINOR})
 SET(CPACK_PACKAGE_VERSION_PATCH ${VERSION_PATCH})
+SET(VERSION ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH})
 
 IF (UNIX AND NOT APPLE)
   find_program(ARCH_EXECUTABLE "arch")
@@ -173,8 +177,20 @@ IF (UNIX AND NOT APPLE)
       WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
     )
     set(CPACK_RPM_PACKAGE_ARCHITECTURE "${arch}")
+    SET(CPACK_GENERATOR  "RPM")
   endif()
-  SET(CPACK_GENERATOR  "RPM")
+  # Override architecture if dpkg-architecture command was found on debian based distributions
+  find_program(DPKG_EXECUTABLE "dpkg")
+  if(DPKG_EXECUTABLE)
+    execute_process(
+      COMMAND ${DPKG_EXECUTABLE} "--print-architecture"
+      OUTPUT_VARIABLE arch
+      OUTPUT_STRIP_TRAILING_WHITESPACE
+      WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+    )
+    set(CPACK_DEBIAN_PACKAGE_ARCHITECTURE "${arch}")
+    SET(CPACK_GENERATOR  "DEB")
+  endif()
   SET(CPACK_SYSTEM_NAME ${CPACK_RPM_PACKAGE_ARCHITECTURE})
   SET(CPACK_RPM_PACKAGE_RELEASE "1")
   SET(CPACK_RPM_PACKAGE_LICENSE "GPLv3")
@@ -184,19 +200,28 @@ IF (UNIX AND NOT APPLE)
   )
   #SET(CPACK_RPM_CHANGELOG_FILE ${CMAKE_CURRENT_BINARY_DIR}/CHANGES)
   SET(CPACK_STRIP_FILES  ${CMAKE_CURRENT_BINARY_DIR}/bin/arsnovaoverlay)
+
+  if (CPACK_GENERATOR STREQUAL "RPM")
+    SET(CPACK_PACKAGE_FILE_NAME "arsnovaoverlay-${VERSION}.${arch}")
+  elseif(CPACK_GENERATOR STREQUAL "DEB")
+    SET(CPACK_PACKAGE_FILE_NAME "arsnovaoverlay_${VERSION}_${arch}")
+  endif()
 ENDIF (UNIX AND NOT APPLE)
 
 IF (WIN32)
   SET(CPACK_GENERATOR  "NSIS")
   SET(CPACK_SYSTEM_NAME "win32")
   SET(CPACK_RESOURCE_FILE_LICENSE ${CMAKE_CURRENT_BINARY_DIR}/COPYING)
-  SET(CPACK_NSIS_MODIFY_PATH ON)
+  SET(CPACK_NSIS_MODIFY_PATH OFF)
   SET(CPACK_NSIS_PACKAGE_NAME "ARSnova Overlay")
   SET(CPACK_NSIS_DISPLAY_NAME "ARSnova Overlay")
   SET(CPACK_NSIS_CONTACT "${CPACK_PACKAGE_VENDOR}")
+  SET(CPACK_NSIS_URL_INFO_ABOUT "https:\\\\\\\\arsnova.eu\\\\blog\\\\")
+  SET(CPACK_NSIS_MUI_FINISHPAGE_RUN "arsnovaoverlay.exe")
+  SET(CPACK_PACKAGE_ICON ${CMAKE_CURRENT_BINARY_DIR}/src/resources/images/logo_32.png)
   SET(CPACK_PACKAGE_EXECUTABLES  ..\\\\arsnovaoverlay;ARSnovaOverlay)
   SET(CPACK_CREATE_DESKTOP_LINKS ..\\\\arsnovaoverlay)
-  SET(CPACK_PACKAGE_INSTALL_DIRECTORY ARSnova Overlay)
+  SET(CPACK_PACKAGE_INSTALL_DIRECTORY "ARSnova Overlay")
   SET(CPACK_STRIP_FILES  ${CMAKE_CURRENT_BINARY_DIR}/bin/arsnovaoverlay.exe)
 ENDIF (WIN32)
 

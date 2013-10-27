@@ -12,7 +12,6 @@ class QRCodeWidget : public QWidget, Ui::QRCodeWidget {
 public:
     explicit QRCodeWidget ( SessionContext * context, QStackedWidget * parent = 0, Qt::WindowFlags f = 0 );
     virtual ~QRCodeWidget();
-    void setUrl ( QUrl url );
     void setFullscreen ( bool fullscreen, int screen = -1 );
     /** Returns user interface of this widget.
      * This method is helpfull if someone needs direct access to the
@@ -35,6 +34,7 @@ private:
     void adjustSize();
     QSize neededQRCodeSize();
     QString neededFontSize();
+    void setUrl ( QUrl url );
     SessionContext * _sessionContext;
     QStackedWidget * parentBackup;
     QPixmap transform ( QPixmap pixmap, Transformation transformation );

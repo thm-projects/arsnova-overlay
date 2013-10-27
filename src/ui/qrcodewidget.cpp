@@ -19,6 +19,8 @@ QRCodeWidget::QRCodeWidget ( SessionContext * context, QStackedWidget * parent, 
         connect ( _sessionContext, SIGNAL ( sessionChanged() ), this->fullscreenWidget, SLOT ( onSessionChanged() ) );
         connect ( _ui->transformComboBox, SIGNAL ( currentIndexChanged ( int ) ), this->fullscreenWidget, SLOT ( onTransformationChanged() ) );
     }
+
+    this->setUrl(Settings::instance()->serverUrl().toString());
 }
 
 QRCodeWidget::~QRCodeWidget() {
@@ -137,7 +139,7 @@ const Ui::QRCodeWidget * const QRCodeWidget::getUi() {
 }
 
 void QRCodeWidget::onSessionChanged() {
-    this->setUrl ( QString ( "https://arsnova.thm.de/#id/" ) + _sessionContext->sessionId() );
+    this->setUrl ( Settings::instance()->serverUrl().toString() + QString ( "#id/" ) + _sessionContext->sessionId() );
 }
 
 void QRCodeWidget::onTransformationChanged() {

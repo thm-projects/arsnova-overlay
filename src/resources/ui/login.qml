@@ -16,16 +16,6 @@ Rectangle {
         source: "qrc:/images/images/splash.png"
     }
     
-    Text {
-        id: versionstring
-        objectName: "versionstring"
-        x: 8
-        y: 380
-        font.pixelSize: 11
-        color: "#777777"
-        text: ""
-    }
-    
     Rectangle {
         id: sessionIdRectangle
         objectName: "sessionIdRectangle"
