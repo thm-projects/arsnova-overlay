@@ -4,7 +4,7 @@
 #include <QtTest>
 #include <QtTestGui>
 
-#include "qplugin/logodiagramwidget.h"
+#include "ui/logodiagramwidget.h"
 
 class LogoDiagramWidgetTest : public QObject {
 
