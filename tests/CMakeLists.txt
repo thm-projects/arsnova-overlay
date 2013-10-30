@@ -8,16 +8,16 @@ set(arsnovawidget_SRCS
   ../src/svglogo.cpp
   svglogotest.cpp
   ../src/feedbackresponse.cpp
-  ../src/qplugin/loginwidget.cpp
-  qplugin/loginwidgettest.cpp
-  ../src/qplugin/bardiagramwidget.cpp
-  qplugin/bardiagramwidgettest.cpp
-  ../src/qplugin/logodiagramwidget.cpp
-  qplugin/logodiagramwidgettest.cpp
-  ../src/qplugin/emotediagramwidget.cpp
-  qplugin/emotediagramwidgettest.cpp
-  ../src/qplugin/sessioninformationwidget.cpp
-  qplugin/sessioninformationwidgettest.cpp
+  ../src/ui/loginwidget.cpp
+  ui/loginwidgettest.cpp
+  ../src/ui/bardiagramwidget.cpp
+  ui/bardiagramwidgettest.cpp
+  ../src/ui/logodiagramwidget.cpp
+  ui/logodiagramwidgettest.cpp
+  ../src/ui/emotediagramwidget.cpp
+  ui/emotediagramwidgettest.cpp
+  ../src/ui/sessioninformationwidget.cpp
+  ui/sessioninformationwidgettest.cpp
   ../src/ui/overlaywidget.cpp
   ui/overlaywidgettest.cpp
   ../src/ui/qrcodewidget.cpp
@@ -63,16 +63,16 @@ set(arsnovawidget_MOC_SRCS
   ../src/svglogo.h
   svglogotest.h
   ../src/feedbackresponse.h
-  ../src/qplugin/loginwidget.h
-  qplugin/loginwidgettest.h
-  ../src/qplugin/bardiagramwidget.h
-  qplugin/bardiagramwidgettest.h
-  ../src/qplugin/logodiagramwidget.h
-  qplugin/logodiagramwidgettest.h
-  ../src/qplugin/emotediagramwidget.h
-  qplugin/emotediagramwidgettest.h
-  ../src/qplugin/sessioninformationwidget.h
-  qplugin/sessioninformationwidgettest.h
+  ../src/ui/loginwidget.h
+  ui/loginwidgettest.h
+  ../src/ui/bardiagramwidget.h
+  ui/bardiagramwidgettest.h
+  ../src/ui/logodiagramwidget.h
+  ui/logodiagramwidgettest.h
+  ../src/ui/emotediagramwidget.h
+  ui/emotediagramwidgettest.h
+  ../src/ui/sessioninformationwidget.h
+  ui/sessioninformationwidgettest.h
   ../src/ui/overlaywidget.h
   ui/overlaywidgettest.h
   ../src/ui/qrcodewidget.h
@@ -101,8 +101,8 @@ set(arsnovawidget_MOC_SRCS
 )
 
 set(arsnovawidget_UIS
-  ../src/qplugin/logodiagramwidget.ui
-  ../src/qplugin/emotediagramwidget.ui
+  ../src/ui/logodiagramwidget.ui
+  ../src/ui/emotediagramwidget.ui
   ../src/ui/overlaywidget.ui
   ../src/ui/sessionwidget.ui
   ../src/ui/settingswidget.ui

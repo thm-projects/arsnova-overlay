@@ -4,7 +4,7 @@ find_package(Qt4 REQUIRED)
 
 set(VERSION_MAJOR 1)
 set(VERSION_MINOR 0)
-set(VERSION_PATCH rc3)
+set(VERSION_PATCH rc4)
 
 set(VERSION_SHORT ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH})
 
@@ -28,12 +28,10 @@ message ("use 'cmake -i' to run CMake in interactive mode")
 message ("or use:")
 message ("  -DTESTS=(ON|OFF)    to build test application")
 message ("  -DCOVERAGE=(ON|OFF) to run test application with code coverage")
-message ("  -DQTPLUGIN=(ON|OFF) to build a Qt designer plugin")
 message ("")
 
 option (TESTS "Enable build of tests" OFF)
 option (COVERAGE "Enable coverage" OFF)
-option (QTPLUGIN "Enable build of Qt plugin" OFF)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR}/bin)
@@ -98,17 +96,6 @@ if(TESTS)
 else(TESTS)
   message ("Build of tests is disabled")
 endif(TESTS)
-
-#if (TESTS AND COVERAGE)
-#  execute_process(COMMAND lcov --directory ${CMAKE_CURRENT_BINARY_DIR} --capture --output-file coverage.info)
-#  execute_process(COMMAND genhtml coverage.info -o ${CMAKE_CURRENT_BINARY_DIR}/coverage)
-#endif (TESTS AND COVERAGE)
-
-if(QTPLUGIN)
-  message ("Build of Qt plugin is enabled")
-else(QTPLUGIN)
-  message ("Build of Qt plugin is disabled")
-endif(QTPLUGIN)
 
 IF (APPLE)
   INSTALL(FILES ${FILES}

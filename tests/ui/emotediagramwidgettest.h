@@ -4,7 +4,7 @@
 #include <QtTest>
 #include <QtTestGui>
 
-#include "qplugin/emotediagramwidget.h"
+#include "ui/emotediagramwidget.h"
 
 class EmoteDiagramWidgetTest : public QObject {
 

@@ -376,17 +376,17 @@
   <customwidget>
    <class>BarDiagramWidget</class>
    <extends>QWidget</extends>
-   <header>qplugin/bardiagramwidget.h</header>
+   <header>ui/bardiagramwidget.h</header>
   </customwidget>
   <customwidget>
    <class>LogoDiagramWidget</class>
    <extends>QWidget</extends>
-   <header>qplugin/logodiagramwidget.h</header>
+   <header>ui/logodiagramwidget.h</header>
   </customwidget>
   <customwidget>
    <class>EmoteDiagramWidget</class>
    <extends>QWidget</extends>
-   <header>qplugin/emotediagramwidget.h</header>
+   <header>ui/emotediagramwidget.h</header>
   </customwidget>
  </customwidgets>
  <resources>

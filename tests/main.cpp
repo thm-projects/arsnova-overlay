@@ -3,11 +3,11 @@
 #include <QApplication>
 
 #include "svglogotest.h"
-#include "qplugin/loginwidgettest.h"
-#include "qplugin/bardiagramwidgettest.h"
-#include "qplugin/logodiagramwidgettest.h"
-#include "qplugin/emotediagramwidgettest.h"
-#include "qplugin/sessioninformationwidgettest.h"
+#include "ui/loginwidgettest.h"
+#include "ui/bardiagramwidgettest.h"
+#include "ui/logodiagramwidgettest.h"
+#include "ui/emotediagramwidgettest.h"
+#include "ui/sessioninformationwidgettest.h"
 #include "ui/overlaywidgettest.h"
 #include "ui/qrcodewidgettest.h"
 #include "ui/mainwindowtest.h"

@@ -5,7 +5,7 @@
 
 #include "version.h"
 #include "ui_mainwindow.h"
-#include "qplugin/loginwidget.h"
+#include "ui/loginwidget.h"
 #include "ui/qrcodewidget.h"
 #include "ui/sessionwidget.h"
 #include "ui/overlaywidget.h"

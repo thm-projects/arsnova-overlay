@@ -4,7 +4,7 @@
 #include <QtTest>
 #include <QtTestGui>
 
-#include "qplugin/sessioninformationwidget.h"
+#include "ui/sessioninformationwidget.h"
 
 class SessionInformationWidgetTest : public QObject {
     Q_OBJECT

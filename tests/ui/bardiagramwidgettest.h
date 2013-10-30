@@ -4,7 +4,7 @@
 #include <QtTest>
 #include <QtTestGui>
 
-#include "qplugin/bardiagramwidget.h"
+#include "ui/bardiagramwidget.h"
 
 class BarDiagramWidgetTest : public QObject {
 

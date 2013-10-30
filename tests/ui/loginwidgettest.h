@@ -5,7 +5,7 @@
 #include <QtTest/QtTestGui>
 #include <QtDeclarative>
 
-#include "qplugin/loginwidget.h"
+#include "ui/loginwidget.h"
 
 class LoginWidgetTest : public QObject {
 
