@@ -15,7 +15,6 @@ public:
     virtual ~LoginWidget();
     QString text();
     void setText ( QString text );
-    void clear();
     /** Returns user interface of this widget.
      * This method is helpfull if someone needs direct access to the
      * user interface itself e.g. testing.

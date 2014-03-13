@@ -38,13 +38,3 @@ void QRCodeWidgetTest::testShouldSwitchToFullscreenMode() {
         QVERIFY ( this->qrCodeWidget->size().width() == QApplication::desktop()->size().width() - 96 );
     }
 }
-
-void QRCodeWidgetTest::testShouldSelectAllTransformationModes() {
-    QTest::mouseClick ( this->qrCodeWidget->getUi()->toolButton, Qt::LeftButton );
-
-    for ( int i = 0; i < this->qrCodeWidget->getUi()->transformComboBox->count(); i++ ) {
-        QTest::mouseClick ( this->qrCodeWidget->getUi()->transformComboBox, Qt::LeftButton );
-        this->qrCodeWidget->getUi()->transformComboBox->setCurrentIndex ( i );
-        QCOMPARE ( this->qrCodeWidget->getUi()->transformComboBox->currentIndex(), i );
-    }
-}

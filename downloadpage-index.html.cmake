@@ -18,7 +18,7 @@
 	<div class="automargin">
 		<nav id="topmenu">
 			<ul>
-				<li><a class="menu-link" href="http://blog.mni.thm.de/arsnova/">Aktuelles zu ARSnova</a></li>
+				<li><a class="menu-link" href="https://arsnova.eu/blog/">Aktuelles zu ARSnova</a></li>
 				<li><a class="menu-link" href="#infotext">Hinweise zur Verwendung</a></li>
 				<li><a class="menu-link" href="#downloadselector">Download</a></li>
 			</ul>

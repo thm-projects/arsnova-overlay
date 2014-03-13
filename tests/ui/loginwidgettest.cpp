@@ -63,7 +63,7 @@ void LoginWidgetTest::testShouldGetAndSetLineEditText() {
 }
 
 void LoginWidgetTest::testShouldClearLineEditText() {
-    this->loginWidget->clear();
+    this->loginWidget->setText("");
 
     QVERIFY ( this->loginWidget->text().isEmpty() );
 }
