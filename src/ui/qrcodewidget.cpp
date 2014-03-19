@@ -38,6 +38,10 @@ bool QRCodeWidget::close() {
     QWidget::close();
 }
 
+QRCodeWidget* QRCodeWidget::getFullscreenWidget() const {
+    return this->fullscreenWidget;
+}
+
 void QRCodeWidget::setFullscreen ( bool fullscreen, int screen ) {
     QRect screenGeometry = (
                                screen == -1 || screen > ( QApplication::desktop()->screenCount() - 1 )
@@ -45,7 +49,7 @@ void QRCodeWidget::setFullscreen ( bool fullscreen, int screen ) {
                                : QApplication::desktop()->availableGeometry ( screen )
                            );
 
-    bool isOver = QApplication::desktop()->screenNumber ( this->parentBackup ) == screen;
+    bool isOver = QApplication::desktop()->screenNumber ( this->parentBackup ) == screen || QApplication::desktop()->screenCount() == 1;
 
     if ( fullscreen && this->fullscreenWidget != nullptr ) {
         // Rezize widget with 48px padding on each side

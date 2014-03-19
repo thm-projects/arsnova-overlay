@@ -20,6 +20,7 @@ public:
      */
     const Ui::QRCodeWidget * const getUi();
     virtual void show();
+    QRCodeWidget * getFullscreenWidget() const;
 
 public slots:
     virtual bool close();
