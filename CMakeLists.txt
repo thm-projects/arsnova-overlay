@@ -4,7 +4,7 @@ find_package(Qt4 REQUIRED)
 
 set(VERSION_MAJOR 1)
 set(VERSION_MINOR 0)
-set(VERSION_PATCH 2)
+set(VERSION_PATCH 3)
 
 set(VERSION_SHORT ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH})
 
@@ -125,8 +125,8 @@ IF (WIN32)
     ${QT_LIBRARY_DIR}/libtiff-5.dll
     ${QT_LIBRARY_DIR}/liblzma-5.dll
     ${QT_LIBRARY_DIR}/zlib1.dll
-    ${QT_LIBRARY_DIR}/libssl-8.dll
-    ${QT_LIBRARY_DIR}/libcrypto-8.dll
+    ${QT_LIBRARY_DIR}/libssl-10.dll
+    ${QT_LIBRARY_DIR}/libcrypto-10.dll
     ${CMAKE_CURRENT_BINARY_DIR}/libs/libqrencode.dll
   )
   INSTALL(FILES ${WINQTFILES}
