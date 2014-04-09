@@ -25,6 +25,7 @@ private slots:
     void testShouldDisplayCorrectUrlOnStart();
     void testShouldDisplayCorrectUrlAfterSessionLogin();
     void testShouldSwitchToFullscreenMode();
+    void testShouldShowFullscreenButtonOnSingleScreen();
 };
 
 #endif // QRCODEWIDGETTEST_H

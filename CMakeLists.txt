@@ -125,8 +125,8 @@ IF (WIN32)
     ${QT_LIBRARY_DIR}/libtiff-5.dll
     ${QT_LIBRARY_DIR}/liblzma-5.dll
     ${QT_LIBRARY_DIR}/zlib1.dll
-    ${QT_LIBRARY_DIR}/libssl-8.dll
-    ${QT_LIBRARY_DIR}/libcrypto-8.dll
+    ${QT_LIBRARY_DIR}/libssl-10.dll
+    ${QT_LIBRARY_DIR}/libcrypto-10.dll
     ${CMAKE_CURRENT_BINARY_DIR}/libs/libqrencode.dll
   )
   INSTALL(FILES ${WINQTFILES}
