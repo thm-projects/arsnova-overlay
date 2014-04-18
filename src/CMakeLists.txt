@@ -23,6 +23,7 @@ set(arsnovawidget_SRCS
   qrcodegenerator.cpp
   interposedquestion.cpp
   sessioncontext.cpp
+  abstractconnection.cpp
   settings.cpp
   main.cpp
 )
@@ -85,11 +86,11 @@ set(resources_RCCS
   resources/resources.qrc
 )
 
-qt4_add_resources(resources_RCC_SRCS ${resources_RCCS})
+qt5_add_resources(resources_RCC_SRCS ${resources_RCCS})
 #####
 
-qt4_wrap_cpp(arsnovawidget_SRCS ${arsnovawidget_MOC_SRCS})
-qt4_wrap_ui(arsnovawidget_UIS_H ${arsnovawidget_UIS})
+#qt5_wrap_cpp(arsnovawidget_SRCS ${arsnovawidget_MOC_SRCS})
+qt5_wrap_ui(arsnovawidget_UIS_H ${arsnovawidget_UIS} ${arsnovawidgetplugin_UIS})
 
 IF( WIN32 AND MINGW )
   # To cross compile on Linux use: 'i686-w64-mingw32-windres' or similar command shipped with mingw cross compiler.
@@ -111,13 +112,9 @@ add_executable(arsnovaoverlay MACOSX_BUNDLE WIN32
   ${resources_RCC_SRCS}
 )
 
+qt5_use_modules(arsnovaoverlay Core Widgets Declarative Network Svg)
+
 target_link_libraries(arsnovaoverlay
-  ${QT_QTCORE_LIBRARY}
-  ${QT_QTGUI_LIBRARY}
-  ${QT_QTNETWORK_LIBRARY}
-  ${QT_QTSCRIPT_LIBRARY}
-  ${QT_QTSVG_LIBRARY}
-  ${QT_QTDECLARATIVE_LIBRARY}
   qrencode
 )
 

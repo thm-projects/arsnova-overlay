@@ -1,6 +1,15 @@
 project(arsnovaoverlay)
-cmake_minimum_required(VERSION 2.6)
-find_package(Qt4 REQUIRED)
+cmake_minimum_required(VERSION 2.8.8)
+
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+
+find_package(Qt5Core REQUIRED)
+find_package(Qt5Widgets REQUIRED)
+find_package(Qt5Declarative REQUIRED)
+find_package(Qt5Network REQUIRED)
+find_package(Qt5Svg REQUIRED)
+find_package(Qt5Test REQUIRED)
 
 set(VERSION_MAJOR 1)
 set(VERSION_MINOR 1)

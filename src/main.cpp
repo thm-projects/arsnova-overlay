@@ -39,7 +39,7 @@ int main ( int argc, char** argv ) {
 #endif
 
     QApplication app ( argc, argv );
-    app.setStyle ( "plastique" );
+    app.setStyle ( "fusion" );
     app.setQuitOnLastWindowClosed ( false );
 
     MainWindow mainWindow;

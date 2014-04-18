@@ -1,8 +1,7 @@
 #ifndef SVGLOGO_H
 #define SVGLOGO_H
 
-#include <QtCore>
-#include <QtGui>
+#include <QtWidgets>
 #include <QtSvg>
 
 #include <memory>

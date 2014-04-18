@@ -1,7 +1,7 @@
 #ifndef SETTINGSWIDGET_H
 #define SETTINGSWIDGET_H
 
-#include <QtGui>
+#include <QtWidgets>
 #include "ui_settingswidget.h"
 #include "settings.h"
 #include "sessioncontext.h"

@@ -1,7 +1,7 @@
 #ifndef QRCODEWIDGET_H
 #define QRCODEWIDGET_H
 
-#include <QtGui>
+#include <QtWidgets>
 #include "ui_qrcodewidget.h"
 #include "qrcodegenerator.h"
 #include "sessioncontext.h"
