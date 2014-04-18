@@ -31,13 +31,6 @@ void LoginWidget::setText ( QString text ) {
     }
 }
 
-void LoginWidget::clear() {
-    QDeclarativeItem * dItem = item->findChild<QDeclarativeItem *> ( "sessionIdTextInput" );
-    if ( dItem != nullptr ) {
-        dItem->setProperty ( "text", "" );
-    }
-}
-
 void LoginWidget::on_exitButton_clicked() {
     emit this->exitButtonClicked();
 }

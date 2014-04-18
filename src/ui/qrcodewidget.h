@@ -20,6 +20,10 @@ public:
      */
     const Ui::QRCodeWidget * const getUi();
     virtual void show();
+    QRCodeWidget * getFullscreenWidget() const;
+
+public slots:
+    virtual bool close();
 
 private:
     enum Transformation {
@@ -37,14 +41,15 @@ private:
     void setUrl ( QUrl url );
     SessionContext * _sessionContext;
     QStackedWidget * parentBackup;
-    QPixmap transform ( QPixmap pixmap, Transformation transformation );
-
     QRCodeWidget * fullscreenWidget;
 
 private slots:
     void onSessionChanged();
-    void onTransformationChanged();
     void onFullscreenButtonToggled ( bool );
+    void onFullscreenWidgetClosed();
+
+signals:
+    void closed();
 };
 
 #endif // QRCODEWIDGET_H
