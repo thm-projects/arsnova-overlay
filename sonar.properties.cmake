@@ -1,5 +1,5 @@
 # required metadata
-sonar.projectKey=de.thm.arsnova:arsnova-overlay
+sonar.projectKey=de.thm.arsnova:arsnova-overlay-10
 sonar.projectName=ARSnova Overlay
 sonar.projectVersion=@VERSION_SHORT@
   
