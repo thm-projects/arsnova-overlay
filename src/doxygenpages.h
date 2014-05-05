@@ -28,7 +28,7 @@
  * @mainpage General Information
  *
  * @section description Description
- * ARSnova Overlay is a small widget to display information taken from ars.thm.de
+ * ARSnova Overlay is a small widget to display information taken from arsnova.eu or other ARSnova servers.
  *
  * @section usage Usage
  * You should be able to run ARSnova Overlay from desktop. It starts with a simple
@@ -50,7 +50,7 @@
  * @page build Build instructions
  * This application is based on the Qt Framework. If you could not find a package
  * for your platform you must have installed the following packages:
- *   - Qt Framework 4.8+
+ *   - Qt Framework 5.2+
  *   - CMake
  *   - A C++ compiler (GCC and Clang/LLVM will work fine)
  *
