@@ -31,9 +31,20 @@ MainWindow::MainWindow ( QWidget * parent, Qt::WindowFlags f ) : QMainWindow ( p
 
     connect ( SystemTrayIcon::instance(), SIGNAL ( activated ( QSystemTrayIcon::ActivationReason ) ), this, SLOT ( onSystemTrayActivated ( QSystemTrayIcon::ActivationReason ) ) );
     connect ( this->sessionContext, SIGNAL ( error ( SessionContext::Error ) ) , this, SLOT ( onContextError ( SessionContext::Error ) ) );
-    connect ( this->ui->actionAbout, SIGNAL ( triggered ( bool ) ), this, SLOT ( showInfoDialog() ) );
-    connect ( this->ui->actionExit, SIGNAL ( triggered ( bool ) ), this, SLOT ( exitApplication() ) );
-    connect ( this->ui->actionLogin, SIGNAL ( triggered ( bool ) ), this, SLOT ( showLoginWidget() ) );
+
+    connect ( this->ui->actionAbout, &QAction::triggered, [=] () {
+        if ( ! infoDialog->isVisible() ) {
+            infoDialog->show();
+        }
+    } );
+
+    connect ( this->ui->actionExit, &QAction::triggered, [=] () {
+        exit ( 0 );
+    } );
+
+    connect ( this->ui->actionLogin, &QAction::triggered, [=] () {
+        this->activateWidget ( "Login" );
+    } );
 }
 
 MainWindow::~MainWindow() {
@@ -119,7 +130,9 @@ QWidget * MainWindow::findWidget ( QString widgetTitle ) {
 void MainWindow::connectLoginWidget() {
     LoginWidget * loginWidget = ( LoginWidget * ) this->findWidget ( "Login" );
     if ( loginWidget != nullptr ) {
-        connect ( loginWidget, SIGNAL ( exitButtonClicked() ), this, SLOT ( exitApplication() ) );
+        connect ( loginWidget, &LoginWidget::exitButtonClicked, [=] () {
+            exit ( 0 );
+        } );
         connect ( loginWidget, SIGNAL ( loginButtonClicked() ), this, SLOT ( sessionLogin() ) );
     }
 }
@@ -131,18 +144,4 @@ void MainWindow::sessionLogin() {
         this->sessionContext->connection()->requestSession ( loginWidget->text() );
         this->activateWidget ( "Sessions" );
     }
-}
-
-void MainWindow::exitApplication() {
-    exit ( 0 );
-}
-
-void MainWindow::showInfoDialog() {
-    if ( ! infoDialog->isVisible() ) {
-        infoDialog->show();
-    }
-}
-
-void MainWindow::showLoginWidget() {
-    this->activateWidget ( "Login" );
 }
