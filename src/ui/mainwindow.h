@@ -15,34 +15,37 @@
 #include "ui/settingswidget.h"
 #include "ui/infodialog.h"
 
-class MainWindow : public QMainWindow, Ui::MainWindow {
+class MainWindow : public QMainWindow {
     Q_OBJECT
 
 public:
-    explicit MainWindow ( QWidget * parent = 0, Qt::WindowFlags f = 0 );
+    explicit MainWindow ( QWidget *parent = 0, Qt::WindowFlags f = 0 );
     virtual ~MainWindow();
-    const Ui::MainWindow * const getUi();
-    void addWidget ( QString title, QWidget * widget );
+    const Ui::MainWindow *const getUi();
+    void addWidget ( QString title, QWidget *widget );
 
 private:
-    Ui::MainWindow * ui;
-    QSignalMapper * menuSignalMapper;
-    QMap<QString, QWidget *> * widgetList;
-    OverlayWidget * overlayWidget;
-    SessionContext * sessionContext;
-    InfoDialog * infoDialog;
+    Ui::MainWindow *ui;
+    QSignalMapper *menuSignalMapper;
+    QMap<QString, QWidget *> *widgetList;
+    OverlayWidget *overlayWidget;
+    SessionContext *sessionContext;
+    InfoDialog *infoDialog;
 
     void checkLeftMenuButton ( QString title );
-    QWidget * findWidget ( QString widgetTitle );
+    QWidget *findWidget ( QString widgetTitle );
     void connectLoginWidget();
 
     void disconnectAll();
+
+protected:
+    void closeEvent ( QCloseEvent * event ) override;
 
 private slots:
     void onSystemTrayActivated ( QSystemTrayIcon::ActivationReason reason );
     void activateWidget ( QString widgetTitle );
     void sessionLogin();
-    void onContextError(SessionContext::Error e);
+    void onContextError ( SessionContext::Error e );
 };
 
 #endif // MAINWINDOW_H

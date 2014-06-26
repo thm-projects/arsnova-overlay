@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 
-MainWindow::MainWindow ( QWidget * parent, Qt::WindowFlags f ) : QMainWindow ( parent, f ), ui ( new Ui::MainWindow ) {
+MainWindow::MainWindow ( QWidget *parent, Qt::WindowFlags f ) : QMainWindow ( parent, f ), ui ( new Ui::MainWindow ) {
     ui->setupUi ( this );
 
     QRect frect = frameGeometry();
@@ -13,15 +13,13 @@ MainWindow::MainWindow ( QWidget * parent, Qt::WindowFlags f ) : QMainWindow ( p
     this->widgetList = new QMap<QString, QWidget *>();
     this->sessionContext = new SessionContext ( new HttpConnection() );
 
-    this->addWidget ( "Login", new LoginWidget() );
     this->connectLoginWidget();
 
+    QRCodeWidget *qrwidget = new QRCodeWidget ( this->sessionContext, this->ui->stackedWidget );
+
+    this->addWidget ( "Login", new LoginWidget() );
     this->addWidget ( "Sessions", new SessionWidget ( this->sessionContext ) );
-
-    QRCodeWidget * qrwidget = new QRCodeWidget ( this->sessionContext, this->ui->stackedWidget );
-
     this->addWidget ( "QR-Code", qrwidget );
-
     this->addWidget ( "Settings", new SettingsWidget ( this->sessionContext ) );
 
     this->activateWidget ( "Login" );
@@ -32,17 +30,17 @@ MainWindow::MainWindow ( QWidget * parent, Qt::WindowFlags f ) : QMainWindow ( p
     connect ( SystemTrayIcon::instance(), SIGNAL ( activated ( QSystemTrayIcon::ActivationReason ) ), this, SLOT ( onSystemTrayActivated ( QSystemTrayIcon::ActivationReason ) ) );
     connect ( this->sessionContext, SIGNAL ( error ( SessionContext::Error ) ) , this, SLOT ( onContextError ( SessionContext::Error ) ) );
 
-    connect ( this->ui->actionAbout, &QAction::triggered, [=] () {
+    connect ( this->ui->actionAbout, &QAction::triggered, [ = ]() {
         if ( ! infoDialog->isVisible() ) {
             infoDialog->show();
         }
     } );
 
-    connect ( this->ui->actionExit, &QAction::triggered, [=] () {
+    connect ( this->ui->actionExit, &QAction::triggered, [ = ]() {
         exit ( 0 );
     } );
 
-    connect ( this->ui->actionLogin, &QAction::triggered, [=] () {
+    connect ( this->ui->actionLogin, &QAction::triggered, [ = ]() {
         this->activateWidget ( "Login" );
     } );
 }
@@ -69,12 +67,26 @@ void MainWindow::disconnectAll() {
     disconnect ( this->findWidget ( "Login" ), SIGNAL ( loginButtonClicked() ), this, SLOT ( sessionLogin() ) );
 }
 
-const Ui::MainWindow * const MainWindow::getUi() {
+const Ui::MainWindow *const MainWindow::getUi() {
     return this->ui;
 }
 
-void MainWindow::addWidget ( QString title, QWidget* widget ) {
-    QPushButton * button = new QPushButton ( title );
+void MainWindow::closeEvent ( QCloseEvent *event ) {
+    if ( QMessageBox::StandardButton::Yes ==
+            QMessageBox::question (
+                this,
+                tr ( "Application will be hidden" ),
+                tr ( "ARSnova Overlay will be hidden. Do you wish to close this application instead?" ),
+                QMessageBox::Yes|QMessageBox::No,
+                QMessageBox::No
+            ) ) {
+        exit ( 0 );
+    }
+    QMainWindow::closeEvent(event);
+}
+
+void MainWindow::addWidget ( QString title, QWidget *widget ) {
+    QPushButton *button = new QPushButton ( title );
     button->setCheckable ( true );
     ui->buttonVerticalLayout->addWidget ( button );
     ui->stackedWidget->addWidget ( widget );
@@ -110,14 +122,14 @@ void MainWindow::onContextError ( SessionContext::Error e ) {
 void MainWindow::activateWidget ( QString widgetTitle ) {
     this->checkLeftMenuButton ( widgetTitle );
 
-    QWidget * widget = this->findWidget ( widgetTitle );
+    QWidget *widget = this->findWidget ( widgetTitle );
     if ( widget != nullptr ) {
         ui->stackedWidget->setCurrentWidget ( widget );
         widget->setFocus();
     }
 }
 
-QWidget * MainWindow::findWidget ( QString widgetTitle ) {
+QWidget *MainWindow::findWidget ( QString widgetTitle ) {
     QMap<QString, QWidget *>::iterator i = this->widgetList->find ( widgetTitle );
 
     for ( i = this->widgetList->begin(); i != this->widgetList->end(); ++i ) {
@@ -128,9 +140,9 @@ QWidget * MainWindow::findWidget ( QString widgetTitle ) {
 }
 
 void MainWindow::connectLoginWidget() {
-    LoginWidget * loginWidget = ( LoginWidget * ) this->findWidget ( "Login" );
+    LoginWidget *loginWidget = ( LoginWidget * ) this->findWidget ( "Login" );
     if ( loginWidget != nullptr ) {
-        connect ( loginWidget, &LoginWidget::exitButtonClicked, [=] () {
+        connect ( loginWidget, &LoginWidget::exitButtonClicked, [ = ]() {
             exit ( 0 );
         } );
         connect ( loginWidget, SIGNAL ( loginButtonClicked() ), this, SLOT ( sessionLogin() ) );
@@ -139,7 +151,7 @@ void MainWindow::connectLoginWidget() {
 
 void MainWindow::sessionLogin() {
     this->getUi()->statusbar->showMessage ( tr ( "Connected to session" ), 5000 );
-    LoginWidget * loginWidget = ( LoginWidget * ) this->findWidget ( "Login" );
+    LoginWidget *loginWidget = ( LoginWidget * ) this->findWidget ( "Login" );
     if ( loginWidget != nullptr ) {
         this->sessionContext->connection()->requestSession ( loginWidget->text() );
         this->activateWidget ( "Sessions" );
