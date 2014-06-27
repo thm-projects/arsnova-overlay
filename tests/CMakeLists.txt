@@ -127,7 +127,7 @@ add_executable(tests
   ${resources_RCC_SRCS}
 )
 
-qt5_use_modules(tests Core Widgets Declarative Network Svg Test)
+qt5_use_modules(tests Core Widgets Declarative Network Svg Test WebSockets)
 
 target_link_libraries(tests
   qrencode

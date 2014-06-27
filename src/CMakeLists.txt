@@ -112,7 +112,7 @@ add_executable(arsnovaoverlay MACOSX_BUNDLE WIN32
   ${resources_RCC_SRCS}
 )
 
-qt5_use_modules(arsnovaoverlay Core Widgets Declarative Network Svg)
+qt5_use_modules(arsnovaoverlay Core Widgets Declarative Network Svg WebSockets)
 
 target_link_libraries(arsnovaoverlay
   qrencode

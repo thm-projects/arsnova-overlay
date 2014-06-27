@@ -13,8 +13,6 @@ MainWindow::MainWindow ( QWidget *parent, Qt::WindowFlags f ) : QMainWindow ( pa
     this->widgetList = new QMap<QString, QWidget *>();
     this->sessionContext = new SessionContext ( new HttpConnection() );
 
-    this->connectLoginWidget();
-
     QRCodeWidget *qrwidget = new QRCodeWidget ( this->sessionContext, this->ui->stackedWidget );
 
     this->addWidget ( "Login", new LoginWidget() );
@@ -23,24 +21,25 @@ MainWindow::MainWindow ( QWidget *parent, Qt::WindowFlags f ) : QMainWindow ( pa
     this->addWidget ( "Settings", new SettingsWidget ( this->sessionContext ) );
 
     this->activateWidget ( "Login" );
-
+    this->connectLoginWidget();
+    
     this->overlayWidget = new OverlayWidget ( this->sessionContext, QApplication::desktop()->screen() );
     this->overlayWidget->setVisible ( false );
 
     connect ( SystemTrayIcon::instance(), SIGNAL ( activated ( QSystemTrayIcon::ActivationReason ) ), this, SLOT ( onSystemTrayActivated ( QSystemTrayIcon::ActivationReason ) ) );
     connect ( this->sessionContext, SIGNAL ( error ( SessionContext::Error ) ) , this, SLOT ( onContextError ( SessionContext::Error ) ) );
 
-    connect ( this->ui->actionAbout, &QAction::triggered, [ = ]() {
+    connect ( this->ui->actionAbout, &QAction::triggered, [ = ] ( bool ) {
         if ( ! infoDialog->isVisible() ) {
             infoDialog->show();
         }
     } );
 
-    connect ( this->ui->actionExit, &QAction::triggered, [ = ]() {
+    connect ( this->ui->actionExit, &QAction::triggered, [ = ] ( bool ) {
         exit ( 0 );
     } );
 
-    connect ( this->ui->actionLogin, &QAction::triggered, [ = ]() {
+    connect ( this->ui->actionLogin, &QAction::triggered, [ = ] ( bool ) {
         this->activateWidget ( "Login" );
     } );
 }
@@ -82,7 +81,7 @@ void MainWindow::closeEvent ( QCloseEvent *event ) {
             ) ) {
         exit ( 0 );
     }
-    QMainWindow::closeEvent(event);
+    QMainWindow::closeEvent ( event );
 }
 
 void MainWindow::addWidget ( QString title, QWidget *widget ) {

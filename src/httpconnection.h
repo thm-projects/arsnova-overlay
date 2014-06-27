@@ -3,6 +3,7 @@
 
 #include <QtNetwork>
 #include <QtScript>
+#include <QtWebSockets/QWebSocket>
 
 #include "abstractconnection.h"
 #include "sessionresponse.h"
@@ -20,11 +21,15 @@ public:
     void requestSession ( QString sessionKey ) override;
     void requestActiveUserCount() override;
     void requestAudienceQuestionsCount() override;
+    void requestWebSocketUrl();
+    void requestWebSocketId ();
 
 private:
     QNetworkAccessManager * networkAccessManager;
     QString sessionKey;
+    QString webSocketPath;
     QList<QNetworkCookie> * cookies;
+    QWebSocket * websocket;
 
     QNetworkRequest createRequest ( QUrl url );
     bool isRedirect ( QNetworkReply * reply );
@@ -32,6 +37,7 @@ private:
 
 private slots:
     void handleReply ( QNetworkReply * reply );
+    void onSslError ( QNetworkReply*,QList<QSslError> );
 
 };
 
