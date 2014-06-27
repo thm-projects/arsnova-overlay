@@ -28,6 +28,7 @@ private:
     QNetworkAccessManager * networkAccessManager;
     QString sessionKey;
     QString webSocketPath;
+    QString webSocketId;
     QList<QNetworkCookie> * cookies;
     QWebSocket * websocket;
 

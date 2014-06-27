@@ -14,7 +14,7 @@ HttpConnection::HttpConnection ()
         )
     );
 
-    this->websocket = new QWebSocket ( "https://arsnova.eu", QWebSocketProtocol::Version13 );
+    this->websocket = new QWebSocket ( "", QWebSocketProtocol::Version13 );
 
     connect ( this->websocket, &QWebSocket::textMessageReceived, [=] ( QString message ) {
         qDebug() << message;
@@ -57,7 +57,7 @@ HttpConnection::HttpConnection ()
         }
         if ( state == QAbstractSocket::UnconnectedState ) {
             // Try to reconnect
-            //this->requestWebSocketId();
+            this->requestSession ( this->sessionKey );
         }
     } );
 }
@@ -78,6 +78,10 @@ void HttpConnection::requestActiveUserCount() {
 }
 
 void HttpConnection::requestSession ( QString sessionKey ) {
+    // cleanup websocket
+    this->websocket->close();
+    this->webSocketPath.clear();
+
     this->sessionKey = sessionKey;
     this->networkAccessManager->get (
         this->createRequest (
@@ -226,7 +230,7 @@ void HttpConnection::handleReply ( QNetworkReply * reply ) {
         this->requestWebSocketId ();
     } else if ( reply->url().path().contains ( "/socket.io/1/" ) ) {
         if ( QString::fromUtf8 ( response.data() ).split ( ":" ).size() > 0 ) {
-            QString webSocketId = QString::fromUtf8 ( response.data() ).split ( ":" ).at ( 0 );
+            this->webSocketId = QString::fromUtf8 ( response.data() ).split ( ":" ).at ( 0 );
 
             QNetworkRequest request = this->createRequest (
                                           QUrl (
@@ -234,22 +238,22 @@ void HttpConnection::handleReply ( QNetworkReply * reply ) {
                                           )
                                       );
             request.setHeader ( QNetworkRequest::ContentTypeHeader, "application/json" );
-            QByteArray data = QByteArray ( "{\"session\":\"" + webSocketId.toUtf8() + "\"}" );
+            QByteArray data = QByteArray ( "{\"session\":\"" + this->webSocketId.toUtf8() + "\"}" );
             qDebug() << data;
             this->networkAccessManager->post (
                 request,
                 data
             );
-
-            QString wsPath = this->webSocketPath;
-            QUrl wsUrl = QUrl ( wsPath.replace ( "http","ws" ) + "/socket.io/1/websocket/" + webSocketId );
-            qDebug() << wsUrl;
-            this->websocket->open ( wsUrl );
-            qDebug() << "WS connect";
         } else {
             qDebug() << "WS close";
             this->websocket->close();
         }
+    } else if ( reply->url().path().contains ( "/socket/assign" ) ) {
+        QString wsPath = this->webSocketPath;
+        QUrl wsUrl = QUrl ( wsPath.replace ( "http","ws" ) + "/socket.io/1/websocket/" + this->webSocketId );
+        qDebug() << wsUrl;
+        this->websocket->open ( wsUrl );
+        qDebug() << "WS connect";
     }
 }
 
