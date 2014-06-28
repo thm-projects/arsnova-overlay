@@ -8,7 +8,6 @@ void MainWindowTest::initTestCase() {
 }
 
 void MainWindowTest::cleanupTestCase() {
-    this->mainWindow->close();
     delete this->mainWindow;
 }
 
