@@ -35,7 +35,7 @@ void QRCodeWidget::show() {
 
 bool QRCodeWidget::close() {
     emit this->closed();
-    QWidget::close();
+    return QWidget::close();
 }
 
 QRCodeWidget* QRCodeWidget::getFullscreenWidget() const {
