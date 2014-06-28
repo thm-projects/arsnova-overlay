@@ -10,6 +10,7 @@ find_package(Qt5Declarative REQUIRED)
 find_package(Qt5Network REQUIRED)
 find_package(Qt5Svg REQUIRED)
 find_package(Qt5Test REQUIRED)
+find_package(Qt5WebSockets REQUIRED)
 
 set(VERSION_MAJOR 1)
 set(VERSION_MINOR 1)
@@ -43,8 +44,6 @@ option (TESTS "Enable build of tests" OFF)
 option (COVERAGE "Enable coverage" OFF)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-set(EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR}/bin)
-set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR}/libs)
 
 CONFIGURE_FILE( version.h.cmake src/version.h )
 CONFIGURE_FILE( Doxyfile.cmake Doxyfile )
@@ -120,17 +119,17 @@ IF (WIN32)
     # This part should contain DLL files to be included in package e.g.:
     ${QT_LIBRARY_DIR}/libgcc_s_sjlj-1.dll
     ${QT_LIBRARY_DIR}/libstdc++-6.dll
-    ${QT_LIBRARY_DIR}/QtCore4.dll
-    ${QT_LIBRARY_DIR}/QtDeclarative4.dll
-    ${QT_LIBRARY_DIR}/QtGui4.dll
-    ${QT_LIBRARY_DIR}/QtNetwork4.dll
-    ${QT_LIBRARY_DIR}/QtScript4.dll
-    ${QT_LIBRARY_DIR}/QtSvg4.dll
-    ${QT_LIBRARY_DIR}/QtSql4.dll
-    ${QT_LIBRARY_DIR}/QtXml4.dll
-    ${QT_LIBRARY_DIR}/QtXmlPatterns4.dll
+    ${QT_LIBRARY_DIR}/Qt5Core.dll
+    ${QT_LIBRARY_DIR}/Qt5Quick.dll
+    ${QT_LIBRARY_DIR}/Qt5Gui.dll
+    ${QT_LIBRARY_DIR}/Qt5Network.dll
+    ${QT_LIBRARY_DIR}/Qt5Widgets.dll
+    ${QT_LIBRARY_DIR}/Qt5Svg.dll
+    ${QT_LIBRARY_DIR}/Qt5Sql.dll
+    ${QT_LIBRARY_DIR}/Qt5Xml.dll
+    ${QT_LIBRARY_DIR}/Qt5XmlPatterns.dll
     ${QT_LIBRARY_DIR}/libjpeg-8.dll
-    ${QT_LIBRARY_DIR}/libpng15-15.dll
+    ${QT_LIBRARY_DIR}/libpng16-16.dll
     ${QT_LIBRARY_DIR}/libtiff-5.dll
     ${QT_LIBRARY_DIR}/liblzma-5.dll
     ${QT_LIBRARY_DIR}/zlib1.dll
