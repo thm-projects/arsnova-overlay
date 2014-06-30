@@ -15,7 +15,6 @@ HttpConnection::HttpConnection ()
     this->websocket = new QWebSocket ( "", QWebSocketProtocol::Version13 );
 
     connect ( this->websocket, &QWebSocket::textMessageReceived, [=] ( QString message ) {
-        qDebug() << message;
         if ( message == "2::" ) {
             // Send Socket.IO Keepalive
             this->websocket->sendTextMessage ( "2::" );
@@ -38,10 +37,6 @@ HttpConnection::HttpConnection ()
                 }
             }
         }
-    } );
-
-    connect ( this->websocket, &QWebSocket::binaryMessageReceived, [=] ( QByteArray message ) {
-        qDebug() << message;
     } );
 
     connect ( this->websocket, &QWebSocket::sslErrors, [=] ( QList<QSslError>  errors ) {
@@ -161,9 +156,6 @@ bool HttpConnection::isRedirect ( QNetworkReply* reply ) {
 
 void HttpConnection::onSslError ( QNetworkReply* reply, QList< QSslError > errors ) {
     reply->ignoreSslErrors ( errors );
-    for ( QSslError error : errors.toStdList() ) {
-        qDebug() << error.errorString();
-    }
 }
 
 void HttpConnection::handleReply ( QNetworkReply * reply ) {
@@ -175,7 +167,7 @@ void HttpConnection::handleReply ( QNetworkReply * reply ) {
     }
 
     if ( reply->url().path().contains ( "auth/login" ) ) {
-        foreach ( QNetworkCookie cookie, qvariant_cast<QList<QNetworkCookie> > ( reply->header ( QNetworkRequest::SetCookieHeader ) ) ) {
+        for ( QNetworkCookie cookie : ( qvariant_cast<QList<QNetworkCookie> > ( reply->header ( QNetworkRequest::SetCookieHeader ) ) ).toStdList() ) {
             this->addCookie ( cookie );
         }
         return;
