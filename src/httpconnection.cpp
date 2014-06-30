@@ -1,7 +1,5 @@
 #include "httpconnection.h"
 
-// 25 00 36 58
-
 HttpConnection::HttpConnection ()
     : networkAccessManager ( new QNetworkAccessManager() ),
       cookies ( new QList<QNetworkCookie>() ) {
@@ -21,6 +19,7 @@ HttpConnection::HttpConnection ()
         if ( message == "2::" ) {
             // Send Socket.IO Keepalive
             this->websocket->sendTextMessage ( "2::" );
+            this->sendOnlinePing();
         }
 
         if ( message.startsWith ( "5:::" ) ) {
@@ -130,6 +129,17 @@ void HttpConnection::requestWebSocketId () {
                 this->webSocketPath + "/socket.io/1/"
             )
         )
+    );
+}
+
+void HttpConnection::sendOnlinePing() {
+    this->networkAccessManager->post (
+        this->createRequest (
+            QUrl (
+                Settings::instance()->serverUrl().toString() + "/session/" + sessionKey + "/online"
+            )
+        ),
+        ""
     );
 }
 
@@ -286,7 +296,4 @@ void HttpConnection::addCookie ( QNetworkCookie cookie ) {
     }
     this->cookies->append ( cookie );
 }
-
-
-
 

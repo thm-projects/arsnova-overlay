@@ -23,6 +23,7 @@ public:
     void requestAudienceQuestionsCount() override;
     void requestWebSocketUrl();
     void requestWebSocketId ();
+    void sendOnlinePing();
 
 private:
     QNetworkAccessManager * networkAccessManager;
