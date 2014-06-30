@@ -276,12 +276,13 @@ QNetworkRequest HttpConnection::createRequest ( QUrl url ) {
             this->cookies->at ( 0 ).name() + "=" + this->cookies->at ( 0 ).value()
         );
     }
+    request.setRawHeader ( "Accept", "application/json" );
+    request.setRawHeader ( "Content-Type", "application/json" );
+
     if ( this->username.isEmpty() || this->password.isEmpty() ) return request;
     QByteArray headerValue = "Basic "
                              + ( this->username + ":" + this->password ).toLocal8Bit().toBase64();
     request.setRawHeader ( "Authorization", headerValue );
-    request.setRawHeader ( "Accept", "application/json" );
-    request.setRawHeader ( "Content-Type", "application/json" );
     return request;
 }
 
