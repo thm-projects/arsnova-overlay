@@ -121,7 +121,7 @@ IF (WIN32)
     ${QT_LIBRARY_DIR}/QtXml4.dll
     ${QT_LIBRARY_DIR}/QtXmlPatterns4.dll
     ${QT_LIBRARY_DIR}/libjpeg-8.dll
-    ${QT_LIBRARY_DIR}/libpng15-15.dll
+    ${QT_LIBRARY_DIR}/libpng16-16.dll
     ${QT_LIBRARY_DIR}/libtiff-5.dll
     ${QT_LIBRARY_DIR}/liblzma-5.dll
     ${QT_LIBRARY_DIR}/zlib1.dll
