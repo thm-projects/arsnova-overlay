@@ -120,7 +120,7 @@ const Ui::QRCodeWidget * const QRCodeWidget::getUi() {
 }
 
 void QRCodeWidget::onSessionChanged() {
-    this->setUrl ( Settings::instance()->serverUrl().toString() + QString ( "#id/" ) + _sessionContext->sessionId() );
+    this->setUrl ( Settings::instance()->serverUrl().toString() + QString ( "/#id/" ) + _sessionContext->sessionId() );
 }
 
 void QRCodeWidget::onFullscreenButtonToggled ( bool enabled ) {
