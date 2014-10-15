@@ -32,7 +32,7 @@
 		    Wenn Sie Ihre Präsentationen durch ARSnova unterstützen möchten oder einfach nur zeigen wollen, wie Ihr Vortrag ankommt
 		    - ARSnova Overlay unterstützt Sie dabei.
 		  </p>
-		  <a class="bold-link" href="http://blog.mni.thm.de/arsnova/">Aktuelles zu ARSnova</a>
+		  <a class="bold-link" href="https://arsnova.eu/blog/">Aktuelles zu ARSnova</a>
 		</div>
 		<article id="infotext">
 			<h2>Nutzen Sie ARSnova Overlay für Ihre Präsentationen</h2>
