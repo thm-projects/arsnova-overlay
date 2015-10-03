@@ -144,7 +144,7 @@ ENDIF (WIN32)
 
 # CPACK
 INCLUDE(InstallRequiredSystemLibraries)
-SET(CPACK_RESOURCE_FILE_LICENSE "COPYING")
+SET(CPACK_RESOURCE_FILE_LICENSE  ${CMAKE_CURRENT_SOURCE_DIR}/COPYING)
 SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "ARSnova Overlay is a small widget to display information taken from arsnova.thm.de")
 SET(CPACK_PACKAGE_VENDOR "Paul-Christian Volkmer <paul-christian.volkmer@mni.thm.de>")
 SET(CPACK_PACKAGE_CONTACT "Paul-Christian Volkmer <paul-christian.volkmer@mni.thm.de>")
@@ -217,4 +217,5 @@ IF (APPLE)
   SET(CPACK_BUNDLE_PLIST ${CMAKE_CURRENT_BINARY_DIR}/Info.plist)
   SET(CPACK_BUNDLE_ICON ${CMAKE_CURRENT_BINARY_DIR}/src/resources/images/arsnovaoverlay.icns)
 ENDIF (APPLE)
+
 INCLUDE(CPack)
