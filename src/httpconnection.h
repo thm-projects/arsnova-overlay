@@ -22,8 +22,6 @@ public:
     void requestActiveUserCount() override;
     void requestAudienceQuestionsCount() override;
     void requestWebSocketUrl();
-    void requestWebSocketId ();
-    void sendOnlinePing();
 
 private:
     QNetworkAccessManager * networkAccessManager;
@@ -32,12 +30,14 @@ private:
     QString webSocketId;
     QList<QNetworkCookie> * cookies;
     QWebSocket * websocket;
+    int wsPingInterval = 0;
 
     QNetworkRequest createRequest ( QUrl url );
     bool isRedirect ( QNetworkReply * reply );
     void addCookie ( QNetworkCookie cookie );
 
 private slots:
+    void sendPong ();
     void handleReply ( QNetworkReply * reply );
     void onSslError ( QNetworkReply*,QList<QSslError> );
 

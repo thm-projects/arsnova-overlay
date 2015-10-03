@@ -8,33 +8,64 @@ HttpConnection::HttpConnection ()
 
     this->networkAccessManager->get (
         this->createRequest (
-            QUrl ( Settings::instance()->serverUrl().toString() + "/auth/login?type=guest" )
+            QUrl ( Settings::instance()->serverUrl().toString() + "/api/auth/login?type=guest" )
         )
     );
+    this->requestWebSocketUrl();
 
     this->websocket = new QWebSocket ( "", QWebSocketProtocol::Version13 );
 
     connect ( this->websocket, &QWebSocket::textMessageReceived, [=] ( QString message ) {
-        if ( message == "2::" ) {
-            // Send Socket.IO Keepalive
-            this->websocket->sendTextMessage ( "2::" );
-            this->sendOnlinePing();
+
+        // Connected to Socket.IO
+        if ( message.startsWith ( "0" ) ) {
+            message = message.remove ( 0,1 );
+            QJsonDocument doc = QJsonDocument::fromJson ( message.toUtf8() );
+            if ( doc.isObject() && doc.object().contains ( "pingInterval" ) ) {
+                this->wsPingInterval = doc.object().value ( "pingInterval" ).toInt();
+            }
+            if ( doc.isObject() && doc.object().contains ( "sid" ) ) {
+                this->webSocketId = doc.object().value ( "sid" ).toString();
+
+                QNetworkRequest request = this->createRequest (
+                                              QUrl (
+                                                  Settings::instance()->serverUrl().toString() + "/api/socket/assign"
+                                              )
+                                          );
+                request.setHeader ( QNetworkRequest::ContentTypeHeader, "application/json" );
+                QByteArray data = QByteArray ( "{\"session\":\"" + this->webSocketId.toUtf8() + "\"}" );
+
+                this->networkAccessManager->post (
+                    request,
+                    data
+                );
+            }
         }
 
-        if ( message.startsWith ( "5:::" ) ) {
-            QJsonDocument doc = QJsonDocument::fromJson ( message.replace ( "5:::","" ).toUtf8() );
-            if ( doc.isObject() && doc.object().contains ( "name" ) &&  doc.object().contains ( "args" ) ) {
-                if ( doc.object().value ( "name" ) == "feedbackData" && doc.object().value ( "args" ).toArray().size() == 1 ) {
-                    QJsonArray array = doc.object().value ( "args" ).toArray().at ( 0 ).toArray();
-                    emit this->requestFinished (
-                        FeedbackResponse (
-                            array.at ( FeedbackResponse::FEEDBACK_OK ).toInt(),
-                            array.at ( FeedbackResponse::FEEDBACK_FASTER ).toInt(),
-                            array.at ( FeedbackResponse::FEEDBACK_SLOWER ).toInt(),
-                            array.at ( FeedbackResponse::FEEDBACK_AWAY ).toInt()
-                        )
-                    );
-                }
+        // Ping
+        if ( message.startsWith ( "3" ) ) {
+            QTimer::singleShot ( this->wsPingInterval, this, &HttpConnection::sendPong );
+        }
+
+        // Socket.IO Init
+        if ( message.startsWith ( "40" ) ) {
+            QTimer::singleShot ( this->wsPingInterval, this, &HttpConnection::sendPong );
+        }
+
+        // Regular message from ARSnova
+        if ( message.startsWith ( "42" ) ) {
+            message = message.remove ( 0,2 );
+            QJsonDocument doc = QJsonDocument::fromJson ( message.toUtf8() );
+            if ( doc.isArray() && doc.array().contains ( "feedbackData" ) ) {
+                QJsonArray array = doc.array().last().toArray();
+                emit this->requestFinished (
+                    FeedbackResponse (
+                        array.at ( FeedbackResponse::FEEDBACK_OK ).toInt(),
+                        array.at ( FeedbackResponse::FEEDBACK_FASTER ).toInt(),
+                        array.at ( FeedbackResponse::FEEDBACK_SLOWER ).toInt(),
+                        array.at ( FeedbackResponse::FEEDBACK_AWAY ).toInt()
+                    )
+                );
             }
         }
     } );
@@ -45,15 +76,15 @@ HttpConnection::HttpConnection ()
     } );
 
     connect ( this->websocket, &QWebSocket::stateChanged, [=] ( QAbstractSocket::SocketState state ) {
-        qDebug() << state;
-        if ( state == QAbstractSocket::ConnectedState ) {
-            this->websocket->sendTextMessage ( "2::" );
-        }
         if ( state == QAbstractSocket::UnconnectedState ) {
             // Try to reconnect
             this->requestSession ( this->sessionKey );
         }
     } );
+}
+
+void HttpConnection::sendPong() {
+    this->websocket->sendTextMessage ( "2" );
 }
 
 HttpConnection::~HttpConnection() {
@@ -65,30 +96,29 @@ void HttpConnection::requestActiveUserCount() {
     this->networkAccessManager->get (
         this->createRequest (
             QUrl (
-                Settings::instance()->serverUrl().toString() + "/session/" + sessionKey + "/activeusercount"
+                Settings::instance()->serverUrl().toString() + "/api/session/" + sessionKey + "/activeusercount"
             )
         )
     );
 }
 
 void HttpConnection::requestSession ( QString sessionKey ) {
-    // cleanup websocket
-    this->websocket->close();
-    this->webSocketPath.clear();
-
     this->sessionKey = sessionKey;
     this->networkAccessManager->get (
         this->createRequest (
-            QUrl ( Settings::instance()->serverUrl().toString() + "/session/" + sessionKey )
+            QUrl ( Settings::instance()->serverUrl().toString() + "/api/session/" + sessionKey )
         )
     );
+
+    QString message = "42[\"setSession\",{\"keyword\":\"" + sessionKey + "\"}]";
+    this->websocket->sendTextMessage ( message );
 }
 
 void HttpConnection::requestFeedback() {
     this->networkAccessManager->get (
         this->createRequest (
             QUrl (
-                Settings::instance()->serverUrl().toString() + "/session/" + sessionKey + "/feedback"
+                Settings::instance()->serverUrl().toString() + "/api/session/" + sessionKey + "/feedback"
             )
         )
     );
@@ -98,7 +128,7 @@ void HttpConnection::requestAudienceQuestionsCount() {
     this->networkAccessManager->get (
         this->createRequest (
             QUrl (
-                Settings::instance()->serverUrl().toString() + "/audiencequestion/readcount?sessionkey=" + sessionKey
+                Settings::instance()->serverUrl().toString() + "/api/audiencequestion/readcount?sessionkey=" + sessionKey
             )
         )
     );
@@ -108,33 +138,9 @@ void HttpConnection::requestWebSocketUrl() {
     this->networkAccessManager->get (
         this->createRequest (
             QUrl (
-                Settings::instance()->serverUrl().toString() + "/socket/url/"
+                Settings::instance()->serverUrl().toString() + "/api/socket/url/"
             )
         )
-    );
-}
-
-void HttpConnection::requestWebSocketId () {
-    if ( this->webSocketPath.startsWith ( "ws" ) ) {
-        this->webSocketPath = this->webSocketPath.replace ( "ws", "http" );
-    }
-    this->networkAccessManager->get (
-        this->createRequest (
-            QUrl (
-                this->webSocketPath + "/socket.io/1/"
-            )
-        )
-    );
-}
-
-void HttpConnection::sendOnlinePing() {
-    this->networkAccessManager->post (
-        this->createRequest (
-            QUrl (
-                Settings::instance()->serverUrl().toString() + "/session/" + sessionKey + "/online"
-            )
-        ),
-        ""
     );
 }
 
@@ -162,7 +168,6 @@ void HttpConnection::handleReply ( QNetworkReply * reply ) {
     reply->deleteLater();
 
     if ( reply->error() != QNetworkReply::NoError ) {
-        qDebug() << reply->request().url() << reply->errorString();
         emit this->requestError();
     }
 
@@ -203,47 +208,20 @@ void HttpConnection::handleReply ( QNetworkReply * reply ) {
     } else if ( reply->url().path().contains ( "/activeusercount" ) ) {
         int value = responseValue->toInteger();
         emit this->requestFinished ( LoggedInResponse ( value ) );
-    } else if ( reply->url().path().contains ( "/session" ) &&  !reply->url().path().contains ( "/online" ) ) {
+    } else if ( reply->url().path().contains ( "/session" ) ) {
         QString sessionKey = responseValue->property ( "keyword" ).toString();
         QString shortName = responseValue->property ( "shortName" ).toString();
         QString name = responseValue->property ( "name" ).toString();
-        this->requestWebSocketUrl();
         emit this->requestFinished ( SessionResponse ( sessionKey, shortName, name ) );
     } else if ( reply->url().path().contains ( "/audiencequestion/readcount" ) ) {
         int read = responseValue->property ( "read" ).toInteger();
         int unread = responseValue->property ( "unread" ).toInteger();
 
         emit this->requestFinished ( AudienceQuestionCountResponse ( read, unread, read+unread ) );
-    } else if ( reply->url().path().contains ( "/socket/url/" ) ) {
-        qDebug() << QString::fromUtf8 ( response.data() );
+    } else if ( reply->url().path().contains ( "/api/socket/url/" ) ) {
         this->webSocketPath = QString::fromUtf8 ( response.data() );
-        this->requestWebSocketId ();
-    } else if ( reply->url().path().contains ( "/socket.io/1/" ) ) {
-        if ( QString::fromUtf8 ( response.data() ).split ( ":" ).size() > 0 ) {
-            this->webSocketId = QString::fromUtf8 ( response.data() ).split ( ":" ).at ( 0 );
-
-            QNetworkRequest request = this->createRequest (
-                                          QUrl (
-                                              Settings::instance()->serverUrl().toString() + "/socket/assign"
-                                          )
-                                      );
-            request.setHeader ( QNetworkRequest::ContentTypeHeader, "application/json" );
-            QByteArray data = QByteArray ( "{\"session\":\"" + this->webSocketId.toUtf8() + "\"}" );
-            qDebug() << data;
-            this->networkAccessManager->post (
-                request,
-                data
-            );
-        } else {
-            qDebug() << "WS close";
-            this->websocket->close();
-        }
-    } else if ( reply->url().path().contains ( "/socket/assign" ) ) {
-        QString wsPath = this->webSocketPath;
-        QUrl wsUrl = QUrl ( wsPath.replace ( "http","ws" ) + "/socket.io/1/websocket/" + this->webSocketId );
-        qDebug() << wsUrl;
+        QUrl wsUrl = QUrl ( this->webSocketPath.replace ( "http","ws" ) + "/socket.io/?EIO=2&transport=websocket" );
         this->websocket->open ( wsUrl );
-        qDebug() << "WS connect";
     }
 }
 
