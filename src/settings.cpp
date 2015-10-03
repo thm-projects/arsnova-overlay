@@ -50,10 +50,10 @@ void Settings::setWidgetPosition ( Settings::WidgetPosition widgetPosition ) {
 
 QUrl Settings::serverUrl() {
     if ( qsettings->value ( "serverUrl" ).isNull() ) {
-        return QUrl ( "https://arsnova.eu/" );
+        return QUrl ( "https://arsnova.eu" );
     }
     QString result = qsettings->value ( "serverUrl" ).toString();
-    return result.endsWith ( "/" ) ? QUrl ( result ) : QUrl ( result.append ( "/" ) );
+    return result.endsWith ( "/" ) ? QUrl ( result.remove( QRegExp( "/$" ) ) ) : QUrl ( result );
 }
 
 void Settings::setServerUrl ( QUrl serverUrl ) {

@@ -98,7 +98,7 @@ void HttpConnection::requestAudienceQuestionsCount() {
     this->networkAccessManager->get (
         this->createRequest (
             QUrl (
-                Settings::instance()->serverUrl().toString() + "/audiencequestion/?sessionkey=" + sessionKey
+                Settings::instance()->serverUrl().toString() + "/audiencequestion/readcount?sessionkey=" + sessionKey
             )
         )
     );
@@ -209,22 +209,10 @@ void HttpConnection::handleReply ( QNetworkReply * reply ) {
         QString name = responseValue->property ( "name" ).toString();
         this->requestWebSocketUrl();
         emit this->requestFinished ( SessionResponse ( sessionKey, shortName, name ) );
-    } else if ( reply->url().path().contains ( "/audiencequestion" ) ) {
-        if ( ! responseValue->isArray() ) {
-            return;
-        }
-        int read = 0;
-        int unread = 0;
+    } else if ( reply->url().path().contains ( "/audiencequestion/readcount" ) ) {
+        int read = responseValue->property ( "read" ).toInteger();
+        int unread = responseValue->property ( "unread" ).toInteger();
 
-        for ( int i = 0; i < responseValue->toVariant().toList().size(); i++ ) {
-            if ( ! responseValue->property ( i ).property ( "read" ).isBool() ) continue;
-
-            if ( responseValue->property ( i ).property ( "read" ).toBool() ) {
-                read++;
-            } else {
-                unread++;
-            }
-        }
         emit this->requestFinished ( AudienceQuestionCountResponse ( read, unread, read+unread ) );
     } else if ( reply->url().path().contains ( "/socket/url/" ) ) {
         qDebug() << QString::fromUtf8 ( response.data() );
@@ -289,4 +277,3 @@ void HttpConnection::addCookie ( QNetworkCookie cookie ) {
     }
     this->cookies->append ( cookie );
 }
-

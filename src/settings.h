@@ -21,6 +21,7 @@
 #ifndef SETTINGS_H
 #define SETTINGS_H
 
+#include <QRegExp>
 #include <QSettings>
 #include <QUrl>
 #include <memory>
