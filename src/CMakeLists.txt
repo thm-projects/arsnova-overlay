@@ -125,7 +125,7 @@ IF(APPLE)
       \"\${CMAKE_INSTALL_PREFIX}/../..\"
     )"
   )
-  INSTALL(CODE "EXECUTE_PROCESS(COMMAND macdeployqt ./bin/arsnovaoverlay.app)")
+  INSTALL(CODE "EXECUTE_PROCESS(COMMAND ${QTDIR}/macdeployqt ${CMAKE_CURRENT_SOURCE_DIR}/arsnovaoverlay.app)")
   INSTALL(TARGETS arsnovaoverlay BUNDLE DESTINATION ../../../)
 ENDIF(APPLE)
 

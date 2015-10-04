@@ -1,6 +1,6 @@
 /**
- *   Copyright (C) 2013  Paul-Christian Volkmer
- *   <paul-christian.volkmer@mni.thm.de>
+ *   Copyright (C) 2015  Paul-Christian Volkmer
+ *   <mail@pcvolkmer.de>
  *
  *   This file is part of ARSnova Overlay.
  *
@@ -66,7 +66,12 @@
  * @code
  *   cmake . && make
  * @endcode
- * in the projects sourcecode folder. The binary will be available in 'bin' folder.
+ * in the projects sourcecode folder.
+ *
+ * Systems with OS X require an prepared environment to point to the clang_64 folder:
+ * @code
+ *   export QTDIR=/Application/Qt5.x.y/5.x/clang_64
+ * @endcode
  *
  * To create an installation package, type:
  * @code

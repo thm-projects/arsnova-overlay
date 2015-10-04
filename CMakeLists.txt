@@ -78,6 +78,7 @@ IF (UNIX AND NOT APPLE)
 ENDIF (UNIX AND NOT APPLE)
 
 if(APPLE)
+  set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} ";${QTDIR}/lib/cmake;")
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
   set(CMAKE_EXE_LINKER_FLAGS "-framework Foundation -w -stdlib=libc++")
 endif(APPLE)
