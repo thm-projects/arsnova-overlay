@@ -97,6 +97,7 @@ void OverlayWidget::setVisibleViewType ( SessionContext::ViewType type ) {
         this->setWindowFlags (
             Qt::Window
             | Qt::FramelessWindowHint
+            | Qt::NoDropShadowWindowHint
             | Qt::WindowStaysOnTopHint
             | Qt::X11BypassWindowManagerHint
         );
@@ -110,6 +111,7 @@ void OverlayWidget::setVisibleViewType ( SessionContext::ViewType type ) {
         this->setWindowFlags (
             Qt::Window
             | Qt::FramelessWindowHint
+            | Qt::NoDropShadowWindowHint
             | Qt::WindowStaysOnTopHint
             | Qt::X11BypassWindowManagerHint
         );
@@ -123,6 +125,7 @@ void OverlayWidget::setVisibleViewType ( SessionContext::ViewType type ) {
         this->setWindowFlags (
             Qt::Window
             | Qt::FramelessWindowHint
+            | Qt::NoDropShadowWindowHint
             | Qt::WindowStaysOnTopHint
             | Qt::X11BypassWindowManagerHint
         );
