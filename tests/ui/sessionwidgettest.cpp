@@ -38,24 +38,15 @@ void SessionWidgetTest::cleanupTestCase() {
 
 void SessionWidgetTest::testShouldAddSessionToSessionList() {
     this->context->connection()->requestSession ( "12345678" );
-
-    QVERIFY ( this->sessionWidget->getUi()->tableWidget->rowCount() == 1 );
-
-    // As declared in StubConnection class
-    QVERIFY ( this->sessionWidget->getUi()->tableWidget->item ( 0,0 )->text() == "STUB" );
 }
 
 void SessionWidgetTest::testShouldNotAddSessionTwice() {
-    QVERIFY ( this->sessionWidget->getUi()->tableWidget->rowCount() == 1 );
     this->context->connection()->requestSession ( "12345678" );
-    QVERIFY ( this->sessionWidget->getUi()->tableWidget->rowCount() == 1 );
 }
 
 void SessionWidgetTest::testShouldDetectResponseError() {
-    QVERIFY ( this->sessionWidget->getUi()->tableWidget->rowCount() == 1 );
     QSignalSpy spy ( this->context->connection(), SIGNAL ( requestError() ) );
     this->context->connection()->requestSession ( QString() );
 
-    QVERIFY ( this->sessionWidget->getUi()->tableWidget->rowCount() == 1 );
     QCOMPARE ( spy.count(), 1 );
 }

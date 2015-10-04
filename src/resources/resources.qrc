@@ -24,5 +24,6 @@
     <file>ui/login.qml</file>
     <file>ui/bardiagram.qml</file>
     <file>ui/sessioninformation.qml</file>
+    <file>ui/sessionlist.qml</file>
   </qresource>
 </RCC>

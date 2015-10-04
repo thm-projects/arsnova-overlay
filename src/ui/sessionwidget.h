@@ -21,7 +21,7 @@ private:
 public slots:
     void onUnderstandingResponse ( FeedbackResponse response );
     void onSessionResponse ( SessionResponse response );
-    void onItemClicked ( QTableWidgetItem * item );
+    void onItemClicked ( QString sessionKey );
     void onViewModeChanged();
     
     void onBarDiagramSelected();

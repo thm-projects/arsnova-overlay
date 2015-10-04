@@ -15,14 +15,14 @@ MainWindow::MainWindow ( QWidget *parent, Qt::WindowFlags f ) : QMainWindow ( pa
 
     QRCodeWidget *qrwidget = new QRCodeWidget ( this->sessionContext, this->ui->stackedWidget );
 
-    this->addWidget ( "Login", new LoginWidget() );
+    //this->addWidget ( "Login", new LoginWidget() );
     this->addWidget ( "Sessions", new SessionWidget ( this->sessionContext ) );
     this->addWidget ( "QR-Code", qrwidget );
     this->addWidget ( "Settings", new SettingsWidget ( this->sessionContext ) );
 
-    this->activateWidget ( "Login" );
+    this->activateWidget ( "Sessions" );
     this->connectLoginWidget();
-    
+
     this->overlayWidget = new OverlayWidget ( this->sessionContext, QApplication::desktop()->screen() );
     this->overlayWidget->setVisible ( false );
 
@@ -114,7 +114,7 @@ void MainWindow::onSystemTrayActivated ( QSystemTrayIcon::ActivationReason reaso
 }
 
 void MainWindow::onContextError ( SessionContext::Error e ) {
-    this->activateWidget ( "Login" );
+    this->activateWidget ( "Sessions" );
     this->getUi()->statusbar->showMessage ( tr ( "Unable to request session from server" ), 5000 );
 }
 

@@ -9,7 +9,7 @@ SessionWidget::SessionWidget ( SessionContext * context, QWidget * parent, Qt::W
 
     connect ( this->connection, SIGNAL ( requestFinished ( FeedbackResponse ) ), this, SLOT ( onUnderstandingResponse ( FeedbackResponse ) ) );
     connect ( this->connection, SIGNAL ( requestFinished ( SessionResponse ) ), this, SLOT ( onSessionResponse ( SessionResponse ) ) );
-    connect ( _ui->tableWidget, SIGNAL ( itemClicked ( QTableWidgetItem* ) ), this, SLOT ( onItemClicked ( QTableWidgetItem* ) ) );
+    connect ( _ui->sessionListWidget, SIGNAL ( sessionChanged ( QString ) ), this, SLOT ( onItemClicked ( QString ) ) );
 
     connect ( _ui->diagramRadioButton, SIGNAL ( clicked ( bool ) ), this, SLOT ( onViewModeChanged() ) );
     connect ( _ui->iconRadioButton, SIGNAL ( clicked ( bool ) ), this, SLOT ( onViewModeChanged() ) );
@@ -38,28 +38,18 @@ void SessionWidget::onUnderstandingResponse ( FeedbackResponse response ) {
 }
 
 void SessionWidget::onSessionResponse ( SessionResponse response ) {
-    if ( ! this->context->isValid() ) return;
+    if ( ! this->context->isValid() || response.sessionId().isEmpty() ) return;
 
-    QList<QTableWidgetItem *> items = _ui->tableWidget->findItems ( response.sessionId(), Qt::MatchExactly );
-    if ( items.count() > 0 ) {
-        items.at ( 0 )->setSelected ( true );
-        return;
-    }
+    QVariantMap newSession;
+    newSession.insert ( "keyword", response.sessionId() );
+    newSession.insert ( "name", response.name() );
+    newSession.insert ( "shortName", response.shortName() );
+    newSession.insert ( "active", true );
 
-    _ui->tableWidget->insertRow ( _ui->tableWidget->rowCount() );
-
-    int newRow = _ui->tableWidget->rowCount()-1;
-    _ui->tableWidget->selectRow ( newRow );
-
-    _ui->tableWidget->setItem ( newRow, 0, new QTableWidgetItem ( response.shortName() ) );
-    _ui->tableWidget->setItem ( newRow, 1, new QTableWidgetItem ( response.name() ) );
-    _ui->tableWidget->setItem ( newRow, 2, new QTableWidgetItem ( response.sessionId() ) );
+    _ui->sessionListWidget->addSession ( newSession );
 }
 
-void SessionWidget::onItemClicked ( QTableWidgetItem * item ) {
-    _ui->tableWidget->selectRow ( item->row() );
-    QString sessionKey = _ui->tableWidget->item ( item->row(), 2 )->text();
-
+void SessionWidget::onItemClicked ( QString sessionKey ) {
     this->connection->requestSession ( sessionKey );
 }
 

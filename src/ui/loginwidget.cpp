@@ -38,4 +38,3 @@ void LoginWidget::on_exitButton_clicked() {
 void LoginWidget::on_loginButton_clicked() {
     emit this->loginButtonClicked();
 }
-

@@ -331,44 +331,7 @@
     </widget>
    </item>
    <item row="0" column="0">
-    <widget class="QTableWidget" name="tableWidget">
-     <property name="frameShape">
-      <enum>QFrame::Box</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Plain</enum>
-     </property>
-     <property name="editTriggers">
-      <set>QAbstractItemView::NoEditTriggers</set>
-     </property>
-     <property name="alternatingRowColors">
-      <bool>true</bool>
-     </property>
-     <property name="selectionMode">
-      <enum>QAbstractItemView::SingleSelection</enum>
-     </property>
-     <property name="selectionBehavior">
-      <enum>QAbstractItemView::SelectRows</enum>
-     </property>
-     <attribute name="verticalHeaderVisible">
-      <bool>false</bool>
-     </attribute>
-     <column>
-      <property name="text">
-       <string>Shortname</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Name</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Session-Key</string>
-      </property>
-     </column>
-    </widget>
+    <widget class="SessionListWidget" name="sessionListWidget" native="true"/>
    </item>
   </layout>
  </widget>
@@ -387,6 +350,12 @@
    <class>EmoteDiagramWidget</class>
    <extends>QWidget</extends>
    <header>ui/emotediagramwidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>SessionListWidget</class>
+   <extends>QWidget</extends>
+   <header>ui/sessionlistwidget.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources>

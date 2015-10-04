@@ -5,6 +5,7 @@ set(arsnovawidget_SRCS
   ui/overlaywidget.cpp
   ui/qrcodewidget.cpp
   ui/sessionwidget.cpp
+  ui/sessionlistwidget.cpp
   ui/systemtrayicon.cpp
   ui/settingswidget.cpp
   ui/infodialog.cpp

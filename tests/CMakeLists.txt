@@ -2,6 +2,7 @@ include_directories(
   ${QT_INCLUDES}
   ${CMAKE_CURRENT_BINARY_DIR}
   ${CMAKE_CURRENT_BINARY_DIR}/../src/
+  ${CMAKE_CURRENT_SOURCE_DIR}/../src/
 )
 
 set(arsnovawidget_SRCS
@@ -24,6 +25,7 @@ set(arsnovawidget_SRCS
   ui/mainwindowtest.cpp
   ../src/ui/mainwindow.cpp
   ../src/ui/sessionwidget.cpp
+  ../src/ui/sessionlistwidget.cpp
   ../src/ui/infodialog.cpp
   ui/sessionwidgettest.cpp
   ui/qrcodewidgettest.cpp

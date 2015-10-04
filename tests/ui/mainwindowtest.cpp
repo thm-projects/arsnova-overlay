@@ -17,7 +17,7 @@ void MainWindowTest::testShouldDisplayMainWindow() {
 
 void MainWindowTest::testThatMainWindowContainsBasicLeftMenu() {
     QList<QPushButton *> buttons = this->mainWindow->getUi()->leftMenu->findChildren<QPushButton *>();
-    QVERIFY ( buttons.size() == 4 );
+    QVERIFY ( buttons.size() == 3 );
 }
 
 void MainWindowTest::testShouldDisplaySessionWidget() {
@@ -44,6 +44,6 @@ void MainWindowTest::testShouldDisplayLoginWidget() {
 
     QCOMPARE (
         this->mainWindow->getUi()->stackedWidget->currentWidget()->metaObject()->className(),
-        "LoginWidget"
+        "SessionWidget"
     );
 }
