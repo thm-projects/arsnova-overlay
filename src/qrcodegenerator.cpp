@@ -15,11 +15,7 @@ QImage QRCodeGenerator::generate ( ) {
     int index = 0;
     for ( int y = 0; y <= this->qrcode->width - 1; y++ ) {
         for ( int x = 0; x <= this->qrcode->width - 1; x++ ) {
-#ifdef __APPLE__
-            image.setPixel ( x,y, ( this->qrcode->data[index] & 1 ) ? 1 : 0 );
-#else
             image.setPixel ( x,y, ( this->qrcode->data[index] & 1 ) ? 0 : 1 );
-#endif
             index++;
         }
     }
