@@ -12,17 +12,7 @@ Rectangle {
         y: 112 - height
         width: 24
         height: 0
-        gradient: Gradient {
-            GradientStop {
-                position: 0
-                color: "#7ab844"
-            }
-
-            GradientStop {
-                position: 1
-                color: "#52901c"
-            }
-        }
+        color: "#80ba24"
 
         Behavior on height { PropertyAnimation { easing.type: Easing.OutBounce; easing.amplitude: 2.0; easing.period: 1.5; duration: 750 } }
     }
@@ -34,17 +24,7 @@ Rectangle {
         y: 112 - height
         width: 24
         height: 0
-        gradient: Gradient {
-            GradientStop {
-                position: 0
-                color: "#fec929"
-            }
-
-            GradientStop {
-                position: 1
-                color: "#d6a100"
-            }
-        }
+        color: "#f2a900"
 
         Behavior on height { PropertyAnimation { easing.type: Easing.OutBounce; easing.amplitude: 2.0; easing.period: 1.5; duration: 750 } }
     }
@@ -56,18 +36,8 @@ Rectangle {
         y: 112 - height
         width: 24
         height: 0
-        gradient: Gradient {
-            GradientStop {
-                position: 0
-                color: "#ed601c"
-            }
-
-            GradientStop {
-                position: 1
-                color: "#c53800"
-            }
-        }
-
+        color: "#971b2f"
+	
         Behavior on height { PropertyAnimation { easing.type: Easing.OutBounce; easing.amplitude: 2.0; easing.period: 1.5; duration: 750 } }
     }
 
@@ -78,17 +48,7 @@ Rectangle {
         y: 112 - height
         width: 24
         height: 0
-        gradient: Gradient {
-            GradientStop {
-                position: 0
-                color: "#ebebeb"
-            }
-
-            GradientStop {
-                position: 1
-                color: "#c3c3c3"
-            }
-        }
+        color: "#4a5c66"
 
         Behavior on height { PropertyAnimation { easing.type: Easing.OutBounce; easing.amplitude: 2.0; easing.period: 1.5; duration: 750 } }
     }
