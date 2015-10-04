@@ -43,6 +43,7 @@ private:
     void moveToEdge ( int screen = -1 );
     void connectSignals();
     void setVisibleViewType ( SessionContext::ViewType type );
+    void paintEvent ( QPaintEvent * event );
 
 public slots:
     virtual void show();

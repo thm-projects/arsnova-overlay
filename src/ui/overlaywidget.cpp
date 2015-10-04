@@ -162,3 +162,10 @@ void OverlayWidget::onAudienceQuestionCountResponse ( AudienceQuestionCountRespo
 void OverlayWidget::onSettingsChanged() {
     this->moveToEdge ( Settings::instance()->screen() );
 }
+
+void OverlayWidget::paintEvent ( QPaintEvent * event ) {
+    QPainter p ( this );
+    p.setCompositionMode ( QPainter::CompositionMode_Clear );
+    p.fillRect ( this->rect (), Qt::transparent );
+    QWidget::paintEvent ( event );
+}
