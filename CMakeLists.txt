@@ -121,14 +121,25 @@ IF (WIN32)
     ${QT_LIBRARY_DIR}/libgcc_s_sjlj-1.dll
     ${QT_LIBRARY_DIR}/libstdc++-6.dll
     ${QT_LIBRARY_DIR}/Qt5Core.dll
-    ${QT_LIBRARY_DIR}/Qt5Quick.dll
+    ${QT_LIBRARY_DIR}/Qt5Declarative.dll
     ${QT_LIBRARY_DIR}/Qt5Gui.dll
     ${QT_LIBRARY_DIR}/Qt5Network.dll
+    ${QT_LIBRARY_DIR}/Qt5WebSockets.dll
     ${QT_LIBRARY_DIR}/Qt5Widgets.dll
+    ${QT_LIBRARY_DIR}/Qt5Script.dll
     ${QT_LIBRARY_DIR}/Qt5Svg.dll
     ${QT_LIBRARY_DIR}/Qt5Sql.dll
     ${QT_LIBRARY_DIR}/Qt5Xml.dll
     ${QT_LIBRARY_DIR}/Qt5XmlPatterns.dll
+    ${QT_LIBRARY_DIR}/libEGL.dll
+    ${QT_LIBRARY_DIR}/libGLESv2.dll
+    ${QT_LIBRARY_DIR}/libharfbuzz-0.dll
+    ${QT_LIBRARY_DIR}/icudata56.dll
+    ${QT_LIBRARY_DIR}/icui18n56.dll
+    ${QT_LIBRARY_DIR}/icuuc56.dll
+    ${QT_LIBRARY_DIR}/libpcre16-0.dll
+    ${QT_LIBRARY_DIR}/libfreetype-6.dll
+    ${QT_LIBRARY_DIR}/libglib-2.0-0.dll
     ${QT_LIBRARY_DIR}/libjpeg-8.dll
     ${QT_LIBRARY_DIR}/libpng16-16.dll
     ${QT_LIBRARY_DIR}/libtiff-5.dll
@@ -136,10 +147,15 @@ IF (WIN32)
     ${QT_LIBRARY_DIR}/zlib1.dll
     ${QT_LIBRARY_DIR}/libssl-10.dll
     ${QT_LIBRARY_DIR}/libcrypto-10.dll
-    ${CMAKE_CURRENT_BINARY_DIR}/libs/libqrencode.dll
+    ${QT_LIBRARY_DIR}/libintl-8.dll
+    ${CMAKE_CURRENT_BINARY_DIR}/extern/libqrencode.dll
   )
   INSTALL(FILES ${WINQTFILES}
     DESTINATION .
+  )
+  INSTALL(FILES
+    ${QT_LIBRARY_DIR}/lib/i386-pc/qt5/plugins/platforms/qwindows.dll
+    DESTINATION ./platforms
   )
 ENDIF (WIN32)
 
