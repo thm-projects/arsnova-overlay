@@ -61,12 +61,13 @@ Item {
                 anchors.verticalCenter: parent.verticalCenter
                 border.color: "#dedede"
                 height: 32
-                width: 140 - 8
+                width: 200 - 8
                 x: 8
                 radius: 2
                 TextInput {
                     id: sessionIdTextInput
                     anchors.centerIn: parent
+                    font.family: "Courier New"
                     font.bold: true
                     font.pixelSize: 22
                     maximumLength: 8
@@ -173,11 +174,12 @@ Item {
                     height: 32
                     color: active ? "#e7efe7" : "#fff"
                     Row {
-                        x: 8
-                        width: 140
+                        x: 24
+                        width: 200
                         anchors.verticalCenter: parent.verticalCenter
                         Text {
                             text: formatSessionKey(keyword);
+                            font.family: "Courier New"
                             font.bold: true
                             font.pixelSize: 22
                             anchors.verticalCenter: parent.verticalCenter

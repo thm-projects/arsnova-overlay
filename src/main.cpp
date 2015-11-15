@@ -1,6 +1,6 @@
 /***************************************************************************
- *   Copyright (C) 2014  Paul-Christian Volkmer
- *   <paul-christian.volkmer@mni.thm.de>
+ *   Copyright (C) 2015  Paul-Christian Volkmer
+ *   <github@pcvolkmer.de>
  *
  *   This file is part of ARSnova Overlay.
  *
@@ -28,16 +28,7 @@
 #include "httpconnection.h"
 #include "ui/systemtrayicon.h"
 
-#ifdef __APPLE__
-extern "C" int startApplication ( int argc, char ** argv );
-extern "C" int stopApplication();
-#endif
-
 int main ( int argc, char** argv ) {
-#ifdef __APPLE__
-    startApplication ( argc, argv );
-#endif
-
     QApplication app ( argc, argv );
     app.setStyle ( "fusion" );
     app.setQuitOnLastWindowClosed ( false );
@@ -47,9 +38,6 @@ int main ( int argc, char** argv ) {
 
     SystemTrayIcon::instance()->show();
 
-#ifdef __APPLE__
-    stopApplication();
-#endif
     return app.exec();
 }
 

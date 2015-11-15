@@ -21,7 +21,6 @@
     <file>images/emotes/face-wink.svg</file>
   </qresource>
   <qresource prefix="qml">
-    <file>ui/login.qml</file>
     <file>ui/bardiagram.qml</file>
     <file>ui/sessioninformation.qml</file>
     <file>ui/sessionlist.qml</file>
