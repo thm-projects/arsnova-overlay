@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>780</width>
-    <height>460</height>
+    <height>465</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -19,13 +19,13 @@
   <property name="minimumSize">
    <size>
     <width>780</width>
-    <height>460</height>
+    <height>465</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>780</width>
-    <height>460</height>
+    <height>465</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -77,19 +77,14 @@
      <number>0</number>
     </property>
     <item row="0" column="0">
-     <layout class="QHBoxLayout" name="horizontalLayout">
+     <layout class="QVBoxLayout" name="stackedWidgetVerticalLayout">
       <property name="spacing">
        <number>0</number>
       </property>
       <item>
-       <layout class="QVBoxLayout" name="stackedWidgetVerticalLayout">
-        <property name="spacing">
-         <number>0</number>
-        </property>
-        <item>
-         <widget class="QWidget" name="topMenu" native="true">
-          <property name="styleSheet">
-           <string notr="true">QWidget {
+       <widget class="QWidget" name="topMenu" native="true">
+        <property name="styleSheet">
+         <string notr="true">QWidget {
 	background-color: #fff;
 	border-bottom: 3px solid #dfe8d7;
 }
@@ -127,65 +122,63 @@ QPushButton[accessibleName=&quot;infoButton&quot;]:hover {
 	width: 48px;
 }
 </string>
-          </property>
-          <layout class="QVBoxLayout" name="leftMenuLayout">
+        </property>
+        <layout class="QVBoxLayout" name="leftMenuLayout">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <layout class="QHBoxLayout" name="buttonHorizontalLayout">
            <property name="spacing">
             <number>0</number>
            </property>
-           <property name="leftMargin">
-            <number>0</number>
-           </property>
-           <property name="topMargin">
-            <number>0</number>
-           </property>
-           <property name="rightMargin">
-            <number>0</number>
-           </property>
-           <property name="bottomMargin">
-            <number>0</number>
-           </property>
-           <item>
-            <layout class="QHBoxLayout" name="buttonHorizontalLayout">
-             <property name="spacing">
-              <number>0</number>
-             </property>
-            </layout>
-           </item>
           </layout>
-         </widget>
-        </item>
-        <item>
-         <widget class="QStackedWidget" name="stackedWidget">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>780</width>
-            <height>402</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>780</width>
-            <height>402</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">background: white;</string>
-          </property>
-          <property name="frameShape">
-           <enum>QFrame::NoFrame</enum>
-          </property>
-          <property name="lineWidth">
-           <number>0</number>
-          </property>
-         </widget>
-        </item>
-       </layout>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QStackedWidget" name="stackedWidget">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>780</width>
+          <height>402</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>780</width>
+          <height>402</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background: white;</string>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::NoFrame</enum>
+        </property>
+        <property name="lineWidth">
+         <number>0</number>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>
