@@ -9,7 +9,7 @@ graphical user interface which allows to enter a ARSnova session key.
 After entering a valid key, the application will show some information about
 the session this application is connected to.
 
-For more information see the users manual.
+For more information see the [user manual](https://arsnova.thm.de/blog/handbuch/mit-live-feedback-praesentieren/).
 
 ## More information
 
