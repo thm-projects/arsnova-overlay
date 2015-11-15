@@ -9,8 +9,6 @@ set(arsnovawidget_SRCS
   ../src/svglogo.cpp
   svglogotest.cpp
   ../src/feedbackresponse.cpp
-  ../src/ui/loginwidget.cpp
-  ui/loginwidgettest.cpp
   ../src/ui/bardiagramwidget.cpp
   ui/bardiagramwidgettest.cpp
   ../src/ui/logodiagramwidget.cpp
@@ -48,26 +46,10 @@ set(arsnovawidget_SRCS
   main.cpp
 )
 
-set(arsnovawidget_MAC_SRCS
-)
-
-set_source_files_properties(
-  ${arsnovawidget_MAC_SRCS} PROPERTIES LANGUAGE C
-)
-
-if(APPLE)
-  set(arsnovawidget_SRCS
-    ${arsnovawidget_SRCS}
-    ${arsnovawidget_MAC_SRCS}
-  )
-endif(APPLE)
-
 set(arsnovawidget_MOC_SRCS
   ../src/svglogo.h
   svglogotest.h
   ../src/feedbackresponse.h
-  ../src/ui/loginwidget.h
-  ui/loginwidgettest.h
   ../src/ui/bardiagramwidget.h
   ui/bardiagramwidgettest.h
   ../src/ui/logodiagramwidget.h
@@ -152,7 +134,6 @@ add_custom_command(TARGET coverage POST_BUILD
 endif (TESTS AND COVERAGE)
 
 add_test(SvgLogoTest ${EXECUTABLE_OUTPUT_PATH}/tests SvgLogoTest)
-add_test(LoginWidgetTest ${EXECUTABLE_OUTPUT_PATH}/tests LoginWidgetTest)
 add_test(BarDiagramWidgetTest ${EXECUTABLE_OUTPUT_PATH}/tests BarDiagramWidgetTest)
 add_test(LogoDiagramWidgetTest ${EXECUTABLE_OUTPUT_PATH}/tests LogoDiagramWidgetTest)
 add_test(EmoteDiagramWidgetTest ${EXECUTABLE_OUTPUT_PATH}/tests EmoteDiagramWidgetTest)

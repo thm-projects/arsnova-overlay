@@ -24,8 +24,6 @@ private slots:
     void testShouldShowYellowLogo();
     void testShouldShowRedLogo();
     void testShouldShowGrayLogo();
-
-    void testShouldShowMiddleGreenYellowLogo();
 };
 
 #endif // SVGLOGOTEST_H

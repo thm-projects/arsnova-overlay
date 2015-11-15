@@ -15,13 +15,14 @@ void MainWindowTest::testShouldDisplayMainWindow() {
     QVERIFY ( this->mainWindow->isVisible() );
 }
 
-void MainWindowTest::testThatMainWindowContainsBasicLeftMenu() {
-    QList<QPushButton *> buttons = this->mainWindow->getUi()->leftMenu->findChildren<QPushButton *>();
-    QVERIFY ( buttons.size() == 3 );
+void MainWindowTest::testThatMainWindowContainsBasicTopMenu() {
+    QList<QPushButton *> buttons = this->mainWindow->getUi()->topMenu->findChildren<QPushButton *>();
+    // 3 Widgets and About Button
+    QVERIFY ( buttons.size() == 4 );
 }
 
 void MainWindowTest::testShouldDisplaySessionWidget() {
-    QList<QPushButton *> buttons = this->mainWindow->getUi()->leftMenu->findChildren<QPushButton *>();
+    QList<QPushButton *> buttons = this->mainWindow->getUi()->topMenu->findChildren<QPushButton *>();
     foreach ( QPushButton * button, buttons ) {
         if ( button->text() == "Sessions" ) {
             QTest::mouseClick ( button, Qt::LeftButton );
@@ -35,7 +36,7 @@ void MainWindowTest::testShouldDisplaySessionWidget() {
 }
 
 void MainWindowTest::testShouldDisplayLoginWidget() {
-    QList<QPushButton *> buttons = this->mainWindow->getUi()->leftMenu->findChildren<QPushButton *>();
+    QList<QPushButton *> buttons = this->mainWindow->getUi()->topMenu->findChildren<QPushButton *>();
     foreach ( QPushButton * button, buttons ) {
         if ( button->text() == "Login" ) {
             QTest::mouseClick ( button, Qt::LeftButton );

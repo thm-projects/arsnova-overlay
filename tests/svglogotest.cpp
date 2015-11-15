@@ -12,32 +12,26 @@ void SvgLogoTest::cleanupTestCase() {
 
 void SvgLogoTest::testShouldShowGreenLogo() {
     this->svgLogo->updateFromResponse ( FeedbackResponse ( 10,0,0,0 ) );
-    QCOMPARE ( this->svgLogo->color(), QColor ( qRgb ( 122, 184, 68 ) ) );
+    QCOMPARE ( this->svgLogo->color(), QColor ( qRgb ( 128, 187, 36 ) ) );
 }
 
 void SvgLogoTest::testShouldShowYellowLogo() {
     this->svgLogo->updateFromResponse ( FeedbackResponse ( 0,10,0,0 ) );
-    QCOMPARE ( this->svgLogo->color(), QColor ( qRgb ( 254, 201, 41 ) ) );
+    QCOMPARE ( this->svgLogo->color(), QColor ( qRgb ( 242, 169, 0 ) ) );
 
     this->svgLogo->updateFromResponse ( FeedbackResponse ( 10,0,10,0 ) );
-    QCOMPARE ( this->svgLogo->color(), QColor ( qRgb ( 254, 201, 41 ) ) );
+    QCOMPARE ( this->svgLogo->color(), QColor ( qRgb ( 242, 169, 0 ) ) );
 }
 
 void SvgLogoTest::testShouldShowRedLogo() {
     this->svgLogo->updateFromResponse ( FeedbackResponse ( 0,0,10,0 ) );
-    QCOMPARE ( this->svgLogo->color(), QColor ( qRgb ( 237, 96, 28 ) ) );
+    QCOMPARE ( this->svgLogo->color(), QColor ( qRgb ( 151, 27, 47 ) ) );
 
     this->svgLogo->updateFromResponse ( FeedbackResponse ( 0,10,0,10 ) );
-    QCOMPARE ( this->svgLogo->color(), QColor ( qRgb ( 237, 96, 28 ) ) );
+    QCOMPARE ( this->svgLogo->color(), QColor ( qRgb ( 151, 27, 47 ) ) );
 }
 
 void SvgLogoTest::testShouldShowGrayLogo() {
     this->svgLogo->updateFromResponse ( FeedbackResponse ( 0,0,0,10 ) );
-    QCOMPARE ( this->svgLogo->color(), QColor ( qRgb ( 235, 235, 235 ) ) );
+    QCOMPARE ( this->svgLogo->color(), QColor ( qRgb ( 74, 92, 102 ) ) );
 }
-
-void SvgLogoTest::testShouldShowMiddleGreenYellowLogo() {
-    this->svgLogo->updateFromResponse ( FeedbackResponse ( 10,10,0,0 ) );
-    QCOMPARE ( this->svgLogo->color(), QColor ( qRgb ( 188, 192, 54 ) ) );
-}
-

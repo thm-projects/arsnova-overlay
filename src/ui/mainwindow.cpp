@@ -14,7 +14,6 @@ MainWindow::MainWindow ( QWidget *parent, Qt::WindowFlags f ) : QMainWindow ( pa
     this->sessionContext = new SessionContext ( new HttpConnection() );
 
     QRCodeWidget *qrwidget = new QRCodeWidget ( this->sessionContext, this->ui->stackedWidget );
-
     ui->buttonHorizontalLayout->addSpacing ( 1 );
     this->addWidget ( "Sessions", new SessionWidget ( this->sessionContext ) );
     this->addWidget ( "QR-Code", qrwidget );
@@ -23,9 +22,7 @@ MainWindow::MainWindow ( QWidget *parent, Qt::WindowFlags f ) : QMainWindow ( pa
     infoButton = new QPushButton ( "About" );
     infoButton->setAccessibleName ( "infoButton" );
     ui->buttonHorizontalLayout->addWidget ( infoButton );
-
     this->activateWidget ( "Sessions" );
-    this->connectLoginWidget();
 
     this->overlayWidget = new OverlayWidget ( this->sessionContext, QApplication::desktop()->screen() );
     this->overlayWidget->setVisible ( false );
@@ -38,11 +35,6 @@ MainWindow::MainWindow ( QWidget *parent, Qt::WindowFlags f ) : QMainWindow ( pa
             infoDialog->show();
         }
     } );
-
-    connect ( this->ui->actionExit, &QAction::triggered, [ = ] ( bool ) {
-        exit ( 0 );
-    } );
-
 }
 
 MainWindow::~MainWindow() {
@@ -63,8 +55,6 @@ MainWindow::~MainWindow() {
 void MainWindow::disconnectAll() {
     disconnect ( SystemTrayIcon::instance(), SIGNAL ( activated ( QSystemTrayIcon::ActivationReason ) ), this, SLOT ( onSystemTrayActivated ( QSystemTrayIcon::ActivationReason ) ) );
     disconnect ( this->menuSignalMapper, SIGNAL ( mapped ( QString ) ), this, SLOT ( activateWidget ( QString ) ) );
-    disconnect ( this->findWidget ( "Login" ), SIGNAL ( exitButtonClicked() ), this, SLOT ( exitApplication() ) );
-    disconnect ( this->findWidget ( "Login" ), SIGNAL ( loginButtonClicked() ), this, SLOT ( sessionLogin() ) );
 }
 
 const Ui::MainWindow *const MainWindow::getUi() {
@@ -97,14 +87,10 @@ void MainWindow::addWidget ( QString title, QWidget *widget ) {
     connect ( this->menuSignalMapper, SIGNAL ( mapped ( QString ) ), this, SLOT ( activateWidget ( QString ) ) );
 }
 
-void MainWindow::checkLeftMenuButton ( QString title ) {
+void MainWindow::checkTopMenuButton ( QString title ) {
     QList<QPushButton *> buttons = ui->topMenu->findChildren<QPushButton *>();
-    foreach ( QPushButton * button, buttons ) {
-        if ( button->text() == title ) {
-            button->setChecked ( true );
-        } else {
-            button->setChecked ( false );
-        }
+    for ( QPushButton * button : buttons ) {
+        button->setChecked ( button->text() == title );
     }
 }
 
@@ -120,7 +106,7 @@ void MainWindow::onContextError ( SessionContext::Error e ) {
 }
 
 void MainWindow::activateWidget ( QString widgetTitle ) {
-    this->checkLeftMenuButton ( widgetTitle );
+    this->checkTopMenuButton ( widgetTitle );
 
     QWidget *widget = this->findWidget ( widgetTitle );
     if ( widget != nullptr ) {
@@ -137,23 +123,4 @@ QWidget *MainWindow::findWidget ( QString widgetTitle ) {
     }
 
     return nullptr;
-}
-
-void MainWindow::connectLoginWidget() {
-    LoginWidget *loginWidget = ( LoginWidget * ) this->findWidget ( "Login" );
-    if ( loginWidget != nullptr ) {
-        connect ( loginWidget, &LoginWidget::exitButtonClicked, [ = ]() {
-            exit ( 0 );
-        } );
-        connect ( loginWidget, SIGNAL ( loginButtonClicked() ), this, SLOT ( sessionLogin() ) );
-    }
-}
-
-void MainWindow::sessionLogin() {
-    this->getUi()->statusbar->showMessage ( tr ( "Connected to session" ), 5000 );
-    LoginWidget *loginWidget = ( LoginWidget * ) this->findWidget ( "Login" );
-    if ( loginWidget != nullptr ) {
-        this->sessionContext->connection()->requestSession ( loginWidget->text() );
-        this->activateWidget ( "Sessions" );
-    }
 }

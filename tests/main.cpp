@@ -3,7 +3,6 @@
 #include <QApplication>
 
 #include "svglogotest.h"
-#include "ui/loginwidgettest.h"
 #include "ui/bardiagramwidgettest.h"
 #include "ui/logodiagramwidgettest.h"
 #include "ui/emotediagramwidgettest.h"
@@ -22,9 +21,6 @@ int main ( int argc, char ** argv ) {
     if ( QString ( argv[argc-1] ) == "SvgLogoTest" ) {
         SvgLogoTest svgLogoTest;
         return QTest::qExec ( &svgLogoTest, argc-1, argv );
-    } else if ( QString ( argv[argc-1] ) == "LoginWidgetTest" ) {
-        LoginWidgetTest loginWidgetTest;
-        return QTest::qExec ( &loginWidgetTest, argc-1, argv );
     } else if ( QString ( argv[argc-1] ) == "BarDiagramWidgetTest" ) {
         BarDiagramWidgetTest barDiagramWidgetTest;
         return QTest::qExec ( &barDiagramWidgetTest, argc-1, argv );

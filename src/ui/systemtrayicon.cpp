@@ -30,7 +30,7 @@ SystemTrayIcon::SystemTrayIcon ( QIcon icon ) : QSystemTrayIcon ( icon, QApplica
 }
 
 SystemTrayIcon::~SystemTrayIcon() {
-    foreach ( QAction * action, this->menu->actions() ) {
+    for ( QAction * action : this->menu->actions() ) {
         this->menu->removeAction ( action );
         delete action;
     }

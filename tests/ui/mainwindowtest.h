@@ -20,7 +20,7 @@ private slots:
     void cleanupTestCase();
 
     void testShouldDisplayMainWindow();
-    void testThatMainWindowContainsBasicLeftMenu();
+    void testThatMainWindowContainsBasicTopMenu();
     void testShouldDisplaySessionWidget();
     void testShouldDisplayLoginWidget();
 

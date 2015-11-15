@@ -9,6 +9,10 @@ set(arsnovawidget_SRCS
   ui/systemtrayicon.cpp
   ui/settingswidget.cpp
   ui/infodialog.cpp
+  ui/bardiagramwidget.cpp
+  ui/logodiagramwidget.cpp
+  ui/emotediagramwidget.cpp
+  ui/sessioninformationwidget.cpp
   updatetimer.cpp
   httpconnection.cpp
   sessionresponse.cpp
@@ -16,11 +20,6 @@ set(arsnovawidget_SRCS
   loggedinresponse.cpp
   audiencequestioncountresponse.cpp
   svglogo.cpp
-  ui/loginwidget.cpp
-  ui/bardiagramwidget.cpp
-  ui/logodiagramwidget.cpp
-  ui/emotediagramwidget.cpp
-  ui/sessioninformationwidget.cpp
   qrcodegenerator.cpp
   interposedquestion.cpp
   sessioncontext.cpp
@@ -37,6 +36,10 @@ set(arsnovawidget_MOC_SRCS
   ui/systemtrayicon.h
   ui/settingswidget.h
   ui/infodialog.h
+  ui/bardiagramwidget.h
+  ui/logodiagramwidget.h
+  ui/emotediagramwidget.h
+  ui/sessioninformationwidget.h
   updatetimer.h
   abstractconnection.h
   httpconnection.h
@@ -45,11 +48,6 @@ set(arsnovawidget_MOC_SRCS
   loggedinresponse.h
   audiencequestioncountresponse.h
   svglogo.h
-  ui/loginwidget.h
-  ui/bardiagramwidget.h
-  ui/logodiagramwidget.h
-  ui/emotediagramwidget.h
-  ui/sessioninformationwidget.h
   qrcodegenerator.h
   interposedquestion.h
   sessioncontext.h

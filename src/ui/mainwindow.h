@@ -5,15 +5,15 @@
 
 #include "version.h"
 #include "ui_mainwindow.h"
-#include "ui/loginwidget.h"
 #include "ui/qrcodewidget.h"
 #include "ui/sessionwidget.h"
 #include "ui/overlaywidget.h"
-#include "sessioncontext.h"
-#include "ui/systemtrayicon.h"
-#include "httpconnection.h"
 #include "ui/settingswidget.h"
 #include "ui/infodialog.h"
+#include "ui/systemtrayicon.h"
+#include "sessioncontext.h"
+#include "httpconnection.h"
+
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
@@ -33,9 +33,8 @@ private:
     InfoDialog *infoDialog;
     QPushButton * infoButton;
 
-    void checkLeftMenuButton ( QString title );
+    void checkTopMenuButton ( QString title );
     QWidget *findWidget ( QString widgetTitle );
-    void connectLoginWidget();
 
     void disconnectAll();
 
@@ -45,7 +44,6 @@ protected:
 private slots:
     void onSystemTrayActivated ( QSystemTrayIcon::ActivationReason reason );
     void activateWidget ( QString widgetTitle );
-    void sessionLogin();
     void onContextError ( SessionContext::Error e );
 };
 
