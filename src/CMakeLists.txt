@@ -29,21 +29,6 @@ set(arsnovawidget_SRCS
   main.cpp
 )
 
-set(arsnovawidget_MAC_SRCS
-  main.m
-)
-
-set_source_files_properties(
-  ${arsnovawidget_MAC_SRCS} PROPERTIES LANGUAGE C
-)
-
-if(APPLE)
-  set(arsnovawidget_SRCS
-    ${arsnovawidget_SRCS}
-    ${arsnovawidget_MAC_SRCS}
-  )
-endif(APPLE)
-
 set(arsnovawidget_MOC_SRCS
   ui/mainwindow.h
   ui/overlaywidget.h
@@ -126,7 +111,7 @@ IF(APPLE)
       \"\${CMAKE_INSTALL_PREFIX}/../..\"
     )"
   )
-  INSTALL(CODE "EXECUTE_PROCESS(COMMAND ${QTDIR}/macdeployqt ${CMAKE_CURRENT_SOURCE_DIR}/arsnovaoverlay.app)")
+  INSTALL(CODE "EXECUTE_PROCESS(COMMAND ${QTDIR}/bin/macdeployqt ${CMAKE_CURRENT_SOURCE_DIR}/arsnovaoverlay.app)")
   INSTALL(TARGETS arsnovaoverlay BUNDLE DESTINATION ../../../)
 ENDIF(APPLE)
 

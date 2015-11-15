@@ -12,6 +12,9 @@ find_package(Qt5Svg REQUIRED)
 find_package(Qt5Test REQUIRED)
 find_package(Qt5WebSockets REQUIRED)
 
+# Set current Qt install dir or use param to define it
+# set(QTDIR "/Applications/Qt5.5.0/5.5/clang_64/")
+
 set(VERSION_MAJOR 1)
 set(VERSION_MINOR 1)
 set(VERSION_PATCH dev)
