@@ -31,6 +31,7 @@ private:
     OverlayWidget *overlayWidget;
     SessionContext *sessionContext;
     InfoDialog *infoDialog;
+    QPushButton * infoButton;
 
     void checkLeftMenuButton ( QString title );
     QWidget *findWidget ( QString widgetTitle );

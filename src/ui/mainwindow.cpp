@@ -15,10 +15,14 @@ MainWindow::MainWindow ( QWidget *parent, Qt::WindowFlags f ) : QMainWindow ( pa
 
     QRCodeWidget *qrwidget = new QRCodeWidget ( this->sessionContext, this->ui->stackedWidget );
 
-    //this->addWidget ( "Login", new LoginWidget() );
+    ui->buttonHorizontalLayout->addSpacing ( 1 );
     this->addWidget ( "Sessions", new SessionWidget ( this->sessionContext ) );
     this->addWidget ( "QR-Code", qrwidget );
     this->addWidget ( "Settings", new SettingsWidget ( this->sessionContext ) );
+    ui->buttonHorizontalLayout->addStretch();
+    infoButton = new QPushButton ( "About" );
+    infoButton->setAccessibleName ( "infoButton" );
+    ui->buttonHorizontalLayout->addWidget ( infoButton );
 
     this->activateWidget ( "Sessions" );
     this->connectLoginWidget();
@@ -29,7 +33,7 @@ MainWindow::MainWindow ( QWidget *parent, Qt::WindowFlags f ) : QMainWindow ( pa
     connect ( SystemTrayIcon::instance(), SIGNAL ( activated ( QSystemTrayIcon::ActivationReason ) ), this, SLOT ( onSystemTrayActivated ( QSystemTrayIcon::ActivationReason ) ) );
     connect ( this->sessionContext, SIGNAL ( error ( SessionContext::Error ) ) , this, SLOT ( onContextError ( SessionContext::Error ) ) );
 
-    connect ( this->ui->actionAbout, &QAction::triggered, [ = ] ( bool ) {
+    connect ( this->infoButton, &QPushButton::clicked, [ = ] ( ) {
         if ( ! infoDialog->isVisible() ) {
             infoDialog->show();
         }
@@ -39,9 +43,6 @@ MainWindow::MainWindow ( QWidget *parent, Qt::WindowFlags f ) : QMainWindow ( pa
         exit ( 0 );
     } );
 
-    connect ( this->ui->actionLogin, &QAction::triggered, [ = ] ( bool ) {
-        this->activateWidget ( "Login" );
-    } );
 }
 
 MainWindow::~MainWindow() {
@@ -87,7 +88,7 @@ void MainWindow::closeEvent ( QCloseEvent *event ) {
 void MainWindow::addWidget ( QString title, QWidget *widget ) {
     QPushButton *button = new QPushButton ( title );
     button->setCheckable ( true );
-    ui->buttonVerticalLayout->addWidget ( button );
+    ui->buttonHorizontalLayout->addWidget ( button );
     ui->stackedWidget->addWidget ( widget );
     this->widgetList->insert ( title, widget );
 
@@ -97,7 +98,7 @@ void MainWindow::addWidget ( QString title, QWidget *widget ) {
 }
 
 void MainWindow::checkLeftMenuButton ( QString title ) {
-    QList<QPushButton *> buttons = ui->leftMenu->findChildren<QPushButton *>();
+    QList<QPushButton *> buttons = ui->topMenu->findChildren<QPushButton *>();
     foreach ( QPushButton * button, buttons ) {
         if ( button->text() == title ) {
             button->setChecked ( true );

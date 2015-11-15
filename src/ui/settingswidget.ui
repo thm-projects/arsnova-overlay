@@ -13,9 +13,46 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QLabel {
+	background-color: transparent;
+}
+
+QLineEdit, QComboBox {
+	border: 1px solid #ccc;
+	padding: 4px 8px;
+	color: #777;
+}
+
+QComboBox {
+	text-align: center;
+	text-transform: uppercase;
+	font-weight: bold;
+}
+
+QPushButton {
+	border: 0px solid #fff;
+	padding: 8px 16px;
+	background-color: #eee;
+	text-align: center;
+	text-transform: uppercase;
+	color: #777;
+	font-weight: bold;
+	width: 100px;
+}
+
+QPushButton:hover {
+	background-color: #ccc;
+	color: #333;
+	font-weight: bold;
+}</string>
+  </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="1" column="0">
     <widget class="QGroupBox" name="groupBox_2">
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
      <property name="title">
       <string>Widget Position</string>
      </property>

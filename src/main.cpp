@@ -33,6 +33,8 @@ int main ( int argc, char** argv ) {
     app.setStyle ( "fusion" );
     app.setQuitOnLastWindowClosed ( false );
 
+    QFontDatabase::addApplicationFont("qrc://fonts/fonts/fontawesome-webfont.ttf");
+
     MainWindow mainWindow;
     mainWindow.show();
 

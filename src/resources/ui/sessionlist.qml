@@ -3,7 +3,7 @@ import QtQuick 1.1
 Item {
     id: item1
     visible: true
-    width: 620
+    width: 760
     height: 220
 
     signal sessionChanged(string sessionkey)
@@ -63,7 +63,6 @@ Item {
                 height: 32
                 width: 200 - 8
                 x: 8
-                radius: 2
                 TextInput {
                     id: sessionIdTextInput
                     anchors.centerIn: parent
@@ -114,7 +113,6 @@ Item {
                 width: 64
                 height: 32
                 anchors.verticalCenter: parent.verticalCenter
-                radius: 2
 
                 property color loginbuttonColor: "#55ad3d"
 
@@ -153,7 +151,7 @@ Item {
         id: sessionListView
         x: 0
         y: 48
-        width: 620
+        width: 760
         height: 172
 
         model: ListModel {}
