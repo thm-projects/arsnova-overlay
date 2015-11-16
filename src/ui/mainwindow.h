@@ -35,15 +35,12 @@ private:
     void checkTopMenuButton ( QString title );
     QWidget *findWidget ( QString widgetTitle );
     void addWidget ( QString title, QWidget *widget );
-    void disconnectAll();
 
 protected:
     void closeEvent ( QCloseEvent * event ) override;
 
 private slots:
-    void onSystemTrayActivated ( QSystemTrayIcon::ActivationReason reason );
     void activateWidget ( QString widgetTitle );
-    void onContextError ( SessionContext::Error e );
 };
 
 #endif // MAINWINDOW_H

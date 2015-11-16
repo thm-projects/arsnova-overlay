@@ -27,10 +27,18 @@ MainWindow::MainWindow ( QWidget *parent, Qt::WindowFlags f ) : QMainWindow ( pa
     this->overlayWidget = new OverlayWidget ( this->sessionContext, QApplication::desktop()->screen() );
     this->overlayWidget->setVisible ( false );
 
-    connect ( SystemTrayIcon::instance(), SIGNAL ( activated ( QSystemTrayIcon::ActivationReason ) ), this, SLOT ( onSystemTrayActivated ( QSystemTrayIcon::ActivationReason ) ) );
-    connect ( this->sessionContext, SIGNAL ( error ( SessionContext::Error ) ) , this, SLOT ( onContextError ( SessionContext::Error ) ) );
+    connect ( this->sessionContext, &SessionContext::error, [=] ( SessionContext::Error error ) {
+        this->activateWidget ( "Sessions" );
+        this->getUi()->statusbar->showMessage ( tr ( "Unable to request session from server" ), 5000 );
+    } );
 
-    connect ( this->infoButton, &QPushButton::clicked, [ = ] ( ) {
+    connect ( SystemTrayIcon::instance(), &SystemTrayIcon::activated, [=] ( QSystemTrayIcon::ActivationReason reason ) {
+        if ( reason == QSystemTrayIcon::Trigger ) {
+            this->setVisible ( ! this->isVisible() );
+        }
+    } );
+
+    connect ( this->infoButton, &QPushButton::clicked, [=] ( ) {
         if ( ! infoDialog->isVisible() ) {
             infoDialog->show();
         }
@@ -38,7 +46,6 @@ MainWindow::MainWindow ( QWidget *parent, Qt::WindowFlags f ) : QMainWindow ( pa
 }
 
 MainWindow::~MainWindow() {
-    this->disconnectAll();
     SystemTrayIcon::destroy();
     this->overlayWidget->close();
     delete overlayWidget;
@@ -50,11 +57,6 @@ MainWindow::~MainWindow() {
     }
     delete ui;
     delete sessionContext;
-}
-
-void MainWindow::disconnectAll() {
-    disconnect ( SystemTrayIcon::instance(), SIGNAL ( activated ( QSystemTrayIcon::ActivationReason ) ), this, SLOT ( onSystemTrayActivated ( QSystemTrayIcon::ActivationReason ) ) );
-    disconnect ( this->menuSignalMapper, SIGNAL ( mapped ( QString ) ), this, SLOT ( activateWidget ( QString ) ) );
 }
 
 const Ui::MainWindow *const MainWindow::getUi() {
@@ -92,17 +94,6 @@ void MainWindow::checkTopMenuButton ( QString title ) {
     for ( QPushButton * button : buttons ) {
         button->setChecked ( button->text() == title );
     }
-}
-
-void MainWindow::onSystemTrayActivated ( QSystemTrayIcon::ActivationReason reason ) {
-    if ( reason == QSystemTrayIcon::Trigger ) {
-        this->setVisible ( ! this->isVisible() );
-    }
-}
-
-void MainWindow::onContextError ( SessionContext::Error e ) {
-    this->activateWidget ( "Sessions" );
-    this->getUi()->statusbar->showMessage ( tr ( "Unable to request session from server" ), 5000 );
 }
 
 void MainWindow::activateWidget ( QString widgetTitle ) {
