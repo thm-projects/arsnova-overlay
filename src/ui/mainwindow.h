@@ -22,7 +22,6 @@ public:
     explicit MainWindow ( QWidget *parent = 0, Qt::WindowFlags f = 0 );
     virtual ~MainWindow();
     const Ui::MainWindow *const getUi();
-    void addWidget ( QString title, QWidget *widget );
 
 private:
     Ui::MainWindow *ui;
@@ -35,7 +34,7 @@ private:
 
     void checkTopMenuButton ( QString title );
     QWidget *findWidget ( QString widgetTitle );
-
+    void addWidget ( QString title, QWidget *widget );
     void disconnectAll();
 
 protected:
