@@ -53,7 +53,7 @@ void SystemTrayIcon::destroy() {
 }
 
 void SystemTrayIcon::addExitAction() {
-    QAction * exitAction = new QAction ( QIcon ( ":images/images/application-exit.png" ), tr ( "Exit" ), this );
+    QAction * exitAction = new QAction ( QIcon ( ":images/images/close.png" ), tr ( "Exit ARSnova Overlay" ), this );
     menu->addAction ( exitAction );
     connect ( exitAction, SIGNAL ( triggered ( bool ) ), this, SLOT ( exitApplication () ) );
 }
