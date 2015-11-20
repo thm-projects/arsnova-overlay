@@ -7,7 +7,7 @@ MainWindow::MainWindow ( QWidget *parent, Qt::WindowFlags f ) : QMainWindow ( pa
     frect.moveCenter ( QDesktopWidget().availableGeometry().center() );
     move ( frect.topLeft() );
 
-    infoDialog = new InfoDialog ( this );
+    infoDialog = std::shared_ptr<InfoDialog> ( new InfoDialog ( this ) );
 
     this->menuSignalMapper = new QSignalMapper ( this );
     this->widgetList = new QMap<QString, QWidget *>();
