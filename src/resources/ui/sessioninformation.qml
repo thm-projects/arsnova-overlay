@@ -21,7 +21,7 @@ Rectangle {
         source: "qrc:/images/images/background.png"
         opacity: .3
     }
-
+/*
     Image {
         id: image1
         x: 10
@@ -72,7 +72,7 @@ Rectangle {
             font.pixelSize: 12
         }
     }
-
+*/
     Rectangle {
         id: rectangleCount
         x: 56
@@ -90,7 +90,8 @@ Rectangle {
             y: 0
             anchors.fill: parent
             color: "#ffffff"
-            text: feedbackCount.toString() + "/" + userCount.toString()
+            //text: feedbackCount.toString() + "/" + userCount.toString()
+            text: userCount.toString()
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
             font.bold: true
