@@ -1,5 +1,9 @@
 # General Information
 
+### Qt Deprecation warning
+
+This project uses deprecated parts available in Qt <= 5.6. To use this project, make sure you use Qt in proper version.
+
 ## Description
 ARSnova Overlay is a small widget to display information taken from arsnova.eu or other ARSnova servers.
 
@@ -24,7 +28,7 @@ This application makes use of [libqrencode](https://github.com/fukuchi/libqrenco
 # Build instructions
 This application is based on the Qt Framework. If you could not find a package
 for your platform you must have installed the following packages:
-* Qt Framework 5.2+
+* Qt Framework 5.2 <= version <= 5.6
 * CMake
 * A C++ compiler (GCC and Clang/LLVM will work fine)
 
