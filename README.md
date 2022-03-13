@@ -1,8 +1,10 @@
 # General Information
 
-### Qt Deprecation warning
+### Deprecation warning
 
 This project uses deprecated parts available in Qt <= 5.6. To use this project, make sure you use Qt in proper version.
+
+**But most important: This project does not work with the current API of ARSnova as provided by Particify**
 
 ## Description
 ARSnova Overlay is a small widget to display information taken from arsnova.eu or other ARSnova servers.
