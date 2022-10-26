@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QtWidgets>
+#include <memory>
 
 #include "version.h"
 #include "ui_mainwindow.h"
@@ -25,12 +26,13 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    std::shared_ptr<InfoDialog> infoDialog;
+    QPushButton *infoButton;
+
     QSignalMapper *menuSignalMapper;
     QMap<QString, QWidget *> *widgetList;
     OverlayWidget *overlayWidget;
     SessionContext *sessionContext;
-    InfoDialog *infoDialog;
-    QPushButton * infoButton;
 
     void checkTopMenuButton ( QString title );
     QWidget *findWidget ( QString widgetTitle );
@@ -44,3 +46,4 @@ private slots:
 };
 
 #endif // MAINWINDOW_H
+

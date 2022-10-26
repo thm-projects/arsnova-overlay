@@ -16,8 +16,8 @@ find_package(Qt5WebSockets REQUIRED)
 # set(QTDIR "/Applications/Qt5.5.0/5.5/clang_64/")
 
 set(VERSION_MAJOR 1)
-set(VERSION_MINOR 1)
-set(VERSION_PATCH dev)
+set(VERSION_MINOR 2)
+set(VERSION_PATCH rc1)
 
 set(VERSION_SHORT ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH})
 

@@ -56,6 +56,7 @@ HttpConnection::HttpConnection ()
         if ( message.startsWith ( "42" ) ) {
             message = message.remove ( 0,2 );
             QJsonDocument doc = QJsonDocument::fromJson ( message.toUtf8() );
+
             if ( doc.isArray() && doc.array().contains ( "feedbackData" ) ) {
                 QJsonArray array = doc.array().last().toArray();
                 emit this->requestFinished (
@@ -128,7 +129,7 @@ void HttpConnection::requestAudienceQuestionsCount() {
     this->networkAccessManager->get (
         this->createRequest (
             QUrl (
-                Settings::instance()->serverUrl().toString() + "/api/audiencequestion/readcount?sessionkey=" + sessionKey
+                Settings::instance()->serverUrl().toString() + "/api/session/" + sessionKey + "/interposedreadingcount"
             )
         )
     );
@@ -208,16 +209,15 @@ void HttpConnection::handleReply ( QNetworkReply * reply ) {
     } else if ( reply->url().path().contains ( "/activeusercount" ) ) {
         int value = responseValue->toInteger();
         emit this->requestFinished ( LoggedInResponse ( value ) );
+    } else if ( reply->url().path().contains ( "/interposedreadingcount" ) ) {
+        int read = responseValue->property ( "read" ).toInteger();
+        int unread = responseValue->property ( "unread" ).toInteger();
+        emit this->requestFinished ( AudienceQuestionCountResponse ( read, unread, read+unread ) );
     } else if ( reply->url().path().contains ( "/session" ) ) {
         QString sessionKey = responseValue->property ( "keyword" ).toString();
         QString shortName = responseValue->property ( "shortName" ).toString();
         QString name = responseValue->property ( "name" ).toString();
         emit this->requestFinished ( SessionResponse ( sessionKey, shortName, name ) );
-    } else if ( reply->url().path().contains ( "/audiencequestion/readcount" ) ) {
-        int read = responseValue->property ( "read" ).toInteger();
-        int unread = responseValue->property ( "unread" ).toInteger();
-
-        emit this->requestFinished ( AudienceQuestionCountResponse ( read, unread, read+unread ) );
     } else if ( reply->url().path().contains ( "/api/socket/url/" ) ) {
         this->webSocketPath = QString::fromUtf8 ( response.data() );
         QUrl wsUrl = QUrl ( this->webSocketPath.replace ( "http","ws" ) + "/socket.io/?EIO=2&transport=websocket" );
